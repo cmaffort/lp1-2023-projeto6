@@ -4,26 +4,27 @@
  */
 package br.cefetmg.lagos.model.dao;
 
+import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
+
 /**
- *
  * @author Aluno
  */
-public interface IFuncionarioDAO extends PessoaDAO{
+public interface IFuncionarioDAO extends IPessoaDAO {
     void setSalario(double salario);
-    
+
     double getSalario();
-    
-    void setAtivo (Boolean ativo);
-    
+
+    void setAtivo(Boolean ativo);
+
     Boolean getAtivo();
-    
+
     void setComissao(double comissao);
-    
+
     double getComissao();
-    
+
     void setTipoFuncionario(TipoFuncionario tipoFuncionario);
-    
+
     TipoFuncionario getTipoFuncionario();
-    
+
     long getId();
 }

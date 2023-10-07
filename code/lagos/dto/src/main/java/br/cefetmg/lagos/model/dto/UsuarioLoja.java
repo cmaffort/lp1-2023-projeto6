@@ -1,13 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.lagos.model.dto;
 
-/**
- *
- * @author Aluno
- */
-public class UsuarioLoja {
-    
+import br.cefetmg.lagos.model.dto.tipos.Permissoes;
+
+import java.util.List;
+
+public class UsuarioLoja extends Funcionario implements DTO {
+    private List<Permissoes> permicoes;
+    private String username;
+    private String senha;
+
+    private long id;
 }

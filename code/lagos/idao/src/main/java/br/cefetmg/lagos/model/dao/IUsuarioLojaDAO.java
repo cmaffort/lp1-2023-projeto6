@@ -4,23 +4,24 @@
  */
 package br.cefetmg.lagos.model.dao;
 
+import br.cefetmg.lagos.model.dto.tipos.Permissoes;
+
 /**
- *
  * @author Aluno
  */
-public interface IUsuarioLojaDAO extends FuncionarioDAO{
-    
+public interface IUsuarioLojaDAO extends IFuncionarioDAO {
+
     void setUsername(String username);
-    
+
     String getUsername();
-    
+
     void setSenha(String senha);
-    
+
     String getSenha();
-    
-    void setPermissoes(PermissaoUsuario[] permissoes);
-    
-    PermissaoUsuario[] getPermissoes();
-    
+
+    void setPermissoes(Permissoes[] permissoes);
+
+    Permissoes[] getPermissoes();
+
     long getId();
 }

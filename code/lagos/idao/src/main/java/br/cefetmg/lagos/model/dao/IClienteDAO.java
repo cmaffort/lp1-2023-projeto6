@@ -5,9 +5,8 @@
 package br.cefetmg.lagos.model.dao;
 
 /**
- *
  * @author Aluno
  */
 public interface IClienteDAO {
-    
+
 }

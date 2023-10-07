@@ -1,5 +1,4 @@
 package br.cefetmg.lagos.model.dto;
 
-public class Loja {
-
+public interface DTO {
 }
