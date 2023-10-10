@@ -3,25 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package br.cefetmg.lagos.model.dao;
-
-import br.cefetmg.lagos.model.dto.tipos.Permissoes;
+import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
 
 /**
- * @author Aluno
+ * @author miguel
  */
-public interface IUsuarioContratoDAO extends IPessoaDAO {
+public interface IUsuarioContratoDAO extends PessoaDAO {
 
-    void setUsername(String username);
+    boolean inserirUsername(String username);
+    
+    boolean alterarUsername(String username);
+    
+    boolean removerUsername(String username);
 
-    String getUsername();
+    String listarUsername();
 
-    void setSenha(String senha);
+    boolean inserirSenhna(String senha);
+    
+    boolean alterarSenha(String senha);
+    
+    boolean removerSenha(String senha);
 
-    String getSenha();
+    String listarSenha();
 
-    void setPermissoes(Permissoes[] permissoes);
+    boolean inserirPermissoes(TipoFuncionario[] permissoes);
+    
+    boolean alterarPermissoes(TipoFuncionario[] permissoes);
+    
+    boolean removerPersmissoes(TipoFuncionario[] permissoes);
 
-    Permissoes[] getPermissoes();
-
-    long getId();
+    TipoFuncionario[] listarPermissoes();
+    
+    boolean inserirPessoa(PessoaDAO pessoa);
+    
+    boolean alterarPessoa(PessoaDAO pessoa);
+    
+    boolean removerPessoa(PessoaDAO pessoa);
+    
+    PessoaDAO listarPessoa();
+    
+    boolean inserirId(int id);
+    
+    boolean removerId(int id);
+    
+    int listarId();
 }

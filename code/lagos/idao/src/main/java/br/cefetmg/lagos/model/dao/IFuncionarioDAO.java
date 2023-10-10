@@ -7,24 +7,52 @@ package br.cefetmg.lagos.model.dao;
 import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
 
 /**
- * @author Aluno
+ * @author miguel
  */
-public interface IFuncionarioDAO extends IPessoaDAO {
-    void setSalario(double salario);
+public interface IFuncionarioDAO extends PessoaDAO {
+    boolean inserirSalario(double salario);
+    
+    boolean alterarSalario(double salario);
+    
+    boolean removerSalario(double salario);
 
-    double getSalario();
+    double listarSalario();
 
-    void setAtivo(Boolean ativo);
+    boolean inserirEstado(boolean ativo);
+    
+    boolean alterarEstado(boolean ativo);
+    
+    boolean removerEstado(boolean ativo);
 
-    Boolean getAtivo();
+    boolean listarEstado();
 
-    void setComissao(double comissao);
+    boolean inserirComissao(double comissao);
+    
+    boolean alterarComissoa(double comissao);
+    
+    boolean removerComissoa(double comissao);
 
-    double getComissao();
+    double listarComissao();
 
-    void setTipoFuncionario(TipoFuncionario tipoFuncionario);
+    boolean inserirTipoFuncionario(TipoFuncionario tipoFuncionario);
+    
+    boolean alterarTipoFuncionario(TipoFuncionario tipoFuncionario);
+    
+    boolean removerTipoFuncionario(TipoFuncionario tipoFuncionario);
 
-    TipoFuncionario getTipoFuncionario();
-
-    long getId();
+    TipoFuncionario listarTipoFuncionario();
+    
+    boolean inserirPessoa(PessoaDAO pessoa);
+    
+    boolean alterarPessoa(PessoaDAO pessoa);
+    
+    boolean removerPessoa(PessoaDAO pessoa);
+    
+    PessoaDAO listarPessoa();
+    
+    boolean inserirId(int id);
+    
+    boolean removerId(int id);
+    
+    int listarId();
 }

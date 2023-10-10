@@ -7,28 +7,46 @@ package br.cefetmg.lagos.model.dao;
 import java.util.Date;
 
 /**
- * @author Aluno
+ * @author miguel
  */
 public interface IPessoaDAO {
-    void setNome(String nome);
+    boolean inserirNome(String nome);
+    
+    boolean removerNome(String nome);
 
-    String getNome();
+    String listarNome();
 
-    void setSobrenome(String sobrenome);
+    boolean inserirSobrenome(String sobrenome);
+    
+    boolean removerSobrenome(String sobrenome);
 
-    String getSobrenome();
+    String listarSobrenome();
 
-    void setData(Date data);
+    boolean inserirNascimento(Date nascimento);
+    
+    boolean removerNascimento(Date nascimento);
 
-    Date getData();
+    Date listarNascimento();
 
-    void setEmail(String email);
+    boolean inserirEmail(String email);
+    
+    boolean alterarEmail(String email);
+    
+    boolean removerEmail(String email);
 
-    String getEmail();
+    String listarEmail();
 
-    void setTelefone(double telefone);
+    boolean inserirTelefone(long telefone);
+    
+    boolean alterarTelefone(long telefone);
+    
+    boolean removerTelefone(long telefone);
 
-    double getTelefone();
-
-    long getId();
+    long listarTelefone();
+    
+    boolean inserirId(int id);
+    
+    boolean removerId(int id);
+    
+    int listarId();
 }
