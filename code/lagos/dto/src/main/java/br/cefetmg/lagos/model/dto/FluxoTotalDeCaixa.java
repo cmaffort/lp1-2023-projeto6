@@ -7,7 +7,7 @@ public class FluxoTotalDeCaixa implements DTO {
     private Caixa caixa;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
     public List<FluxoUnitarioDeCaixa> getFluxosUnitarioDeCaixa() {
         return fluxosUnitarioDeCaixa;
@@ -25,11 +25,19 @@ public class FluxoTotalDeCaixa implements DTO {
         this.caixa = caixa;
     }
 
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

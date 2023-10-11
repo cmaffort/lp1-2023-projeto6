@@ -5,15 +5,16 @@ import java.util.List;
 public class Produto implements DTO {
     private String codigo;
     private String nome;
-    private int quantidade;
-    private double preco;
+    private Integer quantidade;
+    private Double preco;
 
-    private List<Compra> compras;
+    private List<ProdutoCompra> produtoCompras;
     private List<Item> itens;
-    private Promocao promocao;
+    private List<Promocao> promocoes;
+    private List<PromocaoDeFidelidade> promocoesDeFidelidade;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
     public String getCodigo() {
         return codigo;
@@ -31,28 +32,28 @@ public class Produto implements DTO {
         this.nome = nome;
     }
 
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
-    public List<Compra> getCompras() {
-        return compras;
+    public List<ProdutoCompra> getProdutoCompras() {
+        return produtoCompras;
     }
 
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
+    public void setProdutoCompras(List<ProdutoCompra> produtoCompras) {
+        this.produtoCompras = produtoCompras;
     }
 
     public List<Item> getItens() {
@@ -63,19 +64,35 @@ public class Produto implements DTO {
         this.itens = itens;
     }
 
-    public Promocao getPromocao() {
-        return promocao;
+    public List<Promocao> getPromocoes() {
+        return promocoes;
     }
 
-    public void setPromocao(Promocao promocao) {
-        this.promocao = promocao;
+    public void setPromocoes(List<Promocao> promocoes) {
+        this.promocoes = promocoes;
     }
 
-    public long getId() {
+    public List<PromocaoDeFidelidade> getPromocoesDeFidelidade() {
+        return promocoesDeFidelidade;
+    }
+
+    public void setPromocoesDeFidelidade(List<PromocaoDeFidelidade> promocoesDeFidelidade) {
+        this.promocoesDeFidelidade = promocoesDeFidelidade;
+    }
+
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

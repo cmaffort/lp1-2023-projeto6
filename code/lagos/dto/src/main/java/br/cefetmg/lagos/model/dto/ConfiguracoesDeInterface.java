@@ -7,9 +7,9 @@ public class ConfiguracoesDeInterface implements DTO {
     private File logo;
     private String corBase;
 
-    private Loja loja;
+    private Contratante contratante;
 
-    private long id;
+    private Long id;
 
     public String getNomeDaEmpresa() {
         return nomeDaEmpresa;
@@ -35,19 +35,19 @@ public class ConfiguracoesDeInterface implements DTO {
         this.corBase = corBase;
     }
 
-    public Loja getLoja() {
-        return loja;
+    public Contratante getContratante() {
+        return contratante;
     }
 
-    public void setLoja(Loja loja) {
-        this.loja = loja;
+    public void setContratante(Contratante contratante) {
+        this.contratante = contratante;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -3,17 +3,17 @@ package br.cefetmg.lagos.model.dto;
 import java.util.Date;
 
 public class FluxoUnitarioDeCaixa implements DTO {
-    private double dinheiro;
+    private Double dinheiro;
     private Date hora;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public double getDinheiro() {
+    public Double getDinheiro() {
         return dinheiro;
     }
 
-    public void setDinheiro(double dinheiro) {
+    public void setDinheiro(Double dinheiro) {
         this.dinheiro = dinheiro;
     }
 
@@ -25,11 +25,19 @@ public class FluxoUnitarioDeCaixa implements DTO {
         this.hora = hora;
     }
 
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

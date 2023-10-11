@@ -3,29 +3,29 @@ package br.cefetmg.lagos.model.dto;
 import java.util.List;
 
 public class Promocao implements DTO {
-    private boolean fidelidade;
-    private float porcentagem;
+    private Boolean ativa;
+    private Float porcentagem;
 
     private List<Venda> vendas;
     private List<Produto> produtos;
     private Periodicidade periodicidade;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public boolean isFidelidade() {
-        return fidelidade;
+    public Boolean isAtiva() {
+        return ativa;
     }
 
-    public void setFidelidade(boolean fidelidade) {
-        this.fidelidade = fidelidade;
+    public void setAtiva(Boolean ativa) {
+        this.ativa = ativa;
     }
 
-    public float getPorcentagem() {
+    public Float getPorcentagem() {
         return porcentagem;
     }
 
-    public void setPorcentagem(float porcentagem) {
+    public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }
 
@@ -53,11 +53,19 @@ public class Promocao implements DTO {
         this.periodicidade = periodicidade;
     }
 
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

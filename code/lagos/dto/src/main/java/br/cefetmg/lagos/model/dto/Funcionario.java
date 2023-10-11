@@ -2,41 +2,29 @@ package br.cefetmg.lagos.model.dto;
 
 import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
 
-import java.util.List;
-
 public class Funcionario extends Pessoa implements DTO {
-    private double salario;
-    private boolean ativo;
-    private double comissao;
+    private Double salario;
+    private Boolean ativo;
     private TipoFuncionario tipo;
 
-    private List<Venda> vendas; // Só se o funcionário for um vendedor
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public double getSalario() {
+    public Double getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
 
-    public boolean isAtivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public double getComissao() {
-        return comissao;
-    }
-
-    public void setComissao(double comissao) {
-        this.comissao = comissao;
     }
 
     public TipoFuncionario getTipo() {
@@ -47,21 +35,21 @@ public class Funcionario extends Pessoa implements DTO {
         this.tipo = tipo;
     }
 
-    public List<Venda> getVendas() {
-        return vendas;
+    public Loja getLoja() {
+        return loja;
     }
 
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

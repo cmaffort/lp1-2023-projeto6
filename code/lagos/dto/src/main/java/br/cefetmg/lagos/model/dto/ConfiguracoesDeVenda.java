@@ -6,29 +6,29 @@ import br.cefetmg.lagos.model.dto.tipos.MetodosPagamento;
 import java.util.List;
 
 public class ConfiguracoesDeVenda implements DTO {
-    private float limiteDeDesconto;
-    private float taxaDeJurosEfetiva;
+    private Float limiteDeDesconto;
+    private Float taxaDeJurosEfetiva;
     private List<MetodosPagamento> metodosAceitos;
     private List<Bandeira> bandeiras;
+    private Float porcentagemDeComicao;
 
-    private List<Promocao> promocoes;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public float getLimiteDeDesconto() {
+    public Float getLimiteDeDesconto() {
         return limiteDeDesconto;
     }
 
-    public void setLimiteDeDesconto(float limiteDeDesconto) {
+    public void setLimiteDeDesconto(Float limiteDeDesconto) {
         this.limiteDeDesconto = limiteDeDesconto;
     }
 
-    public float getTaxaDeJurosEfetiva() {
+    public Float getTaxaDeJurosEfetiva() {
         return taxaDeJurosEfetiva;
     }
 
-    public void setTaxaDeJurosEfetiva(float taxaDeJurosEfetiva) {
+    public void setTaxaDeJurosEfetiva(Float taxaDeJurosEfetiva) {
         this.taxaDeJurosEfetiva = taxaDeJurosEfetiva;
     }
 
@@ -48,19 +48,27 @@ public class ConfiguracoesDeVenda implements DTO {
         this.bandeiras = bandeiras;
     }
 
-    public List<Promocao> getPromocoes() {
-        return promocoes;
+    public Float getPorcentagemDeComicao() {
+        return porcentagemDeComicao;
     }
 
-    public void setPromocoes(List<Promocao> promocoes) {
-        this.promocoes = promocoes;
+    public void setPorcentagemDeComicao(Float porcentagemDeComicao) {
+        this.porcentagemDeComicao = porcentagemDeComicao;
     }
 
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
