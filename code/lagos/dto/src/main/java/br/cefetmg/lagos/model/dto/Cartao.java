@@ -8,7 +8,6 @@ public class Cartao implements DTO {
 
     private Endereco endereco;
     private Contratante contratante;
-    private Loja loja;
 
     private Long id;
 
@@ -42,14 +41,6 @@ public class Cartao implements DTO {
 
     public void setContratante(Contratante contratante) {
         this.contratante = contratante;
-    }
-
-    public Loja getLoja() {
-        return loja;
-    }
-
-    public void setLoja(Loja loja) {
-        this.loja = loja;
     }
 
     public Long getId() {

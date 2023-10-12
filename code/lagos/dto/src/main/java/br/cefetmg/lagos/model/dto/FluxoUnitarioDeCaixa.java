@@ -1,10 +1,13 @@
 package br.cefetmg.lagos.model.dto;
 
+import javax.swing.plaf.FontUIResource;
 import java.util.Date;
 
 public class FluxoUnitarioDeCaixa implements DTO {
     private Double dinheiro;
     private Date hora;
+
+    private FluxoTotalDeCaixa fluxoTotalDeCaixa;
     private Loja loja;
 
     private Long id;
@@ -23,6 +26,14 @@ public class FluxoUnitarioDeCaixa implements DTO {
 
     public void setHora(Date hora) {
         this.hora = hora;
+    }
+
+    public FluxoTotalDeCaixa getFluxoTotalDeCaixa() {
+        return fluxoTotalDeCaixa;
+    }
+
+    public void setFluxoTotalDeCaixa(FluxoTotalDeCaixa fluxoTotalDeCaixa) {
+        this.fluxoTotalDeCaixa = fluxoTotalDeCaixa;
     }
 
     public Loja getLoja() {
