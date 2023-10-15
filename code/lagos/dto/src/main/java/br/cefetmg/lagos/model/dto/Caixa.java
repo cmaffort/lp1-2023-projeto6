@@ -1,36 +1,36 @@
 package br.cefetmg.lagos.model.dto;
 
 public class Caixa implements DTO {
-    private boolean estaAberto;
-    private double dinheiroEmCaixa;
+    private Boolean aberto;
+    private Double dinheiroEmCaixa;
 
-    private Usuario caixeiro;
+    private Caixeiro caixeiro;
     private FluxoTotalDeCaixa fluxoTotalDeCaixa;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public boolean estaAberto() {
-        return estaAberto;
+    public Boolean isAberto() {
+        return aberto;
     }
 
-    public void setEstaAberto(boolean estaAberto) {
-        this.estaAberto = estaAberto;
+    public void setAberto(Boolean aberto) {
+        this.aberto = aberto;
     }
 
-    public double getDinheiroEmCaixa() {
+    public Double getDinheiroEmCaixa() {
         return dinheiroEmCaixa;
     }
 
-    public void setDinheiroEmCaixa(double dinheiroEmCaixa) {
+    public void setDinheiroEmCaixa(Double dinheiroEmCaixa) {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
-    public Usuario getCaixeiro() {
+    public Caixeiro getCaixeiro() {
         return caixeiro;
     }
 
-    public void setCaixeiro(Usuario caixeiro) {
+    public void setCaixeiro(Caixeiro caixeiro) {
         this.caixeiro = caixeiro;
     }
 
@@ -42,11 +42,19 @@ public class Caixa implements DTO {
         this.fluxoTotalDeCaixa = fluxoTotalDeCaixa;
     }
 
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

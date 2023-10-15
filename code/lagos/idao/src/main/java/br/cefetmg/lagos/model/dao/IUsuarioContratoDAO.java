@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package br.cefetmg.lagos.model.dao;
-import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.tipos.Permissoes;
 
 /**
  * @author miguel
@@ -26,13 +26,13 @@ public interface IUsuarioContratoDAO extends PessoaDAO {
 
     String listarSenha();
 
-    boolean inserirPermissoes(TipoFuncionario[] permissoes);
+    boolean inserirPermissoes(Permissoes[] permissoes);
     
-    boolean alterarPermissoes(TipoFuncionario[] permissoes);
+    boolean alterarPermissoes(Permissoes[] permissoes);
     
-    boolean removerPersmissoes(TipoFuncionario[] permissoes);
+    boolean removerPersmissoes(Permissoes[] permissoes);
 
-    TipoFuncionario[] listarPermissoes();
+    Permissoes[] listarPermissoes();
     
     boolean inserirPessoa(PessoaDAO pessoa);
     

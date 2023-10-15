@@ -7,9 +7,9 @@ public class Pessoa implements DTO {
     private String sobrenome;
     private Date nascimento;
     private String email;
-    private long telefone;
+    private Long telefone;
 
-    private long id;
+    private Long id;
 
     public String getNome() {
         return nome;
@@ -43,19 +43,19 @@ public class Pessoa implements DTO {
         this.email = email;
     }
 
-    public long getTelefone() {
+    public Long getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(long telefone) {
+    public void setTelefone(Long telefone) {
         this.telefone = telefone;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -3,37 +3,38 @@ package br.cefetmg.lagos.model.dto;
 import java.util.List;
 
 public class Venda extends HistoricoVET implements DTO {
-    private float desconto;
+    private Float desconto;
 
-    private UsuarioLoja caixeiro;
-    private Funcionario vendedor;
+    private Caixeiro caixeiro;
+    private Vendedor vendedor;
     private Cliente cliente;
     private List<Promocao> promocoes;
+    private List<PromocaoDeFidelidade> promocoesDeFidelidade;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    public float getDesconto() {
+    public Float getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(float desconto) {
+    public void setDesconto(Float desconto) {
         this.desconto = desconto;
     }
 
-    public UsuarioLoja getCaixeiro() {
+    public Caixeiro getCaixeiro() {
         return caixeiro;
     }
 
-    public void setCaixeiro(UsuarioLoja caixeiro) {
+    public void setCaixeiro(Caixeiro caixeiro) {
         this.caixeiro = caixeiro;
     }
 
-    public Funcionario getVendedor() {
+    public Vendedor getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Funcionario vendedor) {
+    public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
@@ -53,13 +54,31 @@ public class Venda extends HistoricoVET implements DTO {
         this.promocoes = promocoes;
     }
 
+    public List<PromocaoDeFidelidade> getPromocoesDeFidelidade() {
+        return promocoesDeFidelidade;
+    }
+
+    public void setPromocoesDeFidelidade(List<PromocaoDeFidelidade> promocoesDeFidelidade) {
+        this.promocoesDeFidelidade = promocoesDeFidelidade;
+    }
+
     @Override
-    public long getId() {
+    public Loja getLoja() {
+        return loja;
+    }
+
+    @Override
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
+
+    @Override
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

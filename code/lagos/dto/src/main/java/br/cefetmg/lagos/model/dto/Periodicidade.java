@@ -3,32 +3,32 @@ package br.cefetmg.lagos.model.dto;
 import java.util.List;
 
 public class Periodicidade implements DTO {
-    private int periodo;
-    private int qtdDiasPorPeriodo;
+    private Integer periodo;
+    private Integer qtdDiasPorPeriodo;
 
-    private long id;
+    private Long id;
 
-    public int getPeriodo() {
+    public Integer getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(int periodo) {
+    public void setPeriodo(Integer periodo) {
         this.periodo = periodo;
     }
 
-    public int getQtdDiasPorPeriodo() {
+    public Integer getQtdDiasPorPeriodo() {
         return qtdDiasPorPeriodo;
     }
 
-    public void setQtdDiasPorPeriodo(int qtdDiasPorPeriodo) {
+    public void setQtdDiasPorPeriodo(Integer qtdDiasPorPeriodo) {
         this.qtdDiasPorPeriodo = qtdDiasPorPeriodo;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

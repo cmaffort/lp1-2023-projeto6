@@ -1,25 +1,16 @@
 package br.cefetmg.lagos.model.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Compra implements DTO {
-    private int quantidade;
     private Date dataDeCompra;
     private Date dataDeChegada;
-    private boolean precoUnitario;
 
-    private Produto produto;
+    private List<ProdutoCompra> produtosDeCompra;
     private Loja loja;
 
-    private long id;
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+    private Long id;
 
     public Date getDataDeCompra() {
         return dataDeCompra;
@@ -37,27 +28,27 @@ public class Compra implements DTO {
         this.dataDeChegada = dataDeChegada;
     }
 
-    public boolean isPrecoUnitario() {
-        return precoUnitario;
+    public List<ProdutoCompra> getProdutosDeCompra() {
+        return produtosDeCompra;
     }
 
-    public void setPrecoUnitario(boolean precoUnitario) {
-        this.precoUnitario = precoUnitario;
+    public void setProdutosDeCompra(List<ProdutoCompra> produtosDeCompra) {
+        this.produtosDeCompra = produtosDeCompra;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Loja getLoja() {
+        return loja;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

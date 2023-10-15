@@ -1,22 +1,14 @@
 package br.cefetmg.lagos.model.dto;
 
-public class Item implements DTO {
-    private Double preco;
+public class ProdutoCompra implements DTO {
     private Integer quantidade;
+    private Double precoUnitario;
 
     private Produto produto;
-    private HistoricoVET historicoVET;
+    private Compra compra;
     private Loja loja;
 
     private Long id;
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
 
     public Integer getQuantidade() {
         return quantidade;
@@ -24,6 +16,14 @@ public class Item implements DTO {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(Double precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 
     public Produto getProduto() {
@@ -34,12 +34,12 @@ public class Item implements DTO {
         this.produto = produto;
     }
 
-    public HistoricoVET getHistoricoVET() {
-        return historicoVET;
+    public Compra getCompra() {
+        return compra;
     }
 
-    public void setHistoricoVET(HistoricoVET historicoVET) {
-        this.historicoVET = historicoVET;
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 
     public Loja getLoja() {

@@ -5,42 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 public class Contrato implements DTO {
-    private boolean vigente;
-    private Date dataDeContratacao;
-    private Date dataDeValidade;
+    private Boolean ativo;
     private String descricao;
-    private double preco;
+    private Double preco;
     private List<File> documentos;
-    private float taxaDeMulta;
-    private double ativo;
+    private Float taxaDeMulta;
+    private Integer numeroDeLojas;
+    private Date dataDeCriacao;
 
-    private Usuario contratante;
+    private List<ContratoAssinado> contratosAssinados;
     private Periodicidade periodicidade;
 
-    private long id;
+    private Long id;
 
-    public boolean isVigente() {
-        return vigente;
+    public Boolean isAtivo() {
+        return ativo;
     }
 
-    public void setVigente(boolean vigente) {
-        this.vigente = vigente;
-    }
-
-    public Date getDataDeContratacao() {
-        return dataDeContratacao;
-    }
-
-    public void setDataDeContratacao(Date dataDeContratacao) {
-        this.dataDeContratacao = dataDeContratacao;
-    }
-
-    public Date getDataDeValidade() {
-        return dataDeValidade;
-    }
-
-    public void setDataDeValidade(Date dataDeValidade) {
-        this.dataDeValidade = dataDeValidade;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     public String getDescricao() {
@@ -51,11 +34,11 @@ public class Contrato implements DTO {
         this.descricao = descricao;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
@@ -67,28 +50,36 @@ public class Contrato implements DTO {
         this.documentos = documentos;
     }
 
-    public float getTaxaDeMulta() {
+    public Float getTaxaDeMulta() {
         return taxaDeMulta;
     }
 
-    public void setTaxaDeMulta(float taxaDeMulta) {
+    public void setTaxaDeMulta(Float taxaDeMulta) {
         this.taxaDeMulta = taxaDeMulta;
     }
 
-    public double getAtivo() {
-        return ativo;
+    public Integer getNumeroDeLojas() {
+        return numeroDeLojas;
     }
 
-    public void setAtivo(double ativo) {
-        this.ativo = ativo;
+    public void setNumeroDeLojas(Integer numeroDeLojas) {
+        this.numeroDeLojas = numeroDeLojas;
     }
 
-    public Usuario getContratante() {
-        return contratante;
+    public Date getDataDeCriacao() {
+        return dataDeCriacao;
     }
 
-    public void setContratante(Usuario contratante) {
-        this.contratante = contratante;
+    public void setDataDeCriacao(Date dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    public List<ContratoAssinado> getContratosAssinados() {
+        return contratosAssinados;
+    }
+
+    public void setContratosAssinados(List<ContratoAssinado> contratosAssinados) {
+        this.contratosAssinados = contratosAssinados;
     }
 
     public Periodicidade getPeriodicidade() {
@@ -99,11 +90,11 @@ public class Contrato implements DTO {
         this.periodicidade = periodicidade;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

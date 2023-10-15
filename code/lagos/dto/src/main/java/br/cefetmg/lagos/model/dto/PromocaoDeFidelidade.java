@@ -1,10 +1,12 @@
 package br.cefetmg.lagos.model.dto;
 
+import java.util.Date;
 import java.util.List;
 
-public class Promocao implements DTO {
+public class PromocaoDeFidelidade implements DTO {
     private Boolean ativa;
     private Float porcentagem;
+    private Date maximoCadastro;
 
     private List<Venda> vendas;
     private List<Produto> produtos;
@@ -27,6 +29,14 @@ public class Promocao implements DTO {
 
     public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
+    }
+
+    public Date getMaximoCadastro() {
+        return maximoCadastro;
+    }
+
+    public void setMaximoCadastro(Date maximoCadastro) {
+        this.maximoCadastro = maximoCadastro;
     }
 
     public List<Venda> getVendas() {
