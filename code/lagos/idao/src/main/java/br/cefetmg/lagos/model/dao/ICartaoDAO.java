@@ -4,7 +4,6 @@
  */
 package br.cefetmg.lagos.model.dao;
 import br.cefetmg.lagos.model.dto.tipos.Bandeira;
-import br.cefetmg.lagos.model.dao.EnderecoDAO;
 /**
  *
  * @author miguel
