@@ -18,11 +18,11 @@ public interface IFuncionarioDAO extends PessoaDAO {
 
     double listarSalario();
 
-    boolean inserirEstado(boolean ativo);
+    boolean inserirEstado(boolean estado);
     
-    boolean alterarEstado(boolean ativo);
+    boolean alterarEstado(boolean estado);
     
-    boolean removerEstado(boolean ativo);
+    boolean removerEstado(boolean estado);
 
     boolean listarEstado();
 

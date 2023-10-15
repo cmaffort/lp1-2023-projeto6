@@ -9,13 +9,7 @@ import br.cefetmg.lagos.model.dao.EnderecoDAO;
  *
  * @author miguel
  */
-public interface ICartaoDAO extends UsuarioDAO{
-    boolean inserirUsuario(UsuarioDAO usuario);
-    
-    boolean removerUsuario(UsuarioDAO usuario);
-    
-    UsuarioDAO listarUsuario();
-    
+public interface ICartaoDAO extends UsuarioContratoDAO{    
     boolean inserirEndereco(EnderecoDAO endereco);
     
     boolean alterarEndereco(EnderecoDAO endereco);

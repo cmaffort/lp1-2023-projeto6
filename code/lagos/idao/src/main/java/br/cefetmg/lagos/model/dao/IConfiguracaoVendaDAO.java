@@ -32,7 +32,7 @@ public interface IConfiguracaoVendaDAO{
     
     boolean alterarBandeiras(Bandeira[] banderias);
     
-    Bandeiras[] listarBandeiras();
+    Bandeira[] listarBandeiras();
     
     boolean inserirId(int id);
     

@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package br.cefetmg.lagos.model.dao;
-
 /**
  *
  * @author miguel
  */
-public interface IItemDAO extends ProdutoDAO{
+public interface IItemDAO{
     boolean inserirProduto(ProdutoDAO produto);
     
     boolean removerProduto(ProdutoDAO produto);

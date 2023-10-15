@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package br.cefetmg.lagos.model.dao;
-import java.util.Date;
 /**
  *
  * @author migue
  */
-public interface IFluxoTotalCaixaDAO extend FluxoUnitarioCaixaDAO{
+public interface IFluxoTotalCaixaDAO extends FluxoUnitarioCaixaDAO{
     boolean inserirDinheiroCaixa(FluxoUnitarioCaixaDAO fluxo);
     
     boolean alterarDinheiroCaixa(FluxoUnitarioCaixaDAO fluxo);

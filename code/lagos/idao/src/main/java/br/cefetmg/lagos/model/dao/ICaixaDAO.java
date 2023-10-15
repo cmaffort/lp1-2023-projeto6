@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package br.cefetmg.lagos.model.dao;
-
 /**
  *
  * @author miguel
  */
-public interface ICaixaDAO extends UsuarioDAO{
+public interface ICaixaDAO extends UsuarioLojaDAO{
     boolean inserirEstadoCaixa(boolean estadoCaixa);
 
     boolean alterarEstadoCaixa(boolean estadoCaixa);
@@ -17,17 +16,19 @@ public interface ICaixaDAO extends UsuarioDAO{
     
     boolean listarEstadoCaixa();
     
+    boolean inserirCaixeiro(UsuarioLojaDAO caixeiro);
+    
+    boolean alterarCaixeiro(UsuarioLojaDAO caixeiro);
+    
+    boolean removerCaixeiro(UsuarioLojaDAO caixeiro);
+    
+    UsuarioLojaDAO listarCaixeiro();
+    
     boolean inserirDinheiroEmCaixa(double dinheiroEmCaixa);
     
     boolean alterarDinheiroEmCaixa(double dinheiroEmCaixa);
     
     double listarDinheiroEmCaixa();
-    
-    boolean inserirUsuario(UsuarioDAO usuario);
-    
-    boolean alterarUsuario(UsuarioDAO usuario);
-    
-    boolean removerUsuario(UsuarioDAO usuario);
     
     boolean inserirId(int id);
     

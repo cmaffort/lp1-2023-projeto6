@@ -8,7 +8,7 @@ import java.io.File;
  *
  * @author miguel
  */
-public interface IConfiguracaoInterfaceDAO extends UsuarioDAO{
+public interface IConfiguracaoInterfaceDAO{
     boolean inserirNomeEmpresa(String nomeEmpresa);
     
     boolean alterarNomeEmpresa(String nomeEmpresa);
@@ -30,14 +30,6 @@ public interface IConfiguracaoInterfaceDAO extends UsuarioDAO{
     boolean alterarCorBase(String corBase);
     
     boolean removerCorBase(String corBase);
-    
-    boolean inserirUsuario(UsuarioDAO usuario);
-    
-    boolean alterarUsuario(UsuarioDAO usuario);
-    
-    boolean removerUsuario(UsuarioDAO usuario);
-    
-    UsuarioDAO listarUsuario();
     
     boolean inserirId(int id);
     
