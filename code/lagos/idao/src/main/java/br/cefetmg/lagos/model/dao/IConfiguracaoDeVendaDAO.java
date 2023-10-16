@@ -9,7 +9,7 @@ import br.cefetmg.lagos.model.dto.tipos.Bandeira;
  *
  * @author miguel
  */
-public interface IConfiguracaoVendaDAO{
+public interface IConfiguracaoDeVendaDAO{
     boolean inserirLimiteDesconto(float limiteDesconto);
     
     boolean alterarLimiteDesconto(float limiteDesconto);
@@ -32,7 +32,7 @@ public interface IConfiguracaoVendaDAO{
     
     boolean alterarBandeiras(Bandeira[] banderias);
     
-    Bandeira[] listarBandeiras();
+    Bandeiras[] listarBandeiras();
     
     boolean inserirId(int id);
     

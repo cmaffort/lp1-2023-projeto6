@@ -4,11 +4,18 @@
  */
 package br.cefetmg.lagos.model.dao;
 import br.cefetmg.lagos.model.dto.tipos.Bandeira;
+import br.cefetmg.lagos.model.dao.EnderecoDAO;
 /**
  *
  * @author miguel
  */
-public interface ICartaoDAO extends UsuarioContratoDAO{    
+public interface ICartaoDAO extends UsuarioDAO{
+    boolean inserirUsuario(UsuarioDAO usuario);
+    
+    boolean removerUsuario(UsuarioDAO usuario);
+    
+    UsuarioDAO listarUsuario();
+    
     boolean inserirEndereco(EnderecoDAO endereco);
     
     boolean alterarEndereco(EnderecoDAO endereco);

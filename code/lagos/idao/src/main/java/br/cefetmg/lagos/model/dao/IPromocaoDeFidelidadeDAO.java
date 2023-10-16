@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author miguel
  */
-public interface IPromocaoFidelidadeDAO  extends PeriodicidadeDAO{
+public interface IPromocaoDeFidelidadeDAO  extends PeriodicidadeDAO{
     boolean buscarFidelidadeCliente(boolean fidelidade);
     
     boolean inserirFidelidadeCliente(boolean fidelidade);

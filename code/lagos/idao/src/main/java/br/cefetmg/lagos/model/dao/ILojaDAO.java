@@ -8,30 +8,16 @@ package br.cefetmg.lagos.model.dao;
  *
  * @author miguel
  */
-public interface ILojaDAO extends UsuarioContratoDAO{
-    boolean inserirUsuario(UsuarioContratoDAO usuario);
+public interface ILojaDAO extends UsuarioDAO{
+    boolean inserirUsuario(UsuarioDAO usuario);
     
-    boolean alterarUsuario(UsuarioContratoDAO usuario);
+    boolean alterarUsuario(UsuarioDAO usuario);
     
-    boolean removerUsuario(UsuarioContratoDAO usuario);
+    boolean removerUsuario(UsuarioDAO usuario);
     
     UsuarioDAO listarUsuario();
     
-    boolean inserirEndereco(EnderecoDAO endereco);
-    
-    boolean alterarEndereco(EnderecoDAO endereco);
-    
-    boolean removerEndereco(EnderecoDAO endereco);
-    
-    EnderecoDAO listarEndereco();
-    
-    boolean inserirLoja(LojaDAO loja);
-    
-    boolean removerLoja(LojaDAO loja);
-    
-    boolean alterarLoja(LojaDAO loja);
-    
-    LojaDAO[] listarLojas();
+    boolean acessarLoja(long id);
     
     boolean inserirId(int id);
     

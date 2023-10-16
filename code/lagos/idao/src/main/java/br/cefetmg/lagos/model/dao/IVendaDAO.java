@@ -35,13 +35,9 @@ public interface IVendaDAO extends HistoricoVETDAO{
     
     boolean removerPromocaoFidelidade(PromocaoFidelidadeDAO promocao);
     
-    PromocaoFidelidadeDAO listarPromocaoFidelidade();
+    boolean inserirPromocao(Promocao promocao);
     
-    boolean inserirPromocao(PromocaoDAO promocao);
-    
-    boolean removerPromocao(PromocaoDAO promocao);
-    
-    PromocaoDAO listarPromocao();
+    boolean removerPromocao(Promocao promocao);
     
     boolean inserirId(int id);
     

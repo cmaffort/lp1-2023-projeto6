@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author miguel
  */
-public interface IContratoAssinadoDAO extends UsuárioContratoDAO{
+public interface IContratoAssinadoDAO extends UsuárioDAO{
     
     boolean inserirAtividade(boolean vigente);
     
@@ -30,11 +30,11 @@ public interface IContratoAssinadoDAO extends UsuárioContratoDAO{
     
     boolean listarContratoCancelado();
     
-    boolean inserirUsuário(UsuárioContratoDAO usuario);
+    boolean inserirUsuário(UsuarioDAO usuario);
     
-    boolean removerUsuario(UsuárioContratoDAO usuario);
+    boolean removerUsuario(UsuarioDAO usuario);
     
-    UsuárioContratoDAO listarUsuario();
+    UsuarioDAO listarUsuario();
     
     boolean inserirId(int id);
     
