@@ -1,29 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
-import java.util.Date;
-/**
- *
- * @author miguel
- */
+
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.FluxoUnitarioDeCaixa;
+
 public interface IFluxoUnitarioCaixaDAO{
-    boolean inserirDinheiroCaixa(double dinheiroCaixa);
+    boolean inserir(FluxoUnitarioDeCaixa fluxoUnitario) throws SQLException, ClassNotFoundException;
     
-    boolean alterarDinheiroCaixa(double dinheiroCaixa);
+    boolean alterar(FluxoUnitarioDeCaixa fluxoUnitario) throws SQLException, ClassNotFoundException;
     
-    boolean removerDinheiroCaixa(double dinheiroCaixa);
+    boolean remover(FluxoUnitarioDeCaixa fluxoUnitario) throws SQLException, ClassNotFoundException;
     
-    double listarDinheiroCaixa();
-    
-    boolean inserirData(Date data);
-    
-    Date listarData();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<FluxoUnitarioDeCaixa> listar() throws SQLException, ClassNotFoundException;
 }

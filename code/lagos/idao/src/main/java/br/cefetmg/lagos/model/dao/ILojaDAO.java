@@ -1,27 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-/**
- *
- * @author miguel
- */
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Loja;
+
 public interface ILojaDAO extends UsuarioDAO{
-    boolean inserirUsuario(UsuarioDAO usuario);
     
-    boolean alterarUsuario(UsuarioDAO usuario);
+    boolean inserir(Loja loja) throws SQLException, ClassNotFoundException;
     
-    boolean removerUsuario(UsuarioDAO usuario);
+    boolean alterar(Loja loja) throws SQLException, ClassNotFoundException;
     
-    UsuarioDAO listarUsuario();
+    boolean remover(Loja loja) throws SQLException, ClassNotFoundException;
     
-    boolean acessarLoja(long id);
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Loja> listar() throws SQLException, ClassNotFoundException;
 }

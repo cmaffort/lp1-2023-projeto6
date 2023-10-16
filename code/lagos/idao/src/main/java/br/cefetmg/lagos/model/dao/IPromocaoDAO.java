@@ -1,36 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-/**
- *
- * @author miguel
- */
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Promocao;
+
 public interface IPromocaoDAO extends PeriodicidadeDAO{
     
-    boolean inserirTaxaPromocao(float taxaPromocao);
+    boolean inserir(Promocao promocao) throws SQLException, ClassNotFoundException;
     
-    boolean alterarTaxaPromocao(float taxaPromocao);
+    boolean alterar(Promocao promocao) throws SQLException, ClassNotFoundException;
     
-    float listarTaxaPromocao();
+    boolean remover(Promocao promocao) throws SQLException, ClassNotFoundException;
     
-    boolean inserirPeriodicidade(PeriodiciadeDAO periodo);
-    
-    boolean alterarPeriodicidade(PeriodicidadeDAO periodo);
-    
-    PeriodicidadeDAO listarPeriodicidade();
-    
-    boolean inserirEstadoPromocao(boolean estado);
-    
-    boolean alterarEstadoPromocao(boolean estado);
-    
-    boolean listarEstadoPromocao();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Promocao> listar() throws SQLException, ClassNotFoundException;
 }

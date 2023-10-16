@@ -1,48 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
+
 import br.cefetmg.lagos.model.dto.tipos.Bandeira;
-import br.cefetmg.lagos.model.dao.EnderecoDAO;
-/**
- *
- * @author miguel
- */
-public interface ICartaoDAO extends UsuarioDAO{
-    boolean inserirUsuario(UsuarioDAO usuario);
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Cartao;
+
+public interface ICartaoDAO{
     
-    boolean removerUsuario(UsuarioDAO usuario);
+    boolean inserir(Cartao cartao) throws SQLException, ClassNotFoundException;
     
-    UsuarioDAO listarUsuario();
+    boolean alterar(Cartao cartao) throws SQLException, ClassNotFoundException;
     
-    boolean inserirEndereco(EnderecoDAO endereco);
+    boolean remover(Cartao cartao) throws SQLException, ClassNotFoundException;
     
-    boolean alterarEndereco(EnderecoDAO endereco);
-    
-    boolean removerEndereco(EnderecoDAO endereco);
-    
-    EnderecoDAO listarEndereco();
-    
-    boolean inserirNumeroCartao(long numeroCartao);
-    
-    boolean alterarNumeroCartao(long numeroCartao);
-    
-    boolean removerNumeroCartao(long numeroCartao);
-    
-    long listarNumeroCartao();
-    
-    boolean inserirBandeiraCartao(Bandeira bandeira);
-    
-    boolean alterarBandeiraCartao(Bandeira bandeira);
-    
-    boolean removerBandeiraCartao(Bandeira bandeira);
-    
-    Bandeira listarBandeiraCartao();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Cartao> listar() throws SQLException, ClassNotFoundException;
 }

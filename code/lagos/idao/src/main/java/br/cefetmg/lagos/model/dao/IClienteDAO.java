@@ -1,37 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
-import java.util.Date;
 
-/**
- * @author miguel
- */
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Cliente;
+
 public interface IClienteDAO extends PessoaDAO{
-    boolean inserirPessoa(PessoaDAO pessoa);
     
-    boolean removerPessoa(PessoaDAO pessoa);
+    boolean inserir(Cliente cliente) throws SQLException, ClassNotFoundException;
     
-    PessoaDAO listarPessoa();
+    boolean alterar(Cliente cliente) throws SQLException, ClassNotFoundException;
     
-    boolean inserirInstagram(String instagram);
+    boolean remover(Cliente cliente) throws SQLException, ClassNotFoundException;
     
-    boolean alterarInstagram(String instagram);
-    
-    boolean removerInstagram(String instagram);
-    
-    String listarInstagram();
-    
-    boolean inserirCadastro(Date cadastro);
-    
-    boolean removerCadastro(Date cadastro);
-    
-    Date listarCadastro();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Cliente> listar() throws SQLException, ClassNotFoundException;
 }

@@ -1,42 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
+
 import br.cefetmg.lagos.model.dto.tipos.MetodosPagamento;
 import br.cefetmg.lagos.model.dto.tipos.Bandeira;
-/**
- *
- * @author miguel
- */
+import java.util.List;
+import java.sql.SQLException;
+import br.cefetmg.lagos.model.dto.ConfiguracoesDeVenda;
+
 public interface IConfiguracaoDeVendaDAO{
-    boolean inserirLimiteDesconto(float limiteDesconto);
     
-    boolean alterarLimiteDesconto(float limiteDesconto);
+    boolean inserir(ConfiguracoesDeVenda configuracaoVenda) throws SQLException, ClassNotFoundException;
     
-    float listarLimiteDesconto();
+    boolean alterar(ConfiguracoesDeVenda configuracaoVenda) throws SQLException, ClassNotFoundException;
     
-    boolean inserirTaxaJurosEfetiva(float taxaEfetiva);
+    boolean remover(ConfiguracoesDeVenda configuracaoVenda) throws SQLException, ClassNotFoundException;
     
-    boolean alterarTaxaJurosEfetiva(float taxaEfetiva);
-    
-    float listarTaxaJurosEfetiva();
-    
-    boolean inserirMetodosPagamento(MetodosPagamento[] metodosPagamento);
-    
-    boolean alterarMetodosPagamento(MetodosPagamento[] metodosPagamento);
-    
-    MetodosPagamento[] listarMetodosPagamento();
-    
-    boolean inserirBandeiras(Bandeira[] banderias);
-    
-    boolean alterarBandeiras(Bandeira[] banderias);
-    
-    Bandeiras[] listarBandeiras();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<ConfiguracoesDeVenda> listar() throws SQLException, ClassNotFoundException;
 }

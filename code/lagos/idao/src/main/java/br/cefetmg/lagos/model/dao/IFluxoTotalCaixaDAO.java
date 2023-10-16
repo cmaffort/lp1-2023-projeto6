@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
-import java.util.Date;
-/**
- *
- * @author migue
- */
-public interface IFluxoTotalCaixaDAO extend FluxoUnitarioCaixaDAO{
-    boolean inserirDinheiroCaixa(FluxoUnitarioCaixaDAO fluxo);
+
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.FluxoTotalDeCaixa;
+
+public interface IFluxoTotalCaixaDAO extends FluxoUnitarioCaixaDAO{
     
-    boolean alterarDinheiroCaixa(FluxoUnitarioCaixaDAO fluxo);
+    boolean inserir(FluxoTotalDeCaixa fluxoTotal) throws SQLException, ClassNotFoundException;    
+
+    boolean alterar(FluxoTotalDeCaixa fluxoTotal) throws SQLException, ClassNotFoundException;
     
-    boolean removerDinheiroCaixa(FluxoUnitarioCaixaDAO fluxo);
+    boolean remover(FluxoTotalDeCaixa fluxoTotal) throws SQLException, ClassNotFoundException;
     
-    FluxoUnitarioCaixaDAO listarDinheiroCaixa();    
+    List<FluxoTotalDeCaixa> listar() throws SQLException, ClassNotFoundException;
 }

@@ -1,52 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Pessoa;
 
-/**
- * @author miguel
- */
 public interface IPessoaDAO {
-    boolean inserirNome(String nome);
     
-    boolean removerNome(String nome);
+    boolean inserir(Pessoa pessoa)  throws SQLException, ClassNotFoundException;
 
-    String listarNome();
-
-    boolean inserirSobrenome(String sobrenome);
+    boolean alterar(Pessoa pessoa) throws SQLException, ClassNotFoundException;
     
-    boolean removerSobrenome(String sobrenome);
-
-    String listarSobrenome();
-
-    boolean inserirNascimento(Date nascimento);
+    boolean remover(Pessoa pessoa) throws SQLException, ClassNotFoundException;
     
-    boolean removerNascimento(Date nascimento);
-
-    Date listarNascimento();
-
-    boolean inserirEmail(String email);
-    
-    boolean alterarEmail(String email);
-    
-    boolean removerEmail(String email);
-
-    String listarEmail();
-
-    boolean inserirTelefone(long telefone);
-    
-    boolean alterarTelefone(long telefone);
-    
-    boolean removerTelefone(long telefone);
-
-    long listarTelefone();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Pessoa> listar() throws SQLException, ClassNotFoundException;
 }

@@ -1,33 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-/**
- *
- * @author miguel
- */
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Endereco;
+
 public interface IEnderecoDAO {
-    boolean inserirCEP(String CEP);
     
-    boolean alterarCEP(String CEP);
+    boolean inserir(Endereco endereco) throws SQLException, ClassNotFoundException;
     
-    boolean removerCEP(String CEP);
+    boolean alterar(Endereco endereco) throws SQLException, ClassNotFoundException;
     
-    String listarCEP();
+    boolean remover(Endereco endereco) throws SQLException, ClassNotFoundException;
     
-    boolean inserirNumeroCasa(int numeroCasa);
-    
-    boolean alterarNumeroCasa(int numeroCasa);
-    
-    boolean removerNumeroCasa(int numeroCasa);
-    
-    int listarNumeroCasa();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Endereco> listar() throws SQLException, ClassNotFoundException;
 }

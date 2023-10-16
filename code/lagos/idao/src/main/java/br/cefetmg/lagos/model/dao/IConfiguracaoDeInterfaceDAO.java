@@ -1,47 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
-import java.io.File;
-/**
- *
- * @author miguel
- */
-public interface IConfiguracaoDeInterfaceDAO extends UsuarioDAO{
-    boolean inserirNomeEmpresa(String nomeEmpresa);
-    
-    boolean alterarNomeEmpresa(String nomeEmpresa);
-    
-    boolean removerNomeEmpresa(String nomeEmpresa);
 
-    String listarNomeEmpresa();
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.ConfiguracoesDeInterface;
+
+public interface IConfiguracaoDeInterfaceDAO{
     
-    boolean inserirLogo(File logo);
+    boolean inserir(ConfiguracoesDeInterface configuracaoInterface) throws SQLException, ClassNotFoundException;
     
-    boolean alterarLogo(File logo);
+    boolean alterar(ConfiguracoesDeInterface configuracaoInterface) throws SQLException, ClassNotFoundException;
     
-    boolean removerLogo(File logo);
+    boolean remover(ConfiguracoesDeInterface configuracaoInterface) throws SQLException, ClassNotFoundException;
     
-    File listarLogo();
-    
-    boolean inserirCorBase(String corBase);
-    
-    boolean alterarCorBase(String corBase);
-    
-    boolean removerCorBase(String corBase);
-    
-    boolean inserirUsuario(UsuarioDAO usuario);
-    
-    boolean alterarUsuario(UsuarioDAO usuario);
-    
-    boolean removerUsuario(UsuarioDAO usuario);
-    
-    UsuarioDAO listarUsuario();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<ConfiguracoesDeInterface> listar() throws SQLException, ClassNotFoundException;
 }

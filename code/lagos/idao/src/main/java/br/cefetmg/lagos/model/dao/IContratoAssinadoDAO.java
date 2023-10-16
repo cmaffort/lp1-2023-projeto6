@@ -1,44 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-import java.util.Date;
+import java.util.List;
+import java.sql.SQLException;
+import br.cefetmg.lagos.model.dto.ContratoAssinado;
 
-/**
- *
- * @author miguel
- */
-public interface IContratoAssinadoDAO extends UsuárioDAO{
+public interface IContratoAssinadoDAO extends UsuarioDAO{
     
-    boolean inserirAtividade(boolean vigente);
+    boolean inserir(ContratoAssinado contratoAssinado) throws SQLException, ClassNotFoundException;
     
-    boolean alterarAtividade(boolean vigente);
+    boolean alterar(ContratoAssinado contratoAssinado) throws SQLException, ClassNotFoundException;
     
-    boolean listarAtividade();
+    boolean remover(ContratoAssinado contratoAssinado) throws SQLException, ClassNotFoundException;
     
-    boolean inserirDataContratacao(Date data);
-    
-    boolean alterarDataContratacao(Date data);
-    
-    Date listarDataContratacao();
-    
-    boolean inserircontratoCancelado(boolean contratoCancelado);
-    
-    boolean alterarcontratoCancelado(boolean contratoCancelado);
-    
-    boolean listarContratoCancelado();
-    
-    boolean inserirUsuário(UsuarioDAO usuario);
-    
-    boolean removerUsuario(UsuarioDAO usuario);
-    
-    UsuarioDAO listarUsuario();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<ContratoAssinado> listar() throws SQLException, ClassNotFoundException;
 }

@@ -1,33 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.cefetmg.lagos.model.dao;
 
-/**
- *
- * @author miguel
- */
+import java.sql.SQLException;
+import java.util.List;
+import br.cefetmg.lagos.model.dto.Periodicidade;
+
 public interface IPeriodicidadeDAO {
-    boolean inserirPeriodo(int periodo);
     
-    boolean alterarPeriodo(int periodo);
+    boolean inserir(Periodicidade periodicidade) throws SQLException, ClassNotFoundException;
     
-    boolean removerPeriodo(int periodo);
+    boolean alterar(Periodicidade periodicidade) throws SQLException, ClassNotFoundException;
     
-    int listarPeriodo();
+    boolean remover(Periodicidade periodicidade) throws SQLException, ClassNotFoundException;
     
-    boolean inserirDiasPeriodo(int diasPeriodo);
-    
-    boolean alterarDiasPeriodo(int diasPeriodo);
-    
-    boolean removerDiasPeriodo(int diasPeriodo);
-    
-    int listarDiasPeriodo();
-    
-    boolean inserirId(int id);
-    
-    boolean removerId(int id);
-    
-    int listarId();
+    List<Periodicidade> listar() throws SQLException, ClassNotFoundException;
 }
