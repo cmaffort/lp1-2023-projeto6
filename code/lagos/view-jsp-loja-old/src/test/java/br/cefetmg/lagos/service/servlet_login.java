@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.service;
+package br.cefetmg.lagos.service;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/servlet_login")
+@WebServlet(name = "servlet_login", urlPatterns = {"/servlet_login"})
 public class servlet_login extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
