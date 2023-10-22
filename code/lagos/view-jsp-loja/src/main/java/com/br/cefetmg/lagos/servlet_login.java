@@ -21,7 +21,7 @@ public class servlet_login extends HttpServlet {
             request.setAttribute("Usuario", userStr);
             request.setAttribute("Senha", senhaStr);
 
-            request.getRequestDispatcher("/jsp_login.jsp").forward(request, response);
+            request.getRequestDispatcher("core/login-cadastro/jsp_login.jsp").forward(request, response);
 
     }
 }
