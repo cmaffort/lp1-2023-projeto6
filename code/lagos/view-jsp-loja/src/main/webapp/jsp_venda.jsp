@@ -8,15 +8,29 @@
     </head>
     <body>
         <header>
-            <h1>LAGOS</h1>
+            <h1 id="titulo-lagos">LAGOS</h1>
         </header>
+        
+        <h1 id="titulo">Gestão de Vendas</h1>
+        
         <div class="container">
-            <h1 id="titulo">Gestão de Vendas</h1>
-            <h2 class="botoes">Gerenciar preços</h2>
-            <h2 class="botoes">Histórico de vendas</h2>
-            <h2 class="botoes">Gerenciar vendedores</h2>
-            <h2 class="botoes">Descontos</h2>
-            <h2 class="botoes">Taxas</h2>
+            <div class="grid-item">
+                <button class="botoes" id="botao-gerenciar-precos">Gerenciar preços</button>
+                <button class="botoes" id="botao-historia-vendas">Histórico de vendas</button>
+                <button class="botoes" id="botao-gerenciar-vendedores">Gerenciar vendedores</button>
+                <button class="botoes" id="botao-descontos">Descontos</button>
+                <button class="botoes" id="botao-taxas">Taxas</button>
+            </div>
+            <div class="grid-item" id="quadro">
+                <p>Lorem ipsum dolor sit amet, consectetur 
+                    adipiscing elit, sed do eiusmod tempor incididunt 
+                    ut labore et dolore magna aliqua. Ut enim 
+                    ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat.
+                </p>
+            </div>
         </div>
+        <footer></footer>
     </body>
 </html>
