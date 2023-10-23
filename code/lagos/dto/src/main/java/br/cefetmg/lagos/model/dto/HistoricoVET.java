@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.TipoHistoricoVET;
+import br.cefetmg.lagos.model.dto.enums.TipoHistoricoVET;
 
 import java.util.Date;
 import java.util.List;

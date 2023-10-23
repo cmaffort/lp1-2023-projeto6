@@ -8,18 +8,18 @@ public class ConnectionManager {
     private static ConnectionManager cm;
     private static ConnectionFactory cf;
 
-    private ConnectionManager(){
+    private ConnectionManager() {
         ConnectionManager.cf = new MySQLConnection();
     }
 
-    public static ConnectionManager getInstance(){
-        if(cm == null)
+    public static ConnectionManager getInstance() {
+        if (cm == null)
             cm = new ConnectionManager();
 
         return cm;
     }
 
-    public Connection getConnection() throws SQLException, ClassNotFoundException{
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
         return ConnectionManager.cf.getConnection();
     }
 

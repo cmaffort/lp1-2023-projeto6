@@ -1,6 +1,11 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
+import br.cefetmg.lagos.model.dto.utils.PermissoesFuncionario;
+
+import java.util.List;
 
 public class Funcionario extends Pessoa implements DTO {
     private Double salario;
@@ -10,6 +15,12 @@ public class Funcionario extends Pessoa implements DTO {
     private Loja loja;
 
     private Long id;
+
+    public List<Permissao> getPermicoes() throws MissingDataExeption {
+        if (tipo == null)
+            throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
+        return PermissoesFuncionario.getPermissoesForTipo(tipo);
+    }
 
     public Double getSalario() {
         return salario;

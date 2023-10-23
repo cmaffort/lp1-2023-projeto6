@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
 
 public class Caixeiro extends UsuarioLoja implements DTO {
     private QueryList<Venda> vendas;

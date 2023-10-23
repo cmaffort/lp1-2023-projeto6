@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Pessoa implements DTO {
     private String nome;

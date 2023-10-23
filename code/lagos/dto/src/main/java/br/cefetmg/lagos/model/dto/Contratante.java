@@ -1,21 +1,21 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.Permissoes;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 
 import java.util.List;
 
 public class Contratante extends Usuario implements DTO {
     private List<Loja> lojas;
-    private ConfiguracoesDeInterface configuracoesDeInterface;
     private List<Cartao> cartoes;
     private List<ContratoAssinado> contratosAssinados;
 
     public Contratante() {
         super();
-        super.setPermicoes(List.of(new Permissoes[]{Permissoes.CONTRATANTE}));
+        super.setTipo(TipoUsuario.CONTRATANTE);
     }
 
-    public void setPermicoes(List<Permissoes> permicoes) {
+    public void setTipo(TipoUsuario tipo) {
         throw new RuntimeException("Tipo fixo.");
     }
 
@@ -25,14 +25,6 @@ public class Contratante extends Usuario implements DTO {
 
     public void setLojas(List<Loja> lojas) {
         this.lojas = lojas;
-    }
-
-    public ConfiguracoesDeInterface getConfiguracoesDeInterface() {
-        return configuracoesDeInterface;
-    }
-
-    public void setConfiguracoesDeInterface(ConfiguracoesDeInterface configuracoesDeInterface) {
-        this.configuracoesDeInterface = configuracoesDeInterface;
     }
 
     public List<Cartao> getCartoes() {

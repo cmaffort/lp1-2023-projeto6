@@ -1,6 +1,5 @@
 package br.cefetmg.lagos.model.dao;
 
-import br.cefetmg.lagos.model.dto.tipos.Bandeira;
 import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Cartao;

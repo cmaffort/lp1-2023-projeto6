@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.Bandeira;
+import br.cefetmg.lagos.model.dto.enums.Bandeira;
 
 public class Cartao implements DTO {
     private Long numero;
