@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.dto.tipos;
+package br.cefetmg.lagos.model.dto.enums;
 
 public enum Bandeira {
     VISA, MASTERCARD;

@@ -1,16 +1,17 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.Permissoes;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 
 import java.util.List;
 
 public class GerenteDeContrato extends Usuario implements DTO {
     public GerenteDeContrato() {
         super();
-        super.setPermicoes(List.of(new Permissoes[]{Permissoes.GERENTE_DE_CONTRATOS}));
+        super.setTipo(TipoUsuario.GERENTE_DE_CONTRATOS);
     }
 
-    public void setPermicoes(List<Permissoes> permicoes) {
+    public void setTipo(TipoUsuario tipo) {
         throw new RuntimeException("Tipo fixo.");
     }
 }
