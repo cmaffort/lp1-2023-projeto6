@@ -1,0 +1,43 @@
+body{
+    background-color: #f2eed6;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 5px solid black;
+    border-radius: 2px;
+}
+
+#nome-empresa h1{
+    color: #a91f1f;
+    text-align: center;
+    font-family: 'Londrina Solid', sans-serif;
+    font-size: 45px;
+}
+
+#menu li{
+    list-style-type: none;
+}
+
+#aviso img{
+    height: 70px;
+    width: 70px;
+}
+
+article h1{
+    color: gray;
+    text-align: center;
+    font-size: 45px;
+    font-family: 'Chivo', sans-serif;
+}
+
+#botao_cadastro{
+    background-color: #f2eed6;
+    border: 2px solid gray;
+    border-radius: 10px;
+    display: inline;
+    padding: 2px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 20px;
+}
