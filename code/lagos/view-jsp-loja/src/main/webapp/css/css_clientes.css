@@ -41,3 +41,9 @@ article h1{
     font-family: 'Chivo', sans-serif;
     font-size: 20px;
 }
+
+.listras_menu{
+    background-color: grey;
+    border: 1px solid grey;
+    border-radius: 1px;
+}

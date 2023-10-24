@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.service;
 
-public class Venda {
+public class ManagerVenda {
     private double precoTotal;
     
     void adicionarItem(int id) {
