@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.FluxoTotalDeCaixa;
 
-public interface IFluxoTotalCaixaDAO extends FluxoUnitarioCaixaDAO{
+public interface IFluxoTotalCaixaDAO {
     
     boolean inserir(FluxoTotalDeCaixa fluxoTotal) throws SQLException, ClassNotFoundException;    
 

@@ -65,4 +65,9 @@ public class UsuarioDAO implements IUsuarioDAO {
     public List<Usuario> listar() throws PersistenceException {
         return null;
     }
+
+    @Override
+    public Usuario cosultarPorId(Long id) throws PersistenceException {
+        return null;
+    }
 }

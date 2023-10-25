@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.Usuario;
 
 public interface IUsuarioDAO {
@@ -16,4 +17,5 @@ public interface IUsuarioDAO {
     
     List<Usuario> listar() throws PersistenceException;
 
+    Usuario cosultarPorId(Long id) throws PersistenceException;
 }

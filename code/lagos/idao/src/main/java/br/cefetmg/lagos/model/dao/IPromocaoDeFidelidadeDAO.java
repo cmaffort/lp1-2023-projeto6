@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.PromocaoDeFidelidade;
 
-public interface IPromocaoDeFidelidadeDAO  extends PeriodicidadeDAO{
+public interface IPromocaoDeFidelidadeDAO {
     
     boolean inserir(PromocaoDeFidelidade promocaoFidelidadde) throws SQLException, ClassNotFoundException;
     

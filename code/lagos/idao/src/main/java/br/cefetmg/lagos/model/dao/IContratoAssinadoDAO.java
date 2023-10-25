@@ -4,7 +4,7 @@ import java.util.List;
 import java.sql.SQLException;
 import br.cefetmg.lagos.model.dto.ContratoAssinado;
 
-public interface IContratoAssinadoDAO extends UsuarioDAO{
+public interface IContratoAssinadoDAO {
     
     boolean inserir(ContratoAssinado contratoAssinado) throws SQLException, ClassNotFoundException;
     

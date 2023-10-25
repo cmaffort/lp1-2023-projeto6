@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Venda;
 
-public interface IVendaDAO extends HistoricoVETDAO{
+public interface IVendaDAO {
     
     boolean inserir(Venda venda) throws SQLException, ClassNotFoundException;
     

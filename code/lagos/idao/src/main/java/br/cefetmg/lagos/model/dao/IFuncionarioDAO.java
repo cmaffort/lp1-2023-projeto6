@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Funcionario;
 
-public interface IFuncionarioDAO extends PessoaDAO {
+public interface IFuncionarioDAO {
     
     boolean inserir(Funcionario funcionario) throws SQLException, ClassNotFoundException;
     

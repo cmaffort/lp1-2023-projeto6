@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Caixa;
 
-public interface ICaixaDAO{
+public interface ICaixaDAO {
     
     boolean inserir(Caixa caixa) throws SQLException, ClassNotFoundException;
 

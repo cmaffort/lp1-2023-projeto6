@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.dto.utils;
+package br.cefetmg.lagos.model.dto.util;
 
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;

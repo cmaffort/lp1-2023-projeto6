@@ -39,10 +39,9 @@ create table endereco
 
 create table cartao
 (
-    numero   bigint not null,
-    bandeira int    not null,
-    pk       bigint auto_increment
+    numero   bigint not null
         primary key,
+    bandeira int    not null,
 
     endereco__fk bigint not null,
     usuario__fk  bigint not null,

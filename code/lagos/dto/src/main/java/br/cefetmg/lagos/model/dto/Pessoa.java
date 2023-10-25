@@ -1,5 +1,7 @@
 package br.cefetmg.lagos.model.dto;
 
+import br.cefetmg.lagos.model.dto.annotations.Column;
+
 import java.sql.Date;
 
 public class Pessoa implements DTO {
@@ -11,6 +13,7 @@ public class Pessoa implements DTO {
 
     private Long id;
 
+    @Column(nome = "nome")
     public String getNome() {
         return nome;
     }
@@ -19,6 +22,7 @@ public class Pessoa implements DTO {
         this.nome = nome;
     }
 
+    @Column(nome = "sobrenome")
     public String getSobrenome() {
         return sobrenome;
     }

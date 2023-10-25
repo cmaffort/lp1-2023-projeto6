@@ -3,7 +3,7 @@ package br.cefetmg.lagos.model.dto;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
-import br.cefetmg.lagos.model.dto.utils.PermissoesFuncionario;
+import br.cefetmg.lagos.model.dto.util.PermissoesFuncionario;
 
 import java.util.List;
 
