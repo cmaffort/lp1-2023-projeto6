@@ -1,6 +1,8 @@
 package br.cefetmg.lagos.model.dto;
 
 import br.cefetmg.lagos.model.dto.annotations.Column;
+import br.cefetmg.lagos.model.dto.annotations.Getter;
+import br.cefetmg.lagos.model.dto.annotations.Setter;
 
 import java.sql.Date;
 
@@ -9,57 +11,79 @@ public class Pessoa implements DTO {
     private String sobrenome;
     private Date nascimento;
     private String email;
-    private Long telefone;
+    private long telefone;
 
-    private Long id;
+    private long id;
 
     @Column(nome = "nome")
+    @Getter
     public String getNome() {
         return nome;
     }
 
+    @Column(nome = "nome")
+    @Setter
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     @Column(nome = "sobrenome")
+    @Getter
     public String getSobrenome() {
         return sobrenome;
     }
 
+    @Column(nome = "sobrenome")
+    @Setter
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
 
+    @Column(nome = "nascimento")
+    @Getter
     public Date getNascimento() {
         return nascimento;
     }
 
+    @Column(nome = "nascimento")
+    @Setter
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 
+    @Column(nome = "email")
+    @Getter
     public String getEmail() {
         return email;
     }
 
+    @Column(nome = "email")
+    @Setter
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Long getTelefone() {
+    @Column(nome = "telefone")
+    @Getter
+    public long getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Long telefone) {
+    @Column(nome = "telefone")
+    @Setter
+    public void setTelefone(long telefone) {
         this.telefone = telefone;
     }
 
-    public Long getId() {
+    @Column(nome = "pk")
+    @Getter
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    @Column(nome = "pk")
+    @Setter
+    public void setId(long id) {
         this.id = id;
     }
 }

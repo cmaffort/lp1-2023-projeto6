@@ -12,7 +12,7 @@ public class Usuario extends Pessoa implements DTO {
     private String username;
     private String senha;
 
-    private Long id;
+    private long id;
 
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
@@ -45,12 +45,12 @@ public class Usuario extends Pessoa implements DTO {
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
      return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(long id) {
      this.id = id;
      }
 }

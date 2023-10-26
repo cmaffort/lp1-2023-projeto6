@@ -10,7 +10,7 @@ public class Cliente extends Pessoa implements DTO {
     private List<Venda> vendas;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public String getInstagram() {
         return instagram;
@@ -45,12 +45,12 @@ public class Cliente extends Pessoa implements DTO {
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

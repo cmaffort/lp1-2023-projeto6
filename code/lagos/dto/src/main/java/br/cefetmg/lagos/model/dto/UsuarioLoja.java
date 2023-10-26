@@ -5,7 +5,7 @@ public abstract class UsuarioLoja extends Funcionario implements DTO {
     private String senha;
     // TODO: Autenticação
 
-    private Long id;
+    private long id;
 
     public String getUsername() {
         return username;
@@ -24,12 +24,12 @@ public abstract class UsuarioLoja extends Funcionario implements DTO {
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
