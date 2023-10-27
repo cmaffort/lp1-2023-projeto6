@@ -204,3 +204,8 @@ where '2023-10-30' between data_inicio
                               from periodicidade
                               where pk = periodicidade__fk))
   and (select count(*) from venda where cliente__fk = (select @cliente)) >= min_vendas;
+
+select tipo, username, senha, pk, nome, sobrenome, nascimento, email, telefone
+from pessoa, usuario
+where pessoa.pk = usuario.pk
+order by nome, nascimento;

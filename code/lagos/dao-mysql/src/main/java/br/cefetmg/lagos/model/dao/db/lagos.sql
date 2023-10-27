@@ -1,3 +1,35 @@
+set foreign_key_checks = 0;
+
+drop table if exists caixa;
+drop table if exists cartao;
+drop table if exists cliente;
+drop table if exists compra;
+drop table if exists configuracoes_de_interface;
+drop table if exists configuracoes_de_venda;
+drop table if exists contrato;
+drop table if exists contrato_assinado;
+drop table if exists endereco;
+drop table if exists fluxo_de_caixa;
+drop table if exists funcionario;
+drop table if exists historico_vet;
+drop table if exists item;
+drop table if exists loja;
+drop table if exists periodicidade;
+drop table if exists pessoa;
+drop table if exists produto;
+drop table if exists produto_compra;
+drop table if exists promocao;
+drop table if exists promocao_de_fidelidade;
+drop table if exists promocoes__produtos;
+drop table if exists promocoes__vendas;
+drop table if exists promocoes_de_fidelidade__produtos;
+drop table if exists promocoes_de_fidelidade__vendas;
+drop table if exists usuario;
+drop table if exists usuario_loja;
+drop table if exists venda;
+
+set foreign_key_checks = 1;
+
 create table periodicidade
 (
     periodo                     int not null,
