@@ -1,28 +1,33 @@
 package br.cefetmg.lagos.model.dao;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dao.util.DAO;
-import br.cefetmg.lagos.model.dao.util.StringSql;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
+import br.cefetmg.lagos.model.dto.DTO;
 import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.Usuario;
-import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
-public class UsuarioDAO implements IUsuarioDAO {
-    private static final DAO dao;
-    private static final PessoaDAO pessoaDAO;
-
-    static {
-        dao = new DAO(Usuario.class);
-        pessoaDAO = new PessoaDAO();
+public class UsuarioDAO extends DAO implements IUsuarioDAO {
+    protected Class<? extends DTO> getDTOClass() {
+        return Pessoa.class;
     }
 
-    protected static String getTable() {
-        return "usuario";
+    protected String getTable() {
+        return "pessoa";
+    }
+
+    private static final PessoaDAO PESSOA_DAO;
+
+    static {
+        PESSOA_DAO = new PessoaDAO();
+    }
+
+    protected List<List<String>> getColumnsPreparedStatementInserir() {
+        return Arrays.asList(
+                Arrays.asList("tipo", "username", "senha", "pk")
+        );
     }
 
     /**
@@ -30,75 +35,84 @@ public class UsuarioDAO implements IUsuarioDAO {
      */
     @Override
     public Long inserir(Usuario usuario) throws PersistenceException {
-        Long id = pessoaDAO.inserir(usuario);
-
+        Long id = PESSOA_DAO.inserir(usuario);
         usuario.setId(id);
 
-        List<List<String>> columnsPreparedStatement = Arrays.asList(
-                Arrays.asList("tipo", "username", "senha", "pk")
-        );
-
-        List<String> columns = dao.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-
-        String sql = StringSqlDaoHelper.insertWithValues(getTable(), columnsPreparedStatement.get(0));
-
-        dao.inserir(usuario, sql, columns);
+        super.inserir(usuario);
         return id;
+    }
+
+    protected List<List<String>> getColumnsPreparedStatementAlterar() {
+        return Arrays.asList(
+                Arrays.asList("tipo", "username", "senha"),
+                List.of("pk")
+        );
     }
 
     @Override
     public boolean alterar(Usuario usuario) throws PersistenceException {
-        pessoaDAO.alterar(usuario);
+        PESSOA_DAO.alterar(usuario);
 
-        List<List<String>> columnsPreparedStatement = Arrays.asList(
-                Arrays.asList("tipo", "username", "senha"),
-                List.of("pk")
-        );
+        return super.alterar(usuario);
+    }
 
-        List<String> columns = dao.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-
-        String sql = StringSqlDaoHelper.updateSetWhereEq(getTable(), columnsPreparedStatement.get(0), columnsPreparedStatement.get(1));
-
-        return dao.alterar(usuario, sql, columns);
+    protected List<List<String>> getColumnsPreparedStatementRemover() {
+        return List.of();
     }
 
     @Override
     public boolean remover(Usuario usuario) throws PersistenceException {
-        return pessoaDAO.remover(usuario);
+        return PESSOA_DAO.remover(usuario);
+    }
+
+    protected List<List<String>> getColumnsResultSetListar() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "pk")
+        );
+    }
+
+    protected List<String> getOrderByPriority() {
+        return Arrays.asList("nome", "sobrenome");
     }
 
     @Override
     public List<Usuario> listar() throws PersistenceException {
-        List<List<String>> columnsResultSet = Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "pk")
-        );
+        List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = dao.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsResultSet = daoHelper.mergeLists(columnsResultSet.toArray(new List[0]));
 
         String sql = StringSqlDaoHelper.selectFromWhereOrderBy(Arrays.asList("nome", "sobrenome", "nascimento", "email",
                         "telefone", "tipo", "username", "senha", "usuario.pk"), Arrays.asList(getTable(), "pessoa"),
-                Arrays.asList("pessoa.pk = usuario.pk"), Arrays.asList("nome", "sobrenome"));
+                Arrays.asList("pessoa.pk = usuario.pk"), getOrderByPriority());
 
-        return (List<Usuario>) dao.listar(sql, allColumnsResultSet);
+        return (List<Usuario>) daoHelper.listar(sql, allColumnsResultSet);
+    }
+
+    protected List<List<String>> getColumnsPreparedStatementConsultar() {
+        return Arrays.asList(
+                List.of("pk")
+        );
+    }
+
+    protected List<List<String>> getColumnsResultSetConsultar() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "pk")
+        );
     }
 
     @Override
     public Usuario cosultarPorId(Long id) throws PersistenceException {
-        List<List<String>> columnsPreparedStatement = Arrays.asList(
-                List.of("pk")
-        );
+        List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementConsultar();
 
-        List<List<String>> columnsResultSet = Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "pk")
-        );
+        List<List<String>> columnsResultSet = getColumnsResultSetConsultar();
 
-        List<String> allColumnsPreparedStatement = dao.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-        List<String> allColumnsResultSet = dao.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsPreparedStatement = daoHelper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
+        List<String> allColumnsResultSet = daoHelper.mergeLists(columnsResultSet.toArray(new List[0]));
 
         String sql = StringSqlDaoHelper.selectFromWhere(
                 Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "usuario.pk"),
                 Arrays.asList(getTable(), "pessoa"), Arrays.asList("usuario.pk = ?", "pessoa.pk = usuario.pk"));
 
-        return (Usuario) dao.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet);
+        return (Usuario) daoHelper.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet);
     }
 }

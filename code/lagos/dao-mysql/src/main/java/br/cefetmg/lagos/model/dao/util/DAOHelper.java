@@ -9,10 +9,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DAO {
+public class DAOHelper {
     protected DTOMethods dtoMethods;
 
-    public DAO(Class<? extends DTO> dtoClass) {
+    public DAOHelper(Class<? extends DTO> dtoClass) {
         dtoMethods = new DTOMethods(dtoClass);
     }
 

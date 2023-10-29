@@ -2,41 +2,41 @@ package br.cefetmg.lagos.model.dao;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.DTO;
-import br.cefetmg.lagos.model.dto.Pessoa;
+import br.cefetmg.lagos.model.dto.Endereco;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PessoaDAO extends DAO implements IPessoaDAO {
+public class EnderecoDAO extends DAO implements IEnderecoDAO {
     protected Class<? extends DTO> getDTOClass() {
-        return Pessoa.class;
+        return Endereco.class;
     }
 
     protected String getTable() {
-        return "pessoa";
+        return "endereco";
     }
 
     protected List<List<String>> getColumnsPreparedStatementInserir() {
         return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone")
+                Arrays.asList("cep", "numero")
         );
     }
 
     @Override
-    public Long inserir(Pessoa pessoa) throws PersistenceException {
-        return super.inserir(pessoa);
+    public Long inserir(Endereco endereco) throws PersistenceException {
+        return super.inserir(endereco);
     }
 
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
         return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone"),
+                Arrays.asList("cep", "numero"),
                 List.of("pk")
         );
     }
 
     @Override
-    public boolean alterar(Pessoa pessoa) throws PersistenceException {
-        return super.alterar(pessoa);
+    public boolean alterar(Endereco endereco) throws PersistenceException {
+        return super.alterar(endereco);
     }
 
     protected List<List<String>> getColumnsPreparedStatementRemover() {
@@ -46,23 +46,23 @@ public class PessoaDAO extends DAO implements IPessoaDAO {
     }
 
     @Override
-    public boolean remover(Pessoa pessoa) throws PersistenceException {
-        return super.remover(pessoa);
+    public boolean remover(Endereco endereco) throws PersistenceException {
+        return super.remover(endereco);
     }
 
     protected List<List<String>> getColumnsResultSetListar() {
         return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
+                Arrays.asList("cep", "numero", "pk")
         );
     }
 
     protected List<String> getOrderByPriority() {
-        return Arrays.asList("nome", "sobrenome");
+        return Arrays.asList("pk");
     }
 
     @Override
-    public List<Pessoa> listar() throws PersistenceException {
-        return (List<Pessoa>) super.listar();
+    public List<Endereco> listar() throws PersistenceException {
+        return (List<Endereco>) super.listar();
     }
 
     protected List<List<String>> getColumnsPreparedStatementConsultar() {
@@ -73,12 +73,12 @@ public class PessoaDAO extends DAO implements IPessoaDAO {
 
     protected List<List<String>> getColumnsResultSetConsultar() {
         return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
+                Arrays.asList("cep", "numero", "pk")
         );
     }
 
     @Override
-    public Pessoa cosultarPorId(Long id) throws PersistenceException {
-        return (Pessoa) super.cosultarPorId(id);
+    public Endereco cosultarPorId(Long id) throws PersistenceException {
+        return (Endereco) super.cosultarPorId(id);
     }
 }
