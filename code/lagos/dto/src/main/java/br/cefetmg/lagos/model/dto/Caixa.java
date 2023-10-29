@@ -1,9 +1,9 @@
 package br.cefetmg.lagos.model.dto;
 
 public class Caixa implements DTO {
+    
     private Boolean aberto;
     private Double dinheiroEmCaixa;
-
     private Caixeiro caixeiro;
     private FluxoTotalDeCaixa fluxoTotalDeCaixa;
     private Loja loja;

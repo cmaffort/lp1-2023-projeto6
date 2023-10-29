@@ -2,7 +2,7 @@ package br.cefetmg.lagos.model.dto;
 
 import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
 
-class Chefe extends UsuarioLoja implements DTO {
+public class Chefe extends UsuarioLoja implements DTO {
     public Chefe() {
         super();
         super.setTipo(TipoFuncionario.CHEFE);

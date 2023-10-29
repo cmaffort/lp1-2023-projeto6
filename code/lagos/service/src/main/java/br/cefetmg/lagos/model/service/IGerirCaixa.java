@@ -1,12 +1,12 @@
-package br.cefetmg.lagos.model.dao;
+package br.cefetmg.lagos.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Caixa;
 
-public interface ICaixaDAO{
+public interface IGerirCaixa {
     
-    long inserir(Caixa caixa) throws SQLException, ClassNotFoundException;
+    long cadastrar(Caixa caixa) throws SQLException, ClassNotFoundException;
 
     boolean alterar(Caixa caixa) throws SQLException, ClassNotFoundException;
     
@@ -14,5 +14,4 @@ public interface ICaixaDAO{
     
     List<Caixa> listar() throws SQLException, ClassNotFoundException;
     
-    Caixa cosultarPorId(Long id) throws ClassNotFoundException;
 }
