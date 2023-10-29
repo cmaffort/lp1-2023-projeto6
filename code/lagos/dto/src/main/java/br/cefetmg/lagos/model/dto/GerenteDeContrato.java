@@ -8,7 +8,7 @@ import java.util.List;
 public class GerenteDeContrato extends Usuario implements DTO {
     public GerenteDeContrato() {
         super();
-        super.setTipo(TipoUsuario.GERENTE_DE_CONTRATOS);
+        super.setTipoUsuario(TipoUsuario.GERENTE_DE_CONTRATOS);
     }
 
     public void setTipo(TipoUsuario tipo) {

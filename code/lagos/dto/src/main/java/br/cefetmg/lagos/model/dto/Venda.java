@@ -12,7 +12,7 @@ public class Venda extends HistoricoVET implements DTO {
     private List<PromocaoDeFidelidade> promocoesDeFidelidade;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public Float getDesconto() {
         return desconto;
@@ -73,12 +73,12 @@ public class Venda extends HistoricoVET implements DTO {
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

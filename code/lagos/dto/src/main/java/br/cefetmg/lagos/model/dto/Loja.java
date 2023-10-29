@@ -4,7 +4,7 @@ public class Loja implements DTO {
     private Contratante contratante;
     private Endereco endereco;
 
-    private Long id;
+    private long id;
 
     public Contratante getContratante() {
         return contratante;
@@ -22,11 +22,11 @@ public class Loja implements DTO {
         this.endereco = endereco;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

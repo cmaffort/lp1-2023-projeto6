@@ -10,7 +10,7 @@ public class Compra implements DTO {
     private List<ProdutoCompra> produtosDeCompra;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public Date getDataDeCompra() {
         return dataDeCompra;
@@ -44,11 +44,11 @@ public class Compra implements DTO {
         this.loja = loja;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

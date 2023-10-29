@@ -14,7 +14,7 @@ public class ConfiguracoesDeVenda implements DTO {
 
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public Float getLimiteDeDesconto() {
         return limiteDeDesconto;
@@ -64,11 +64,11 @@ public class ConfiguracoesDeVenda implements DTO {
         this.loja = loja;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

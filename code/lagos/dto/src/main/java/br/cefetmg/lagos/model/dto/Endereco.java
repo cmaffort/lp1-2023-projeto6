@@ -4,7 +4,7 @@ public class Endereco implements DTO {
     private Integer cep;
     private Integer numero;
 
-    private Long id;
+    private long id;
 
     public Integer getCep() {
         return cep;
@@ -22,11 +22,11 @@ public class Endereco implements DTO {
         this.numero = numero;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

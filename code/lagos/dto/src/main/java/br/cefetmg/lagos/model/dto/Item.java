@@ -8,7 +8,7 @@ public class Item implements DTO {
     private HistoricoVET historicoVET;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public Double getPreco() {
         return preco;
@@ -50,11 +50,11 @@ public class Item implements DTO {
         this.loja = loja;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

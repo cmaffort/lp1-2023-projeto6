@@ -8,7 +8,6 @@ import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.Usuario;
 
 public interface IUsuarioDAO {
-    
     Long inserir(Usuario usuario) throws PersistenceException;
     
     boolean alterar(Usuario usuario) throws PersistenceException;

@@ -53,10 +53,6 @@ public class StringSql {
         return "VALUES " + valueList(n);
     }
 
-    public static String insertWithValues(String table, List<String> columns) {
-        return insert(table, columns) + " " + values(columns.size());
-    }
-
     public static String from(String table) {
         return "FROM " + table;
     }
@@ -105,6 +101,10 @@ public class StringSql {
         return "DELETE FROM " + table;
     }
 
+    public static String deleteFrom(List<String> tables) {
+        return "DELETE " + from(tables);
+    }
+
     public static String orderBy(List<String> columns) {
         return "ORDER BY " + listWithParenthesis(columns, ", ", "", "");
     }
@@ -115,26 +115,5 @@ public class StringSql {
 
     public static String bigStatement(String... microStatements) {
         return String.join(" ", microStatements);
-    }
-
-    public static void main(String[] args) {
-        List<String> columns = Arrays.asList("pk", "select @hv2");
-        Map<String, String> dateDataWhere = Map.ofEntries(
-                Map.entry("pk", "periodicidade__fk")
-        );
-        String sqlDiasPeriodicidade = select(Collections.singletonList("periodo * periodicidade.quantidade_dias_por_periodo")) + "\n" +
-                from("periodicidade") + "\n" +
-                where(dateDataWhere);
-        String sql = select(columns) + "\n" +
-                from("promocao") + "\n" +
-                where(List.of(dateBetween("2023-10-30", "data_inicio", "ADDDATE(data_inicio, " + sqlDiasPeriodicidade + ")")));
-        System.out.println(sql);
-
-        List<String> columnsInsert = Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone");
-
-        sql = StringSql.insertWithValues("pessoa", columnsInsert) + "; " +
-                StringSql.select(List.of("LAST_INSERT_ID()"));
-
-        System.out.println(sql);
     }
 }

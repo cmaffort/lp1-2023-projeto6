@@ -8,7 +8,7 @@ public class ProdutoCompra implements DTO {
     private Compra compra;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public Integer getQuantidade() {
         return quantidade;
@@ -50,11 +50,11 @@ public class ProdutoCompra implements DTO {
         this.loja = loja;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

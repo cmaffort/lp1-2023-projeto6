@@ -15,24 +15,30 @@ public class Usuario extends Pessoa implements DTO {
     private String username;
     private String senha;
 
-    private long id;
-
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
             throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
         return PermissoesUsuario.getPermissoesForTipo(tipo);
     }
 
+    public TipoUsuario getTipoUsuario() {
+        return tipo;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+
     @Column(nome = "tipo")
     @Getter
-    public TipoUsuario getTipo() {
-        return tipo;
+    public int getTipo() {
+        return tipo.ordinal();
     }
 
     @Column(nome = "tipo")
     @Setter
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
+    public void setTipo(int ord) {
+        this.tipo = TipoUsuario.values()[ord];
     }
 
     @Column(nome = "username")
@@ -58,18 +64,4 @@ public class Usuario extends Pessoa implements DTO {
     public void setSenha(String senha) {
      this.senha = senha;
     }
-
-    @Override
-    @Column(nome = "pk")
-    @Getter
-    public long getId() {
-     return id;
-    }
-
-    @Override
-    @Column(nome = "pk")
-    @Setter
-    public void setId(long id) {
-     this.id = id;
-     }
 }

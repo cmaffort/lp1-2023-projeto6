@@ -16,7 +16,7 @@ public class Contrato implements DTO {
     private List<ContratoAssinado> contratosAssinados;
     private Periodicidade periodicidade;
 
-    private Long id;
+    private long id;
 
     public Boolean isAtivo() {
         return ativo;
@@ -90,11 +90,11 @@ public class Contrato implements DTO {
         this.periodicidade = periodicidade;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

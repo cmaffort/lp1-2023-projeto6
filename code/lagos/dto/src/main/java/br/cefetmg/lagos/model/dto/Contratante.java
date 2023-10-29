@@ -12,7 +12,7 @@ public class Contratante extends Usuario implements DTO {
 
     public Contratante() {
         super();
-        super.setTipo(TipoUsuario.CONTRATANTE);
+        super.setTipoUsuario(TipoUsuario.CONTRATANTE);
     }
 
     public void setTipo(TipoUsuario tipo) {

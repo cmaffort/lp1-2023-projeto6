@@ -12,7 +12,7 @@ public class HistoricoVET implements DTO {
     private List<Item> itens;
     private Loja loja;
 
-    private Long id;
+    private long id;
 
     public TipoHistoricoVET getTipo() {
         return tipo;
@@ -46,11 +46,11 @@ public class HistoricoVET implements DTO {
         this.loja = loja;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

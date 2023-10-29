@@ -3,19 +3,19 @@ package br.cefetmg.lagos.model.dto;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
 
 public class Cartao implements DTO {
-    private Long numero;
+    private long numero;
     private Bandeira bandeira;
 
     private Endereco endereco;
     private Contratante contratante;
 
-    private Long id;
+    private long id;
 
-    public Long getNumero() {
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(long numero) {
         this.numero = numero;
     }
 
@@ -43,11 +43,11 @@ public class Cartao implements DTO {
         this.contratante = contratante;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

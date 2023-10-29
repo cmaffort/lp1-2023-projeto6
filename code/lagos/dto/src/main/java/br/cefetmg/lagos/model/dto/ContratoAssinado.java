@@ -10,7 +10,7 @@ public class ContratoAssinado implements DTO {
     private Contratante contratante;
     private Contrato contrato;
 
-    private Long id;
+    private long id;
 
     public Boolean isVigente() {
         return vigente;
@@ -52,11 +52,11 @@ public class ContratoAssinado implements DTO {
         this.contrato = contrato;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

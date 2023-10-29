@@ -6,7 +6,7 @@ public class Periodicidade implements DTO {
     private Integer periodo;
     private Integer qtdDiasPorPeriodo;
 
-    private Long id;
+    private long id;
 
     public Integer getPeriodo() {
         return periodo;
@@ -24,11 +24,11 @@ public class Periodicidade implements DTO {
         this.qtdDiasPorPeriodo = qtdDiasPorPeriodo;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

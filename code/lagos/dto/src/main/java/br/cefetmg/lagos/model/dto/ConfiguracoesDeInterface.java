@@ -9,7 +9,7 @@ public class ConfiguracoesDeInterface implements DTO {
 
     private Contratante contratante;
 
-    private Long id;
+    private long id;
 
     public String getNomeDaEmpresa() {
         return nomeDaEmpresa;
@@ -43,11 +43,11 @@ public class ConfiguracoesDeInterface implements DTO {
         this.contratante = contratante;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

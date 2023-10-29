@@ -209,3 +209,5 @@ select tipo, username, senha, pk, nome, sobrenome, nascimento, email, telefone
 from pessoa, usuario
 where pessoa.pk = usuario.pk
 order by nome, nascimento;
+
+select nome, sobrenome, nascimento, email, telefone, pk from pessoa where pk = 4
