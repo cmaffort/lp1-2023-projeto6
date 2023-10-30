@@ -1,11 +1,9 @@
 package br.cefetmg.lagos.model.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Endereco;
-import br.cefetmg.lagos.model.dto.Pessoa;
+
+import java.util.List;
 
 public interface IEnderecoDAO extends IDAO {
     Long inserir(Endereco endereco) throws PersistenceException;

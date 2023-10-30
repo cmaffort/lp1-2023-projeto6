@@ -1,21 +1,18 @@
 package br.cefetmg.lagos.model.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Cartao;
-import br.cefetmg.lagos.model.dto.Endereco;
 
-public interface ICartaoDAO{
+public interface ICartaoDAO extends IDAO {
+    Long inserir(Cartao cartao) throws PersistenceException;
     
-    boolean inserir(Cartao cartao) throws SQLException, ClassNotFoundException;
+    boolean alterar(Cartao cartao) throws PersistenceException;
     
-    boolean alterar(Cartao cartao) throws SQLException, ClassNotFoundException;
+    boolean remover(Cartao cartao) throws PersistenceException;
     
-    boolean remover(Cartao cartao) throws SQLException, ClassNotFoundException;
-    
-    List<Cartao> listar() throws SQLException, ClassNotFoundException;
+    List<Cartao> listar() throws PersistenceException;
 
     Cartao cosultarPorId(Long id) throws PersistenceException;
 }

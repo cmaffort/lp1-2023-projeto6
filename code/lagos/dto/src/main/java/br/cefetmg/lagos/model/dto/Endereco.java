@@ -1,34 +1,37 @@
 package br.cefetmg.lagos.model.dto;
 
 import br.cefetmg.lagos.model.dto.annotations.*;
+import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-public class Endereco implements DTO {
-    private Integer cep;
-    private Integer numero;
+@Table(nome = "endereco")
+public class Endereco extends AbstractDTO implements DTO {
+    private int cep;
+    private int numero;
 
     private long id;
 
     @Column(nome = "cep")
     @Getter
-    public Integer getCep() {
+    public int getCep() {
         return cep;
     }
 
     @Column(nome = "cep")
     @Setter
-    public void setCep(Integer cep) {
+    public void setCep(int cep) {
         this.cep = cep;
     }
 
     @Column(nome = "numero")
     @Getter
-    public Integer getNumero() {
+    public int getNumero() {
         return numero;
     }
 
     @Column(nome = "numero")
     @Setter
-    public void setNumero(Integer numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

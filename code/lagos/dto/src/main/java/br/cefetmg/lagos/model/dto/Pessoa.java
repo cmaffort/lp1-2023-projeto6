@@ -3,10 +3,14 @@ package br.cefetmg.lagos.model.dto;
 import br.cefetmg.lagos.model.dto.annotations.Column;
 import br.cefetmg.lagos.model.dto.annotations.Getter;
 import br.cefetmg.lagos.model.dto.annotations.Setter;
+import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 import java.sql.Date;
 
-public class Pessoa implements DTO {
+@Table(nome = "pessoa")
+public class Pessoa extends AbstractDTO implements DTO {
     private String nome;
     private String sobrenome;
     private Date nascimento;

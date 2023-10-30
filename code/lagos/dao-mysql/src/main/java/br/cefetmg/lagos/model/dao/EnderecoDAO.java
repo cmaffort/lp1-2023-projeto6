@@ -1,21 +1,19 @@
 package br.cefetmg.lagos.model.dao;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.DTO;
+import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.Endereco;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EnderecoDAO extends DAO implements IEnderecoDAO {
-    protected Class<? extends DTO> getDTOClass() {
-        return Endereco.class;
+public class EnderecoDAO extends AbstractDAO implements IEnderecoDAO {
+    @Override
+    protected DTO getDTO() {
+        return new Endereco();
     }
 
-    protected String getTable() {
-        return "endereco";
-    }
-
+    @Override
     protected List<List<String>> getColumnsPreparedStatementInserir() {
         return Arrays.asList(
                 Arrays.asList("cep", "numero")
@@ -27,6 +25,7 @@ public class EnderecoDAO extends DAO implements IEnderecoDAO {
         return super.inserir(endereco);
     }
 
+    @Override
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
         return Arrays.asList(
                 Arrays.asList("cep", "numero"),
@@ -39,6 +38,7 @@ public class EnderecoDAO extends DAO implements IEnderecoDAO {
         return super.alterar(endereco);
     }
 
+    @Override
     protected List<List<String>> getColumnsPreparedStatementRemover() {
         return Arrays.asList(
                 List.of("pk")
@@ -50,12 +50,14 @@ public class EnderecoDAO extends DAO implements IEnderecoDAO {
         return super.remover(endereco);
     }
 
+    @Override
     protected List<List<String>> getColumnsResultSetListar() {
         return Arrays.asList(
                 Arrays.asList("cep", "numero", "pk")
         );
     }
 
+    @Override
     protected List<String> getOrderByPriority() {
         return Arrays.asList("pk");
     }
@@ -65,12 +67,14 @@ public class EnderecoDAO extends DAO implements IEnderecoDAO {
         return (List<Endereco>) super.listar();
     }
 
+    @Override
     protected List<List<String>> getColumnsPreparedStatementConsultar() {
         return Arrays.asList(
                 List.of("pk")
         );
     }
 
+    @Override
     protected List<List<String>> getColumnsResultSetConsultar() {
         return Arrays.asList(
                 Arrays.asList("cep", "numero", "pk")

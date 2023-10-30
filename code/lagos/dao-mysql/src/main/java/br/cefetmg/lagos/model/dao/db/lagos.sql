@@ -145,9 +145,9 @@ create table configuracoes_de_venda
     metodos_aceitos       blob   null,
     bandeiras_aceitas     blob   null,
     porcentagem_comissao  float  null,
-    loja__fk              bigint not null
+    pk                    bigint not null
         primary key,
-    foreign key (loja__fk) references loja (pk)
+    foreign key (pk) references loja (pk)
         on delete cascade
 );
 
@@ -206,8 +206,8 @@ create table item
 
 create table produto_compra
 (
-    quantidade     int not null,
-    preco_unitario int not null,
+    quantidade     int    not null,
+    preco_unitario double not null,
     pk             bigint auto_increment
         primary key,
 
@@ -354,13 +354,11 @@ create table venda
     caixa__fk bigint not null,
     funcionario__fk  bigint null,
     cliente__fk      bigint null,
-    loja__fk         bigint not null,
-    foreign key (pk) references historico_vet (pk),
+    foreign key (pk) references historico_vet (pk)
+        on delete cascade ,
     foreign key (caixa__fk) references caixa (pk),
     foreign key (funcionario__fk) references funcionario (pk),
-    foreign key (cliente__fk) references cliente (pk),
-    foreign key (loja__fk) references loja (pk)
-        on delete cascade
+    foreign key (cliente__fk) references cliente (pk)
 );
 
 create table promocoes__vendas

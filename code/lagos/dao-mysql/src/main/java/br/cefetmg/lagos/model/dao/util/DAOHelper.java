@@ -1,7 +1,7 @@
 package br.cefetmg.lagos.model.dao.util;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.DTO;
+import br.cefetmg.lagos.model.dto.base.DTO;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,20 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DAOHelper {
-    protected DTOMethods dtoMethods;
+    protected DTODb dtoDb;
+    private final DTO dto;
 
-    public DAOHelper(Class<? extends DTO> dtoClass) {
-        dtoMethods = new DTOMethods(dtoClass);
-    }
-
-    public List<String> getAllColumns() {
-        return dtoMethods.getAllColumns();
-    }
-
-    public List<String> getAllColumnsButPk() {
-        List<String> allColumnsButPk = new ArrayList<>(getAllColumns());
-        allColumnsButPk.remove("pk");
-        return allColumnsButPk;
+    public DAOHelper(DTO dto) {
+        this.dto = dto;
+        dtoDb = new DTODb(dto);
     }
 
     @SafeVarargs
@@ -40,7 +32,7 @@ public class DAOHelper {
 
     public boolean executeSql(DTO dto, String sql, List<String> columnsPreparedStatement)
             throws SQLException, ClassNotFoundException {
-        JDBCOperation operation = new JDBCOperation(dtoMethods, sql, columnsPreparedStatement);
+        JDBCOperation operation = new JDBCOperation(dtoDb, sql, columnsPreparedStatement);
         operation.executeUpdate(dto);
 
         operation.close();
@@ -52,7 +44,7 @@ public class DAOHelper {
             throws PersistenceException {
         try {
             JDBCOperation inserirVariosOperation =
-                    new JDBCOperation(dtoMethods, sql, columnsPreparedStatement,Statement.RETURN_GENERATED_KEYS);
+                    new JDBCOperation(dtoDb, sql, columnsPreparedStatement,Statement.RETURN_GENERATED_KEYS);
             inserirVariosOperation.executeUpdate(dtos);
             List<Long> ids = inserirVariosOperation.getIds();
             for (int i = 0; i < ids.size(); i++)
@@ -67,7 +59,7 @@ public class DAOHelper {
             throws PersistenceException {
         try {
             JDBCOperation inserirOperation =
-                    new JDBCOperation(dtoMethods, sql, columnsPreparedStatement, Statement.RETURN_GENERATED_KEYS);
+                    new JDBCOperation(dtoDb, sql, columnsPreparedStatement, Statement.RETURN_GENERATED_KEYS);
             inserirOperation.executeUpdate(dto);
             Long id = inserirOperation.getId();
             if (id != null)
@@ -98,7 +90,7 @@ public class DAOHelper {
 
     public List<? extends DTO> listar(String sql, List<String> columnsResultSet) throws PersistenceException {
         try {
-            JDBCOperation listarOperation = new JDBCOperation(dtoMethods, sql, Arrays.asList());
+            JDBCOperation listarOperation = new JDBCOperation(dtoDb, sql, Arrays.asList());
             listarOperation.executeQuery();
             return listarOperation.getInstances(columnsResultSet);
         } catch (Exception e) {
@@ -109,8 +101,8 @@ public class DAOHelper {
     public DTO consultarPorId(Long id, String sql, List<String> columnsPreparedStatement, List<String> columnsResultSet)
             throws PersistenceException {
         try {
-            JDBCOperation consultarOperation = new JDBCOperation(dtoMethods, sql, columnsPreparedStatement);
-            DTO dto = dtoMethods.getInstanceOfDTO();
+            JDBCOperation consultarOperation = new JDBCOperation(dtoDb, sql, columnsPreparedStatement);
+            DTO dto = this.dto.getInstance();
             dto.setId(id);
             consultarOperation.executeQuery(dto);
             return consultarOperation.getInstance(columnsResultSet);
