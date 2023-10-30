@@ -1,3 +1,14 @@
+body {
+   background-color: #e2e3d1;
+   color: #c9cbad;
+   overflow:hidden;
+}
+h1{
+   position: relative;
+   font-size: 8vh;
+   top: -50%;
+   text-align: center;
+}
 .avisos {
     background-color: #FFFFE0;
     border: 1px solid #E6DB55;
@@ -7,8 +18,29 @@
 
 #criar-aviso {
     background-color: #4CAF50;
-    color: white;
+    color: wheat;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+}
+.pastel-popup {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pastel-title {
+    color: #6495ED; /* Azul Pastel */
+}
+
+.pastel-content {
+    color: #FF69B4; /* Rosa Pastel */
+}
+
+.pastel-button {
+    background-color: #98FB98; /* Verde Pastel */
+    color: #000; /* Cor de texto escura */
+}
+
+.pastel-button:hover {
+    background-color: #90EE90; /* Verde Pastel mais claro no hover */
 }

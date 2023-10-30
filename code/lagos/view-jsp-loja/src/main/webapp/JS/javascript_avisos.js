@@ -4,6 +4,31 @@ document.getElementById("criar-aviso").addEventListener("click", function() {
         input: 'text',
         showCancelButton: true,
         confirmButtonText: 'Criar',
+        cancelButtonText: 'Cancelar'
+        
+        
+
+    }).then((result) => {
+        if (result.value) {
+            // O usuário clicou em "Criar" e digitou um texto
+            var textoAviso = result.value;
+            
+            // Crie um elemento de aviso
+            var aviso = document.createElement("div");
+            aviso.className = "aviso";
+            aviso.textContent = textoAviso;
+
+            // Adicione o aviso ao contêiner de avisos
+            document.getElementById("avisos-container").appendChild(aviso);
+        }
+    });
+});
+/*document.getElementById("criar-aviso").addEventListener("click", function() {
+    Swal.fire({
+        title: 'Digite o texto do aviso:',
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Criar',
         cancelButtonText: 'Cancelar',
         inputValidator: (value) => {
             if (!value) {
@@ -18,11 +43,11 @@ document.getElementById("criar-aviso").addEventListener("click", function() {
             aviso.className = "aviso";
             aviso.textContent = textoAviso;
 
-            // Crie um botão de remoção para o aviso
+
             var botaoRemover = document.createElement("button");
             botaoRemover.className = "remover-aviso";
 
-            // Defina a imagem como conteúdo do botão
+
             botaoRemover.innerHTML = '<img src="../images/deletar.svg" alt="Remover Aviso">';
             botaoRemover.addEventListener("click", function() {  
                 Swal.fire({
@@ -46,8 +71,11 @@ document.getElementById("criar-aviso").addEventListener("click", function() {
                 })
 
                 });
+                
                  aviso.appendChild(botaoRemover);
+            
         }
     });
 });
 
+ */
