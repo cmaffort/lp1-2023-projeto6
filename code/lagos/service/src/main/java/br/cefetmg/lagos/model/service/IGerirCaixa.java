@@ -20,4 +20,6 @@ public interface IGerirCaixa {
     
     boolean moverDinheiro(Caixa origem, Caixa destino, Double qtd) throws SQLException, ClassNotFoundException;
     
+    boolean moverDinheiro(Caixa origem, Double qtd) throws SQLException, ClassNotFoundException;
+    
 }

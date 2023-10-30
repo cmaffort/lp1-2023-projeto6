@@ -98,4 +98,19 @@ public class GerirCaixa implements IGerirCaixa {
         
     }
     
+    @Override
+    public boolean moverDinheiro(Caixa origem, Double qtd) throws SQLException, ClassNotFoundException {
+        
+        Boolean result;
+        
+        Double dinheiroOrigem = origem.getDinheiroEmCaixa()+qtd;
+        
+        origem.setDinheiroEmCaixa(dinheiroOrigem);
+        
+        result = caixaDAO.alterar(origem);
+        
+        return result;
+        
+    }
+    
 }
