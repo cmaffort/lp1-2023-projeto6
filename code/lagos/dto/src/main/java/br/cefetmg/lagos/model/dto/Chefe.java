@@ -2,7 +2,7 @@ package br.cefetmg.lagos.model.dto;
 
 import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
 
-class Chefe extends UsuarioLoja implements DTO {
+public class Chefe extends UsuarioLoja implements DTO {
     public Chefe() {
         super();
         super.setTipo(TipoFuncionario.CHEFE);
@@ -12,4 +12,5 @@ class Chefe extends UsuarioLoja implements DTO {
     public void setTipo(TipoFuncionario tipo) {
         throw new RuntimeException("Tipo fixo.");
     }
+
 }

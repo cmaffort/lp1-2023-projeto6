@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Promocao;
 
-public interface IPromocaoDAO extends PeriodicidadeDAO{
+public interface IPromocaoDAO {
     
     boolean inserir(Promocao promocao) throws SQLException, ClassNotFoundException;
     

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.Produto;
 
-public interface IProdutoDAO extends PromocaoDAO{
+public interface IProdutoDAO {
     
     boolean inserir(Produto produto) throws SQLException, ClassNotFoundException;
    

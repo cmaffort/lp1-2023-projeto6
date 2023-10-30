@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.UsuarioLoja;
 
-public interface IUsuarioLojaDAO extends FuncionarioDAO {
+public interface IUsuarioLojaDAO  {
 
     boolean inserir(UsuarioLoja usuarioLoja) throws SQLException, ClassNotFoundException;
     

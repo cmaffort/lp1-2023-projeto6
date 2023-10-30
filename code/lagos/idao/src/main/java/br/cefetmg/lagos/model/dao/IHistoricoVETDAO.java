@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.cefetmg.lagos.model.dto.HistoricoVET;
 
-public interface IHistoricoVETDAO extends ItemDAO{
+public interface IHistoricoVETDAO {
     
     boolean inserir(HistoricoVET historico) throws SQLException, ClassNotFoundException;
     

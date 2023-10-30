@@ -1,5 +1,6 @@
 body{
     background-color: #f2eed6;
+    margin: 0;
 }
 
 header{
@@ -16,25 +17,21 @@ header{
     font-size: 45px;
 }
 
-#menu li{
-    list-style-type: none;
-}
-
-#aviso img{
-    height: 70px;
-    width: 70px;
+#menu img, #aviso img{
+    width: 2vw;
+    height: 2vw;
 }
 
 article h1{
-    color: gray;
+    color: rgb(128, 128, 128);
     text-align: center;
-    font-size: 45px;
+    font-size: 30px;
     font-family: 'Chivo', sans-serif;
 }
 
-#botao_cadastro{
+#pesquisa_cadastro button{
     background-color: #f2eed6;
-    border: 2px solid gray;
+    border: 2px solid rgb(128, 128, 128);
     border-radius: 10px;
     display: inline;
     padding: 2px;
@@ -42,8 +39,40 @@ article h1{
     font-size: 20px;
 }
 
-.listras_menu{
-    background-color: grey;
-    border: 1px solid grey;
-    border-radius: 1px;
+#pesquisa_cadastro{
+    margin-left: 1%;
+}
+
+#aviso button, #menu button{
+    background-color: #f2eed6;
+    border:0;
+}
+
+#pesquisa_cadastro input{
+    background-color: #f2eed6;
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 10px;
+    display: inline;
+    padding: 2px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 20px;
+    margin-left: 5%;
+}
+
+#listar_cliente{
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+#listar_cliente td{
+    padding: 0 10px 0 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+
+#editar_cliente{
+    display: none;
 }
