@@ -17,7 +17,7 @@ public class Contrato extends AbstractDTO implements DTO {
     private boolean ativo;
     private String descricao;
     private double preco;
-    private List<Blob> documentos;
+    private Blob documento;
     private float taxaDeMulta;
     private int numeroDeLojas;
     private Date dataDeCriacao;
@@ -64,23 +64,17 @@ public class Contrato extends AbstractDTO implements DTO {
         this.preco = preco;
     }
 
-    public List<Blob> getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(List<Blob> documentos) {
-        this.documentos = documentos;
-    }
-
-    // TODO: Get e Set documentos as blob?
-
-    @Column(nome = "documentos")
+    @Column(nome = "documento")
     @Getter
-    public Blob getDocumentosAsBlob() {return null;}
+    public Blob getDocumento() {
+        return documento;
+    }
 
-    @Column(nome = "documentos")
+    @Column(nome = "documento")
     @Setter
-    public void setDocumentosWithBlob(Blob documentos) {}
+    public void setDocumento(Blob documento) {
+        this.documento = documento;
+    }
 
     @Column(nome = "taxa_de_multa")
     @Getter
@@ -132,6 +126,18 @@ public class Contrato extends AbstractDTO implements DTO {
 
     public void setPeriodicidade(Periodicidade periodicidade) {
         this.periodicidade = periodicidade;
+    }
+
+    @Column(nome = "periodicidade__fk")
+    @Getter
+    public long getPeriodicidadeAsLong() {
+        return getRelatedDTOAsLong(getPeriodicidade());
+    }
+
+    @Column(nome = "periodicidade__fk")
+    @Setter
+    public void setPeriodicidadeWithLong(long id) {
+        setPeriodicidade((Periodicidade) setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
     }
 
     @Column(nome = "pk")

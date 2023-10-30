@@ -42,7 +42,7 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "bandeira")
     @Getter
     public int getBandeiraAsInt() {
-        return getBandeira().ordinal();
+        return getEnumAsInt(getBandeira());
     }
 
     @Column(nome = "bandeira")
@@ -62,15 +62,13 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "endereco__fk")
     @Getter
     public long getEnderecoAsLong() {
-        return getEndereco().getId();
+        return getRelatedDTOAsLong(getEndereco());
     }
 
     @Column(nome = "endereco__fk")
     @Setter
     public void setEnderecoWithLong(long id) {
-        if (endereco == null)
-            endereco = new Endereco();
-        endereco.setId(id);
+        setEndereco((Endereco) setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
     public Contratante getContratante() {
@@ -84,15 +82,13 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "usuario__fk")
     @Getter
     public long getContratanteAsLong() {
-        return getContratante().getId();
+        return getRelatedDTOAsLong(getContratante());
     }
 
     @Column(nome = "usuario__fk")
     @Setter
     public void setContratanteWithLong(long id) {
-        if (contratante == null)
-            contratante = new Contratante();
-        contratante.setId(id);
+        setContratante((Contratante) setRelatedWithLong(getContratante(), id, new Contratante()));
     }
 
     @Column(nome = "pk")

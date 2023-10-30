@@ -4,71 +4,85 @@ import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Periodicidade;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PeriodicidadeDAO extends AbstractDAO implements IPeriodicidadeDAO {
     @Override
     protected DTO getDTO() {
-        return null;
+        return new Periodicidade();
     }
 
     @Override
     protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
+        return Arrays.asList(
+                Arrays.asList("periodo", "quantidade_dias_por_periodo")
+        );
     }
 
     @Override
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
+        return Arrays.asList(
+                Arrays.asList("periodo", "quantidade_dias_por_periodo"),
+                List.of("pk")
+        );
     }
 
     @Override
     protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
+        return Arrays.asList(
+                List.of("pk")
+        );
     }
 
     @Override
     protected List<List<String>> getColumnsResultSetListar() {
-        return null;
+        return Arrays.asList(
+                Arrays.asList("periodo", "quantidade_dias_por_periodo", "pk")
+        );
     }
 
     @Override
     protected List<String> getOrderByPriority() {
-        return null;
+        return Arrays.asList("pk");
     }
 
     @Override
     protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
+        return Arrays.asList(
+                List.of("pk")
+        );
     }
 
     @Override
     protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
+        return Arrays.asList(
+                Arrays.asList("periodo", "quantidade_dias_por_periodo", "pk")
+        );
     }
 
     @Override
     public Long inserir(Periodicidade periodicidade) throws PersistenceException {
-        return null;
+        return super.inserir(periodicidade);
     }
 
     @Override
     public boolean alterar(Periodicidade periodicidade) throws PersistenceException {
-        return false;
+        return super.alterar(periodicidade);
     }
 
     @Override
     public boolean remover(Periodicidade periodicidade) throws PersistenceException {
-        return false;
+        return super.remover(periodicidade);
     }
 
     @Override
     public List<Periodicidade> listar() throws PersistenceException {
-        return null;
+        return (List<Periodicidade>) super.listar();
     }
 
     @Override
     public Periodicidade cosultarPorId(Long id) throws PersistenceException {
-        return null;
+        return (Periodicidade) super.cosultarPorId(id);
     }
 }

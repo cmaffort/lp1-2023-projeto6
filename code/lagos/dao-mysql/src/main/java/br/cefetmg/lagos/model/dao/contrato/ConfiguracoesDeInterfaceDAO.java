@@ -10,7 +10,7 @@ import java.util.List;
 public class ConfiguracoesDeInterfaceDAO extends AbstractDAO implements IConfiguracoesDeInterfaceDAO {
     @Override
     protected DTO getDTO() {
-        return null;
+        return new ConfiguracoesDeInterface();
     }
 
     @Override

@@ -17,8 +17,6 @@ public class ConfiguracoesDeInterface extends AbstractDTO implements DTO {
 
     private Contratante contratante;
 
-    private long id;
-
     @Column(nome = "nome_da_empresa")
     @Getter
     public String getNomeDaEmpresa() {
@@ -66,12 +64,12 @@ public class ConfiguracoesDeInterface extends AbstractDTO implements DTO {
     @Column(nome = "pk")
     @Getter
     public long getId() {
-        return id;
+        return getRelatedDTOAsLong(getContratante());
     }
 
     @Column(nome = "pk")
     @Setter
     public void setId(long id) {
-        this.id = id;
+        setContratante((Contratante) setRelatedWithLong(getContratante(), id, new Contratante()));
     }
 }

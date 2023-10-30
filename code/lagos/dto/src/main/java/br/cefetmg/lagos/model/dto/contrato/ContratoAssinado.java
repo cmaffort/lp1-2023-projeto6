@@ -64,12 +64,36 @@ public class ContratoAssinado extends AbstractDTO implements DTO {
         this.contratante = contratante;
     }
 
+    @Column(nome = "usuario__fk")
+    @Getter
+    public long getContratanteAsLong() {
+        return getRelatedDTOAsLong(getContratante());
+    }
+
+    @Column(nome = "usuario__fk")
+    @Setter
+    public void setContratanteWithLong(long id) {
+        setContratante((Contratante) setRelatedWithLong(getContratante(), id, new Contratante()));
+    }
+
     public Contrato getContrato() {
         return contrato;
     }
 
     public void setContrato(Contrato contrato) {
         this.contrato = contrato;
+    }
+
+    @Column(nome = "contrato__fk")
+    @Getter
+    public long getContratoAsLong() {
+        return getRelatedDTOAsLong(getContrato());
+    }
+
+    @Column(nome = "contrato__fk")
+    @Setter
+    public void setContratoWithLong(long id) {
+        setContrato((Contrato) setRelatedWithLong(getContrato(), id, new Contrato()));
     }
 
     @Column(nome = "pk")

@@ -12,15 +12,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
-    @Override
-    protected DTO getDTO() {
-        return new Usuario();
-    }
-
     private static final IPessoaDAO PESSOA_DAO;
 
     static {
         PESSOA_DAO = new PessoaDAO();
+    }
+
+    private static IPessoaDAO getPessoaDao() {
+        return PESSOA_DAO;
+    }
+
+    @Override
+    protected DTO getDTO() {
+        return new Usuario();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
      */
     @Override
     public Long inserir(Usuario usuario) throws PersistenceException {
-        Long id = PESSOA_DAO.inserir(usuario);
+        Long id = getPessoaDao().inserir(usuario);
         usuario.setId(id);
 
         super.inserir(usuario);
@@ -52,7 +56,7 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
 
     @Override
     public boolean alterar(Usuario usuario) throws PersistenceException {
-        PESSOA_DAO.alterar(usuario);
+        getPessoaDao().alterar(usuario);
 
         return super.alterar(usuario);
     }
@@ -64,7 +68,7 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
 
     @Override
     public boolean remover(Usuario usuario) throws PersistenceException {
-        return PESSOA_DAO.remover(usuario);
+        return getPessoaDao().remover(usuario);
     }
 
     @Override
@@ -80,16 +84,15 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
     }
 
     @Override
-    public List<Usuario> listar() throws PersistenceException {
-        List<List<String>> columnsResultSet = getColumnsResultSetListar();
-
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
-        String sql = StringSqlDaoHelper.selectFromWhereOrderBy(Arrays.asList("nome", "sobrenome", "nascimento", "email",
+    protected String getSQLListar(List<List<String>> columnsResultSet) {
+        return StringSqlDaoHelper.selectFromWhereOrderBy(Arrays.asList("nome", "sobrenome", "nascimento", "email",
                         "telefone", "tipo", "username", "senha", "usuario.pk"), Arrays.asList(getTable(), "pessoa"),
                 Arrays.asList("pessoa.pk = usuario.pk"), getOrderByPriority());
+    }
 
-        return (List<Usuario>) helper.listar(sql, allColumnsResultSet);
+    @Override
+    public List<Usuario> listar() throws PersistenceException {
+        return (List<Usuario>) super.listar();
     }
 
     @Override
@@ -107,18 +110,14 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
     }
 
     @Override
-    public Usuario cosultarPorId(Long id) throws PersistenceException {
-        List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementConsultar();
-
-        List<List<String>> columnsResultSet = getColumnsResultSetConsultar();
-
-        List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
-        String sql = StringSqlDaoHelper.selectFromWhere(
+    protected String getSQLConsultar(List<List<String>> columnsPreparedStatement, List<List<String>> columnsResultSet) {
+        return StringSqlDaoHelper.selectFromWhere(
                 Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "usuario.pk"),
                 Arrays.asList(getTable(), "pessoa"), Arrays.asList("usuario.pk = ?", "pessoa.pk = usuario.pk"));
+    }
 
-        return (Usuario) helper.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet);
+    @Override
+    public Usuario cosultarPorId(Long id) throws PersistenceException {
+        return (Usuario) super.cosultarPorId(id);
     }
 }

@@ -57,4 +57,23 @@ public abstract class AbstractDTO implements DTO {
         }
 
     }
+
+    protected static long getRelatedDTOAsLong(DTO related) {
+        if (related == null)
+            return -1;
+        return related.getId();
+    }
+
+    protected static DTO setRelatedWithLong(DTO related, long id, DTO backup) {
+        if (related == null)
+            related = backup;
+        related.setId(id);
+        return related;
+    }
+
+    protected static <T extends Enum<T>> int getEnumAsInt(T enumerationValue) {
+        if (enumerationValue == null)
+            return -1;
+        return enumerationValue.ordinal();
+    }
 }

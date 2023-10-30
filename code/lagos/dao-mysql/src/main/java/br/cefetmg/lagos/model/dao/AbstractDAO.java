@@ -2,6 +2,7 @@ package br.cefetmg.lagos.model.dao;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dao.util.DAOHelper;
+import br.cefetmg.lagos.model.dao.util.StringSql;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
 import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
@@ -70,14 +71,17 @@ public abstract class AbstractDAO implements IDAO {
 
     protected abstract List<String> getOrderByPriority();
 
+    protected String getSQLListar(List<List<String>> columnsResultSet) {
+        return StringSqlDaoHelper.selectFromOrderBy(columnsResultSet.get(0), getTable(), getOrderByPriority());
+    }
+
     @Override
     public List<? extends DTO> listar() throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
         List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
 
-        String sql = StringSqlDaoHelper.selectFromOrderBy(columnsResultSet.get(0), getTable(),
-                getOrderByPriority());
+        String sql = getSQLListar(columnsResultSet);
 
         return helper.listar(sql, allColumnsResultSet);
     }
@@ -85,6 +89,10 @@ public abstract class AbstractDAO implements IDAO {
     protected abstract List<List<String>> getColumnsPreparedStatementConsultar();
 
     protected abstract List<List<String>> getColumnsResultSetConsultar();
+
+    protected String getSQLConsultar(List<List<String>> columnsPreparedStatement, List<List<String>> columnsResultSet) {
+        return StringSqlDaoHelper.selectAllFromWhereEq(getTable(), columnsPreparedStatement.get(0));
+    }
 
     @Override
     public DTO cosultarPorId(Long id) throws PersistenceException {
@@ -95,8 +103,31 @@ public abstract class AbstractDAO implements IDAO {
         List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
         List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
 
-        String sql = StringSqlDaoHelper.selectAllFromWhereEq(getTable(), columnsPreparedStatement.get(0));
+        String sql = getSQLConsultar(columnsPreparedStatement, columnsResultSet);
 
         return helper.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet);
+    }
+
+    private String getWhereRelated(DTO dto) {
+        String tableDto = dto.getClass().getAnnotation(Table.class).nome();
+        String fk = tableDto + "__fk";
+        if (!getDTO().getManeger().getColumns().contains(fk))
+            return "pk";
+        return fk;
+    }
+
+    protected String getSQLListarDTO(List<List<String>> columnsResultSet, DTO dto) {
+        return StringSqlDaoHelper.selectFromWhere(columnsResultSet.get(0), getTable(),
+                List.of(getWhereRelated(dto) + " = " + dto.getId())) + " " + StringSql.orderBy(getOrderByPriority());
+    }
+
+    protected List<? extends DTO> listar(DTO dto) throws PersistenceException {
+        List<List<String>> columnsResultSet = getColumnsResultSetListar();
+
+        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
+
+        String sql = getSQLListar(columnsResultSet);
+
+        return helper.listar(sql, allColumnsResultSet);
     }
 }

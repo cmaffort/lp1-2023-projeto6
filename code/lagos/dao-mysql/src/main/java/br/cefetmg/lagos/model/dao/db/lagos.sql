@@ -71,9 +71,10 @@ create table endereco
 
 create table cartao
 (
-    numero   bigint not null
-        primary key,
+    numero   bigint not null,
     bandeira int    not null,
+    pk       bigint auto_increment
+        primary key,
 
     endereco__fk bigint not null,
     usuario__fk  bigint not null,
@@ -111,7 +112,7 @@ create table contrato
     ativo           tinyint(1)    not null,
     descricao       varchar(4096) null,
     preco           double        not null,
-    documentos      blob          null,
+    documento       blob          null,
     taxa_de_multa   float         null,
     numero_de_lojas int           not null,
     data_de_criacao date          not null,
