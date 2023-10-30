@@ -8,9 +8,6 @@
     </head>
     <body>
         <%@include file="Header.jsp" %>
-        <header>
-            <h1 id="titulo-lagos">LAGOS</h1>
-        </header>
         
         <h1 id="titulo">Gestão de Vendas</h1>
         
