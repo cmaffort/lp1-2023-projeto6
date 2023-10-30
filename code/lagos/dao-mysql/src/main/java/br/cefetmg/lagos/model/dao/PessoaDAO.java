@@ -1,167 +1,102 @@
 package br.cefetmg.lagos.model.dao;
 
-import br.cefetmg.lagos.model.dao.connections.ConnectionManager;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.Pessoa;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
-public class PessoaDAO implements IPessoaDAO {
-    private void setAllStatementValues(Pessoa pessoa, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, pessoa.getNome());
-        preparedStatement.setString(2, pessoa.getSobrenome());
-        preparedStatement.setDate(3, pessoa.getNascimento());
-        preparedStatement.setString(4, pessoa.getEmail());
-        preparedStatement.setLong(5, pessoa.getTelefone());
+public class PessoaDAO extends AbstractDAO implements IPessoaDAO {
+    @Override
+    protected DTO getDTO() {
+        return new Pessoa();
     }
 
-    private Pessoa getPessoaFrom(ResultSet resultSet) throws SQLException {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setId(resultSet.getLong("pk"));
-        pessoa.setNome(resultSet.getString("nome"));
-        pessoa.setSobrenome(resultSet.getString("sobrenome"));
-        pessoa.setNascimento(resultSet.getDate("nascimento"));
-        pessoa.setEmail(resultSet.getString("email"));
-        pessoa.setTelefone(resultSet.getLong("telefone"));
-        return pessoa;
+    @Override
+    protected List<List<String>> getColumnsPreparedStatementInserir() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone")
+        );
     }
 
     @Override
     public Long inserir(Pessoa pessoa) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
+        return super.inserir(pessoa);
+    }
 
-            String sql =
-                    "INSERT INTO pessoa (nome, sobrenome, nascimento, email, telefone) " +
-                    "VALUES (?, ?, ?, ?, ?);" +
-                    "SELECT LAST_INSERT_ID();";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            setAllStatementValues(pessoa, preparedStatement);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            Long id = null;
-            if (resultSet.next()) {
-                id = resultSet.getLong("pk");
-                pessoa.setId(id);
-            }
-
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-
-            return id;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException(e.getMessage(), e);
-        }
+    @Override
+    protected List<List<String>> getColumnsPreparedStatementAlterar() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone"),
+                List.of("pk")
+        );
     }
 
     @Override
     public boolean alterar(Pessoa pessoa) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
+        return super.alterar(pessoa);
+    }
 
-            String sql =
-                    "UPDATE pessoa " +
-                    "SET nome = ?, sobrenome = ?, nascimento = ?, email = ?, telefone = ? " +
-                    "WHERE pk = ?;";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            setAllStatementValues(pessoa, preparedStatement);
-            preparedStatement.setLong(6, pessoa.getId());
-
-            preparedStatement.executeUpdate();
-
-            preparedStatement.close();
-            connection.close();
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException(e.getMessage(), e);
-        }
+    @Override
+    protected List<List<String>> getColumnsPreparedStatementRemover() {
+        return Arrays.asList(
+                List.of("pk")
+        );
     }
 
     @Override
     public boolean remover(Pessoa pessoa) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
+        return super.remover(pessoa);
+    }
 
-            String sql = "DELETE FROM pessoa WHERE pk = ?;";
+    @Override
+    protected List<List<String>> getColumnsResultSetListar() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
+        );
+    }
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, pessoa.getId());
-            preparedStatement.executeUpdate();
-
-            preparedStatement.close();
-            connection.close();
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException(e.getMessage(), e);
-        }
+    @Override
+    protected List<String> getOrderByPriority() {
+        return Arrays.asList("nome", "sobrenome");
     }
 
     @Override
     public List<Pessoa> listar() throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
+        return (List<Pessoa>) super.listar();
+    }
 
-            String sql = "SELECT * FROM pessoa ORDER BY nome, sobrenome;";
+    @Override
+    protected List<List<String>> getColumnsPreparedStatementConsultar() {
+        return Arrays.asList(
+                List.of("pk")
+        );
+    }
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            ArrayList<Pessoa> pessoas = null;
-            if (resultSet.next()) {
-                pessoas = new ArrayList<>();
-                do {
-                    pessoas.add(getPessoaFrom(resultSet));
-                } while (resultSet.next());
-            }
-
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-
-            return pessoas;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException(e.getMessage(), e);
-        }
+    @Override
+    protected List<List<String>> getColumnsResultSetConsultar() {
+        return Arrays.asList(
+                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
+        );
     }
 
     @Override
     public Pessoa cosultarPorId(Long id) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
+        return (Pessoa) super.cosultarPorId(id);
+    }
 
-            String sql = "SELECT * FROM pessoa WHERE pk = ?;";
+    public static void main(String[] args) throws PersistenceException {
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome("testesssss");
+        pessoa.setSobrenome("de paula");
+        pessoa.setEmail("pessao@f.con");
+        pessoa.setNascimento(Date.valueOf("2008-09-23"));
+        pessoa.setTelefone(2123455L);
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            Pessoa pessoa = null;
-            if (resultSet.next())
-                pessoa = getPessoaFrom(resultSet);
-
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-
-            return pessoa;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException(e.getMessage(), e);
-        }
+        for (Pessoa p : pessoaDAO.listar())
+            System.out.println(p);
     }
 }

@@ -13,7 +13,7 @@ public class MySQLConnection implements ConnectionFactory {
     private final static String password;
 
     static {
-        driver = "com.myswl.jdbc.Driver";
+        driver = "com.mysql.cj.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/lagos";
         user = "admin";
         password = "admin";

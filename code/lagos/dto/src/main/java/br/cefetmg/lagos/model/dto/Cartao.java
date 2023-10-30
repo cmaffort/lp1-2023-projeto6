@@ -1,21 +1,33 @@
 package br.cefetmg.lagos.model.dto;
 
+import br.cefetmg.lagos.model.dto.annotations.Column;
+import br.cefetmg.lagos.model.dto.annotations.Getter;
+import br.cefetmg.lagos.model.dto.annotations.Setter;
+import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.base.AbstractDTO;
+import br.cefetmg.lagos.model.dto.contrato.Contratante;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
 
-public class Cartao implements DTO {
-    private Long numero;
+@Table(nome = "cartao")
+public class Cartao extends AbstractDTO implements DTO {
+    private long numero;
     private Bandeira bandeira;
 
     private Endereco endereco;
     private Contratante contratante;
 
-    private Long id;
+    private long id;
 
-    public Long getNumero() {
+    @Column(nome = "numero")
+    @Getter
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    @Column(nome = "numero")
+    @Setter
+    public void setNumero(long numero) {
         this.numero = numero;
     }
 
@@ -27,12 +39,38 @@ public class Cartao implements DTO {
         this.bandeira = bandeira;
     }
 
+    @Column(nome = "bandeira")
+    @Getter
+    public int getBandeiraAsInt() {
+        return getBandeira().ordinal();
+    }
+
+    @Column(nome = "bandeira")
+    @Setter
+    public void setBandeiraWithInt(int ord) {
+        setBandeira(Bandeira.get(ord));
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Column(nome = "endereco__fk")
+    @Getter
+    public long getEnderecoAsLong() {
+        return getEndereco().getId();
+    }
+
+    @Column(nome = "endereco__fk")
+    @Setter
+    public void setEnderecoWithLong(long id) {
+        if (endereco == null)
+            endereco = new Endereco();
+        endereco.setId(id);
     }
 
     public Contratante getContratante() {
@@ -43,11 +81,29 @@ public class Cartao implements DTO {
         this.contratante = contratante;
     }
 
-    public Long getId() {
+    @Column(nome = "usuario__fk")
+    @Getter
+    public long getContratanteAsLong() {
+        return getContratante().getId();
+    }
+
+    @Column(nome = "usuario__fk")
+    @Setter
+    public void setContratanteWithLong(long id) {
+        if (contratante == null)
+            contratante = new Contratante();
+        contratante.setId(id);
+    }
+
+    @Column(nome = "pk")
+    @Getter
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    @Column(nome = "pk")
+    @Setter
+    public void setId(long id) {
         this.id = id;
     }
 }

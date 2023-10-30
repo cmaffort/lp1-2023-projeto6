@@ -1,34 +1,52 @@
 package br.cefetmg.lagos.model.dto;
 
-import java.util.List;
+import br.cefetmg.lagos.model.dto.annotations.Column;
+import br.cefetmg.lagos.model.dto.annotations.Getter;
+import br.cefetmg.lagos.model.dto.annotations.Setter;
+import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-public class Periodicidade implements DTO {
-    private Integer periodo;
-    private Integer qtdDiasPorPeriodo;
+@Table(nome = "periodicidade")
+public class Periodicidade extends AbstractDTO implements DTO {
+    private int periodo;
+    private int quantidadeDiasPorPeriodo;
 
-    private Long id;
+    private long id;
 
-    public Integer getPeriodo() {
+    @Column(nome = "periodo")
+    @Getter
+    public int getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(Integer periodo) {
+    @Column(nome = "periodo")
+    @Setter
+    public void setPeriodo(int periodo) {
         this.periodo = periodo;
     }
 
-    public Integer getQtdDiasPorPeriodo() {
-        return qtdDiasPorPeriodo;
+    @Column(nome = "quantidade_dias_por_periodo")
+    @Getter
+    public int getQuantidadeDiasPorPeriodo() {
+        return quantidadeDiasPorPeriodo;
     }
 
-    public void setQtdDiasPorPeriodo(Integer qtdDiasPorPeriodo) {
-        this.qtdDiasPorPeriodo = qtdDiasPorPeriodo;
+    @Column(nome = "quantidade_dias_por_periodo")
+    @Setter
+    public void setQuantidadeDiasPorPeriodo(int quantidadeDiasPorPeriodo) {
+        this.quantidadeDiasPorPeriodo = quantidadeDiasPorPeriodo;
     }
 
-    public Long getId() {
+    @Column(nome = "pk")
+    @Getter
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    @Column(nome = "pk")
+    @Setter
+    public void setId(long id) {
         this.id = id;
     }
 }
