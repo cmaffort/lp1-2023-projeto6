@@ -29,6 +29,8 @@
         }
 
         .menu-button {
+            position: absolute;
+            right: 2%;
             cursor: pointer;
             margin-right: 2vh;
         }
@@ -43,37 +45,37 @@
         }
 
         .menu {
+            position: absolute;
             flex-direction: column;
-            right: 10%;
+            right: 0%;
         }
 
         .menu.active {
             display: flex;
-            animation: slideIn 0.5s forwards;
+            animation: slideIn 1s forwards;
         }
         
         .menu.inactive {
-            display: none;
-            animation: slideOut 0.5s forwards;
+            animation: slideOut 1s forwards;
+
         }
 
         @keyframes slideIn {
             0% {
-                transform: translateX(100%);
+                right: -10%;
             }
             100% {
-                transform: translateX(94%);
+                right: 4%;
             }
 
         }
         @keyframes slideOut {
             0% {
-                transform: translateX(94%);
+                 right: 4%;
             }
             100% {
-                transform: translateX(100%);
+                 right: -10%;
             }
-            display:none;
         }
 
         .menu-item {

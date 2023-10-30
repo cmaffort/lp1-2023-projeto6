@@ -39,6 +39,7 @@
             if (menu.classList.contains('active')) {
                 menu.classList.remove("active");
                 menu.classList.add("inactive");
+                
             } 
             else{
                 menu.classList.remove("inactive");
