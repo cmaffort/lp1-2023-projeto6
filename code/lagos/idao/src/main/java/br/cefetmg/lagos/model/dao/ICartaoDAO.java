@@ -15,4 +15,6 @@ public interface ICartaoDAO extends IDAO {
     List<Cartao> listar() throws PersistenceException;
 
     Cartao cosultarPorId(Long id) throws PersistenceException;
+
+    List<Cartao> listar(DTO related) throws PersistenceException;
 }
