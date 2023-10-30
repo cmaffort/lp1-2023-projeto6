@@ -14,4 +14,10 @@ public interface IGerirCaixa {
     
     List<Caixa> listar() throws SQLException, ClassNotFoundException;
     
+    boolean abrirCaixa(Caixa caixa) throws SQLException, ClassNotFoundException;
+    
+    boolean fecharCaixa(Caixa caixa) throws SQLException, ClassNotFoundException;
+    
+    boolean moverDinheiro(Caixa origem, Caixa destino, Double qtd) throws SQLException, ClassNotFoundException;
+    
 }

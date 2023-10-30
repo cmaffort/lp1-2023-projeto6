@@ -50,4 +50,52 @@ public class GerirCaixa implements IGerirCaixa {
         
     }
     
+    @Override
+    public boolean abrirCaixa(Caixa caixa) throws SQLException, ClassNotFoundException {
+       
+        caixa.setAberto(true);
+        
+        Boolean result = caixaDAO.alterar(caixa);
+        
+        return result;
+       
+    }
+    
+    @Override
+    public boolean fecharCaixa(Caixa caixa) throws SQLException, ClassNotFoundException {
+       
+        caixa.setAberto(false);
+        
+        Boolean result = caixaDAO.alterar(caixa);
+        
+        return result;
+       
+    }
+    
+    @Override
+    public boolean moverDinheiro(Caixa origem, Caixa destino, Double qtd) throws SQLException, ClassNotFoundException {
+        
+        Boolean result = false;
+        Boolean[] results = new Boolean[]{false, false};
+        
+        Double dinheiroOrigem = origem.getDinheiroEmCaixa();
+        Double dinheiroDestino = destino.getDinheiroEmCaixa();
+        
+        
+        if(dinheiroDestino>=qtd) {
+            
+            destino.setDinheiroEmCaixa(dinheiroDestino-qtd);
+            origem.setDinheiroEmCaixa(dinheiroOrigem+qtd);
+            
+            results[0] = caixaDAO.alterar(origem);
+            results[1] = caixaDAO.alterar(destino);
+            
+            result = results[0]&&results[1]&&true;
+            
+        }
+        
+        return result;
+        
+    }
+    
 }

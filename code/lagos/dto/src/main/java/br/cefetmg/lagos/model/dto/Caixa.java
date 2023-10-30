@@ -1,13 +1,14 @@
 package br.cefetmg.lagos.model.dto;
 
+import java.util.List;
+
 public class Caixa implements DTO {
     
     private Boolean aberto;
     private Double dinheiroEmCaixa;
-    private Caixeiro caixeiro;
-    private FluxoTotalDeCaixa fluxoTotalDeCaixa;
-    private Loja loja;
-
+    private String caixeiro;
+    private Double fluxoTotalDeCaixa;
+    private Long loja;
     private Long id;
 
     public Boolean isAberto() {
@@ -26,28 +27,51 @@ public class Caixa implements DTO {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
-    public Caixeiro getCaixeiro() {
+    public String getCaixeiro() {
         return caixeiro;
     }
 
     public void setCaixeiro(Caixeiro caixeiro) {
-        this.caixeiro = caixeiro;
+        this.caixeiro = caixeiro.getNome();
     }
 
-    public FluxoTotalDeCaixa getFluxoTotalDeCaixa() {
+    public void setCaixeiro(String caixeiroNome) {
+        this.caixeiro = caixeiroNome;
+    }
+    
+    public Double getFluxoTotalDeCaixa() {
         return fluxoTotalDeCaixa;
     }
 
     public void setFluxoTotalDeCaixa(FluxoTotalDeCaixa fluxoTotalDeCaixa) {
-        this.fluxoTotalDeCaixa = fluxoTotalDeCaixa;
+        
+        List<FluxoUnitarioDeCaixa> fluxos;
+        double result = 0;
+        
+        fluxos = fluxoTotalDeCaixa.getFluxosUnitarioDeCaixa();
+        
+        for (FluxoUnitarioDeCaixa f : fluxos)
+            result += f.getDinheiro();
+       
+        this.fluxoTotalDeCaixa = result;
+        
+    }
+    
+    public void setFluxoTotalDeCaixa(Double fluxoTotal) {
+       
+        this.fluxoTotalDeCaixa = fluxoTotal;
+       
     }
 
-    public Loja getLoja() {
+    public Long getLoja() {
         return loja;
     }
 
     public void setLoja(Loja loja) {
-        this.loja = loja;
+        this.loja = loja.getEndereco().getCep();
+    }
+    public void setLoja(Long lojaCEP) {
+        this.loja = lojaCEP;
     }
 
     public Long getId() {

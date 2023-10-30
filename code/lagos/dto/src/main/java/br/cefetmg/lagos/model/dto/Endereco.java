@@ -1,16 +1,16 @@
 package br.cefetmg.lagos.model.dto;
 
 public class Endereco implements DTO {
-    private Integer cep;
+    private Long cep;
     private Integer numero;
 
     private Long id;
 
-    public Integer getCep() {
+    public Long getCep() {
         return cep;
     }
 
-    public void setCep(Integer cep) {
+    public void setCep(Long cep) {
         this.cep = cep;
     }
 
