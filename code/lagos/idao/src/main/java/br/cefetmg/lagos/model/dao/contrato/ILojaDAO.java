@@ -16,4 +16,6 @@ public interface ILojaDAO extends IDAO {
     List<Loja> listar() throws PersistenceException;
 
     Loja cosultarPorId(Long id) throws PersistenceException;
+
+    List<Loja> listarPorContratante(Contratante contratante) throws PersistenceException;
 }
