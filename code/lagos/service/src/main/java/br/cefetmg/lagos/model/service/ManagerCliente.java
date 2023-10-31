@@ -41,7 +41,7 @@ public class ManagerCliente{
     }
     
     public Cliente consultarPorId(Long id) throws PersistenceException {
-        return clienteDAO.cosultarPorId(id);
+        return clienteDAO.consultarPorId(id);
     }
 
     public List<Cliente> consultarPorLoja(Long idLoja){
