@@ -45,6 +45,11 @@ public class TestContratos {
 
         for (Periodicidade p : dao.listar())
             System.out.println(p);
+
+        dao.inserir(periodicidade);
+        periodicidade.setPeriodo(4);
+        dao.alterar(periodicidade);
+        dao.remover(periodicidade);
     }
 
     private static void testEndereco() throws PersistenceException {
@@ -58,6 +63,11 @@ public class TestContratos {
 
         for (Endereco e : enderecoDAO.listar())
             System.out.println(e);
+
+        enderecoDAO.inserir(endereco);
+        endereco.setNumero(234);
+        enderecoDAO.alterar(endereco);
+        enderecoDAO.remover(endereco);
     }
 
     private static void testCartao() throws PersistenceException {
@@ -82,6 +92,11 @@ public class TestContratos {
 
         for (Cartao c : cartaoDAO.listar(cartao.getUsuario()))
             System.out.println(c);
+
+        cartaoDAO.inserir(cartao);
+        cartao.setNumero(12L);
+        cartaoDAO.alterar(cartao);
+        cartaoDAO.remover(cartao);
     }
 
     private static void testUsuario() throws PersistenceException {
@@ -103,6 +118,11 @@ public class TestContratos {
 
         for (Usuario u : usuarioDAO.listar())
             System.out.println(u);
+
+        usuarioDAO.inserir(usuario);
+        usuario.setUsername("not");
+        usuarioDAO.alterar(usuario);
+        usuarioDAO.remover(usuario);
     }
 
     private static void testLoja() throws PersistenceException, DTOExeption {
@@ -117,6 +137,11 @@ public class TestContratos {
 
         for (Loja l : lojaDAO.listar())
             System.out.println(l.getInstance(loja));
+
+        lojaDAO.inserir(loja);
+        loja.setUsuarioWithLong(2L);
+        lojaDAO.alterar(loja);
+        lojaDAO.remover(loja);
     }
 
     private static void testContrato() throws PersistenceException {
@@ -133,6 +158,11 @@ public class TestContratos {
 
         for (Contrato c : contratoDAO.listar())
             System.out.println(c);
+
+        contratoDAO.inserir(contrato);
+        contrato.setNumeroDeLojas(12);
+        contratoDAO.alterar(contrato);
+        contratoDAO.remover(contrato);
     }
 
     private static void testContratoAssinado() throws PersistenceException {
@@ -156,6 +186,11 @@ public class TestContratos {
 
         for (ContratoAssinado c : contratoAssinadoDAO.listar(usuario))
             System.out.println(c);
+
+        contratoAssinadoDAO.inserir(contratoAssinado);
+        contratoAssinado.setCancelado(true);
+        contratoAssinadoDAO.alterar(contratoAssinado);
+        contratoAssinadoDAO.remover(contratoAssinado);
     }
 
     private static void testConfiguracoesDeInterface() throws SQLException, PersistenceException {
@@ -178,6 +213,12 @@ public class TestContratos {
 
         for (ConfiguracoesDeInterface c : configuracoesDeInterfaceDAO.listar(usuario))
             System.out.println(c);
+
+        configuracoesDeInterfaceDAO.remover(configuracoesDeInterface);
+        configuracoesDeInterface.setId(2);
+        configuracoesDeInterfaceDAO.inserir(configuracoesDeInterface);
+        configuracoesDeInterface.setNomeDaEmpresa("onge");
+        configuracoesDeInterfaceDAO.alterar(configuracoesDeInterface);
     }
 
     public static void main(String[] args) throws PersistenceException, DTOExeption, SQLException {

@@ -35,54 +35,6 @@ public class LojaDAO extends AbstractDAO implements ILojaDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return Arrays.asList(
-                Arrays.asList("endereco__fk", "usuario__fk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("endereco__fk", "usuario__fk"),
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("endereco__fk", "usuario__fk", "pk")
-        );
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return List.of("pk");
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("endereco__fk", "usuario__fk", "pk")
-        );
-    }
-
-    @Override
     public Long inserir(Loja loja) throws PersistenceException {
         return super.inserir(loja);
     }

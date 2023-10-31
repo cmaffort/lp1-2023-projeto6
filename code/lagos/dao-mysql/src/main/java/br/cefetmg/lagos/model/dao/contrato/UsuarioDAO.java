@@ -71,13 +71,6 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "tipo", "username", "senha", "pk")
-        );
-    }
-
-    @Override
     protected List<String> getOrderByPriority() {
         return Arrays.asList("nome", "sobrenome");
     }
@@ -92,13 +85,6 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
     @Override
     public List<Usuario> listar() throws PersistenceException {
         return (List<Usuario>) super.listar();
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
     }
 
     @Override

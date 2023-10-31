@@ -29,11 +29,6 @@ public class EnderecoDAO extends AbstractDAO implements IEnderecoDAO {
     }
 
     @Override
-    protected List<String> getOrderByPriority() {
-        return Arrays.asList("pk");
-    }
-
-    @Override
     public List<Endereco> listar() throws PersistenceException {
         return (List<Endereco>) super.listar();
     }

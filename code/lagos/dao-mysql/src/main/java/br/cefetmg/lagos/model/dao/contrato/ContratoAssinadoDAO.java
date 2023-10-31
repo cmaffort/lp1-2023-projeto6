@@ -33,23 +33,8 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return Arrays.asList(
-                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk")
-        );
-    }
-
-    @Override
     public Long inserir(ContratoAssinado contratoAssinado) throws PersistenceException {
         return super.inserir(contratoAssinado);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk"),
-                List.of("pk")
-        );
     }
 
     @Override
@@ -58,22 +43,8 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
     public boolean remover(ContratoAssinado contratoAssinado) throws PersistenceException {
         return super.remover(contratoAssinado);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk", "pk")
-        );
     }
 
     @Override
@@ -108,19 +79,6 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     @Override
     public List<ContratoAssinado> listar(DTO... dto) throws PersistenceException {
         return fillRelatedDTOs((List<ContratoAssinado>) super.listar(dto));
-    }
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk", "pk")
-        );
     }
 
     @Override

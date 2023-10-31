@@ -26,37 +26,13 @@ public class ContratoDAO extends AbstractDAO implements IContratoDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return Arrays.asList(
-                Arrays.asList("ativo", "descricao", "preco", "documento", "taxa_de_multa", "numero_de_lojas",
-                        "data_de_criacao", "periodicidade__fk")
-        );
-    }
-
-    @Override
     public Long inserir(Contrato contrato) throws PersistenceException {
         return super.inserir(contrato);
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("ativo", "descricao", "preco", "documento", "taxa_de_multa", "numero_de_lojas",
-                        "data_de_criacao", "periodicidade__fk"),
-                List.of("pk")
-        );
-    }
-
-    @Override
     public boolean alterar(Contrato contrato) throws PersistenceException {
         return super.alterar(contrato);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
     }
 
     @Override
@@ -83,31 +59,8 @@ public class ContratoDAO extends AbstractDAO implements IContratoDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("ativo", "descricao", "preco", "documento", "taxa_de_multa", "numero_de_lojas",
-                        "data_de_criacao", "periodicidade__fk", "pk")
-        );
-    }
-
-    @Override
     protected List<String> getOrderByPriority() {
         return List.of("data_de_criacao");
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("ativo", "descricao", "preco", "documento", "taxa_de_multa", "numero_de_lojas",
-                        "data_de_criacao", "periodicidade__fk", "pk")
-        );
     }
 
     @Override

@@ -6,6 +6,7 @@ import br.cefetmg.lagos.model.dto.contrato.ConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,48 +29,7 @@ public class ConfiguracoesDeInterfaceDAO extends AbstractDAO implements IConfigu
     @Override
     protected List<List<String>> getColumnsPreparedStatementInserir() {
         return Arrays.asList(
-                Arrays.asList("nome_da_empresa", "logo", "cor_base", "pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("nome_da_empresa", "logo", "cor_base"),
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("nome_da_empresa", "logo", "cor_base", "pk")
-        );
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return List.of("pk");
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("nome_da_empresa", "logo", "cor_base", "pk")
+                new ArrayList<>(getDTO().getManeger().getColumns())
         );
     }
 
