@@ -14,5 +14,5 @@ public interface IEnderecoDAO extends IDAO {
     
     List<Endereco> listar() throws PersistenceException;
 
-    Endereco cosultarPorId(Long id) throws PersistenceException;
+    Endereco consultarPorId(Long id) throws PersistenceException;
 }

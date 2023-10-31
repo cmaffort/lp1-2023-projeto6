@@ -15,5 +15,5 @@ public interface IPromocaoDAO extends IDAO {
     
     List<Promocao> listar() throws PersistenceException;
 
-    Promocao cosultarPorId(Long id) throws PersistenceException;
+    Promocao consultarPorId(Long id) throws PersistenceException;
 }

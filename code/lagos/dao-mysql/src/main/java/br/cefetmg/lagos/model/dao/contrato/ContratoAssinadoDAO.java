@@ -2,25 +2,25 @@ package br.cefetmg.lagos.model.dao.contrato;
 
 import br.cefetmg.lagos.model.dao.AbstractDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.contrato.Contratante;
 import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.contrato.Usuario;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinadoDAO {
-    private static final IContratanteDAO CONTRATANTE_DAO;
+    private static final IUsuarioDAO USUARIO_DAO;
     private static final IContratoDAO CONTRATO_DAO;
 
     static {
-        CONTRATANTE_DAO = new ContratanteDAO();
+        USUARIO_DAO = new UsuarioDAO();
         CONTRATO_DAO = new ContratoDAO();
     }
 
-    private static IContratanteDAO getContratanteDao() {
-        return CONTRATANTE_DAO;
+    private static IUsuarioDAO getUsuarioDao() {
+        return USUARIO_DAO;
     }
 
     private static IContratoDAO getContratoDao() {
@@ -47,7 +47,8 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     @Override
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
         return Arrays.asList(
-                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk")
+                Arrays.asList("vigente", "data_de_contratacao", "cancelado", "usuario__fk", "contrato__fk"),
+                List.of("pk")
         );
     }
 
@@ -81,13 +82,13 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     }
 
     private ContratoAssinado fillRelatedDTOs(ContratoAssinado contratoAssinado) throws PersistenceException {
-        IContratanteDAO contratanteDAO = getContratanteDao();
+        IUsuarioDAO usuarioDAO = getUsuarioDao();
         IContratoDAO contratoDAO = getContratoDao();
 
-        Contratante contratante = contratanteDAO.cosultarPorId(contratoAssinado.getContratanteAsLong());
-        Contrato contrato = contratoDAO.cosultarPorId(contratoAssinado.getContratoAsLong());
+        Usuario usuario = usuarioDAO.consultarPorId(contratoAssinado.getUsuarioAsLong());
+        Contrato contrato = contratoDAO.consultarPorId(contratoAssinado.getContratoAsLong());
 
-        contratoAssinado.setContratante(contratante);
+        contratoAssinado.setUsuario(usuario);
         contratoAssinado.setContrato(contrato);
 
         return contratoAssinado;
@@ -105,6 +106,10 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     }
 
     @Override
+    public List<ContratoAssinado> listar(DTO... dto) throws PersistenceException {
+        return fillRelatedDTOs((List<ContratoAssinado>) super.listar(dto));
+    }
+    @Override
     protected List<List<String>> getColumnsPreparedStatementConsultar() {
         return Arrays.asList(
                 List.of("pk")
@@ -119,12 +124,12 @@ public class ContratoAssinadoDAO extends AbstractDAO implements IContratoAssinad
     }
 
     @Override
-    public ContratoAssinado cosultarPorId(Long id) throws PersistenceException {
-        return fillRelatedDTOs((ContratoAssinado) super.cosultarPorId(id));
+    public ContratoAssinado consultarPorId(Long id) throws PersistenceException {
+        return fillRelatedDTOs((ContratoAssinado) super.consultarPorId(id));
     }
 
     @Override
-    public List<ContratoAssinado> listar(DTO dto) throws PersistenceException {
-        return (List<ContratoAssinado>) super.listar(dto);
+    public ContratoAssinado consultarPor(DTO... related) throws PersistenceException {
+        return fillRelatedDTOs((ContratoAssinado) super.consultarPor(related));
     }
 }

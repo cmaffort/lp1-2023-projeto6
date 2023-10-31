@@ -17,8 +17,6 @@ public class HistoricoVET extends AbstractDTO implements DTO {
     private TipoHistoricoVET tipo;
     private Date data;
 
-    private List<Item> itens;
-
     private Loja loja;
 
     private long id;
@@ -53,14 +51,6 @@ public class HistoricoVET extends AbstractDTO implements DTO {
     @Setter
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
     }
 
     public Loja getLoja() {

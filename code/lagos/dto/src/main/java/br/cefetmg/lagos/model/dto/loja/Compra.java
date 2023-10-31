@@ -16,7 +16,6 @@ public class Compra extends AbstractDTO implements DTO {
     private Date dataDeCompra;
     private Date dataDeChegada;
 
-    private List<ProdutoCompra> produtos;
     private Loja loja;
 
     private long id;
@@ -43,14 +42,6 @@ public class Compra extends AbstractDTO implements DTO {
     @Setter
     public void setDataDeChegada(Date dataDeChegada) {
         this.dataDeChegada = dataDeChegada;
-    }
-
-    public List<ProdutoCompra> getProdutosDeCompra() {
-        return produtos;
-    }
-
-    public void setProdutosDeCompra(List<ProdutoCompra> produtos) {
-        this.produtos = produtos;
     }
 
     public Loja getLoja() {

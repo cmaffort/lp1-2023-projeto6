@@ -1,13 +1,13 @@
-package br.cefetmg.lagos.model.dao.contrato;
+package br.cefetmg.lagos.model.dao.loja;
 
 import br.cefetmg.lagos.model.dao.AbstractDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.contrato.GerenteDeContrato;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.loja.PromocoesDeFidelidadeProdutos;
 
 import java.util.List;
 
-public class GerenteDeContratoDAO extends AbstractDAO implements IGerenteDeContratoDAO {
+public class PromocoesDeFidelidadeProdutosDAO extends AbstractDAO implements IPromocoesDeFidelidadeProdutosDAO {
     @Override
     protected DTO getDTO() {
         return null;
@@ -49,27 +49,32 @@ public class GerenteDeContratoDAO extends AbstractDAO implements IGerenteDeContr
     }
 
     @Override
-    public Long inserir(GerenteDeContrato gerenteDeContrato) throws PersistenceException {
+    public Long inserir(PromocoesDeFidelidadeProdutos promocoesDeFidelidadeProdutos) throws PersistenceException {
         return null;
     }
 
     @Override
-    public boolean alterar(GerenteDeContrato gerenteDeContrato) throws PersistenceException {
+    public boolean alterar(PromocoesDeFidelidadeProdutos promocoesDeFidelidadeProdutos) throws PersistenceException {
         return false;
     }
 
     @Override
-    public boolean remover(GerenteDeContrato gerenteDeContrato) throws PersistenceException {
+    public boolean remover(PromocoesDeFidelidadeProdutos promocoesDeFidelidadeProdutos) throws PersistenceException {
         return false;
     }
 
     @Override
-    public List<GerenteDeContrato> listar() throws PersistenceException {
+    public List<PromocoesDeFidelidadeProdutos> listar() throws PersistenceException {
         return null;
     }
 
     @Override
-    public GerenteDeContrato cosultarPorId(Long id) throws PersistenceException {
+    public List<PromocoesDeFidelidadeProdutos> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public PromocoesDeFidelidadeProdutos consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

@@ -15,5 +15,5 @@ public interface IUsuarioDAO extends IDAO {
     
     List<Usuario> listar() throws PersistenceException;
 
-    Usuario cosultarPorId(Long id) throws PersistenceException;
+    Usuario consultarPorId(Long id) throws PersistenceException;
 }

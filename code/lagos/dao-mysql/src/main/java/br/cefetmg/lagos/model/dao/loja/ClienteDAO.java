@@ -69,7 +69,7 @@ public class ClienteDAO extends AbstractDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente cosultarPorId(Long id) throws PersistenceException {
+    public Cliente consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

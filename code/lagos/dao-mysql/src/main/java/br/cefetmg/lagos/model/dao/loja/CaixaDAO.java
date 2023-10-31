@@ -69,7 +69,12 @@ public class CaixaDAO extends AbstractDAO implements ICaixaDAO {
     }
 
     @Override
-    public Caixa cosultarPorId(Long id) throws PersistenceException {
+    public Caixa consultarPorId(Long id) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Caixa consultarPor(DTO... related) throws PersistenceException {
         return null;
     }
 }

@@ -15,5 +15,5 @@ public interface ICompraDAO extends IDAO {
     
     List<Compra> listar() throws PersistenceException;
 
-    Compra cosultarPorId(Long id) throws PersistenceException;
+    Compra consultarPorId(Long id) throws PersistenceException;
 }

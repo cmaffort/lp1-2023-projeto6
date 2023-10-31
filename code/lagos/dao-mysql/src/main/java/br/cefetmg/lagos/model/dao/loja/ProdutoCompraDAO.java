@@ -69,7 +69,12 @@ public class ProdutoCompraDAO extends AbstractDAO implements IProdutoCompraDAO {
     }
 
     @Override
-    public ProdutoCompra cosultarPorId(Long id) throws PersistenceException {
+    public List<ProdutoCompra> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public ProdutoCompra consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

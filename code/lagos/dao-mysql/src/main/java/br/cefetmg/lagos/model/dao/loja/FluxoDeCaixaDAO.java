@@ -69,7 +69,12 @@ public class FluxoDeCaixaDAO extends AbstractDAO implements IFluxoDeCaixaDAO {
     }
 
     @Override
-    public FluxoDeCaixa cosultarPorId(Long id) throws PersistenceException {
+    public List<FluxoDeCaixa> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public FluxoDeCaixa consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

@@ -69,7 +69,7 @@ public class HistoricoVETDAO extends AbstractDAO implements IHistoricoVETDAO {
     }
 
     @Override
-    public HistoricoVET cosultarPorId(Long id) throws PersistenceException {
+    public HistoricoVET consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

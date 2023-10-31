@@ -29,7 +29,7 @@ values ('LOSH', '#000000', (select @usuario_contratante));
 # Cria uma loja, e gera, automaticamente, uma configuração de venda padrão
 insert into loja (endereco__fk, usuario__fk)
 values ((select @endereco), (select @usuario_contratante));
-insert into configuracoes_de_venda (limite_de_desconto, taxa_de_juros_ao_mes, metodos_aceitos, bandeiras_aceitas, porcentagem_comissao, loja__fk)
+insert into configuracoes_de_venda (limite_de_desconto, taxa_de_juros_ao_mes, metodos_aceitos, bandeiras_aceitas, porcentagem_comissao, pk)
 values (0.10, 0.10, 3451521, 1432512, 0.05, 1);
 
 # Contratante cria chefe para uma loja
@@ -68,7 +68,7 @@ insert into fluxo_de_caixa (dinheiro_em_caixa, tipo, hora, caixa__fk)
 values (26, 2, '2023-09-19 09:08:57', (select @caixa));
 
 # Gerente altera configurações de venda
-update configuracoes_de_venda set limite_de_desconto = 0.5 where loja__fk = 1;
+update configuracoes_de_venda set limite_de_desconto = 0.5 where pk = 1;
 
 # Gerente cria compra e insere produtos comprados
 insert into compra (data_de_compra, loja__fk)
@@ -136,8 +136,8 @@ values ((select (preco) from produto where pk = (select @luminaria)), 3, (select
 insert into item (preco, quantidade, historioco_vet__fk, produto__fk)
 values ((select (preco) from produto where pk = (select @limpa)), 10, (select @hv1), (select @limpa));
 
-insert into venda (desconto, numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk, loja__fk)
-values (0.05, 2, (select @hv1), (select @caixa), (select @vendedor), (select @cliente), 1);
+insert into venda (desconto, numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk)
+values (0.05, 2, (select @hv1), (select @caixa), (select @vendedor), (select @cliente));
 
 update produto
     inner join item on item.produto__fk = produto.pk
@@ -180,8 +180,8 @@ set @hv2 := (select last_insert_id());
 insert into item (preco, quantidade, historioco_vet__fk, produto__fk)
 values ((select (preco) from produto where pk = (select @luminaria)), 1, (select @hv2), (select @luminaria));
 
-insert into venda (numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk, loja__fk)
-values (2, (select @hv2), (select @caixa), (select @vendedor), (select @cliente), 1);
+insert into venda (numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk)
+values (2, (select @hv2), (select @caixa), (select @vendedor), (select @cliente));
 
 update produto
     inner join item on item.produto__fk = produto.pk
@@ -204,10 +204,3 @@ where '2023-10-30' between data_inicio
                               from periodicidade
                               where pk = periodicidade__fk))
   and (select count(*) from venda where cliente__fk = (select @cliente)) >= min_vendas;
-
-select tipo, username, senha, pk, nome, sobrenome, nascimento, email, telefone
-from pessoa, usuario
-where pessoa.pk = usuario.pk
-order by nome, nascimento;
-
-select nome, sobrenome, nascimento, email, telefone, pk from pessoa where pk = 4

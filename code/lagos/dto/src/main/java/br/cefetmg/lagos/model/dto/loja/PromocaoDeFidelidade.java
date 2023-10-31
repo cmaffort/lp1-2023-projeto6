@@ -19,9 +19,6 @@ public class PromocaoDeFidelidade extends AbstractDTO implements DTO {
     private float porcentagem;
     private Date dataInicio;
 
-    private List<Venda> vendas;
-    private List<Produto> produtos;
-
     private Periodicidade periodicidade;
     private Loja loja;
 
@@ -73,22 +70,6 @@ public class PromocaoDeFidelidade extends AbstractDTO implements DTO {
     @Setter
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
-    }
-
-    public List<Venda> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     public Periodicidade getPeriodicidade() {

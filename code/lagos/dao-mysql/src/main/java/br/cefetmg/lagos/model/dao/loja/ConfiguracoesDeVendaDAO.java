@@ -69,7 +69,7 @@ public class ConfiguracoesDeVendaDAO extends AbstractDAO implements IConfiguraco
     }
 
     @Override
-    public ConfiguracoesDeVenda cosultarPorId(Long id) throws PersistenceException {
+    public ConfiguracoesDeVenda consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

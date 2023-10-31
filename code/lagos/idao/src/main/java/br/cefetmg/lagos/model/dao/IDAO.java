@@ -14,5 +14,5 @@ public interface IDAO {
 
     List<? extends DTO> listar() throws PersistenceException;
 
-    DTO cosultarPorId(Long id) throws PersistenceException;
+    DTO consultarPorId(Long id) throws PersistenceException;
 }

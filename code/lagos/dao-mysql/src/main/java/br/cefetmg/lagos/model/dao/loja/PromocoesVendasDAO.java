@@ -2,12 +2,12 @@ package br.cefetmg.lagos.model.dao.loja;
 
 import br.cefetmg.lagos.model.dao.AbstractDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.loja.Caixeiro;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.loja.PromocoesVendas;
 
 import java.util.List;
 
-public class CaixeiroDAO extends AbstractDAO implements ICaixeiroDAO {
+public class PromocoesVendasDAO extends AbstractDAO implements IPromocoesVendasDAO {
     @Override
     protected DTO getDTO() {
         return null;
@@ -49,27 +49,32 @@ public class CaixeiroDAO extends AbstractDAO implements ICaixeiroDAO {
     }
 
     @Override
-    public Long inserir(Caixeiro caixeiro) throws PersistenceException {
+    public Long inserir(PromocoesVendas promocoesVendas) throws PersistenceException {
         return null;
     }
 
     @Override
-    public boolean alterar(Caixeiro caixeiro) throws PersistenceException {
+    public boolean alterar(PromocoesVendas promocoesVendas) throws PersistenceException {
         return false;
     }
 
     @Override
-    public boolean remover(Caixeiro caixeiro) throws PersistenceException {
+    public boolean remover(PromocoesVendas promocoesVendas) throws PersistenceException {
         return false;
     }
 
     @Override
-    public List<Caixeiro> listar() throws PersistenceException {
+    public List<PromocoesVendas> listar() throws PersistenceException {
         return null;
     }
 
     @Override
-    public Caixeiro cosultarPorId(Long id) throws PersistenceException {
+    public List<PromocoesVendas> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public PromocoesVendas consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

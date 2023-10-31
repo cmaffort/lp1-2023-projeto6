@@ -16,9 +16,9 @@ public interface IContratoAssinadoDAO extends IDAO {
     
     List<ContratoAssinado> listar() throws PersistenceException;
 
-    ContratoAssinado cosultarPorId(Long id) throws PersistenceException;
+    List<ContratoAssinado> listar(DTO... related) throws PersistenceException;
 
-    ContratoAssinado consultarPor(DTO related) throws PersistenceException;
+    ContratoAssinado consultarPorId(Long id) throws PersistenceException;
 
-    List<ContratoAssinado> listar(DTO related) throws PersistenceException;
+    ContratoAssinado consultarPor(DTO... related) throws PersistenceException;
 }

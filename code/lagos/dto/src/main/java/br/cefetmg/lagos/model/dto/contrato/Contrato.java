@@ -9,8 +9,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 import java.sql.Blob;
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Table(nome = "contrato")
 public class Contrato extends AbstractDTO implements DTO {
@@ -23,8 +22,6 @@ public class Contrato extends AbstractDTO implements DTO {
     private Date dataDeCriacao;
 
     private Periodicidade periodicidade;
-
-    private List<ContratoAssinado> contratosAssinados;
 
     private long id;
 
@@ -110,14 +107,6 @@ public class Contrato extends AbstractDTO implements DTO {
     @Setter
     public void setDataDeCriacao(Date dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
-    }
-
-    public List<ContratoAssinado> getContratosAssinados() {
-        return contratosAssinados;
-    }
-
-    public void setContratosAssinados(List<ContratoAssinado> contratosAssinados) {
-        this.contratosAssinados = contratosAssinados;
     }
 
     public Periodicidade getPeriodicidade() {

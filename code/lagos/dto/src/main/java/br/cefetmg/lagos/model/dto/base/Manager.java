@@ -68,23 +68,46 @@ public class Manager {
         return columns;
     }
 
+    public String getPKColumn() {
+        return "pk";
+    }
+
+    public List<String> getColumnsButPK() {
+        List<String> c = new ArrayList<>(getColumns());
+        c.remove(getPKColumn());
+        return c;
+    }
+
     private static List<Map.Entry<String, Method>> getMethodsGroupedByColumns(Map<String, Method> methods, List<String> columns) {
         return columns.stream()
                 .map(column -> Map.entry(column, methods.get(column)))
                 .toList();
     }
 
-    private String columnValue(String column) {
+    private Object getColumn(String column) throws InvocationTargetException, IllegalAccessException {
+        Object getResult = getGetters().get(column).invoke(dto);
+        if (getResult == null)
+            getResult = "null";
+        return getResult;
+    }
+
+    private Map.Entry<String, Object> columnValue(String column) {
         try {
-            return column + ": " + getGetters().get(column).invoke(dto);
+            return Map.entry(column, getColumn(column));
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     public String toString() {
+        return toMap().entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .collect(Collectors.joining(", ", "{", "}"));
+    }
+
+    public Map<String, Object> toMap() {
         return getColumns().stream()
                 .map(this::columnValue)
-                .collect(Collectors.joining(", ", "{", "}"));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

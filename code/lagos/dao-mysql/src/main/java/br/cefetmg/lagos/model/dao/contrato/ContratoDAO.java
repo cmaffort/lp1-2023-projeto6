@@ -11,19 +11,13 @@ import java.util.List;
 
 public class ContratoDAO extends AbstractDAO implements IContratoDAO {
     private static final IPeriodicidadeDAO PERIODICIDADE_DAO;
-    private static final IContratoAssinadoDAO CONTRATO_ASSINADO_DAO;
 
     static {
         PERIODICIDADE_DAO = new PeriodicidadeDAO();
-        CONTRATO_ASSINADO_DAO = new ContratoAssinadoDAO();
     }
 
     private static IPeriodicidadeDAO getPeriodicidadeDao() {
         return PERIODICIDADE_DAO;
-    }
-
-    private static IContratoAssinadoDAO getContratoAssinadoDao() {
-        return CONTRATO_ASSINADO_DAO;
     }
 
     @Override
@@ -48,7 +42,8 @@ public class ContratoDAO extends AbstractDAO implements IContratoDAO {
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
         return Arrays.asList(
                 Arrays.asList("ativo", "descricao", "preco", "documento", "taxa_de_multa", "numero_de_lojas",
-                        "data_de_criacao", "periodicidade__fk")
+                        "data_de_criacao", "periodicidade__fk"),
+                List.of("pk")
         );
     }
 
@@ -69,34 +64,22 @@ public class ContratoDAO extends AbstractDAO implements IContratoDAO {
         return super.remover(contrato);
     }
 
-    private Contrato fillRelatedDTOs(Contrato contrato) throws PersistenceException {
+    private Contrato fillFKedDTOs(Contrato contrato) throws PersistenceException {
         IPeriodicidadeDAO periodicidadeDAO = getPeriodicidadeDao();
-        Periodicidade periodicidade = periodicidadeDAO.cosultarPorId(contrato.getPeriodicidadeAsLong());
+        Periodicidade periodicidade = periodicidadeDAO.consultarPorId(contrato.getPeriodicidadeAsLong());
         contrato.setPeriodicidade(periodicidade);
         return contrato;
     }
 
-    private List<Contrato> fillRelatedDTOs(List<Contrato> contratos) throws PersistenceException {
+    private List<Contrato> fillFKedDTOs(List<Contrato> contratos) throws PersistenceException {
         for (Contrato contrato : contratos)
-            fillRelatedDTOs(contrato);
-        return contratos;
-    }
-
-    private Contrato setRelatedFields(Contrato contrato) throws PersistenceException {
-        IContratoAssinadoDAO contratoAssinadoDAO = getContratoAssinadoDao();
-        contrato.setContratosAssinados(contratoAssinadoDAO.listar(contrato));
-        return contrato;
-    }
-
-    private List<Contrato> setRelatedFields(List<Contrato> contratos) throws PersistenceException {
-        for (Contrato contrato : contratos)
-            setRelatedFields(contrato);
+            fillFKedDTOs(contrato);
         return contratos;
     }
 
     @Override
     public List<Contrato> listar() throws PersistenceException {
-        return setRelatedFields(fillRelatedDTOs((List<Contrato>) super.listar()));
+        return fillFKedDTOs((List<Contrato>) super.listar());
     }
 
     @Override
@@ -128,7 +111,7 @@ public class ContratoDAO extends AbstractDAO implements IContratoDAO {
     }
 
     @Override
-    public Contrato cosultarPorId(Long id) throws PersistenceException {
-        return setRelatedFields(fillRelatedDTOs((Contrato) super.cosultarPorId(id)));
+    public Contrato consultarPorId(Long id) throws PersistenceException {
+        return fillFKedDTOs((Contrato) super.consultarPorId(id));
     }
 }

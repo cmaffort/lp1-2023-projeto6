@@ -13,5 +13,5 @@ public interface IPeriodicidadeDAO extends IDAO {
     
     List<Periodicidade> listar() throws PersistenceException;
 
-    Periodicidade cosultarPorId(Long id) throws PersistenceException;
+    Periodicidade consultarPorId(Long id) throws PersistenceException;
 }

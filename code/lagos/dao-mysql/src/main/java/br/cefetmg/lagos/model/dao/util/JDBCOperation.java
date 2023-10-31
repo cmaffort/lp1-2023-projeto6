@@ -84,29 +84,27 @@ public class JDBCOperation {
     }
 
     public Long getId() throws SQLException {
-        List<Long> ids = getIds();
-        if (ids == null)
-            return null;
-        return ids.get(0);
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+        Long id = null;
+        if (resultSet.next())
+            id = resultSet.getLong(1);
+        return id;
     }
 
     public List<? extends DTO> getInstances(List<String> columns) throws SQLException, DTOExeption {
-        ArrayList<DTO> dtos = null;
-        if (resultSet.next()) {
-            dtos = new ArrayList<>();
-            do
-                dtos.add(dtoDb.createWith(resultSet, columns));
-            while (resultSet.next());
-        }
+        ArrayList<DTO> dtos = new ArrayList<>();
+
+        while (resultSet.next())
+            dtos.add(dtoDb.createWith(resultSet, columns));
 
         return dtos;
     }
 
     public DTO getInstance(List<String> columns) throws SQLException, DTOExeption {
-        List<? extends DTO> dtos = getInstances(columns);
-        if (dtos == null)
-            return null;
-        return dtos.get(0);
+        DTO dto = null;
+        if (resultSet.next())
+            dto = dtoDb.createWith(resultSet, columns);
+        return dto;
     }
 
     public void close() throws SQLException {

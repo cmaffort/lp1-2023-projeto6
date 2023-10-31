@@ -69,7 +69,7 @@ public class FuncionarioDAO extends AbstractDAO implements IFuncionarioDAO {
     }
 
     @Override
-    public Funcionario cosultarPorId(Long id) throws PersistenceException {
+    public Funcionario consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

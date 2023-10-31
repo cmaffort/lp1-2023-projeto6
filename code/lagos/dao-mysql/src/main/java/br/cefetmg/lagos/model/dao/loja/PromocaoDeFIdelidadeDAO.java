@@ -69,7 +69,7 @@ public class PromocaoDeFIdelidadeDAO extends AbstractDAO implements IPromocaoDeF
     }
 
     @Override
-    public PromocaoDeFidelidade cosultarPorId(Long id) throws PersistenceException {
+    public PromocaoDeFidelidade consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

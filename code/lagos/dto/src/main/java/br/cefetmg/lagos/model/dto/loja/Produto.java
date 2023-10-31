@@ -17,10 +17,6 @@ public class Produto extends AbstractDTO implements DTO {
     private int quantidade;
     private double preco;
 
-    private List<ProdutoCompra> produtoCompras;
-    private List<Item> itens;
-    private List<Promocao> promocoes;
-    private List<PromocaoDeFidelidade> promocoesDeFidelidade;
     private Loja loja;
 
     private long id;
@@ -71,38 +67,6 @@ public class Produto extends AbstractDTO implements DTO {
     @Setter
     public void setPreco(double preco) {
         this.preco = preco;
-    }
-
-    public List<ProdutoCompra> getProdutoCompras() {
-        return produtoCompras;
-    }
-
-    public void setProdutoCompras(List<ProdutoCompra> produtoCompras) {
-        this.produtoCompras = produtoCompras;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
-
-    public List<Promocao> getPromocoes() {
-        return promocoes;
-    }
-
-    public void setPromocoes(List<Promocao> promocoes) {
-        this.promocoes = promocoes;
-    }
-
-    public List<PromocaoDeFidelidade> getPromocoesDeFidelidade() {
-        return promocoesDeFidelidade;
-    }
-
-    public void setPromocoesDeFidelidade(List<PromocaoDeFidelidade> promocoesDeFidelidade) {
-        this.promocoesDeFidelidade = promocoesDeFidelidade;
     }
 
     public Loja getLoja() {

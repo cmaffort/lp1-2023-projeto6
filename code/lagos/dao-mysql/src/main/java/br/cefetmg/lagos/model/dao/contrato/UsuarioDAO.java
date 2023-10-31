@@ -1,13 +1,12 @@
 package br.cefetmg.lagos.model.dao.contrato;
 
-import br.cefetmg.lagos.model.dao.AbstractDAO;
-import br.cefetmg.lagos.model.dao.IPessoaDAO;
-import br.cefetmg.lagos.model.dao.PessoaDAO;
+import br.cefetmg.lagos.model.dao.*;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
@@ -117,7 +116,7 @@ public class UsuarioDAO extends AbstractDAO implements IUsuarioDAO {
     }
 
     @Override
-    public Usuario cosultarPorId(Long id) throws PersistenceException {
-        return (Usuario) super.cosultarPorId(id);
+    public Usuario consultarPorId(Long id) throws PersistenceException {
+        return (Usuario) super.consultarPorId(id);
     }
 }

@@ -69,7 +69,7 @@ public class CompraDAO extends AbstractDAO implements ICompraDAO {
     }
 
     @Override
-    public Compra cosultarPorId(Long id) throws PersistenceException {
+    public Compra consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

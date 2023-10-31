@@ -69,7 +69,12 @@ public class itemDAO extends AbstractDAO implements IItemDAO {
     }
 
     @Override
-    public Item cosultarPorId(Long id) throws PersistenceException {
+    public List<Item> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Item consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

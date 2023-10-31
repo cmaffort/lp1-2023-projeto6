@@ -15,7 +15,7 @@ public class ConfiguracoesDeInterface extends AbstractDTO implements DTO {
     private Blob logo;
     private String corBase;
 
-    private Contratante contratante;
+    private Usuario usuario;
 
     @Column(nome = "nome_da_empresa")
     @Getter
@@ -53,23 +53,23 @@ public class ConfiguracoesDeInterface extends AbstractDTO implements DTO {
         this.corBase = corBase;
     }
 
-    public Contratante getContratante() {
-        return contratante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setContratante(Contratante contratante) {
-        this.contratante = contratante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Column(nome = "pk")
     @Getter
     public long getId() {
-        return getRelatedDTOAsLong(getContratante());
+        return getRelatedDTOAsLong(getUsuario());
     }
 
     @Column(nome = "pk")
     @Setter
     public void setId(long id) {
-        setContratante((Contratante) setRelatedWithLong(getContratante(), id, new Contratante()));
+        setUsuario((Usuario) setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 }
