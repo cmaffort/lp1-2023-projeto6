@@ -69,7 +69,7 @@ public class PromocaoDAO extends AbstractDAO implements IPromocaoDAO {
     }
 
     @Override
-    public Promocao cosultarPorId(Long id) throws PersistenceException {
+    public Promocao consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

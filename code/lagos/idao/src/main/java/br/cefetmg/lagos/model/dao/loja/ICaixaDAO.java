@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.cefetmg.lagos.model.dao.IDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.loja.Caixa;
 
 public interface ICaixaDAO extends IDAO {
@@ -15,5 +16,7 @@ public interface ICaixaDAO extends IDAO {
     
     List<Caixa> listar() throws PersistenceException;
 
-    Caixa cosultarPorId(Long id) throws PersistenceException;
+    Caixa consultarPorId(Long id) throws PersistenceException;
+
+    Caixa consultarPor(DTO... related) throws PersistenceException;
 }

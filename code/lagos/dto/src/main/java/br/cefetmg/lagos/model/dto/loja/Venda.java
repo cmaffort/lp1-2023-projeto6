@@ -13,11 +13,8 @@ public class Venda extends HistoricoVET implements DTO {
     private float desconto;
     private int numeroDeParcelas;
 
-    private List<Promocao> promocoes;
-    private List<PromocaoDeFidelidade> promocoesDeFidelidade;
-
     private Caixa caixa;
-    private Vendedor vendedor;
+    private Funcionario funcionario;
     private Cliente cliente;
 
     @Column(nome = "desconto")
@@ -52,12 +49,12 @@ public class Venda extends HistoricoVET implements DTO {
         this.caixa = caixa;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public Cliente getCliente() {
@@ -66,21 +63,5 @@ public class Venda extends HistoricoVET implements DTO {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public List<Promocao> getPromocoes() {
-        return promocoes;
-    }
-
-    public void setPromocoes(List<Promocao> promocoes) {
-        this.promocoes = promocoes;
-    }
-
-    public List<PromocaoDeFidelidade> getPromocoesDeFidelidade() {
-        return promocoesDeFidelidade;
-    }
-
-    public void setPromocoesDeFidelidade(List<PromocaoDeFidelidade> promocoesDeFidelidade) {
-        this.promocoesDeFidelidade = promocoesDeFidelidade;
     }
 }

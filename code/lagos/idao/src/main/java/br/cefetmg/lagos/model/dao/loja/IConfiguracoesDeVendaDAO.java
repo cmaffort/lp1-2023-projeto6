@@ -15,5 +15,5 @@ public interface IConfiguracoesDeVendaDAO extends IDAO {
     
     List<ConfiguracoesDeVenda> listar() throws PersistenceException;
 
-    ConfiguracoesDeVenda cosultarPorId(Long id) throws PersistenceException;
+    ConfiguracoesDeVenda consultarPorId(Long id) throws PersistenceException;
 }

@@ -15,8 +15,7 @@ public class Caixa extends AbstractDTO implements DTO {
     private boolean aberto;
     private double dinheiroEmCaixa;
 
-    private Caixeiro caixeiro;
-    private List<FluxoDeCaixa> fluxosDeCaixa;
+    private UsuarioLoja usuarioLoja;
     private Loja loja;
 
     private long id;
@@ -45,20 +44,12 @@ public class Caixa extends AbstractDTO implements DTO {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
-    public Caixeiro getCaixeiro() {
-        return caixeiro;
+    public UsuarioLoja getUsuarioLoja() {
+        return usuarioLoja;
     }
 
-    public void setCaixeiro(Caixeiro caixeiro) {
-        this.caixeiro = caixeiro;
-    }
-
-    public List<FluxoDeCaixa> getFluxosDeCaixa() {
-        return fluxosDeCaixa;
-    }
-
-    public void setFluxosDeCaixa(List<FluxoDeCaixa> fluxosDeCaixa) {
-        this.fluxosDeCaixa = fluxosDeCaixa;
+    public void setUsuarioLoja(UsuarioLoja usuarioLoja) {
+        this.usuarioLoja = usuarioLoja;
     }
 
     public Loja getLoja() {

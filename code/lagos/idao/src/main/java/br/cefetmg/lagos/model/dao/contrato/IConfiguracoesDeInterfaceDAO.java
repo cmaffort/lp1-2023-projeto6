@@ -2,6 +2,7 @@ package br.cefetmg.lagos.model.dao.contrato;
 
 import br.cefetmg.lagos.model.dao.IDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.contrato.ConfiguracoesDeInterface;
 
 import java.util.List;
@@ -15,5 +16,9 @@ public interface IConfiguracoesDeInterfaceDAO extends IDAO {
     
     List<ConfiguracoesDeInterface> listar() throws PersistenceException;
 
-    ConfiguracoesDeInterface cosultarPorId(Long id) throws PersistenceException;
+    List<ConfiguracoesDeInterface> listar(DTO... related) throws PersistenceException;
+
+    ConfiguracoesDeInterface consultarPorId(Long id) throws PersistenceException;
+
+    ConfiguracoesDeInterface consultarPor(DTO... related) throws PersistenceException;
 }

@@ -14,5 +14,5 @@ public interface IPessoaDAO extends IDAO {
     
     List<Pessoa> listar() throws PersistenceException;
 
-    Pessoa cosultarPorId(Long id) throws PersistenceException;
+    Pessoa consultarPorId(Long id) throws PersistenceException;
 }

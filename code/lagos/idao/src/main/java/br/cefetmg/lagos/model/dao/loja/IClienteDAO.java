@@ -15,5 +15,5 @@ public interface IClienteDAO extends IDAO {
     
     List<Cliente> listar() throws PersistenceException;
 
-    Cliente cosultarPorId(Long id) throws PersistenceException;
+    Cliente consultarPorId(Long id) throws PersistenceException;
 }

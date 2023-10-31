@@ -6,7 +6,7 @@ import br.cefetmg.lagos.model.dto.annotations.Setter;
 import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
-import br.cefetmg.lagos.model.dto.contrato.Contratante;
+import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
 
 @Table(nome = "cartao")
@@ -15,7 +15,7 @@ public class Cartao extends AbstractDTO implements DTO {
     private Bandeira bandeira;
 
     private Endereco endereco;
-    private Contratante contratante;
+    private Usuario usuario;
 
     private long id;
 
@@ -42,7 +42,7 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "bandeira")
     @Getter
     public int getBandeiraAsInt() {
-        return getBandeira().ordinal();
+        return getEnumAsInt(getBandeira());
     }
 
     @Column(nome = "bandeira")
@@ -62,37 +62,33 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "endereco__fk")
     @Getter
     public long getEnderecoAsLong() {
-        return getEndereco().getId();
+        return getRelatedDTOAsLong(getEndereco());
     }
 
     @Column(nome = "endereco__fk")
     @Setter
     public void setEnderecoWithLong(long id) {
-        if (endereco == null)
-            endereco = new Endereco();
-        endereco.setId(id);
+        setEndereco((Endereco) setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
-    public Contratante getContratante() {
-        return contratante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setContratante(Contratante contratante) {
-        this.contratante = contratante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Column(nome = "usuario__fk")
     @Getter
-    public long getContratanteAsLong() {
-        return getContratante().getId();
+    public long getUsuarioAsLong() {
+        return getRelatedDTOAsLong(getUsuario());
     }
 
     @Column(nome = "usuario__fk")
     @Setter
-    public void setContratanteWithLong(long id) {
-        if (contratante == null)
-            contratante = new Contratante();
-        contratante.setId(id);
+    public void setUsuarioWithLong(long id) {
+        setUsuario((Usuario) setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
     @Column(nome = "pk")

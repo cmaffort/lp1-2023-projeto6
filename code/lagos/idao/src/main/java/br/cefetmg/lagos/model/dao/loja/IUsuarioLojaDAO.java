@@ -16,7 +16,7 @@ public interface IUsuarioLojaDAO extends IDAO {
 
     List<UsuarioLoja> listar() throws PersistenceException;
 
-    List<UsuarioLoja> listar(DTO dto) throws PersistenceException;
+    List<UsuarioLoja> listar(DTO... dto) throws PersistenceException;
 
     UsuarioLoja cosultarPorId(Long id) throws PersistenceException;
 }

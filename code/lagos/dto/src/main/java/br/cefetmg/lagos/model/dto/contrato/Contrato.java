@@ -9,22 +9,19 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 import java.sql.Blob;
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Table(nome = "contrato")
 public class Contrato extends AbstractDTO implements DTO {
     private boolean ativo;
     private String descricao;
     private double preco;
-    private List<Blob> documentos;
+    private Blob documento;
     private float taxaDeMulta;
     private int numeroDeLojas;
     private Date dataDeCriacao;
 
     private Periodicidade periodicidade;
-
-    private List<ContratoAssinado> contratosAssinados;
 
     private long id;
 
@@ -64,23 +61,17 @@ public class Contrato extends AbstractDTO implements DTO {
         this.preco = preco;
     }
 
-    public List<Blob> getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(List<Blob> documentos) {
-        this.documentos = documentos;
-    }
-
-    // TODO: Get e Set documentos as blob?
-
-    @Column(nome = "documentos")
+    @Column(nome = "documento")
     @Getter
-    public Blob getDocumentosAsBlob() {return null;}
+    public Blob getDocumento() {
+        return documento;
+    }
 
-    @Column(nome = "documentos")
+    @Column(nome = "documento")
     @Setter
-    public void setDocumentosWithBlob(Blob documentos) {}
+    public void setDocumento(Blob documento) {
+        this.documento = documento;
+    }
 
     @Column(nome = "taxa_de_multa")
     @Getter
@@ -118,20 +109,24 @@ public class Contrato extends AbstractDTO implements DTO {
         this.dataDeCriacao = dataDeCriacao;
     }
 
-    public List<ContratoAssinado> getContratosAssinados() {
-        return contratosAssinados;
-    }
-
-    public void setContratosAssinados(List<ContratoAssinado> contratosAssinados) {
-        this.contratosAssinados = contratosAssinados;
-    }
-
     public Periodicidade getPeriodicidade() {
         return periodicidade;
     }
 
     public void setPeriodicidade(Periodicidade periodicidade) {
         this.periodicidade = periodicidade;
+    }
+
+    @Column(nome = "periodicidade__fk")
+    @Getter
+    public long getPeriodicidadeAsLong() {
+        return getRelatedDTOAsLong(getPeriodicidade());
+    }
+
+    @Column(nome = "periodicidade__fk")
+    @Setter
+    public void setPeriodicidadeWithLong(long id) {
+        setPeriodicidade((Periodicidade) setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
     }
 
     @Column(nome = "pk")

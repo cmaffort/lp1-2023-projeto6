@@ -2,7 +2,6 @@ package br.cefetmg.lagos.model.dto.loja;
 
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.Pessoa;
-import br.cefetmg.lagos.model.dto.QueryList;
 import br.cefetmg.lagos.model.dto.annotations.Column;
 import br.cefetmg.lagos.model.dto.annotations.Getter;
 import br.cefetmg.lagos.model.dto.annotations.Setter;
@@ -16,7 +15,6 @@ public class Cliente extends Pessoa implements DTO {
     private String instagram;
     private Date cadastro;
 
-    private QueryList<Venda> vendas;
     private Loja loja;
 
     @Column(nome = "instagram")
@@ -41,14 +39,6 @@ public class Cliente extends Pessoa implements DTO {
     @Setter
     public void setCadastro(Date cadastro) {
         this.cadastro = cadastro;
-    }
-
-    public QueryList<Venda> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(QueryList<Venda> vendas) {
-        this.vendas = vendas;
     }
 
     public Loja getLoja() {

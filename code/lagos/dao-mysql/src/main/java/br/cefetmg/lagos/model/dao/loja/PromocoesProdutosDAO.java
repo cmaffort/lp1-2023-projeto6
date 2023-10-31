@@ -1,13 +1,13 @@
-package br.cefetmg.lagos.model.dao.contrato;
+package br.cefetmg.lagos.model.dao.loja;
 
 import br.cefetmg.lagos.model.dao.AbstractDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.contrato.Contratante;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.loja.PromocoesProdutos;
 
 import java.util.List;
 
-public class ContratanteDAO extends AbstractDAO implements IContratanteDAO {
+public class PromocoesProdutosDAO extends AbstractDAO implements IPromocoesProdutosDAO {
     @Override
     protected DTO getDTO() {
         return null;
@@ -49,27 +49,32 @@ public class ContratanteDAO extends AbstractDAO implements IContratanteDAO {
     }
 
     @Override
-    public Long inserir(Contratante contratante) throws PersistenceException {
+    public Long inserir(PromocoesProdutos promocoesProdutos) throws PersistenceException {
         return null;
     }
 
     @Override
-    public boolean alterar(Contratante contratante) throws PersistenceException {
+    public boolean alterar(PromocoesProdutos promocoesProdutos) throws PersistenceException {
         return false;
     }
 
     @Override
-    public boolean remover(Contratante contratante) throws PersistenceException {
+    public boolean remover(PromocoesProdutos promocoesProdutos) throws PersistenceException {
         return false;
     }
 
     @Override
-    public List<Contratante> listar() throws PersistenceException {
+    public List<PromocoesProdutos> listar() throws PersistenceException {
         return null;
     }
 
     @Override
-    public Contratante cosultarPorId(Long id) throws PersistenceException {
+    public List<PromocoesProdutos> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public PromocoesProdutos consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

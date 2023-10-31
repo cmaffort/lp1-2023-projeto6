@@ -7,7 +7,7 @@ import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "usuario_loja")
-public abstract class UsuarioLoja extends Funcionario implements DTO {
+public class UsuarioLoja extends Funcionario implements DTO {
     private String username;
     private String senha;
 

@@ -3,11 +3,11 @@ package br.cefetmg.lagos.model.dao.loja;
 import br.cefetmg.lagos.model.dao.AbstractDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.base.DTO;
-import br.cefetmg.lagos.model.dto.loja.Estoquista;
+import br.cefetmg.lagos.model.dto.loja.PromocoesDeFidelidadeVendas;
 
 import java.util.List;
 
-public class EstoquistaDAO extends AbstractDAO implements IEstoquistaDAO {
+public class PromocoesDeFidelidadeVendasDAO extends AbstractDAO implements IPromocoesDeFidelidadeVendasDAO {
     @Override
     protected DTO getDTO() {
         return null;
@@ -49,27 +49,32 @@ public class EstoquistaDAO extends AbstractDAO implements IEstoquistaDAO {
     }
 
     @Override
-    public Long inserir(Estoquista etoquista) throws PersistenceException {
+    public Long inserir(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
         return null;
     }
 
     @Override
-    public boolean alterar(Estoquista estoquista) throws PersistenceException {
+    public boolean alterar(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
         return false;
     }
 
     @Override
-    public boolean remover(Estoquista estoquista) throws PersistenceException {
+    public boolean remover(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
         return false;
     }
 
     @Override
-    public List<Estoquista> listar() throws PersistenceException {
+    public List<PromocoesDeFidelidadeVendas> listar() throws PersistenceException {
         return null;
     }
 
     @Override
-    public Estoquista cosultarPorId(Long id) throws PersistenceException {
+    public List<PromocoesDeFidelidadeVendas> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public PromocoesDeFidelidadeVendas consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

@@ -10,17 +10,29 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "loja")
 public class Loja extends AbstractDTO implements DTO {
-    private Contratante contratante;
+    private Usuario usuario;
     private Endereco endereco;
 
     private long id;
 
-    public Contratante getContratante() {
-        return contratante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setContratante(Contratante contratante) {
-        this.contratante = contratante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @Column(nome = "endereco__fk")
+    @Getter
+    public long getEnderecoAsLong() {
+        return getRelatedDTOAsLong(getEndereco());
+    }
+
+    @Column(nome = "endereco__fk")
+    @Setter
+    public void setEnderecoWithLong(long id) {
+        setEndereco((Endereco) setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
     public Endereco getEndereco() {
@@ -29,6 +41,18 @@ public class Loja extends AbstractDTO implements DTO {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Column(nome = "usuario__fk")
+    @Getter
+    public long getUsuarioAsLong() {
+        return getRelatedDTOAsLong(getUsuario());
+    }
+
+    @Column(nome = "usuario__fk")
+    @Setter
+    public void setUsuarioWithLong(long id) {
+        setUsuario((Usuario) setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
     @Column(nome = "pk")

@@ -69,7 +69,22 @@ public class VendaDAO extends AbstractDAO implements IVendaDAO {
     }
 
     @Override
-    public Venda cosultarPorId(Long id) throws PersistenceException {
+    public List<Venda> listar(DTO... related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Double sum() throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Double sum(DTO related) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Venda consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

@@ -15,5 +15,5 @@ public interface IContratoDAO extends IDAO {
     
     List<Contrato> listar() throws PersistenceException;
 
-    Contrato cosultarPorId(Long id) throws PersistenceException;
+    Contrato consultarPorId(Long id) throws PersistenceException;
 }

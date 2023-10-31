@@ -25,7 +25,7 @@ public class DAOHelper {
                 .collect(Collectors.toList());
     }
 
-    public PersistenceException handleExeption(Exception e) throws PersistenceException {
+    public PersistenceException handleExeption(Exception e) {
         e.printStackTrace();
         return new PersistenceException(e.getMessage(), e);
     }
@@ -90,9 +90,20 @@ public class DAOHelper {
 
     public List<? extends DTO> listar(String sql, List<String> columnsResultSet) throws PersistenceException {
         try {
-            JDBCOperation listarOperation = new JDBCOperation(dtoDb, sql, Arrays.asList());
+            JDBCOperation listarOperation = new JDBCOperation(dtoDb, sql, List.of());
             listarOperation.executeQuery();
             return listarOperation.getInstances(columnsResultSet);
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    public DTO consultarPor(String sql, List<String> columnsResultSet)
+            throws PersistenceException {
+        try {
+            JDBCOperation consultarOperation = new JDBCOperation(dtoDb, sql, List.of());
+            consultarOperation.executeQuery();
+            return consultarOperation.getInstance(columnsResultSet);
         } catch (Exception e) {
             throw handleExeption(e);
         }

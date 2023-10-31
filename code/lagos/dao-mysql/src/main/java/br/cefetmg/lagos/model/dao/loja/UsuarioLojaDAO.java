@@ -73,7 +73,7 @@ public class UsuarioLojaDAO extends AbstractDAO implements IUsuarioLojaDAO {
     }
 
     @Override
-    public UsuarioLoja cosultarPorId(Long id) throws PersistenceException {
+    public UsuarioLoja consultarPorId(Long id) throws PersistenceException {
         return null;
     }
 }

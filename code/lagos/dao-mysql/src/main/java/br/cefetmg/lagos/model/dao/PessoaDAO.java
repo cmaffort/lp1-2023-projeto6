@@ -15,23 +15,8 @@ public class PessoaDAO extends AbstractDAO implements IPessoaDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone")
-        );
-    }
-
-    @Override
     public Long inserir(Pessoa pessoa) throws PersistenceException {
         return super.inserir(pessoa);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone"),
-                List.of("pk")
-        );
     }
 
     @Override
@@ -40,22 +25,8 @@ public class PessoaDAO extends AbstractDAO implements IPessoaDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
     public boolean remover(Pessoa pessoa) throws PersistenceException {
         return super.remover(pessoa);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
-        );
     }
 
     @Override
@@ -69,34 +40,7 @@ public class PessoaDAO extends AbstractDAO implements IPessoaDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("nome", "sobrenome", "nascimento", "email", "telefone", "pk")
-        );
-    }
-
-    @Override
-    public Pessoa cosultarPorId(Long id) throws PersistenceException {
-        return (Pessoa) super.cosultarPorId(id);
-    }
-
-    public static void main(String[] args) throws PersistenceException {
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("testesssss");
-        pessoa.setSobrenome("de paula");
-        pessoa.setEmail("pessao@f.con");
-        pessoa.setNascimento(Date.valueOf("2008-09-23"));
-        pessoa.setTelefone(2123455L);
-
-        for (Pessoa p : pessoaDAO.listar())
-            System.out.println(p);
+    public Pessoa consultarPorId(Long id) throws PersistenceException {
+        return (Pessoa) super.consultarPorId(id);
     }
 }

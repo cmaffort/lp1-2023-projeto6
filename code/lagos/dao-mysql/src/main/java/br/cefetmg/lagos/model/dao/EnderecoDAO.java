@@ -14,23 +14,8 @@ public class EnderecoDAO extends AbstractDAO implements IEnderecoDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return Arrays.asList(
-                Arrays.asList("cep", "numero")
-        );
-    }
-
-    @Override
     public Long inserir(Endereco endereco) throws PersistenceException {
         return super.inserir(endereco);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return Arrays.asList(
-                Arrays.asList("cep", "numero"),
-                List.of("pk")
-        );
     }
 
     @Override
@@ -39,27 +24,8 @@ public class EnderecoDAO extends AbstractDAO implements IEnderecoDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
     public boolean remover(Endereco endereco) throws PersistenceException {
         return super.remover(endereco);
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return Arrays.asList(
-                Arrays.asList("cep", "numero", "pk")
-        );
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return Arrays.asList("pk");
     }
 
     @Override
@@ -68,21 +34,7 @@ public class EnderecoDAO extends AbstractDAO implements IEnderecoDAO {
     }
 
     @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return Arrays.asList(
-                List.of("pk")
-        );
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return Arrays.asList(
-                Arrays.asList("cep", "numero", "pk")
-        );
-    }
-
-    @Override
-    public Endereco cosultarPorId(Long id) throws PersistenceException {
-        return (Endereco) super.cosultarPorId(id);
+    public Endereco consultarPorId(Long id) throws PersistenceException {
+        return (Endereco) super.consultarPorId(id);
     }
 }

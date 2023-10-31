@@ -51,6 +51,10 @@ public class StringSqlDaoHelper {
         return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(tables), StringSql.whereEq(columnsWhere));
     }
 
+    public static String selectFromWhere(List<String> columnsSelect, String table, List<String> columnsWhere) {
+        return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.where(columnsWhere));
+    }
+
     public static String selectFromWhere(List<String> columnsSelect, List<String> tables, List<String> columnsWhere) {
         return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(tables), StringSql.where(columnsWhere));
     }

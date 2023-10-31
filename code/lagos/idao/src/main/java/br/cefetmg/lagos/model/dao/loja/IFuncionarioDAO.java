@@ -16,5 +16,5 @@ public interface IFuncionarioDAO extends IDAO {
     
     List<Funcionario> listar() throws PersistenceException;
 
-    Funcionario cosultarPorId(Long id) throws PersistenceException;
+    Funcionario consultarPorId(Long id) throws PersistenceException;
 }

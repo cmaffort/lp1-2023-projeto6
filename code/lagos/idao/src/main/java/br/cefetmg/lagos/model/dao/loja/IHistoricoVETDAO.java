@@ -16,5 +16,5 @@ public interface IHistoricoVETDAO extends IDAO {
     
     List<HistoricoVET> listar() throws PersistenceException;
 
-    HistoricoVET cosultarPorId(Long id) throws PersistenceException;
+    HistoricoVET consultarPorId(Long id) throws PersistenceException;
 }
