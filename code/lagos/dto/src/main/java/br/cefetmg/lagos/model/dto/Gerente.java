@@ -1,6 +1,8 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.tipos.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
+import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
+import br.cefetmg.lagos.model.dto.base.DTO;
 
 public class Gerente extends UsuarioLoja implements DTO {
     public Gerente() {

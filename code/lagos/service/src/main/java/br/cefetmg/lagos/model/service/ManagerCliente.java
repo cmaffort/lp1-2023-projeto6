@@ -1,54 +1,68 @@
 package br.cefetmg.lagos.model.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.cefetmg.lagos.model.dto.Cliente;
-import br.cefetmg.lagos.model.dao.ClienteDAO;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.loja.Cliente;
+import br.cefetmg.lagos.model.dao.loja.ClienteDAO;
 import br.cefetmg.lagos.model.service.exception.DadoException;
-import java.util.List;
 
 public class ManagerCliente{
+    private ClienteDAO clienteDAO;
 
-    private Cliente cliente;
-
-    public boolean cadastrar(Cliente cliente) throws DadoException{
+    public Long cadastrar(Cliente cliente) throws DadoException, PersistenceException {
        if(cliente.getCadastro() == null){
         throw new DadoException("Obrigatório informar a data de cadastro.");
        }
        
-       if(cliente.getId() == null){
-        throw new DadoException("Obrigatorio informar o id do cliente.");
-       }
-       
        if(cliente.getLoja() == null){
            throw new DadoException("Obrigatorio informar a loja em que o cliente esta sendo cadastrado.");
        }
        
-       return ClienteDAO.inserir(cliente);
+       return clienteDAO.inserir(cliente);
     }
     
-    public boolean alterar(Cliente cliente) throws DadoException{
+    public boolean alterar(Cliente cliente) throws DadoException, PersistenceException {
         if(cliente.getCadastro() == null){
         throw new DadoException("Obrigatório informar a data de cadastro.");
        }
-       
-       if(cliente.getId() == null){
-        throw new DadoException("Obrigatorio informar o id do cliente.");
-       }
-       
+
        if(cliente.getLoja() == null){
            throw new DadoException("Obrigatorio informar a loja em que o cliente esta sendo cadastrado.");
        }
        
-       return ClienteDAO.alterar(cliente);
+       return clienteDAO.alterar(cliente);
     }
     
-    public List<Cliente> pesquisar(){
-        return ClienteDAO.listar(cliente);
+    public List<Cliente> pesquisar() throws PersistenceException {
+        return clienteDAO.listar();
     }
     
-    public Cliente pesquisarPorId(Long id){
-        return ClienteDAO.listarPorId(id);
+    public Cliente consultarPorId(Long id) throws PersistenceException {
+        return clienteDAO.cosultarPorId(id);
+    }
+
+    public List<Cliente> consultarPorLoja(Long idLoja){
+        return null;
+
+        // Cliente cliente;
+        // Cliente cliente2;
+
+        // List<Cliente> clientes = new ArrayList<>();
+
+        // cliente.setNome("Enéas Carneiro");
+        // cliente.setTelefone(21999999);
+        // cliente.setEmail("enéasmitinho@gmail.com");
+
+        // cliente2.setNome("xxxx  xxxxxxxxx");
+        // cliente2.setTelefone(2196999);
+        // cliente2.setEmail("XXX@gmail.com");
+
+        // clientes.add(cliente);
+        // clientes.add(cliente2);
+
+        // return clientes;
     }
 }

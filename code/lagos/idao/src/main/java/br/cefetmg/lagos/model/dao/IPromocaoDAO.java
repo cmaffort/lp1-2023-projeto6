@@ -2,7 +2,7 @@ package br.cefetmg.lagos.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import br.cefetmg.lagos.model.dto.Promocao;
+import br.cefetmg.lagos.model.dto.loja.Promocao;
 
 public interface IPromocaoDAO {
     

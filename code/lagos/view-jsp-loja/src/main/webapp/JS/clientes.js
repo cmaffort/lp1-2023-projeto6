@@ -1,62 +1,71 @@
-let pesquisaClienteEl = document.querySelector("#botao_pesquisa");
 let inputPesquisaCliente = document.querySelector("#input_cliente");
 let cadastroClienteEL = document.querySelector("#botao_cadastro");
 
+document.addEventListener('DOMContentLoaded', () =>{
+    $.ajax({
+        type: 'POST',
+        url: '/src/main/java/com/br/cefetmg/lagos/ListarClientes.java',
+        success: function (result) {
+            let tabelaCliente = document.querySelector("#tabela_clientes");
+            tabelaCliente.style.display = 'block';
 
-
-pesquisaClienteEl.addEventListener('click', () => {
-
-    if(inputPesquisaCliente.value === ""){
-        if(pesquisaClienteEl.nextElementSibling === null) {
-            let textoErro = document.createElement("p");
-
-            textoErro.textContent = "Insira algum dado para pesquisar um cliente";
-            textoErro.setAttribute("style", "color: red; font-size: 15px; display:inline; margin-left:1%;")
-
-            pesquisaClienteEl.parentNode.insertBefore(textoErro, pesquisaClienteEl.nextSibling);
+            let body = ("#tabela_clientes").find("tbody");
+            for (let i = 0; i < result.length; i++) {
+                let cliente = result[i];
+                body.append("<div><tr><td>" + cliente.nome + "</td><td>" + cliente.telefone + "</td><td>" + cliente.email + "</td></tr></div>");
+            }
         }
-    }
-    else{
-        if(pesquisaClienteEl.nextElementSibling !== null){
-            let textoErrorEL = pesquisaClienteEl.nextElementSibling;
-            textoErrorEL.remove();
-        }
-         let dadoParaTratar = {
-            dado: inputPesquisaCliente.value
-        };
-
-        let objetoParaTratar = JSON.stringify(dadoParaTratar);
-
-        //enviar para o servlet
-        fetch('/src/main/java/com/br/cefetmg/lagos/ListarClientes.java', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: objetoParaTratar
-        }).then((data) => {
-            let tbody = document.querySelector("tbody");
-
-            data.formData(cliente =>{
-                let row = tbody.insertRow(-1);
-                row.insertCell(0).textContent = `${cliente.nome}`+`${cliente.sobrenome}`;
-                row.insertCell(0).textContent = `${cliente.email}`;
-                row.insertCell(0).textContent = `${cliente.telefone}`;
-                row.insertCell(0).textContent = `<button id="botao_editar"><img src="${pageContext.request.contextPath}/imagens/edit.png"></button>`;
-            })
-        })
-
-
-    }
+    })
 })
+
+
+let tabela = document.querySelector('table');
+let linhasNl = tabela.querySelectorAll('tbody tr');
+let linhas = Array.from(linhasNl);
+inputPesquisaCliente.addEventListener('input', () => {
+
+    linhas.forEach(function (linha) {
+        let valorDigitado = inputPesquisaCliente.value.toLowerCase();
+
+        let nome = linha.querySelector('td:first-child').textContent.toLowerCase();
+
+        if (nome.includes(valorDigitado))
+            linha.style.display = '';
+        else
+            linha.style.display = 'none';
+    })
+});
+
+let editarEl = document.querySelector("#editar_cliente");
+editarEl.style.display = 'none';
 
 cadastroClienteEL.addEventListener('click', () => {
-    window.alert('Cadastro');
-})
+    editarEl.style.display = '';
+});
 
+let fecharEl = document.querySelector("#fechar");
+fecharEl.addEventListener('click', () => {
+    editarEl.style.display = 'none';
+});
 
+let concluirCadastroEl = document.querySelector("#concluir");
 
+concluirCadastroEl.addEventListener('click', () => {
+    let inputCadastroEl = document.querySelectorAll('.input_cadastro');
 
+    let dadosCadastro = {
+        nome: inputCadastroEl[0].value,
+        sobrenome: inputCadastroEl[1].value,
+        telefone: inputCadastroEl[2].value,
+        email: inputCadastroEl[3].value
+    };
 
+    let dadosCadastroJson = JSON.stringify(dadosCadastro);
 
+    $.ajax({
+        data: dadosCadastroJson,
+        method: 'POST',
+        url: '.../src/main/java/com/br/cefetmg/lagos/CadastrarCliente.java',
+        contentType: 'application/json',
+    })
+});
