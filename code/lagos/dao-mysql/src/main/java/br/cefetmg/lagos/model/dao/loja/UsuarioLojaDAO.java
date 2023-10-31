@@ -67,10 +67,6 @@ public class UsuarioLojaDAO extends AbstractDAO implements IUsuarioLojaDAO {
     public List<UsuarioLoja> listar() throws PersistenceException {
         return null;
     }
-    @Override
-    public List<UsuarioLoja> listar(DTO dto) throws PersistenceException {
-        return null;
-    }
 
     @Override
     public List<UsuarioLoja> listar(DTO... related) throws PersistenceException {
