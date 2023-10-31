@@ -3,6 +3,7 @@ package br.cefetmg.lagos.model.dao.loja;
 import br.cefetmg.lagos.model.dao.IDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
+import br.cefetmg.lagos.model.dto.base.DTO;
 
 import java.util.List;
 
@@ -12,8 +13,10 @@ public interface IUsuarioLojaDAO extends IDAO {
     boolean alterar(UsuarioLoja usuarioLoja) throws PersistenceException;
     
     boolean remover(UsuarioLoja usuarioLoja) throws PersistenceException;
-    
+
     List<UsuarioLoja> listar() throws PersistenceException;
 
-    UsuarioLoja consultarPorId(Long id) throws PersistenceException;
+    List<UsuarioLoja> listar(DTO... dto) throws PersistenceException;
+
+    UsuarioLoja cosultarPorId(Long id) throws PersistenceException;
 }
