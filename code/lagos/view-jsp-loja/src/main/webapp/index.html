@@ -1,23 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-    <title>Login</title>
-     <link rel="stylesheet" type="text/css" href="css/css_login.css" />
+    <title>Redirecionando</title>
+    <script>
+        function redireciona(){
+            window.location = "http://localhost:8080/view-jsp-loja/JSP/Index.jsp";
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <h1>Fazer Login</h1>
-        <form action="servlet_login" method="post">
-            <div class="form-field">
-                <label for="usuario" style="background-color: #e2e3d1; color: black;" >Usuario</label>
-                <input type="text" name="usuario" id="usuario" required><br>
-            </div>
-            <div class="form-field" >
-                <label for="senha" style="background-color: #e2e3d1; color: black;">Senha</label>
-                <input type="text" name="senha" id="senha" required><br>
-            </div>
-            <input type="submit" value="Entrar">
-        </form>
-    </div>
+<body onLoad="redireciona();">
+    <!-- Conteúdo da página HTML (será redirecionado via JavaScript) -->
 </body>
 </html>

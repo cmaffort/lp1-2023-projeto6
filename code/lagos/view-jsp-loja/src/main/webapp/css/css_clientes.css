@@ -1,0 +1,84 @@
+body{
+    background-color: #f2eed6;
+    margin: 0;
+}
+
+body h1{
+    color: rgb(128, 128, 128);
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Chivo', sans-serif;
+}
+
+#pesquisa_cadastro button, #pesquisa_cadastro img{
+    background-color: #f2eed6;
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 10px;
+    display: inline;
+    padding: 2px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 19px;
+}
+
+#pesquisa_cadastro input{
+    background-color: #f2eed6;
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 10px;
+    display: inline;
+    padding: 2px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 20px;
+    margin-left: 5%;
+}
+
+#pesquisa_cadastro{
+    margin-left: 1%;
+}
+
+#listar_cliente{
+    margin-left: 1%;
+    margin-top: 1%;
+    display: none;
+}
+
+#listar_cliente td{
+    padding: 0 10px 0 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+
+#editar_cliente{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f2eed6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(128, 128, 128);
+    border-radius: 9px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#editar_cliente input, #editar_cliente label, #editar_cliente button{
+    font-family: 'Chivo', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+#editar_cliente input, #editar_cliente button{
+    background-color: rgb(128, 128, 128);
+    border-radius: 9px;
+    border: 1px solid rgb(128, 128, 128);
+}
+
+#editar_cliente button{
+    border: 1px solid black;
+}
