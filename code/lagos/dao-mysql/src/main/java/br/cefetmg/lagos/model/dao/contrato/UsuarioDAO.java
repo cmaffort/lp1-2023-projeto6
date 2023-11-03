@@ -1,7 +1,8 @@
 package br.cefetmg.lagos.model.dao.contrato;
 
 import br.cefetmg.lagos.model.dao.*;
-import br.cefetmg.lagos.model.dao.util.InheritDAO;
+import br.cefetmg.lagos.model.dao.base.IDAO;
+import br.cefetmg.lagos.model.dao.base.InheritDAO;
 import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 

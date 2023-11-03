@@ -3,39 +3,38 @@ package br.cefetmg.lagos.model.dto.loja;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
-import br.cefetmg.lagos.model.dto.contrato.Loja;
 
 @Table(nome = "item")
 public class Item extends AbstractDTO<Item> implements DTO<Item> {
-    private double preco;
-    private int quantidade;
+    private Double preco;
+    private Integer quantidade;
 
     private Produto produto;
     private HistoricoVET historicoVET;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Getter
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Setter
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
-    @Column(nome = "quantidade")
+    @Column(nome = "quantidade", tipo = Integer.class)
     @Getter
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    @Column(nome = "quantidade")
+    @Column(nome = "quantidade", tipo = Integer.class)
     @Setter
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -52,15 +51,15 @@ public class Item extends AbstractDTO<Item> implements DTO<Item> {
         this.produto = produto;
     }
 
-    @Column(nome = "produto__fk")
+    @Column(nome = "produto__fk", tipo = Long.class)
     @Getter
-    public long getProdutoAsLong() {
+    public Long getProdutoAsLong() {
         return getRelatedAsLong(getProduto());
     }
 
-    @Column(nome = "produto__fk")
+    @Column(nome = "produto__fk", tipo = Long.class)
     @Setter
-    public void setProdutoWithLong(long id) {
+    public void setProdutoWithLong(Long id) {
         setProduto(setRelatedWithLong(getProduto(), id, new Produto()));
     }
 
@@ -78,27 +77,27 @@ public class Item extends AbstractDTO<Item> implements DTO<Item> {
         this.historicoVET = historicoVET;
     }
 
-    @Column(nome = "historico_vet__fk")
+    @Column(nome = "historico_vet__fk", tipo = Long.class)
     @Getter
-    public long getHistoricoVETAsLong() {
+    public Long getHistoricoVETAsLong() {
         return getRelatedAsLong(getHistoricoVET());
     }
 
-    @Column(nome = "historico_vet__fk")
+    @Column(nome = "historico_vet__fk", tipo = Long.class)
     @Setter
-    public void setHistoricoVETWithLong(long id) {
+    public void setHistoricoVETWithLong(Long id) {
         setHistoricoVET(setRelatedWithLong(getHistoricoVET(), id, new HistoricoVET()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

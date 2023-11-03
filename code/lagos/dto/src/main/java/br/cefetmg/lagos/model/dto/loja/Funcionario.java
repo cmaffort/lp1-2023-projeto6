@@ -16,8 +16,8 @@ import java.util.List;
 
 @Table(nome = "funcionario")
 public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcionario>, PessoaAdapter<Funcionario> {
-    private double salario;
-    private boolean ativo;
+    private Double salario;
+    private Boolean ativo;
     private TipoFuncionario tipo;
 
     private Loja loja;
@@ -30,27 +30,27 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
         return PermissoesFuncionario.getPermissoesForTipo(tipo);
     }
 
-    @Column(nome = "salario")
+    @Column(nome = "salario", tipo = Double.class)
     @Getter
-    public double getSalario() {
+    public Double getSalario() {
         return salario;
     }
 
-    @Column(nome = "salario")
+    @Column(nome = "salario", tipo = Double.class)
     @Setter
-    public void setSalario(double salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
 
-    @Column(nome = "ativo")
+    @Column(nome = "ativo", tipo = Boolean.class)
     @Getter
-    public boolean isAtivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
-    @Column(nome = "ativo")
+    @Column(nome = "ativo", tipo = Boolean.class)
     @Setter
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -62,15 +62,15 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
         this.tipo = tipo;
     }
 
-    @Column(nome = "tipo_funcionario")
+    @Column(nome = "tipo_funcionario", tipo = Integer.class)
     @Getter
-    public int getTipoAsInt() {
+    public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
-    @Column(nome = "tipo_funcionario")
+    @Column(nome = "tipo_funcionario", tipo = Integer.class)
     @Setter
-    public void setTipoWithInt(int ord) {
+    public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoFuncionario.class));
     }
 
@@ -86,15 +86,15 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
@@ -110,15 +110,15 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
         this.pessoa = pessoa;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getPessoa());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setPessoa(setRelatedWithLong(pessoa, id, new Pessoa()));
     }
 }

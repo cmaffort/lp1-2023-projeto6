@@ -6,44 +6,44 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "endereco")
 public class Endereco extends AbstractDTO<Endereco> implements DTO<Endereco> {
-    private int cep;
-    private int numero;
+    private Integer cep;
+    private Integer numero;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "cep")
+    @Column(nome = "cep", tipo = Integer.class)
     @Getter
-    public int getCep() {
+    public Integer getCep() {
         return cep;
     }
 
-    @Column(nome = "cep")
+    @Column(nome = "cep", tipo = Integer.class)
     @Setter
-    public void setCep(int cep) {
+    public void setCep(Integer cep) {
         this.cep = cep;
     }
 
-    @Column(nome = "numero")
+    @Column(nome = "numero", tipo = Integer.class)
     @Getter
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    @Column(nome = "numero")
+    @Column(nome = "numero", tipo = Integer.class)
     @Setter
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

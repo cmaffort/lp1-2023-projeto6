@@ -1,8 +1,7 @@
-package br.cefetmg.lagos.model.dao.util;
+package br.cefetmg.lagos.model.dao.base;
 
-import br.cefetmg.lagos.model.dao.AbstractDAO;
-import br.cefetmg.lagos.model.dao.IDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dao.util.DAOHelper;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.Manager;
 

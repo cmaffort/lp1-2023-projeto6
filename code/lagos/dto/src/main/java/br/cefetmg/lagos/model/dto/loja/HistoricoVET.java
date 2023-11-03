@@ -7,8 +7,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.enums.IntEnum;
 import br.cefetmg.lagos.model.dto.enums.TipoHistoricoVET;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Table(nome = "historico_vet")
 public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<HistoricoVET> {
@@ -17,7 +16,7 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
 
     private Loja loja;
 
-    private long id;
+    private Long id;
 
     public TipoHistoricoVET getTipo() {
         return tipo;
@@ -27,25 +26,25 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
         this.tipo = tipo;
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Getter
-    public int getTipoAsInt() {
+    public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Setter
-    public void setTipoWithInt(int ord) {
+    public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoHistoricoVET.class));
     }
 
-    @Column(nome = "data")
+    @Column(nome = "data", tipo = Date.class)
     @Getter
     public Date getData() {
         return data;
     }
 
-    @Column(nome = "data")
+    @Column(nome = "data", tipo = Date.class)
     @Setter
     public void setData(Date data) {
         this.data = data;
@@ -63,27 +62,27 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -7,35 +7,35 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "caixa")
 public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
-    private boolean aberto;
-    private double dinheiroEmCaixa;
+    private Boolean aberto;
+    private Double dinheiroEmCaixa;
 
     private UsuarioLoja usuarioLoja;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "aberto")
+    @Column(nome = "aberto", tipo = Boolean.class)
     @Getter
-    public boolean isAberto() {
+    public Boolean isAberto() {
         return aberto;
     }
 
-    @Column(nome = "aberto")
+    @Column(nome = "aberto", tipo = Boolean.class)
     @Setter
-    public void setAberto(boolean aberto) {
+    public void setAberto(Boolean aberto) {
         this.aberto = aberto;
     }
 
-    @Column(nome = "dinheiro_em_caixa")
+    @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
     @Getter
-    public double getDinheiroEmCaixa() {
+    public Double getDinheiroEmCaixa() {
         return dinheiroEmCaixa;
     }
 
-    @Column(nome = "dinheiro_em_caixa")
+    @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
     @Setter
-    public void setDinheiroEmCaixa(double dinheiroEmCaixa) {
+    public void setDinheiroEmCaixa(Double dinheiroEmCaixa) {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
@@ -51,15 +51,15 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
         this.usuarioLoja = usuarioLoja;
     }
 
-    @Column(nome = "usuario_loja__fk")
+    @Column(nome = "usuario_loja__fk", tipo = Long.class)
     @Getter
-    public long getUsuarioLojaAsLong() {
+    public Long getUsuarioLojaAsLong() {
         return getRelatedAsLong(getUsuarioLoja());
     }
 
-    @Column(nome = "usuario_loja__fk")
+    @Column(nome = "usuario_loja__fk", tipo = Long.class)
     @Setter
-    public void setUsuarioLojaWithLong(long id) {
+    public void setUsuarioLojaWithLong(Long id) {
         setUsuarioLoja(setRelatedWithLong(getUsuarioLoja(), id, new UsuarioLoja()));
     }
 
@@ -75,27 +75,27 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -6,8 +6,8 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "venda")
 public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVETAdapter<Venda> {
-    private float desconto;
-    private int numeroDeParcelas;
+    private Float desconto;
+    private Integer numeroDeParcelas;
 
     private Caixa caixa;
     private Funcionario funcionario;
@@ -15,27 +15,27 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
 
     private HistoricoVET historicoVET;
 
-    @Column(nome = "desconto")
+    @Column(nome = "desconto", tipo = Float.class)
     @Getter
-    public float getDesconto() {
+    public Float getDesconto() {
         return desconto;
     }
 
-    @Column(nome = "desconto")
+    @Column(nome = "desconto", tipo = Float.class)
     @Setter
-    public void setDesconto(float desconto) {
+    public void setDesconto(Float desconto) {
         this.desconto = desconto;
     }
 
-    @Column(nome = "numero_de_parcelas")
+    @Column(nome = "numero_de_parcelas", tipo = Integer.class)
     @Getter
-    public int getNumeroDeParcelas() {
+    public Integer getNumeroDeParcelas() {
         return numeroDeParcelas;
     }
 
-    @Column(nome = "numero_de_parcelas")
+    @Column(nome = "numero_de_parcelas", tipo = Integer.class)
     @Setter
-    public void setNumeroDeParcelas(int numeroDeParcelas) {
+    public void setNumeroDeParcelas(Integer numeroDeParcelas) {
         this.numeroDeParcelas = numeroDeParcelas;
     }
 
@@ -51,15 +51,15 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
         this.caixa = caixa;
     }
 
-    @Column(nome = "caixa__fk")
+    @Column(nome = "caixa__fk", tipo = Long.class)
     @Getter
-    public long getCaixaAsLong() {
+    public Long getCaixaAsLong() {
         return getRelatedAsLong(getCaixa());
     }
 
-    @Column(nome = "caixa__fk")
+    @Column(nome = "caixa__fk", tipo = Long.class)
     @Setter
-    public void setCaixaWithLong(long id) {
+    public void setCaixaWithLong(Long id) {
         setCaixa(setRelatedWithLong(getCaixa(), id, new Caixa()));
     }
 
@@ -75,15 +75,15 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
         this.funcionario = funcionario;
     }
 
-    @Column(nome = "funcionario__fk")
+    @Column(nome = "funcionario__fk", tipo = Long.class)
     @Getter
-    public long getFuncionarioAsLong() {
+    public Long getFuncionarioAsLong() {
         return getRelatedAsLong(getFuncionario());
     }
 
-    @Column(nome = "funcionario__fk")
+    @Column(nome = "funcionario__fk", tipo = Long.class)
     @Setter
-    public void setFuncionarioWith(long id) {
+    public void setFuncionarioWith(Long id) {
         setFuncionario(setRelatedWithLong(getFuncionario(), id, new Funcionario()));
     }
 
@@ -99,15 +99,15 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
         this.cliente = cliente;
     }
 
-    @Column(nome = "cliente__fk")
+    @Column(nome = "cliente__fk", tipo = Long.class)
     @Getter
-    public long getClienteAsLong() {
+    public Long getClienteAsLong() {
         return getRelatedAsLong(getCliente());
     }
 
-    @Column(nome = "cliente__fk")
+    @Column(nome = "cliente__fk", tipo = Long.class)
     @Setter
-    public void setClienteWith(long id) {
+    public void setClienteWith(Long id) {
         setCliente(setRelatedWithLong(getCliente(), id, new Cliente()));
     }
 
@@ -124,15 +124,15 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
         this.historicoVET = historicoVET;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getHistoricoVET());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setHistoricoVET(setRelatedWithLong(getHistoricoVET(), id, new HistoricoVET()));
     }
 }

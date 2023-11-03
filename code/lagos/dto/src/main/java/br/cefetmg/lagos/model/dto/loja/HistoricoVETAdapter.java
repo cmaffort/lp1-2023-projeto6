@@ -4,7 +4,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.enums.TipoHistoricoVET;
 
-import java.util.Date;
+import java.sql.Date;
 
 public interface HistoricoVETAdapter<DataTransferObject extends HistoricoVETAdapter<DataTransferObject>> extends DTO<DataTransferObject> {
     HistoricoVET getHistoricoVET();
@@ -19,11 +19,11 @@ public interface HistoricoVETAdapter<DataTransferObject extends HistoricoVETAdap
         getHistoricoVET().setTipo(tipo);
     }
 
-    default int getTipoAsInt() {
+    default Integer getTipoAsInt() {
         return getHistoricoVET().getTipoAsInt();
     }
 
-    default void setTipoWithInt(int ord) {
+    default void setTipoWithInt(Integer ord) {
         getHistoricoVET().setTipoWithInt(ord);
     }
 
@@ -43,11 +43,11 @@ public interface HistoricoVETAdapter<DataTransferObject extends HistoricoVETAdap
         getHistoricoVET().setLoja(loja);
     }
 
-    default long getId() {
+    default Long getId() {
         return getHistoricoVET().getId();
     }
 
-    default void setId(long id) {
+    default void setId(Long id) {
         getHistoricoVET().setId(id);
     }
 }

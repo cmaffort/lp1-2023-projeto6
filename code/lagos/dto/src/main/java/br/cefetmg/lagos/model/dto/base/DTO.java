@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface DTO<DataTransferObject extends DTO<DataTransferObject>> {
-    long getId();
+    Long getId();
 
-    void setId(long id);
+    void setId(Long id);
 
     Manager<DataTransferObject> getManeger();
 

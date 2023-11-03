@@ -40,37 +40,37 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
         this.tipo = tipo;
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Getter
-    public int getTipoAsInt() {
+    public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Setter
-    public void setTipoWithInt(int ord) {
+    public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoUsuario.class));
     }
 
-    @Column(nome = "username")
+    @Column(nome = "username", tipo = String.class)
     @Getter
     public String getUsername() {
      return username;
     }
 
-    @Column(nome = "username")
+    @Column(nome = "username", tipo = String.class)
     @Setter
     public void setUsername(String username) {
      this.username = username;
     }
 
-    @Column(nome = "senha")
+    @Column(nome = "senha", tipo = String.class)
     @Getter
     public String getSenha() {
      return senha;
     }
 
-    @Column(nome = "senha")
+    @Column(nome = "senha", tipo = String.class)
     @Setter
     public void setSenha(String senha) {
      this.senha = senha;
@@ -88,15 +88,15 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
         this.pessoa = pessoa;
      }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getPessoa());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setPessoa(setRelatedWithLong(getPessoa(), id, new Pessoa()));
     }
 }

@@ -1,5 +1,5 @@
 package br.cefetmg.lagos.model.dto.enums;
 
-public enum TipoHistoricoVET implements IntEnum<TipoHistoricoVET> {
+public enum TipoHistoricoVET {
     VENDA, ESTORNO, TROCA;
 }

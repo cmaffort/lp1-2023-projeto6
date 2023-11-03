@@ -8,48 +8,48 @@ import java.sql.Date;
 
 @Table(nome = "contrato_assinado")
 public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements DTO<ContratoAssinado> {
-    private boolean vigente;
+    private Boolean vigente;
     private Date dataDeContratacao;
-    private boolean cancelado;
+    private Boolean cancelado;
 
     private Usuario usuario;
     private Contrato contrato;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "vigente")
+    @Column(nome = "vigente", tipo = Boolean.class)
     @Getter
-    public boolean isVigente() {
+    public Boolean isVigente() {
         return vigente;
     }
 
-    @Column(nome = "vigente")
+    @Column(nome = "vigente", tipo = Boolean.class)
     @Setter
-    public void setVigente(boolean vigente) {
+    public void setVigente(Boolean vigente) {
         this.vigente = vigente;
     }
 
-    @Column(nome = "data_de_contratacao")
+    @Column(nome = "data_de_contratacao", tipo = Date.class)
     @Getter
     public Date getDataDeContratacao() {
         return dataDeContratacao;
     }
 
-    @Column(nome = "data_de_contratacao")
+    @Column(nome = "data_de_contratacao", tipo = Date.class)
     @Setter
     public void setDataDeContratacao(Date dataDeContratacao) {
         this.dataDeContratacao = dataDeContratacao;
     }
 
-    @Column(nome = "cancelado")
+    @Column(nome = "cancelado", tipo = Boolean.class)
     @Getter
-    public boolean isCancelado() {
+    public Boolean isCancelado() {
         return cancelado;
     }
 
-    @Column(nome = "cancelado")
+    @Column(nome = "cancelado", tipo = Boolean.class)
     @Setter
-    public void setCancelado(boolean cancelado) {
+    public void setCancelado(Boolean cancelado) {
         this.cancelado = cancelado;
     }
 
@@ -65,15 +65,15 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
         this.usuario = usuario;
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Getter
-    public long getUsuarioAsLong() {
+    public Long getUsuarioAsLong() {
         return getRelatedAsLong(getUsuario());
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Setter
-    public void setUsuarioWithLong(long id) {
+    public void setUsuarioWithLong(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
@@ -89,27 +89,27 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
         this.contrato = contrato;
     }
 
-    @Column(nome = "contrato__fk")
+    @Column(nome = "contrato__fk", tipo = Long.class)
     @Getter
-    public long getContratoAsLong() {
+    public Long getContratoAsLong() {
         return getRelatedAsLong(getContrato());
     }
 
-    @Column(nome = "contrato__fk")
+    @Column(nome = "contrato__fk", tipo = Long.class)
     @Setter
-    public void setContratoWithLong(long id) {
+    public void setContratoWithLong(Long id) {
         setContrato(setRelatedWithLong(getContrato(), id, new Contrato()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

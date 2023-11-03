@@ -10,19 +10,19 @@ public interface FuncionarioAdapter<DataTransferObject extends FuncionarioAdapte
 
     void setFuncionario(Funcionario funcionario);
 
-    default double getSalario() {
+    default Double getSalario() {
         return getFuncionario().getSalario();
     }
 
-    default void setSalario(double salario) {
+    default void setSalario(Double salario) {
         getFuncionario().setSalario(salario);
     }
 
-    default boolean isAtivo() {
+    default Boolean isAtivo() {
         return getFuncionario().isAtivo();
     }
 
-    default void setAtivo(boolean ativo) {
+    default void setAtivo(Boolean ativo) {
         getFuncionario().setAtivo(ativo);
     }
 
@@ -34,11 +34,11 @@ public interface FuncionarioAdapter<DataTransferObject extends FuncionarioAdapte
         getFuncionario().setTipo(tipo);
     }
 
-    default int getTipoAsInt() {
+    default Integer getTipoAsInt() {
         return getFuncionario().getTipoAsInt();
     }
 
-    default void setTipoWithInt(int ord) {
+    default void setTipoWithInt(Integer ord) {
         getFuncionario().setTipoWithInt(ord);
     }
 

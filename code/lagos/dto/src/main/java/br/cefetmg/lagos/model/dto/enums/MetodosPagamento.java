@@ -1,5 +1,10 @@
 package br.cefetmg.lagos.model.dto.enums;
 
-public enum MetodosPagamento implements IntEnum<MetodosPagamento> {
+import java.sql.SQLData;
+import java.sql.SQLException;
+import java.sql.SQLInput;
+import java.sql.SQLOutput;
+
+public enum MetodosPagamento {
     DINHEIRO, PIX, DEBITO, CREDITO;
 }

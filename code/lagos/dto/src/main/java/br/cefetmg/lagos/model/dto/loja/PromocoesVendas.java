@@ -25,15 +25,15 @@ public class PromocoesVendas extends AbstractDTO<PromocoesVendas> implements DTO
         this.promocao = promocao;
     }
 
-    @Column(nome = "promocao__fk")
+    @Column(nome = "promocao__fk", tipo = Long.class)
     @Getter
-    public long getPromocaoAsLong() {
+    public Long getPromocaoAsLong() {
         return getRelatedAsLong(getPromocao());
     }
 
-    @Column(nome = "promocao__fk")
+    @Column(nome = "promocao__fk", tipo = Long.class)
     @Setter
-    public void setPromocaoWithLong(long id) {
+    public void setPromocaoWithLong(Long id) {
         setPromocao(setRelatedWithLong(getPromocao(), id, new Promocao()));
     }
 
@@ -49,27 +49,27 @@ public class PromocoesVendas extends AbstractDTO<PromocoesVendas> implements DTO
         this.venda = venda;
     }
 
-    @Column(nome = "venda__fk")
+    @Column(nome = "venda__fk", tipo = Long.class)
     @Getter
-    public long getVendaAsLong() {
+    public Long getVendaAsLong() {
         return getRelatedAsLong(getVenda());
     }
 
-    @Column(nome = "venda__fk")
+    @Column(nome = "venda__fk", tipo = Long.class)
     @Setter
-    public void setVendaWithLong(long id) {
+    public void setVendaWithLong(Long id) {
         setVenda(setRelatedWithLong(getVenda(), id, new Venda()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

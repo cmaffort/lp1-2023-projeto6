@@ -1,31 +1,31 @@
-package br.cefetmg.lagos.model.dto;
+package br.cefetmg.lagos.model.dto.contrato;
 
+import br.cefetmg.lagos.model.dto.Endereco;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
-import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
 import br.cefetmg.lagos.model.dto.enums.IntEnum;
 
 @Table(nome = "cartao")
 public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
-    private long numero;
+    private Long numero;
     private Bandeira bandeira;
 
     private Endereco endereco;
     private Usuario usuario;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "numero")
+    @Column(nome = "numero", tipo = Long.class)
     @Getter
-    public long getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    @Column(nome = "numero")
+    @Column(nome = "numero", tipo = Long.class)
     @Setter
-    public void setNumero(long numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 
@@ -37,15 +37,15 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
         this.bandeira = bandeira;
     }
 
-    @Column(nome = "bandeira")
+    @Column(nome = "bandeira", tipo = Integer.class)
     @Getter
-    public int getBandeiraAsInt() {
+    public Integer getBandeiraAsInt() {
         return IntEnum.getIntForEnum(getBandeira());
     }
 
-    @Column(nome = "bandeira")
+    @Column(nome = "bandeira", tipo = Integer.class)
     @Setter
-    public void setBandeiraWithInt(int ord) {
+    public void setBandeiraWithInt(Integer ord) {
         setBandeira(IntEnum.getEnumForInt(ord, Bandeira.class));
     }
 
@@ -61,15 +61,15 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
         this.endereco = endereco;
     }
 
-    @Column(nome = "endereco__fk")
+    @Column(nome = "endereco__fk", tipo = Long.class)
     @Getter
-    public long getEnderecoAsLong() {
+    public Long getEnderecoAsLong() {
         return getRelatedAsLong(getEndereco());
     }
 
-    @Column(nome = "endereco__fk")
+    @Column(nome = "endereco__fk", tipo = Long.class)
     @Setter
-    public void setEnderecoWithLong(long id) {
+    public void setEnderecoWithLong(Long id) {
         setEndereco(setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
@@ -85,27 +85,27 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
         this.usuario = usuario;
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Getter
-    public long getUsuarioAsLong() {
+    public Long getUsuarioAsLong() {
         return getRelatedAsLong(getUsuario());
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Setter
-    public void setUsuarioWithLong(long id) {
+    public void setUsuarioWithLong(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

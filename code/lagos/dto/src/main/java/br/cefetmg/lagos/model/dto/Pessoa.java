@@ -15,84 +15,79 @@ public class Pessoa extends AbstractDTO<Pessoa> implements DTO<Pessoa> {
     private String sobrenome;
     private Date nascimento;
     private String email;
-    private long telefone;
+    private Long telefone;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "nome")
+    @Column(nome = "nome", tipo = String.class)
     @Getter
     public String getNome() {
         return nome;
     }
 
-    @Column(nome = "nome")
+    @Column(nome = "nome", tipo = String.class)
     @Setter
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Column(nome = "sobrenome")
+    @Column(nome = "sobrenome", tipo = String.class)
     @Getter
     public String getSobrenome() {
         return sobrenome;
     }
 
-    @Column(nome = "sobrenome")
+    @Column(nome = "sobrenome", tipo = String.class)
     @Setter
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
 
-    @Column(nome = "nascimento")
+    @Column(nome = "nascimento", tipo = Date.class)
     @Getter
     public Date getNascimento() {
         return nascimento;
     }
 
-    @Column(nome = "nascimento")
+    @Column(nome = "nascimento", tipo = Date.class)
     @Setter
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 
-    @Column(nome = "email")
+    @Column(nome = "email", tipo = String.class)
     @Getter
     public String getEmail() {
         return email;
     }
 
-    @Column(nome = "email")
+    @Column(nome = "email", tipo = String.class)
     @Setter
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Column(nome = "telefone")
+    @Column(nome = "telefone", tipo = Long.class)
     @Getter
-    public long getTelefone() {
+    public Long getTelefone() {
         return telefone;
     }
 
-    @Column(nome = "telefone")
+    @Column(nome = "telefone", tipo = Long.class)
     @Setter
-    public void setTelefone(long telefone) {
+    public void setTelefone(Long telefone) {
         this.telefone = telefone;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public static void main(String[] args) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Pessoa");
     }
 }

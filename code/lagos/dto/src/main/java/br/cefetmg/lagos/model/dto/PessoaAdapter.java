@@ -41,19 +41,19 @@ public interface PessoaAdapter<DataTransferObject extends PessoaAdapter<DataTran
         getPessoa().setEmail(email);
     }
 
-    default long getTelefone() {
+    default Long getTelefone() {
         return getPessoa().getTelefone();
     }
 
-    default void setTelefone(long telefone) {
+    default void setTelefone(Long telefone) {
         getPessoa().setTelefone(telefone);
     }
 
-    default long getId() {
+    default Long getId() {
         return getPessoa().getId();
     }
 
-    default void setId(long id) {
+    default void setId(Long id) {
         getPessoa().setId(id);
     }
 }

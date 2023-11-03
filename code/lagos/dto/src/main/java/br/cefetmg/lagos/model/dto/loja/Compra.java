@@ -5,8 +5,7 @@ import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Table(nome = "compra")
 public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
@@ -15,27 +14,27 @@ public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
 
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "data_de_compra")
+    @Column(nome = "data_de_compra", tipo = Date.class)
     @Getter
     public Date getDataDeCompra() {
         return dataDeCompra;
     }
 
-    @Column(nome = "data_de_compra")
+    @Column(nome = "data_de_compra", tipo = Date.class)
     @Setter
     public void setDataDeCompra(Date dataDeCompra) {
         this.dataDeCompra = dataDeCompra;
     }
 
-    @Column(nome = "data_de_chegada")
+    @Column(nome = "data_de_chegada", tipo = Date.class)
     @Getter
     public Date getDataDeChegada() {
         return dataDeChegada;
     }
 
-    @Column(nome = "data_de_chegada")
+    @Column(nome = "data_de_chegada", tipo = Date.class)
     @Setter
     public void setDataDeChegada(Date dataDeChegada) {
         this.dataDeChegada = dataDeChegada;
@@ -53,27 +52,27 @@ public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -9,7 +9,7 @@ public class PromocoesDeFidelidadeProdutos extends AbstractDTO<PromocoesDeFideli
     private PromocaoDeFidelidade promocaoDeFidelidade;
     private Produto produto;
 
-    private long id;
+    private Long id;
 
     @Related(nome = "promocao_de_fidelidade")
     @Getter
@@ -23,15 +23,15 @@ public class PromocoesDeFidelidadeProdutos extends AbstractDTO<PromocoesDeFideli
         this.promocaoDeFidelidade = promocaoDeFidelidade;
     }
 
-    @Column(nome = "promocao_de_fidelidade__fk")
+    @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
     @Getter
-    public long getPromocaoDeFidelidadeAsLong() {
+    public Long getPromocaoDeFidelidadeAsLong() {
         return getRelatedAsLong(getPromocaoDeFidelidade());
     }
 
-    @Column(nome = "promocao_de_fidelidade__fk")
+    @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
     @Setter
-    public void setPromocaoDeFidelidadeWithLong(long id) {
+    public void setPromocaoDeFidelidadeWithLong(Long id) {
         setPromocaoDeFidelidade(setRelatedWithLong(getPromocaoDeFidelidade(), id, new PromocaoDeFidelidade()));
     }
 
@@ -47,27 +47,27 @@ public class PromocoesDeFidelidadeProdutos extends AbstractDTO<PromocoesDeFideli
         this.produto = produto;
     }
 
-    @Column(nome = "produto__fk")
+    @Column(nome = "produto__fk", tipo = Long.class)
     @Getter
-    public long getProdutoAsLong() {
+    public Long getProdutoAsLong() {
         return getRelatedAsLong(getProduto());
     }
 
-    @Column(nome = "produto__fk")
+    @Column(nome = "produto__fk", tipo = Long.class)
     @Setter
-    public void setProdutoWithLong(long id) {
+    public void setProdutoWithLong(Long id) {
         setProduto(setRelatedWithLong(getProduto(), id, new Produto()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

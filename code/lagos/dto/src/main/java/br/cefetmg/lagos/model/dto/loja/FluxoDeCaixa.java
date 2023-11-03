@@ -10,23 +10,23 @@ import java.sql.Timestamp;
 
 @Table(nome = "fluxo_de_caixa")
 public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<FluxoDeCaixa> {
-    private double dinheiroEmCaixa;
+    private Double dinheiroEmCaixa;
     private TipoFluxoDeCaixa tipo;
     private Timestamp hora;
 
     private Caixa caixa;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "dinheiro_em_caixa")
+    @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
     @Getter
-    public double getDinheiroEmCaixa() {
+    public Double getDinheiroEmCaixa() {
         return dinheiroEmCaixa;
     }
 
-    @Column(nome = "dinheiro_em_caixa")
+    @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
     @Setter
-    public void setDinheiroEmCaixa(double dinheiroEmCaixa) {
+    public void setDinheiroEmCaixa(Double dinheiroEmCaixa) {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
@@ -38,25 +38,25 @@ public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<Fluxo
         this.tipo = tipo;
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Getter
-    public int getTipoAsInt() {
+    public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
-    @Column(nome = "tipo")
+    @Column(nome = "tipo", tipo = Integer.class)
     @Setter
-    public void setTipoWithInt(int ord) {
+    public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoFluxoDeCaixa.class));
     }
 
-    @Column(nome = "hora")
+    @Column(nome = "hora", tipo = Timestamp.class)
     @Getter
     public Timestamp getHora() {
         return hora;
     }
 
-    @Column(nome = "hora")
+    @Column(nome = "hora", tipo = Timestamp.class)
     @Setter
     public void setHora(Timestamp hora) {
         this.hora = hora;
@@ -74,27 +74,27 @@ public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<Fluxo
         this.caixa = caixa;
     }
 
-    @Column(nome = "caixa__fk")
+    @Column(nome = "caixa__fk", tipo = Long.class)
     @Getter
-    public long getCaixaAsLong() {
+    public Long getCaixaAsLong() {
         return getRelatedAsLong(getCaixa());
     }
 
-    @Column(nome = "caixa__fk")
+    @Column(nome = "caixa__fk", tipo = Long.class)
     @Setter
-    public void setCaixaWithLong(long id) {
+    public void setCaixaWithLong(Long id) {
         setCaixa(setRelatedWithLong(getCaixa(), id, new Caixa()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

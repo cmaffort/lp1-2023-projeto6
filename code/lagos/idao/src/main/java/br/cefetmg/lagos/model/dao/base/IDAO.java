@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.dao;
+package br.cefetmg.lagos.model.dao.base;
 
 import java.util.List;
 

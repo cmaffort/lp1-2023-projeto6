@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.dao;
+package br.cefetmg.lagos.model.dao.base;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dao.util.DAOHelper;
@@ -6,7 +6,6 @@ import br.cefetmg.lagos.model.dao.util.StringSql;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
 import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
-import br.cefetmg.lagos.model.dto.base.Manager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

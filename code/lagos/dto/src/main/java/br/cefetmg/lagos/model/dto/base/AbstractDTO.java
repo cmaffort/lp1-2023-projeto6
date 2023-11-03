@@ -30,14 +30,14 @@ public abstract class AbstractDTO<DataTransferObject extends AbstractDTO<DataTra
         return getManeger().toString(columns);
     }
 
-    protected static <DataTransferObject extends DTO<DataTransferObject>> long getRelatedAsLong(DataTransferObject related) {
-        if (related == null)
-            return -1;
-        return related.getId();
+    protected static <DataTransferObject extends DTO<DataTransferObject>> Long getRelatedAsLong(DataTransferObject related) {
+        if (related != null)
+            return related.getId();
+        return null;
     }
 
     protected static <DataTransferObject extends DTO<DataTransferObject>> DataTransferObject
-    setRelatedWithLong(DataTransferObject related, long id, DataTransferObject backup) {
+    setRelatedWithLong(DataTransferObject related, Long id, DataTransferObject backup) {
         if (related == null)
             related = backup;
         related.setId(id);

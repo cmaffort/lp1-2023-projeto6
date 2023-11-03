@@ -8,39 +8,40 @@ import br.cefetmg.lagos.model.dto.enums.Bandeira;
 import br.cefetmg.lagos.model.dto.enums.MetodosPagamento;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.List;
 
 @Table(nome = "configuracoes_de_venda")
 public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> implements DTO<ConfiguracoesDeVenda> {
-    private float limiteDeDesconto;
-    private float taxaDeJurosAoMes;
+    private Float limiteDeDesconto;
+    private Float taxaDeJurosAoMes;
     private List<MetodosPagamento> metodosAceitos;
     private List<Bandeira> bandeirasAceitas;
-    private float porcentagemComissao;
+    private Float porcentagemComissao;
 
     private Loja loja;
 
-    @Column(nome = "limite_de_desconto")
+    @Column(nome = "limite_de_desconto", tipo = Float.class)
     @Getter
-    public float getLimiteDeDesconto() {
+    public Float getLimiteDeDesconto() {
         return limiteDeDesconto;
     }
 
-    @Column(nome = "limite_de_desconto")
+    @Column(nome = "limite_de_desconto", tipo = Float.class)
     @Setter
-    public void setLimiteDeDesconto(float limiteDeDesconto) {
+    public void setLimiteDeDesconto(Float limiteDeDesconto) {
         this.limiteDeDesconto = limiteDeDesconto;
     }
 
-    @Column(nome = "taxa_de_juros_ao_mes")
+    @Column(nome = "taxa_de_juros_ao_mes", tipo = Float.class)
     @Getter
-    public float getTaxaDeJurosAoMes() {
+    public Float getTaxaDeJurosAoMes() {
         return taxaDeJurosAoMes;
     }
 
-    @Column(nome = "taxa_de_juros_ao_mes")
+    @Column(nome = "taxa_de_juros_ao_mes", tipo = Float.class)
     @Setter
-    public void setTaxaDeJurosAoMes(float taxaDeJurosAoMes) {
+    public void setTaxaDeJurosAoMes(Float taxaDeJurosAoMes) {
         this.taxaDeJurosAoMes = taxaDeJurosAoMes;
     }
 
@@ -54,13 +55,13 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
 
     // TODO: Implementar list<int> para blob e o inverso, usar Gson
 
-    @Column(nome = "metodos_aceitos")
+    @Column(nome = "metodos_aceitos", tipo = Blob.class)
     @Getter
     public Blob getMetodosAceitosAsBlob() {
         return null;
     }
 
-    @Column(nome = "metodos_aceitos")
+    @Column(nome = "metodos_aceitos", tipo = Blob.class)
     @Setter
     public void setMetodosAceitosWithBlob(Blob metodosAceitos) {
 
@@ -76,27 +77,27 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
 
     // TODO: Implementar list<int> para blob e o inverso, usar Gson
 
-    @Column(nome = "bandeiras_aceitas")
+    @Column(nome = "bandeiras_aceitas", tipo = Blob.class)
     @Getter
     public Blob getBandeirasAceitasAsBlob() {
         return null;
     }
 
-    @Column(nome = "bandeiras_aceitas")
+    @Column(nome = "bandeiras_aceitas", tipo = Blob.class)
     @Setter
     public void setBandeirasAceitasWithBlob(Blob bandeirasAceitas) {
 
     }
 
-    @Column(nome = "porcentagem_comissao")
+    @Column(nome = "porcentagem_comissao", tipo = Float.class)
     @Getter
-    public float getPorcentagemComissao() {
+    public Float getPorcentagemComissao() {
         return porcentagemComissao;
     }
 
-    @Column(nome = "porcentagem_comissao")
+    @Column(nome = "porcentagem_comissao", tipo = Float.class)
     @Setter
-    public void setPorcentagemComissao(float porcentagemComissao) {
+    public void setPorcentagemComissao(Float porcentagemComissao) {
         this.porcentagemComissao = porcentagemComissao;
     }
 
@@ -112,15 +113,15 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
         this.loja = loja;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 }

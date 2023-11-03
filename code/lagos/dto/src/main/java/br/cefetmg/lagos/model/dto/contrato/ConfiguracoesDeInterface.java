@@ -15,13 +15,13 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
 
     private Usuario usuario;
 
-    @Column(nome = "nome_da_empresa")
+    @Column(nome = "nome_da_empresa", tipo = String.class)
     @Getter
     public String getNomeDaEmpresa() {
         return nomeDaEmpresa;
     }
 
-    @Column(nome = "nome_da_empresa")
+    @Column(nome = "nome_da_empresa", tipo = String.class)
     @Setter
     public void setNomeDaEmpresa(String nomeDaEmpresa) {
         this.nomeDaEmpresa = nomeDaEmpresa;
@@ -37,25 +37,25 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
 
     // TODO: Implementar parsers para blob da imagem
 
-    @Column(nome = "logo")
+    @Column(nome = "logo", tipo = Blob.class)
     @Getter
     public Blob getLogoAsBlob() {
         return null;
     }
 
-    @Column(nome = "logo")
+    @Column(nome = "logo", tipo = Blob.class)
     @Setter
     public void setLogoWithBlob(Blob logo) {
 
     }
 
-    @Column(nome = "cor_base")
+    @Column(nome = "cor_base", tipo = String.class)
     @Getter
     public String getCorBase() {
         return corBase;
     }
 
-    @Column(nome = "cor_base")
+    @Column(nome = "cor_base", tipo = String.class)
     @Setter
     public void setCorBase(String corBase) {
         this.corBase = corBase;
@@ -73,15 +73,15 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
         this.usuario = usuario;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getUsuario());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 }

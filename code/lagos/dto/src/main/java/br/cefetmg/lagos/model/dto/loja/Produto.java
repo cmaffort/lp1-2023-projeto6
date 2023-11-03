@@ -5,64 +5,62 @@ import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
-import java.util.List;
-
 @Table(nome = "produto")
 public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
     private String codigo;
     private String nome;
-    private int quantidade;
-    private double preco;
+    private Integer quantidade;
+    private Double preco;
 
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "codigo")
+    @Column(nome = "codigo", tipo = String.class)
     @Getter
     public String getCodigo() {
         return codigo;
     }
 
-    @Column(nome = "codigo")
+    @Column(nome = "codigo", tipo = String.class)
     @Setter
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-    @Column(nome = "nome")
+    @Column(nome = "nome", tipo = String.class)
     @Getter
     public String getNome() {
         return nome;
     }
 
-    @Column(nome = "nome")
+    @Column(nome = "nome", tipo = String.class)
     @Setter
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Column(nome = "quantidade")
+    @Column(nome = "quantidade", tipo = Integer.class)
     @Getter
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    @Column(nome = "quantidade")
+    @Column(nome = "quantidade", tipo = Integer.class)
     @Setter
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Getter
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Setter
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
@@ -78,27 +76,27 @@ public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

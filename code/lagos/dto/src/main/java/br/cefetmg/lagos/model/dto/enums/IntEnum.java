@@ -1,13 +1,15 @@
 package br.cefetmg.lagos.model.dto.enums;
 
-public interface IntEnum<E extends Enum<E>> {
-    static <E extends Enum<E>> int getIntForEnum(E enumValue) {
+public class IntEnum {
+    public static <E extends Enum<E>> Integer getIntForEnum(E enumValue) {
         if (enumValue != null)
             return enumValue.ordinal();
-        return -1;
+        return null;
     }
 
-    static <E extends Enum<E>> E getEnumForInt(int ordinal, Class<E> enumClass) {
-        return enumClass.getEnumConstants()[ordinal];
+    public static <E extends Enum<E>> E getEnumForInt(Integer ordinal, Class<E> enumClass) {
+        if (ordinal != null)
+            return enumClass.getEnumConstants()[ordinal];
+        return null;
     }
 }

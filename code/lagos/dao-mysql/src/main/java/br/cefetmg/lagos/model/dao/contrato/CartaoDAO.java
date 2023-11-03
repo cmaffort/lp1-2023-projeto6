@@ -1,14 +1,11 @@
-package br.cefetmg.lagos.model.dao;
+package br.cefetmg.lagos.model.dao.contrato;
 
-import br.cefetmg.lagos.model.dao.contrato.UsuarioDAO;
-import br.cefetmg.lagos.model.dao.contrato.IUsuarioDAO;
-import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.Cartao;
-import br.cefetmg.lagos.model.dto.Endereco;
-import br.cefetmg.lagos.model.dto.base.DTO;
-import br.cefetmg.lagos.model.dto.contrato.Usuario;
+import br.cefetmg.lagos.model.dao.EnderecoDAO;
+import br.cefetmg.lagos.model.dao.IEnderecoDAO;
+import br.cefetmg.lagos.model.dao.base.AbstractDAO;
+import br.cefetmg.lagos.model.dao.base.IDAO;
+import br.cefetmg.lagos.model.dto.contrato.Cartao;
 
-import java.util.List;
 import java.util.Map;
 
 public class CartaoDAO extends AbstractDAO<Cartao> implements ICartaoDAO {

@@ -28,6 +28,10 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
         return method.getAnnotation(Column.class).nome();
     }
 
+    public Class<?> getTypeForColumn(String column) {
+        return getGetters().get(column).getAnnotation(Column.class).tipo();
+    }
+
     private Map<String, Method> getMethodsFromDTO(Class<? extends Annotation> leak) {
         Map<String, Method> methodsMap = Arrays.stream(dtoClass.getMethods())
                 .filter(method -> method.isAnnotationPresent(Column.class)

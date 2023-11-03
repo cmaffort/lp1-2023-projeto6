@@ -10,7 +10,7 @@ public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
     private Usuario usuario;
     private Endereco endereco;
 
-    private long id;
+    private Long id;
 
     @Related(nome = "usuario")
     @Getter
@@ -24,15 +24,15 @@ public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
         this.usuario = usuario;
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Getter
-    public long getUsuarioAsLong() {
+    public Long getUsuarioAsLong() {
         return getRelatedAsLong(getUsuario());
     }
 
-    @Column(nome = "usuario__fk")
+    @Column(nome = "usuario__fk", tipo = Long.class)
     @Setter
-    public void setUsuarioWithLong(long id) {
+    public void setUsuarioWithLong(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
@@ -48,27 +48,27 @@ public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
         this.endereco = endereco;
     }
 
-    @Column(nome = "endereco__fk")
+    @Column(nome = "endereco__fk", tipo = Long.class)
     @Getter
-    public long getEnderecoAsLong() {
+    public Long getEnderecoAsLong() {
         return getRelatedAsLong(getEndereco());
     }
 
-    @Column(nome = "endereco__fk")
+    @Column(nome = "endereco__fk", tipo = Long.class)
     @Setter
-    public void setEnderecoWithLong(long id) {
+    public void setEnderecoWithLong(Long id) {
         setEndereco(setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

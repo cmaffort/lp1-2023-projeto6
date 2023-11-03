@@ -7,7 +7,7 @@ import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Table(nome = "cliente")
 public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, PessoaAdapter<Cliente> {
@@ -18,25 +18,25 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
 
     private Pessoa pessoa;
 
-    @Column(nome = "instagram")
+    @Column(nome = "instagram", tipo = String.class)
     @Getter
     public String getInstagram() {
         return instagram;
     }
 
-    @Column(nome = "instagram")
+    @Column(nome = "instagram", tipo = String.class)
     @Setter
     public void setInstagram(String instagram) {
         this.instagram = instagram;
     }
 
-    @Column(nome = "cadastro")
+    @Column(nome = "cadastro", tipo = Date.class)
     @Getter
     public Date getCadastro() {
         return cadastro;
     }
 
-    @Column(nome = "cadastro")
+    @Column(nome = "cadastro", tipo = Date.class)
     @Setter
     public void setCadastro(Date cadastro) {
         this.cadastro = cadastro;
@@ -54,15 +54,15 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setRelatedWithLong(getLoja(), id, new Loja());
     }
 
@@ -78,15 +78,15 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
         this.pessoa = pessoa;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return getRelatedAsLong(getPessoa());
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         setPessoa(setRelatedWithLong(pessoa, id, new Pessoa()));
     }
 }

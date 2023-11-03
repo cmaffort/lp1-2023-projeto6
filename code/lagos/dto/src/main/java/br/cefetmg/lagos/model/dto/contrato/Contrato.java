@@ -11,51 +11,51 @@ import java.sql.Date;
 
 @Table(nome = "contrato")
 public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
-    private boolean ativo;
+    private Boolean ativo;
     private String descricao;
-    private double preco;
+    private Double preco;
     private File documento;
-    private float taxaDeMulta;
-    private int numeroDeLojas;
+    private Float taxaDeMulta;
+    private Integer numeroDeLojas;
     private Date dataDeCriacao;
 
     private Periodicidade periodicidade;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "ativo")
+    @Column(nome = "ativo", tipo = Boolean.class)
     @Getter
-    public boolean isAtivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
-    @Column(nome = "ativo")
+    @Column(nome = "ativo", tipo = Boolean.class)
     @Setter
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
-    @Column(nome = "descricao")
+    @Column(nome = "descricao", tipo = String.class)
     @Getter
     public String getDescricao() {
         return descricao;
     }
 
-    @Column(nome = "descricao")
+    @Column(nome = "descricao", tipo = String.class)
     @Setter
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Getter
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    @Column(nome = "preco")
+    @Column(nome = "preco", tipo = Double.class)
     @Setter
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
@@ -69,49 +69,49 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
         this.documento = documento;
     }
 
-    @Column(nome = "documento")
+    @Column(nome = "documento", tipo = Blob.class)
     @Getter
     public Blob getDocumentoAsBlob() {
         return null;
     }
 
-    @Column(nome = "documento")
+    @Column(nome = "documento", tipo = Blob.class)
     @Setter
     public void setDocumentoWithBlob(Blob documento) {
 
     }
 
-    @Column(nome = "taxa_de_multa")
+    @Column(nome = "taxa_de_multa", tipo = Float.class)
     @Getter
-    public float getTaxaDeMulta() {
+    public Float getTaxaDeMulta() {
         return taxaDeMulta;
     }
 
-    @Column(nome = "taxa_de_multa")
+    @Column(nome = "taxa_de_multa", tipo = Float.class)
     @Setter
-    public void setTaxaDeMulta(float taxaDeMulta) {
+    public void setTaxaDeMulta(Float taxaDeMulta) {
         this.taxaDeMulta = taxaDeMulta;
     }
 
-    @Column(nome = "numero_de_lojas")
+    @Column(nome = "numero_de_lojas", tipo = Integer.class)
     @Getter
-    public int getNumeroDeLojas() {
+    public Integer getNumeroDeLojas() {
         return numeroDeLojas;
     }
 
-    @Column(nome = "numero_de_lojas")
+    @Column(nome = "numero_de_lojas", tipo = Integer.class)
     @Setter
-    public void setNumeroDeLojas(int numeroDeLojas) {
+    public void setNumeroDeLojas(Integer numeroDeLojas) {
         this.numeroDeLojas = numeroDeLojas;
     }
 
-    @Column(nome = "data_de_criacao")
+    @Column(nome = "data_de_criacao", tipo = Date.class)
     @Getter
     public Date getDataDeCriacao() {
         return dataDeCriacao;
     }
 
-    @Column(nome = "data_de_criacao")
+    @Column(nome = "data_de_criacao", tipo = Date.class)
     @Setter
     public void setDataDeCriacao(Date dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
@@ -129,27 +129,27 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
         this.periodicidade = periodicidade;
     }
 
-    @Column(nome = "periodicidade__fk")
+    @Column(nome = "periodicidade__fk", tipo = Long.class)
     @Getter
-    public long getPeriodicidadeAsLong() {
+    public Long getPeriodicidadeAsLong() {
         return getRelatedAsLong(getPeriodicidade());
     }
 
-    @Column(nome = "periodicidade__fk")
+    @Column(nome = "periodicidade__fk", tipo = Long.class)
     @Setter
-    public void setPeriodicidadeWithLong(long id) {
+    public void setPeriodicidadeWithLong(Long id) {
         setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

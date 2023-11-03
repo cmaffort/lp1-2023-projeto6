@@ -2,7 +2,7 @@ package br.cefetmg.lagos.model.dao;
 
 import br.cefetmg.lagos.model.dao.contrato.*;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dto.Cartao;
+import br.cefetmg.lagos.model.dto.contrato.Cartao;
 import br.cefetmg.lagos.model.dto.Endereco;
 import br.cefetmg.lagos.model.dto.Periodicidade;
 import br.cefetmg.lagos.model.dto.Pessoa;
@@ -96,8 +96,8 @@ public class TestContratos {
         Cartao cartao = new Cartao();
         cartao.setNumero(1243525235432324L);
         cartao.setBandeiraWithInt(1);
-        cartao.setEnderecoWithLong(1);
-        cartao.setUsuarioWithLong(1);
+        cartao.setEnderecoWithLong(1L);
+        cartao.setUsuarioWithLong(1L);
 
         System.out.println(cartaoDAO.inserir(cartao));
         cartao = cartaoDAO.consultarPorId(cartao.getId());
@@ -106,8 +106,8 @@ public class TestContratos {
         Cartao cartao1 = new Cartao();
         cartao1.setNumero(1243525235432324L);
         cartao1.setBandeiraWithInt(1);
-        cartao1.setEnderecoWithLong(1);
-        cartao1.setUsuarioWithLong(2);
+        cartao1.setEnderecoWithLong(1L);
+        cartao1.setUsuarioWithLong(2L);
 
         cartaoDAO.inserir(cartao1);
 
@@ -172,10 +172,10 @@ public class TestContratos {
         IContratoDAO contratoDAO = new ContratoDAO();
         Contrato contrato = new Contrato();
         contrato.setAtivo(true);
-        contrato.setPreco(2500);
+        contrato.setPreco(2500.0);
         contrato.setNumeroDeLojas(10);
         contrato.setDataDeCriacao(Date.valueOf("2022-10-18"));
-        contrato.setPeriodicidadeWithLong(1);
+        contrato.setPeriodicidadeWithLong(1L);
 
         System.out.println(contratoDAO.inserir(contrato));
         System.out.println(contratoDAO.consultarPorId(contrato.getId()).getManeger().getColumns());
@@ -195,14 +195,14 @@ public class TestContratos {
         contratoAssinado.setVigente(true);
         contratoAssinado.setDataDeContratacao(Date.valueOf("2023-08-18"));
         contratoAssinado.setCancelado(false);
-        contratoAssinado.setUsuarioWithLong(1);
-        contratoAssinado.setContratoWithLong(1);
+        contratoAssinado.setUsuarioWithLong(1L);
+        contratoAssinado.setContratoWithLong(1L);
 
         contratoAssinadoDAO.inserir(contratoAssinado);
 
         Usuario usuario = contratoAssinado.getUsuario();
 
-        contratoAssinado.setUsuarioWithLong(2);
+        contratoAssinado.setUsuarioWithLong(2L);
 
         System.out.println(contratoAssinadoDAO.inserir(contratoAssinado));
         System.out.println(contratoAssinadoDAO.consultarPorId(contratoAssinado.getId()));
@@ -223,13 +223,13 @@ public class TestContratos {
         configuracoesDeInterface.setLogoWithBlob(new SerialBlob("1242".getBytes()));
         configuracoesDeInterface.setCorBase("#000000");
         configuracoesDeInterface.setNomeDaEmpresa("LOSH");
-        configuracoesDeInterface.setId(1);
+        configuracoesDeInterface.setId(1L);
 
         configuracoesDeInterfaceDAO.inserir(configuracoesDeInterface);
 
         Usuario usuario = configuracoesDeInterface.getUsuario();
 
-        configuracoesDeInterface.setId(2);
+        configuracoesDeInterface.setId(2L);
 
         System.out.println(configuracoesDeInterfaceDAO.inserir(configuracoesDeInterface));
         System.out.println(configuracoesDeInterfaceDAO.consultarPorId(configuracoesDeInterface.getId()));
@@ -239,7 +239,7 @@ public class TestContratos {
             System.out.println(c);
 
         configuracoesDeInterfaceDAO.remover(configuracoesDeInterface);
-        configuracoesDeInterface.setId(2);
+        configuracoesDeInterface.setId(2L);
         configuracoesDeInterfaceDAO.inserir(configuracoesDeInterface);
         configuracoesDeInterface.setNomeDaEmpresa("onge");
         configuracoesDeInterfaceDAO.alterar(configuracoesDeInterface);

@@ -6,64 +6,63 @@ import br.cefetmg.lagos.model.dto.Periodicidade;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Table(nome = "promocao_de_fidelidade")
 public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> implements DTO<PromocaoDeFidelidade> {
-    private int minVendas;
-    private boolean ativa;
-    private float porcentagem;
+    private Integer minVendas;
+    private Boolean ativa;
+    private Float porcentagem;
     private Date dataInicio;
 
     private Periodicidade periodicidade;
     private Loja loja;
 
-    private long id;
+    private Long id;
 
-    @Column(nome = "min_vendas")
+    @Column(nome = "min_vendas", tipo = Integer.class)
     @Getter
-    public int getMinVendas() {
+    public Integer getMinVendas() {
         return minVendas;
     }
 
-    @Column(nome = "min_vendas")
+    @Column(nome = "min_vendas", tipo = Integer.class)
     @Setter
-    public void setMinVendas(int minVendas) {
+    public void setMinVendas(Integer minVendas) {
         this.minVendas = minVendas;
     }
 
-    @Column(nome = "ativa")
+    @Column(nome = "ativa", tipo = Boolean.class)
     @Getter
-    public boolean isAtiva() {
+    public Boolean isAtiva() {
         return ativa;
     }
 
-    @Column(nome = "ativa")
+    @Column(nome = "ativa", tipo = Boolean.class)
     @Setter
-    public void setAtiva(boolean ativa) {
+    public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
     }
 
-    @Column(nome = "porcentagem")
+    @Column(nome = "porcentagem", tipo = Float.class)
     @Getter
-    public float getPorcentagem() {
+    public Float getPorcentagem() {
         return porcentagem;
     }
 
-    @Column(nome = "porcentagem")
+    @Column(nome = "porcentagem", tipo = Float.class)
     @Setter
-    public void setPorcentagem(float porcentagem) {
+    public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }
 
-    @Column(nome = "data_inicio")
+    @Column(nome = "data_inicio", tipo = Date.class)
     @Getter
     public Date getDataInicio() {
         return dataInicio;
     }
 
-    @Column(nome = "data_inicio")
+    @Column(nome = "data_inicio", tipo = Date.class)
     @Setter
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
@@ -81,15 +80,15 @@ public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> impl
         this.periodicidade = periodicidade;
     }
 
-    @Column(nome = "periodicidade__fk")
+    @Column(nome = "periodicidade__fk", tipo = Long.class)
     @Getter
-    public long getPeriodicidadeAsLong() {
+    public Long getPeriodicidadeAsLong() {
         return getRelatedAsLong(getPeriodicidade());
     }
 
-    @Column(nome = "periodicidade__fk")
+    @Column(nome = "periodicidade__fk", tipo = Long.class)
     @Setter
-    public void setPeriodicidadeWithLong(long id) {
+    public void setPeriodicidadeWithLong(Long id) {
         setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
     }
 
@@ -105,27 +104,27 @@ public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> impl
         this.loja = loja;
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Getter
-    public long getLojaAsLong() {
+    public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
-    @Column(nome = "loja__fk")
+    @Column(nome = "loja__fk", tipo = Long.class)
     @Setter
-    public void setLojaWithLong(long id) {
+    public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

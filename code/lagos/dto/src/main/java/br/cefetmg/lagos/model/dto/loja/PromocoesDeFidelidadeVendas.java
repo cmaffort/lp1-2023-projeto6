@@ -23,15 +23,15 @@ public class PromocoesDeFidelidadeVendas extends AbstractDTO<PromocoesDeFidelida
         this.promocaoDeFidelidade = promocaoDeFidelidade;
     }
 
-    @Column(nome = "promocao_de_fidelidade__fk")
+    @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
     @Getter
-    public long getPromocaoDeFidelidadeAsLong() {
+    public Long getPromocaoDeFidelidadeAsLong() {
         return getRelatedAsLong(getPromocaoDeFidelidade());
     }
 
-    @Column(nome = "promocao_de_fidelidade__fk")
+    @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
     @Setter
-    public void setPromocaoDeFidelidadeWithLong(long id) {
+    public void setPromocaoDeFidelidadeWithLong(Long id) {
         setPromocaoDeFidelidade(setRelatedWithLong(getPromocaoDeFidelidade(), id, new PromocaoDeFidelidade()));
     }
 
@@ -47,27 +47,27 @@ public class PromocoesDeFidelidadeVendas extends AbstractDTO<PromocoesDeFidelida
         this.venda = venda;
     }
 
-    @Column(nome = "venda__fk")
+    @Column(nome = "venda__fk", tipo = Long.class)
     @Getter
-    public long getVendaAsLong() {
+    public Long getVendaAsLong() {
         return getRelatedAsLong(getVenda());
     }
 
-    @Column(nome = "venda__fk")
+    @Column(nome = "venda__fk", tipo = Long.class)
     @Setter
-    public void setVendaWithLong(long id) {
+    public void setVendaWithLong(Long id) {
         setVenda(setRelatedWithLong(getVenda(), id, new Venda()));
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Getter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    @Column(nome = "pk")
+    @Column(nome = "pk", tipo = Long.class)
     @Setter
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
