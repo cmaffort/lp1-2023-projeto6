@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css_venda.css">
+        <link rel="stylesheet" href="css/css_venda.css">
         <title>Gestão de Vendas</title>
     </head>
     <body>

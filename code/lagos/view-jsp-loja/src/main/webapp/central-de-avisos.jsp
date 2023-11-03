@@ -18,7 +18,7 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="JS/js_avisos.js"></script>
+    <script src="js/avisos.js"></script>
 
 </body>
 </html>

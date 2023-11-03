@@ -4,7 +4,7 @@ let cadastroClienteEL = document.querySelector("#botao_cadastro");
 document.addEventListener('DOMContentLoaded', () =>{
     $.ajax({
         type: 'POST',
-        url: '/src/main/java/com/br/cefetmg/lagos/ListarClientes.java',
+        url: '/loja?acao=ListarClientes',
         success: function (result) {
             let tabelaCliente = document.querySelector("#tabela_clientes");
             tabelaCliente.style.display = 'block';
@@ -29,7 +29,7 @@ inputPesquisaCliente.addEventListener('input', () => {
 
         let nome = linha.querySelector('td:first-child').textContent.toLowerCase();
 
-        if (nome.includes(valorDigitado))
+        if (nome.startsWith(valorDigitado))
             linha.style.display = '';
         else
             linha.style.display = 'none';
@@ -65,7 +65,7 @@ concluirCadastroEl.addEventListener('click', () => {
     $.ajax({
         data: dadosCadastroJson,
         method: 'POST',
-        url: '.../src/main/java/com/br/cefetmg/lagos/CadastrarCliente.java',
+        url: '/loja?acao=CadastrarCliente',
         contentType: 'application/json',
     })
 });

@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-     <link rel="stylesheet" type="text/css" href="../css/css_header.css" />
+    <link rel="stylesheet" type="text/css" href="css/header.css" />
+    <title></title>
 </head>
 <body>
     
     <header>
         
-        <div class="logo"><img src="../images/lagos-semfundo.svg" alt="logo lagos" id="logo"></div>
+        <div class="logo"><img src="images/lagos-semfundo.svg" alt="logo lagos" id="logo"></div>
         
         <div class="menu-button" onclick="toggleMenu()">
             <div class="menu-icon"></div>

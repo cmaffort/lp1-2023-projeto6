@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Gestão de Clientes</title>
-    <link rel="icon" href="${pageContext.request.contextPath}/images/icon_lagos.ico">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clientes.css">
+    <link rel="icon" href="images/icon_lagos.ico">
+    <link rel="stylesheet" type="text/css" href="css/clientes.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Londrina+Solid&family=Righteous&display=swap"
@@ -22,13 +22,13 @@
 
     <h1>Gestão de Clientes</h1>
     <div id="pesquisa_cadastro">
-        <img src="${pageContext.request.contextPath}/images/add.png">
+        <img src="images/add.png">
 
         <button id="botao_cadastro">Cadastrar Cliente</button>
 
         <input type="text" name="pesquisa" id="input_cliente"
                placeholder="Busque um cliente pelo nome">
-        <button id="botao_pesquisa"><img src="${pageContext.request.contextPath}/images/search.png"></button>
+        <button id="botao_pesquisa"><img src="images/search.png"></button>
     </div>
 
     <div id="listar_cliente">
@@ -50,22 +50,22 @@
 
         <h1>Edite os dados do Cliente</h1>
 
-        <label for="editar_nome">Nome do cliente</label>
-        <input class="input_cadastro" name="editar_nome" type="text" required>
+        <label for="editar-nome">Nome do cliente</label>
+        <input id="editar-nome" class="input_cadastro" name="editar_nome" type="text" required>
 
-        <label for="editar_sobrenome">Sobrenome do Cliente</label>
-        <input class="input_cadastro" name="editar_sobrenome" type="text" required>
+        <label for="editar-sobrenome">Sobrenome do Cliente</label>
+        <input id="editar-sobrenome" class="input_cadastro" name="editar_sobrenome" type="text" required>
 
-        <label for="editar_telefone">Número de telefone do cliente</label>
-        <input class="input_cadastro" name="editar_telefone" type="tel" pattern="(\d{2}[-\s]?)(\d{5}[-\s]?\d{4}|\d{4}[-\s]?\d{4})" required>
+        <label for="editar-telefone">Número de telefone do cliente</label>
+        <input id="editar-telefone" class="input_cadastro" name="editar_telefone" type="tel" pattern="(\d{2}[-\s]?)(\d{5}[-\s]?\d{4}|\d{4}[-\s]?\d{4})" required>
 
-        <label for="editar_email">E-mail do cliente</label>
-        <input class="input_cadastro" name="editar_email" type="email" required>
+        <label for="editar-email">E-mail do cliente</label>
+        <input id="editar-email" class="input_cadastro" name="editar_email" type="email" required>
 
         <button id="concluir">Concluir</button>
     </div>
 
-    <script src="${pageContext.request.contextPath}/JS/clientes.js"></script>
+    <script src="js/clientes.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

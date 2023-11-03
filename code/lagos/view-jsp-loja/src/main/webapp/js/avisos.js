@@ -72,7 +72,7 @@ document.getElementById("criar-aviso").addEventListener("click", function() {
 
                 var botaoRemover = document.createElement('image');
                 botaoRemover.className = "remover-aviso";
-                botaoRemover.innerHTML = ' <img id="remover-aviso" src="../images/deletar.svg" alt="criar aviso" class="hidden">';
+                botaoRemover.innerHTML = ' <img id="remover-aviso" src="images/deletar.svg" alt="criar aviso" class="hidden">';
 
                 botaoRemover.addEventListener("click", function() {
                     Swal.fire({
