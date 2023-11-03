@@ -1,0 +1,31 @@
+body {
+   background-color: #e2e3d1;
+   color: #c9cbad;
+   overflow:hidden;
+}
+
+h1{
+   position: relative;
+   font-size: 8vh;
+   top: -50%;
+   text-align: center;
+}
+.avisos {
+    background-color: #c9cbad;
+    border: 1px solid #E6DB55;
+    padding: 10px;
+    margin: 10px;
+}
+
+#criar-aviso {
+    background-color: #4CAF50;
+    color: wheat;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#remover-aviso {
+    position: relative;
+    cursor: pointer;
+}
