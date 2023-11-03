@@ -7,74 +7,9 @@ import br.cefetmg.lagos.model.dto.loja.PromocoesDeFidelidadeVendas;
 
 import java.util.List;
 
-public class PromocoesDeFidelidadeVendasDAO extends AbstractDAO implements IPromocoesDeFidelidadeVendasDAO {
+public class PromocoesDeFidelidadeVendasDAO extends AbstractDAO<PromocoesDeFidelidadeVendas> implements IPromocoesDeFidelidadeVendasDAO {
     @Override
-    protected DTO getDTO() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
-    }
-
-    @Override
-    public Long inserir(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public boolean alterar(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public boolean remover(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public List<PromocoesDeFidelidadeVendas> listar() throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public List<PromocoesDeFidelidadeVendas> listar(DTO... related) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public PromocoesDeFidelidadeVendas consultarPorId(Long id) throws PersistenceException {
-        return null;
+    protected PromocoesDeFidelidadeVendas getDTO() {
+        return new PromocoesDeFidelidadeVendas();
     }
 }

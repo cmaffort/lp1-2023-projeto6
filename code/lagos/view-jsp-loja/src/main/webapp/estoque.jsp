@@ -3,10 +3,10 @@
 <html lang="pt">
 <head>
     <title>Estoque</title>
-     <link rel="stylesheet" type="text/css" href="../css/css_estoque.css" />
+     <link rel="stylesheet" type="text/css" href="css/estoque.css" />
 </head>
 <body>
-    <%@include file="Header.jsp" %>
+    <%@include file="header.jsp" %>
         <h1>Estoque</h1>
         
 

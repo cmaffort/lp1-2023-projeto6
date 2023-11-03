@@ -1,17 +1,12 @@
 package br.cefetmg.lagos.model.dto.loja;
 
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-import java.util.List;
-
 @Table(nome = "caixa")
-public class Caixa extends AbstractDTO implements DTO {
+public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     private boolean aberto;
     private double dinheiroEmCaixa;
 
@@ -44,20 +39,52 @@ public class Caixa extends AbstractDTO implements DTO {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
     }
 
+    @Related(nome = "usuario_loja")
+    @Getter
     public UsuarioLoja getUsuarioLoja() {
         return usuarioLoja;
     }
 
+    @Related(nome = "usuario_loja")
+    @Getter
     public void setUsuarioLoja(UsuarioLoja usuarioLoja) {
         this.usuarioLoja = usuarioLoja;
     }
 
+    @Column(nome = "usuario_loja__fk")
+    @Getter
+    public long getUsuarioLojaAsLong() {
+        return getRelatedAsLong(getUsuarioLoja());
+    }
+
+    @Column(nome = "usuario_loja__fk")
+    @Setter
+    public void setUsuarioLojaWithLong(long id) {
+        setUsuarioLoja(setRelatedWithLong(getUsuarioLoja(), id, new UsuarioLoja()));
+    }
+
+    @Related(nome = "loja")
+    @Getter
     public Loja getLoja() {
         return loja;
     }
 
+    @Related(nome = "loja")
+    @Setter
     public void setLoja(Loja loja) {
         this.loja = loja;
+    }
+
+    @Column(nome = "loja__fk")
+    @Getter
+    public long getLojaAsLong() {
+        return getRelatedAsLong(getLoja());
+    }
+
+    @Column(nome = "loja__fk")
+    @Setter
+    public void setLojaWithLong(long id) {
+        setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
     @Column(nome = "pk")

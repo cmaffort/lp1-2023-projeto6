@@ -7,16 +7,5 @@ import br.cefetmg.lagos.model.dto.loja.PromocoesDeFidelidadeVendas;
 
 import java.util.List;
 
-public interface IPromocoesDeFidelidadeVendasDAO extends IDAO {
-    Long inserir(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException;
-
-    boolean alterar(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException;
-
-    boolean remover(PromocoesDeFidelidadeVendas promocoesDeFidelidadeVendas) throws PersistenceException;
-
-    List<PromocoesDeFidelidadeVendas> listar() throws PersistenceException;
-
-    List<PromocoesDeFidelidadeVendas> listar(DTO... related) throws PersistenceException;
-
-    PromocoesDeFidelidadeVendas consultarPorId(Long id) throws PersistenceException;
+public interface IPromocoesDeFidelidadeVendasDAO extends IDAO<PromocoesDeFidelidadeVendas> {
 }

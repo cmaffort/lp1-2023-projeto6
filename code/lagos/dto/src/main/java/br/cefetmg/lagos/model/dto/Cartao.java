@@ -1,16 +1,14 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
+import br.cefetmg.lagos.model.dto.enums.IntEnum;
 
 @Table(nome = "cartao")
-public class Cartao extends AbstractDTO implements DTO {
+public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     private long numero;
     private Bandeira bandeira;
 
@@ -42,19 +40,23 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "bandeira")
     @Getter
     public int getBandeiraAsInt() {
-        return getEnumAsInt(getBandeira());
+        return IntEnum.getIntForEnum(getBandeira());
     }
 
     @Column(nome = "bandeira")
     @Setter
     public void setBandeiraWithInt(int ord) {
-        setBandeira(Bandeira.get(ord));
+        setBandeira(IntEnum.getEnumForInt(ord, Bandeira.class));
     }
 
+    @Related(nome = "endereco")
+    @Getter
     public Endereco getEndereco() {
         return endereco;
     }
 
+    @Related(nome = "endereco")
+    @Setter
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
@@ -62,19 +64,23 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "endereco__fk")
     @Getter
     public long getEnderecoAsLong() {
-        return getRelatedDTOAsLong(getEndereco());
+        return getRelatedAsLong(getEndereco());
     }
 
     @Column(nome = "endereco__fk")
     @Setter
     public void setEnderecoWithLong(long id) {
-        setEndereco((Endereco) setRelatedWithLong(getEndereco(), id, new Endereco()));
+        setEndereco(setRelatedWithLong(getEndereco(), id, new Endereco()));
     }
 
+    @Related(nome = "usuario")
+    @Getter
     public Usuario getUsuario() {
         return usuario;
     }
 
+    @Related(nome = "usuario")
+    @Setter
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -82,13 +88,13 @@ public class Cartao extends AbstractDTO implements DTO {
     @Column(nome = "usuario__fk")
     @Getter
     public long getUsuarioAsLong() {
-        return getRelatedDTOAsLong(getUsuario());
+        return getRelatedAsLong(getUsuario());
     }
 
     @Column(nome = "usuario__fk")
     @Setter
     public void setUsuarioWithLong(long id) {
-        setUsuario((Usuario) setRelatedWithLong(getUsuario(), id, new Usuario()));
+        setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
     @Column(nome = "pk")

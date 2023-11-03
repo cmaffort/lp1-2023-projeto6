@@ -8,7 +8,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "periodicidade")
-public class Periodicidade extends AbstractDTO implements DTO {
+public class Periodicidade extends AbstractDTO<Periodicidade> implements DTO<Periodicidade> {
     private int periodo;
     private int quantidadeDiasPorPeriodo;
 

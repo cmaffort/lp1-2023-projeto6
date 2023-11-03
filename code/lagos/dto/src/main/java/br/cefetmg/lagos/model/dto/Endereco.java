@@ -5,7 +5,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "endereco")
-public class Endereco extends AbstractDTO implements DTO {
+public class Endereco extends AbstractDTO<Endereco> implements DTO<Endereco> {
     private int cep;
     private int numero;
 

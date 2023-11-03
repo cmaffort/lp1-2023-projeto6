@@ -9,44 +9,48 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DAOHelper {
-    protected DTODb dtoDb;
-    private final DTO dto;
+public class DAOHelper<DataTransferObject extends DTO<DataTransferObject>> {
+    protected DTODb<DataTransferObject> dtoDb;
+    private final DataTransferObject dto;
 
-    public DAOHelper(DTO dto) {
+    public DAOHelper(DataTransferObject dto) {
         this.dto = dto;
-        dtoDb = new DTODb(dto);
+        dtoDb = new DTODb<>(dto);
     }
 
     @SafeVarargs
-    public final <T> List<T> mergeLists(List<T>... lists) {
+    public static <T> List<T> mergeLists(List<T>... lists) {
         return Stream.of(lists)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
-    public PersistenceException handleExeption(Exception e) {
+    public static PersistenceException handleExeption(Exception e) {
         e.printStackTrace();
         return new PersistenceException(e.getMessage(), e);
     }
 
-    public boolean executeSql(DTO dto, String sql, List<String> columnsPreparedStatement)
-            throws SQLException, ClassNotFoundException {
-        JDBCOperation operation = new JDBCOperation(dtoDb, sql, columnsPreparedStatement);
-        operation.executeUpdate(dto);
+    public boolean executeUpdate(DataTransferObject dto, String sql, List<String> columnsPreparedStatement) throws PersistenceException {
+        try {
+            JDBCOperation<DataTransferObject> operation = new JDBCOperation<>(dtoDb, sql, columnsPreparedStatement);
+            operation.executeUpdate(dto);
+            operation.close();
 
-        operation.close();
-
-        return true;
+            return true;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
     }
 
-    public List<Long> inserirVarios(List<DTO> dtos, String sql, List<String> columnsPreparedStatement)
+    public List<Long> executeUpdateGettingIds(List<DataTransferObject> dtos, String sql, List<String> columnsPreparedStatement)
             throws PersistenceException {
         try {
-            JDBCOperation inserirVariosOperation =
-                    new JDBCOperation(dtoDb, sql, columnsPreparedStatement,Statement.RETURN_GENERATED_KEYS);
-            inserirVariosOperation.executeUpdate(dtos);
-            List<Long> ids = inserirVariosOperation.getIds();
+            JDBCOperation<DataTransferObject> operation = new JDBCOperation<>(dtoDb, sql, columnsPreparedStatement, Statement.RETURN_GENERATED_KEYS);
+            operation.executeUpdate(dtos);
+
+            List<Long> ids = operation.getIds();
+            operation.close();
+
             for (int i = 0; i < ids.size(); i++)
                 dtos.get(i).setId(ids.get(i));
             return ids;
@@ -55,68 +59,73 @@ public class DAOHelper {
         }
     }
 
-    public Long inserir(DTO dto, String sql, List<String> columnsPreparedStatement)
+    public Long executeUpdateGettingId(DataTransferObject dto, String sql, List<String> columnsPreparedStatement)
             throws PersistenceException {
         try {
-            JDBCOperation inserirOperation =
-                    new JDBCOperation(dtoDb, sql, columnsPreparedStatement, Statement.RETURN_GENERATED_KEYS);
-            inserirOperation.executeUpdate(dto);
-            Long id = inserirOperation.getId();
+            JDBCOperation<DataTransferObject> operation = new JDBCOperation<>(dtoDb, sql, columnsPreparedStatement, Statement.RETURN_GENERATED_KEYS);
+            operation.executeUpdate(dto);
+
+            Long id = operation.getId();
+            operation.close();
             if (id != null)
                 dto.setId(id);
-            inserirOperation.close();
             return id;
         } catch (Exception e) {
             throw handleExeption(e);
         }
     }
 
-    public boolean alterar(DTO dto, String sql, List<String> columnsPreparedStatement)
+    private JDBCOperation<DataTransferObject> getOperationToExecuteQuery(DataTransferObject dto, String sql, List<String> columnsPreparedStatement)
+            throws SQLException, ClassNotFoundException {
+        if (columnsPreparedStatement == null)
+            columnsPreparedStatement = List.of();
+
+        JDBCOperation<DataTransferObject> operation = new JDBCOperation<>(dtoDb, sql, columnsPreparedStatement);
+
+        if (dto != null)
+            operation.executeQuery(dto);
+        else
+            operation.executeQuery();
+
+        return operation;
+    }
+
+    public List<DataTransferObject> executeQueryGettingList(DataTransferObject dto, String sql, List<String> columnsPreparedStatement, List<String> columnsResultSet)
             throws PersistenceException {
         try {
-            return executeSql(dto, sql, columnsPreparedStatement);
+            JDBCOperation<DataTransferObject> getDTOsOperation = getOperationToExecuteQuery(dto, sql, columnsPreparedStatement);
+
+            List<DataTransferObject> dtosResult = getDTOsOperation.getInstances(columnsResultSet);
+            getDTOsOperation.close();
+            return dtosResult;
         } catch (Exception e) {
             throw handleExeption(e);
         }
     }
 
-    public boolean remover(DTO dto, String sql, List<String> columnsPreparedStatement) throws PersistenceException {
-        try {
-            return executeSql(dto, sql, columnsPreparedStatement);
-        } catch (Exception e) {
-            throw handleExeption(e);
-        }
+    public List<DataTransferObject> executeQueryGettingList(String sql, List<String> columnsResultSet) throws PersistenceException {
+        return executeQueryGettingList(null, sql, null, columnsResultSet);
     }
 
-    public List<? extends DTO> listar(String sql, List<String> columnsResultSet) throws PersistenceException {
-        try {
-            JDBCOperation listarOperation = new JDBCOperation(dtoDb, sql, List.of());
-            listarOperation.executeQuery();
-            return listarOperation.getInstances(columnsResultSet);
-        } catch (Exception e) {
-            throw handleExeption(e);
-        }
-    }
-
-    public DTO consultarPor(String sql, List<String> columnsResultSet)
+    public DataTransferObject executeQueryGettingDTO(DataTransferObject dto, String sql, List<String> columnsPreparedStatement, List<String> columnsResultSet)
             throws PersistenceException {
         try {
-            JDBCOperation consultarOperation = new JDBCOperation(dtoDb, sql, List.of());
-            consultarOperation.executeQuery();
-            return consultarOperation.getInstance(columnsResultSet);
+            JDBCOperation<DataTransferObject> getDTOOperation = getOperationToExecuteQuery(dto, sql, columnsPreparedStatement);
+
+            DataTransferObject dtoResult = getDTOOperation.getInstance(columnsResultSet);
+            getDTOOperation.close();
+            return dtoResult;
         } catch (Exception e) {
             throw handleExeption(e);
         }
     }
 
-    public DTO consultarPorId(Long id, String sql, List<String> columnsPreparedStatement, List<String> columnsResultSet)
+    public DataTransferObject consultarPorId(Long id, String sql, List<String> columnsPreparedStatement, List<String> columnsResultSet)
             throws PersistenceException {
         try {
-            JDBCOperation consultarOperation = new JDBCOperation(dtoDb, sql, columnsPreparedStatement);
-            DTO dto = this.dto.getInstance();
+            DataTransferObject dto = this.dto.getInstance();
             dto.setId(id);
-            consultarOperation.executeQuery(dto);
-            return consultarOperation.getInstance(columnsResultSet);
+            return executeQueryGettingDTO(dto, sql, columnsPreparedStatement, columnsResultSet);
         } catch (Exception e) {
             throw handleExeption(e);
         }

@@ -1,14 +1,12 @@
 package br.cefetmg.lagos.model.dto.loja;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
+import br.cefetmg.lagos.model.dto.contrato.Loja;
 
 @Table(nome = "item")
-public class Item extends AbstractDTO implements DTO {
+public class Item extends AbstractDTO<Item> implements DTO<Item> {
     private double preco;
     private int quantidade;
 
@@ -41,20 +39,55 @@ public class Item extends AbstractDTO implements DTO {
         this.quantidade = quantidade;
     }
 
+    @Related(nome = "produto")
+    @Getter
     public Produto getProduto() {
         return produto;
     }
 
+
+    @Related(nome = "produto")
+    @Setter
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
+    @Column(nome = "produto__fk")
+    @Getter
+    public long getProdutoAsLong() {
+        return getRelatedAsLong(getProduto());
+    }
+
+    @Column(nome = "produto__fk")
+    @Setter
+    public void setProdutoWithLong(long id) {
+        setProduto(setRelatedWithLong(getProduto(), id, new Produto()));
+    }
+
+
+    @Related(nome = "historico_vet")
+    @Getter
     public HistoricoVET getHistoricoVET() {
         return historicoVET;
     }
 
+
+    @Related(nome = "historico_vet")
+    @Setter
     public void setHistoricoVET(HistoricoVET historicoVET) {
         this.historicoVET = historicoVET;
+    }
+
+    @Column(nome = "historico_vet__fk")
+    @Getter
+    public long getHistoricoVETAsLong() {
+        return getRelatedAsLong(getHistoricoVET());
+    }
+
+    @Column(nome = "historico_vet__fk")
+    @Setter
+    public void setHistoricoVETWithLong(long id) {
+        setHistoricoVET(setRelatedWithLong(getHistoricoVET(), id, new HistoricoVET()));
     }
 
     @Column(nome = "pk")

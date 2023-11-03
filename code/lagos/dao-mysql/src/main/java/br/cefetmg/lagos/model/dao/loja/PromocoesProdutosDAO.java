@@ -7,74 +7,9 @@ import br.cefetmg.lagos.model.dto.loja.PromocoesProdutos;
 
 import java.util.List;
 
-public class PromocoesProdutosDAO extends AbstractDAO implements IPromocoesProdutosDAO {
+public class PromocoesProdutosDAO extends AbstractDAO<PromocoesProdutos> implements IPromocoesProdutosDAO {
     @Override
-    protected DTO getDTO() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
-    }
-
-    @Override
-    public Long inserir(PromocoesProdutos promocoesProdutos) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public boolean alterar(PromocoesProdutos promocoesProdutos) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public boolean remover(PromocoesProdutos promocoesProdutos) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public List<PromocoesProdutos> listar() throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public List<PromocoesProdutos> listar(DTO... related) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public PromocoesProdutos consultarPorId(Long id) throws PersistenceException {
-        return null;
+    protected PromocoesProdutos getDTO() {
+        return new PromocoesProdutos();
     }
 }

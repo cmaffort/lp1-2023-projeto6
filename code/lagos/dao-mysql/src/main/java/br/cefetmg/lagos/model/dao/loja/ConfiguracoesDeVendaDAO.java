@@ -7,69 +7,9 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 
 import java.util.List;
 
-public class ConfiguracoesDeVendaDAO extends AbstractDAO implements IConfiguracoesDeVendaDAO {
+public class ConfiguracoesDeVendaDAO extends AbstractDAO<ConfiguracoesDeVenda> implements IConfiguracoesDeVendaDAO {
     @Override
-    protected DTO getDTO() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
-    }
-
-    @Override
-    public Long inserir(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public boolean alterar(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public boolean remover(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public List<ConfiguracoesDeVenda> listar() throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public ConfiguracoesDeVenda consultarPorId(Long id) throws PersistenceException {
-        return null;
+    protected ConfiguracoesDeVenda getDTO() {
+        return new ConfiguracoesDeVenda();
     }
 }

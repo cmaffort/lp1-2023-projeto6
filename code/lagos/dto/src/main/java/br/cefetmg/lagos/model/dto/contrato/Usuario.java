@@ -1,24 +1,30 @@
- package br.cefetmg.lagos.model.dto.contrato;
+package br.cefetmg.lagos.model.dto.contrato;
 
- import br.cefetmg.lagos.model.dto.Pessoa;
- import br.cefetmg.lagos.model.dto.annotations.Column;
- import br.cefetmg.lagos.model.dto.annotations.Getter;
- import br.cefetmg.lagos.model.dto.annotations.Setter;
- import br.cefetmg.lagos.model.dto.annotations.Table;
- import br.cefetmg.lagos.model.dto.base.DTO;
- import br.cefetmg.lagos.model.dto.enums.Permissao;
- import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
- import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
- import br.cefetmg.lagos.model.dto.permicoes.PermissoesUsuario;
+import br.cefetmg.lagos.model.dto.Pessoa;
+import br.cefetmg.lagos.model.dto.PessoaAdapter;
+import br.cefetmg.lagos.model.dto.annotations.*;
+import br.cefetmg.lagos.model.dto.base.AbstractDTO;
+import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.enums.IntEnum;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
+import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
+import br.cefetmg.lagos.model.dto.permicoes.PermissoesUsuario;
 
- import java.sql.Date;
- import java.util.List;
+import java.util.List;
 
- @Table(nome = "usuario")
-public class Usuario extends Pessoa implements DTO {
+@Table(nome = "usuario")
+public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, PessoaAdapter<Usuario> {
     private TipoUsuario tipo;
     private String username;
     private String senha;
+
+    private Pessoa pessoa;
+
+    public Usuario() {
+        super();
+        pessoa = new Pessoa();
+    }
 
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
@@ -37,13 +43,13 @@ public class Usuario extends Pessoa implements DTO {
     @Column(nome = "tipo")
     @Getter
     public int getTipoAsInt() {
-        return getTipo().ordinal();
+        return IntEnum.getIntForEnum(getTipo());
     }
 
     @Column(nome = "tipo")
     @Setter
     public void setTipoWithInt(int ord) {
-        setTipo(TipoUsuario.get(ord));
+        setTipo(IntEnum.getEnumForInt(ord, TipoUsuario.class));
     }
 
     @Column(nome = "username")
@@ -68,5 +74,29 @@ public class Usuario extends Pessoa implements DTO {
     @Setter
     public void setSenha(String senha) {
      this.senha = senha;
+    }
+
+    @Related(nome = "pessoa")
+    @Getter
+    public Pessoa getPessoa() {
+         return pessoa;
+     }
+
+    @Related(nome = "pessoa")
+    @Setter
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+     }
+
+    @Column(nome = "pk")
+    @Getter
+    public long getId() {
+        return getRelatedAsLong(getPessoa());
+    }
+
+    @Column(nome = "pk")
+    @Setter
+    public void setId(long id) {
+        setPessoa(setRelatedWithLong(getPessoa(), id, new Pessoa()));
     }
 }

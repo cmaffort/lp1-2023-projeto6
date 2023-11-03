@@ -1,17 +1,14 @@
 package br.cefetmg.lagos.model.dto.loja;
 
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 import java.util.List;
 
 @Table(nome = "produto")
-public class Produto extends AbstractDTO implements DTO {
+public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
     private String codigo;
     private String nome;
     private int quantidade;
@@ -69,12 +66,28 @@ public class Produto extends AbstractDTO implements DTO {
         this.preco = preco;
     }
 
+    @Related(nome = "loja")
+    @Getter
     public Loja getLoja() {
         return loja;
     }
 
+    @Related(nome = "loja")
+    @Setter
     public void setLoja(Loja loja) {
         this.loja = loja;
+    }
+
+    @Column(nome = "loja__fk")
+    @Getter
+    public long getLojaAsLong() {
+        return getRelatedAsLong(getLoja());
+    }
+
+    @Column(nome = "loja__fk")
+    @Setter
+    public void setLojaWithLong(long id) {
+        setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 
     @Column(nome = "pk")

@@ -7,20 +7,8 @@ import br.cefetmg.lagos.model.dto.loja.Venda;
 
 import java.util.List;
 
-public interface IVendaDAO extends IDAO {
-    Long inserir(Venda venda) throws PersistenceException;
-    
-    boolean alterar(Venda venda) throws PersistenceException;
-    
-    boolean remover(Venda venda) throws PersistenceException;
-    
-    List<Venda> listar() throws PersistenceException;
-
-    List<Venda> listar(DTO... related) throws PersistenceException;
-
+public interface IVendaDAO extends IDAO<Venda> {
     Double sum() throws PersistenceException;
 
-    Double sum(DTO related) throws PersistenceException;
-
-    Venda consultarPorId(Long id) throws PersistenceException;
+    Double sum(DTO... related) throws PersistenceException;
 }

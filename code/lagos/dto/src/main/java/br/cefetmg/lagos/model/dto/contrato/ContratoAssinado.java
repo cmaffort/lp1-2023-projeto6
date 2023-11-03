@@ -1,16 +1,13 @@
 package br.cefetmg.lagos.model.dto.contrato;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 import java.sql.Date;
 
 @Table(nome = "contrato_assinado")
-public class ContratoAssinado extends AbstractDTO implements DTO {
+public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements DTO<ContratoAssinado> {
     private boolean vigente;
     private Date dataDeContratacao;
     private boolean cancelado;
@@ -56,10 +53,14 @@ public class ContratoAssinado extends AbstractDTO implements DTO {
         this.cancelado = cancelado;
     }
 
+    @Related(nome = "usuario")
+    @Getter
     public Usuario getUsuario() {
         return usuario;
     }
 
+    @Related(nome = "usuario")
+    @Setter
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -67,19 +68,23 @@ public class ContratoAssinado extends AbstractDTO implements DTO {
     @Column(nome = "usuario__fk")
     @Getter
     public long getUsuarioAsLong() {
-        return getRelatedDTOAsLong(getUsuario());
+        return getRelatedAsLong(getUsuario());
     }
 
     @Column(nome = "usuario__fk")
     @Setter
     public void setUsuarioWithLong(long id) {
-        setUsuario((Usuario) setRelatedWithLong(getUsuario(), id, new Usuario()));
+        setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
     }
 
+    @Related(nome = "contrato")
+    @Getter
     public Contrato getContrato() {
         return contrato;
     }
 
+    @Related(nome = "contrato")
+    @Setter
     public void setContrato(Contrato contrato) {
         this.contrato = contrato;
     }
@@ -87,13 +92,13 @@ public class ContratoAssinado extends AbstractDTO implements DTO {
     @Column(nome = "contrato__fk")
     @Getter
     public long getContratoAsLong() {
-        return getRelatedDTOAsLong(getContrato());
+        return getRelatedAsLong(getContrato());
     }
 
     @Column(nome = "contrato__fk")
     @Setter
     public void setContratoWithLong(long id) {
-        setContrato((Contrato) setRelatedWithLong(getContrato(), id, new Contrato()));
+        setContrato(setRelatedWithLong(getContrato(), id, new Contrato()));
     }
 
     @Column(nome = "pk")

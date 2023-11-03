@@ -15,14 +15,14 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class DTODb {
-    private final DTO dto;
+public class DTODb<DataTransferObject extends DTO<DataTransferObject>> {
+    private final DataTransferObject dto;
     private final Manager manager;
 
     private final Map<String, Methods> getters;
     private final Map<String, Methods> setters;
 
-    public DTODb(DTO dto) {
+    public DTODb(DataTransferObject dto) {
         this.dto = dto;
         manager = dto.getManeger();
         getters = initGetters();
@@ -96,7 +96,7 @@ public class DTODb {
         return getMethodsForColumns(setters, columns);
     }
 
-    public int setPreparedStatement(DTO dto, PreparedStatement preparedStatement, List<String> columns, int initial) {
+    public int setPreparedStatement(DataTransferObject dto, PreparedStatement preparedStatement, List<String> columns, int initial) {
         AtomicInteger i = new AtomicInteger(initial);
         getGettersForColumns(columns).forEach(entry -> {
             Methods methods = entry.getValue();
@@ -109,11 +109,11 @@ public class DTODb {
         return i.get();
     }
 
-    public int setPreparedStatement(DTO dto, PreparedStatement preparedStatement, List<String> columns) {
+    public int setPreparedStatement(DataTransferObject dto, PreparedStatement preparedStatement, List<String> columns) {
         return setPreparedStatement(dto, preparedStatement, columns, 1);
     }
 
-    public DTO insertInto(DTO dto, ResultSet resultSet, List<String> columns) {
+    public DataTransferObject insertInto(DataTransferObject dto, ResultSet resultSet, List<String> columns) {
         getSettersForColumns(columns).forEach(entry -> {
             String column = entry.getKey();
             Methods methods = entry.getValue();
@@ -127,7 +127,7 @@ public class DTODb {
         return dto;
     }
 
-    public DTO createWith(ResultSet resultSet, List<String> columns) throws DTOExeption {
+    public DataTransferObject createWith(ResultSet resultSet, List<String> columns) throws DTOExeption {
         return insertInto(dto.getInstance(), resultSet, columns);
     }
 }

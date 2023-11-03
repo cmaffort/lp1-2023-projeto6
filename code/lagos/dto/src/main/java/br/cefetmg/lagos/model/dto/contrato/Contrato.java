@@ -1,22 +1,20 @@
 package br.cefetmg.lagos.model.dto.contrato;
 
 import br.cefetmg.lagos.model.dto.Periodicidade;
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
+import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 
 @Table(nome = "contrato")
-public class Contrato extends AbstractDTO implements DTO {
+public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private boolean ativo;
     private String descricao;
     private double preco;
-    private Blob documento;
+    private File documento;
     private float taxaDeMulta;
     private int numeroDeLojas;
     private Date dataDeCriacao;
@@ -61,16 +59,26 @@ public class Contrato extends AbstractDTO implements DTO {
         this.preco = preco;
     }
 
+    // TODO: Implementar parser de File para Blob e de Blob para file
+
+    public File getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(File documento) {
+        this.documento = documento;
+    }
+
     @Column(nome = "documento")
     @Getter
-    public Blob getDocumento() {
-        return documento;
+    public Blob getDocumentoAsBlob() {
+        return null;
     }
 
     @Column(nome = "documento")
     @Setter
-    public void setDocumento(Blob documento) {
-        this.documento = documento;
+    public void setDocumentoWithBlob(Blob documento) {
+
     }
 
     @Column(nome = "taxa_de_multa")
@@ -109,10 +117,14 @@ public class Contrato extends AbstractDTO implements DTO {
         this.dataDeCriacao = dataDeCriacao;
     }
 
+    @Related(nome = "periodicidade")
+    @Getter
     public Periodicidade getPeriodicidade() {
         return periodicidade;
     }
 
+    @Related(nome = "periodicidade")
+    @Setter
     public void setPeriodicidade(Periodicidade periodicidade) {
         this.periodicidade = periodicidade;
     }
@@ -120,13 +132,13 @@ public class Contrato extends AbstractDTO implements DTO {
     @Column(nome = "periodicidade__fk")
     @Getter
     public long getPeriodicidadeAsLong() {
-        return getRelatedDTOAsLong(getPeriodicidade());
+        return getRelatedAsLong(getPeriodicidade());
     }
 
     @Column(nome = "periodicidade__fk")
     @Setter
     public void setPeriodicidadeWithLong(long id) {
-        setPeriodicidade((Periodicidade) setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
+        setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
     }
 
     @Column(nome = "pk")

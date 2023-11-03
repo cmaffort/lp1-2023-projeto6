@@ -20,17 +20,38 @@ public class TestContratos {
         for (Pessoa p : pessoaDAO.listar())
             pessoaDAO.remover(p);
 
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("testesssss");
-        pessoa.setSobrenome("de paula");
-        pessoa.setEmail("pessao@f.con");
-        pessoa.setNascimento(Date.valueOf("2008-09-23"));
-        pessoa.setTelefone(2123455L);
-        pessoaDAO.inserir(pessoa);
+        Pessoa pessoa1 = new Pessoa();
+        pessoa1.setNome("José");
+        pessoa1.setSobrenome("Alencar");
+        pessoa1.setEmail("josAl@m.com");
+        pessoa1.setTelefone(3245234465L);
+        pessoa1.setNascimento(Date.valueOf("1888-07-12"));
 
-        System.out.println(pessoaDAO.consultarPorId(pessoa.getId()));
+        Pessoa pessoa2 = new Pessoa();
+        pessoa2.setNome("José");
+        pessoa2.setSobrenome("Ferreira");
+        pessoa2.setEmail("topJos@e.e");
+        pessoa2.setTelefone(3245234465L);
+        pessoa2.setNascimento(Date.valueOf("1888-07-12"));
+
+        System.out.println(pessoaDAO.inserir(pessoa1));
+        System.out.println(pessoaDAO.consultarPorId(pessoa1.getId()));
+        System.out.println(pessoaDAO.inserir(pessoa2));
+        System.out.println(pessoaDAO.consultarPorId(pessoa2.getId()));
 
         for (Pessoa p : pessoaDAO.listar())
+            System.out.println(p);
+
+        System.out.println();
+
+        System.out.println("Has `nome` = José");
+        for (Pessoa p : pessoaDAO.filtrar(pessoa1, "nome"))
+            System.out.println(p);
+
+        System.out.println();
+
+        System.out.println("Has `sobrenome` = Ferreira");
+        for (Pessoa p : pessoaDAO.filtrar(pessoa2, "sobrenome"))
             System.out.println(p);
     }
 
@@ -90,7 +111,7 @@ public class TestContratos {
 
         cartaoDAO.inserir(cartao1);
 
-        for (Cartao c : cartaoDAO.listar(cartao.getUsuario()))
+        for (Cartao c : cartaoDAO.filtrarRelated(cartao.getUsuario()))
             System.out.println(c);
 
         cartaoDAO.inserir(cartao);
@@ -118,6 +139,9 @@ public class TestContratos {
 
         for (Usuario u : usuarioDAO.listar())
             System.out.println(u);
+
+        for (Usuario u : usuarioDAO.listar())
+            System.out.println(u.getPessoa());
 
         usuarioDAO.inserir(usuario);
         usuario.setUsername("not");
@@ -182,9 +206,9 @@ public class TestContratos {
 
         System.out.println(contratoAssinadoDAO.inserir(contratoAssinado));
         System.out.println(contratoAssinadoDAO.consultarPorId(contratoAssinado.getId()));
-        System.out.println(contratoAssinadoDAO.consultarPor(contratoAssinado.getUsuario()));
+        System.out.println(contratoAssinadoDAO.filtrarRelated(contratoAssinado.getUsuario()).get(0));
 
-        for (ContratoAssinado c : contratoAssinadoDAO.listar(usuario))
+        for (ContratoAssinado c : contratoAssinadoDAO.filtrarRelated(usuario))
             System.out.println(c);
 
         contratoAssinadoDAO.inserir(contratoAssinado);
@@ -196,7 +220,7 @@ public class TestContratos {
     private static void testConfiguracoesDeInterface() throws SQLException, PersistenceException {
         IConfiguracoesDeInterfaceDAO configuracoesDeInterfaceDAO = new ConfiguracoesDeInterfaceDAO();
         ConfiguracoesDeInterface configuracoesDeInterface = new ConfiguracoesDeInterface();
-        configuracoesDeInterface.setLogo(new SerialBlob("1242".getBytes()));
+        configuracoesDeInterface.setLogoWithBlob(new SerialBlob("1242".getBytes()));
         configuracoesDeInterface.setCorBase("#000000");
         configuracoesDeInterface.setNomeDaEmpresa("LOSH");
         configuracoesDeInterface.setId(1);
@@ -209,9 +233,9 @@ public class TestContratos {
 
         System.out.println(configuracoesDeInterfaceDAO.inserir(configuracoesDeInterface));
         System.out.println(configuracoesDeInterfaceDAO.consultarPorId(configuracoesDeInterface.getId()));
-//        System.out.println(configuracoesDeInterfaceDAO.consultarPor(configuracoesDeInterface.getUsuario()));
+//        System.out.println(configuracoesDeInterfaceDAO.consultar(configuracoesDeInterface.getUsuario()));
 
-        for (ConfiguracoesDeInterface c : configuracoesDeInterfaceDAO.listar(usuario))
+        for (ConfiguracoesDeInterface c : configuracoesDeInterfaceDAO.filtrarRelated(usuario))
             System.out.println(c);
 
         configuracoesDeInterfaceDAO.remover(configuracoesDeInterface);
@@ -223,6 +247,7 @@ public class TestContratos {
 
     public static void main(String[] args) throws PersistenceException, DTOExeption, SQLException {
         // Essa classe não realiza testes automatizados. Por enquanto ela é só um playground
+//        testPessoa();
         testUsuario();
         testEndereco();
         testCartao();

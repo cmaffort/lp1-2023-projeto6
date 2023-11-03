@@ -7,70 +7,10 @@ import br.cefetmg.lagos.model.dto.loja.Venda;
 
 import java.util.List;
 
-public class VendaDAO extends AbstractDAO implements IVendaDAO {
+public class VendaDAO extends AbstractDAO<Venda> implements IVendaDAO {
     @Override
-    protected DTO getDTO() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
-    }
-
-    @Override
-    public Long inserir(Venda venda) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public boolean alterar(Venda venda) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public boolean remover(Venda venda) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public List<Venda> listar() throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public List<Venda> listar(DTO... related) throws PersistenceException {
-        return null;
+    protected Venda getDTO() {
+        return new Venda();
     }
 
     @Override
@@ -79,12 +19,7 @@ public class VendaDAO extends AbstractDAO implements IVendaDAO {
     }
 
     @Override
-    public Double sum(DTO related) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public Venda consultarPorId(Long id) throws PersistenceException {
+    public Double sum(DTO... related) throws PersistenceException {
         return null;
     }
 }

@@ -10,7 +10,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import java.sql.Date;
 
 @Table(nome = "pessoa")
-public class Pessoa extends AbstractDTO implements DTO {
+public class Pessoa extends AbstractDTO<Pessoa> implements DTO<Pessoa> {
     private String nome;
     private String sobrenome;
     private Date nascimento;
@@ -89,5 +89,10 @@ public class Pessoa extends AbstractDTO implements DTO {
     @Setter
     public void setId(long id) {
         this.id = id;
+    }
+
+    public static void main(String[] args) {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome("Pessoa");
     }
 }

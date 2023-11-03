@@ -7,16 +7,5 @@ import br.cefetmg.lagos.model.dto.loja.Produto;
 
 import java.util.List;
 
-public interface IProdutoDAO extends IDAO {
-    Long inserir(Produto produto) throws PersistenceException;
-   
-    boolean alterar(Produto produto) throws PersistenceException;
-    
-    boolean remover(Produto produto) throws PersistenceException;
-    
-    List<Produto> listar() throws PersistenceException;
-
-    List<Produto> listar(DTO... related) throws PersistenceException;
-
-    Produto consultarPorId(Long id) throws PersistenceException;
+public interface IProdutoDAO extends IDAO<Produto> {
 }

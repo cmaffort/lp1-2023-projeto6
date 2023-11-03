@@ -4,15 +4,7 @@ import java.util.List;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Pessoa;
+import br.cefetmg.lagos.model.dto.base.DTO;
 
-public interface IPessoaDAO extends IDAO {
-    Long inserir(Pessoa pessoa)  throws PersistenceException;
-
-    boolean alterar(Pessoa pessoa) throws PersistenceException;
-    
-    boolean remover(Pessoa pessoa) throws PersistenceException;
-    
-    List<Pessoa> listar() throws PersistenceException;
-
-    Pessoa consultarPorId(Long id) throws PersistenceException;
+public interface IPessoaDAO extends IDAO<Pessoa> {
 }

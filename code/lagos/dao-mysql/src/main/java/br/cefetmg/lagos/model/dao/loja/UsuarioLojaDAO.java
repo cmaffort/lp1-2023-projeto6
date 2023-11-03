@@ -7,74 +7,9 @@ import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
 
 import java.util.List;
 
-public class UsuarioLojaDAO extends AbstractDAO implements IUsuarioLojaDAO {
+public class UsuarioLojaDAO extends AbstractDAO<UsuarioLoja> implements IUsuarioLojaDAO {
     @Override
-    protected DTO getDTO() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementInserir() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementAlterar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementRemover() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetListar() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getOrderByPriority() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsPreparedStatementConsultar() {
-        return null;
-    }
-
-    @Override
-    protected List<List<String>> getColumnsResultSetConsultar() {
-        return null;
-    }
-
-    @Override
-    public Long inserir(UsuarioLoja usuarioLoja) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public boolean alterar(UsuarioLoja usuarioLoja) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public boolean remover(UsuarioLoja usuarioLoja) throws PersistenceException {
-        return false;
-    }
-
-    @Override
-    public List<UsuarioLoja> listar() throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public List<UsuarioLoja> listar(DTO... related) throws PersistenceException {
-        return null;
-    }
-
-    @Override
-    public UsuarioLoja consultarPorId(Long id) throws PersistenceException {
-        return null;
+    protected UsuarioLoja getDTO() {
+        return new UsuarioLoja();
     }
 }

@@ -1,10 +1,7 @@
 package br.cefetmg.lagos.model.dto.loja;
 
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
@@ -14,7 +11,7 @@ import java.sql.Blob;
 import java.util.List;
 
 @Table(nome = "configuracoes_de_venda")
-public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
+public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> implements DTO<ConfiguracoesDeVenda> {
     private float limiteDeDesconto;
     private float taxaDeJurosAoMes;
     private List<MetodosPagamento> metodosAceitos;
@@ -22,8 +19,6 @@ public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
     private float porcentagemComissao;
 
     private Loja loja;
-
-    private long id;
 
     @Column(nome = "limite_de_desconto")
     @Getter
@@ -57,15 +52,19 @@ public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
         this.metodosAceitos = metodosAceitos;
     }
 
-    // TODO: Implement getting an setting blobs
+    // TODO: Implementar list<int> para blob e o inverso, usar Gson
 
     @Column(nome = "metodos_aceitos")
     @Getter
-    public Blob getMetodosAceitosAsBlob() {return null;}
+    public Blob getMetodosAceitosAsBlob() {
+        return null;
+    }
 
     @Column(nome = "metodos_aceitos")
     @Setter
-    public void setMetodosAceitosWithBlob(Blob metodosAceitos) {}
+    public void setMetodosAceitosWithBlob(Blob metodosAceitos) {
+
+    }
 
     public List<Bandeira> getBandeirasAceitas() {
         return bandeirasAceitas;
@@ -75,13 +74,19 @@ public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
         this.bandeirasAceitas = bandeirasAceitas;
     }
 
+    // TODO: Implementar list<int> para blob e o inverso, usar Gson
+
     @Column(nome = "bandeiras_aceitas")
     @Getter
-    public Blob getBandeirasAceitasAsBlob() {return null;}
+    public Blob getBandeirasAceitasAsBlob() {
+        return null;
+    }
 
     @Column(nome = "bandeiras_aceitas")
     @Setter
-    public void setBandeirasAceitasWithBlob(Blob bandeirasAceitas) {}
+    public void setBandeirasAceitasWithBlob(Blob bandeirasAceitas) {
+
+    }
 
     @Column(nome = "porcentagem_comissao")
     @Getter
@@ -95,10 +100,14 @@ public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
         this.porcentagemComissao = porcentagemComissao;
     }
 
+    @Related(nome = "loja")
+    @Getter
     public Loja getLoja() {
         return loja;
     }
 
+    @Related(nome = "loja")
+    @Setter
     public void setLoja(Loja loja) {
         this.loja = loja;
     }
@@ -106,12 +115,12 @@ public class ConfiguracoesDeVenda extends AbstractDTO implements DTO {
     @Column(nome = "pk")
     @Getter
     public long getId() {
-        return id;
+        return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "pk")
     @Setter
     public void setId(long id) {
-        this.id = id;
+        setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
     }
 }

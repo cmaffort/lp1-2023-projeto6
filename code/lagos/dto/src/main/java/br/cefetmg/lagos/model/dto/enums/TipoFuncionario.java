@@ -1,9 +1,5 @@
 package br.cefetmg.lagos.model.dto.enums;
 
-public enum TipoFuncionario implements TipoPessoa {
+public enum TipoFuncionario implements TipoPessoa, IntEnum<TipoFuncionario> {
     CAIXEIRO, VENDEDOR, CHEFE, GERENTE, ESTOQUISTA;
-
-    public static TipoFuncionario get(int ord) {
-        return TipoFuncionario.values()[ord];
-    }
 }

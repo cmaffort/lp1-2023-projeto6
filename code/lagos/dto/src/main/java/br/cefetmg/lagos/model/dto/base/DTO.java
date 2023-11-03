@@ -4,28 +4,28 @@ import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
-public interface DTO {
+public interface DTO<DataTransferObject extends DTO<DataTransferObject>> {
     long getId();
 
     void setId(long id);
 
-    Manager getManeger();
+    Manager<DataTransferObject> getManeger();
 
-    default DTO getInstance() throws DTOExeption {
+    default DataTransferObject getInstance() throws DTOExeption {
         try {
-            Constructor<? extends DTO> constructorDto = getClass().getConstructor();
+            Constructor<DataTransferObject> constructorDto = (Constructor<DataTransferObject>) getClass().getConstructor();
             return constructorDto.newInstance();
         } catch (Exception e) {
             throw new DTOExeption(e.getMessage(), e);
         }
     }
 
-    default DTO getInstance(Map<String, Object> map) throws DTOExeption {
-        DTO dto = getInstance();
-        Manager manager = getManeger();
+    default DataTransferObject getInstance(Map<String, Object> map) throws DTOExeption {
+        DataTransferObject dto = getInstance();
+        Manager<DataTransferObject> manager = dto.getManeger();
         map.forEach((column, value) -> {
             try {
                 manager.getSetters().get(column).invoke(dto, value);
@@ -37,17 +37,19 @@ public interface DTO {
         return dto;
     }
 
-    default DTO getInstance(DTO dto) throws DTOExeption {
+    default DataTransferObject getInstance(DataTransferObject dto) throws DTOExeption {
         return getInstance(dto.toMap());
     }
 
-    DTO clone();
-
     Map<String, Object> toMap();
+
+    Map<String, Object> toMap(List<String> columns);
 
     String toString();
 
-    default boolean equals(DTO dto) {
+    String toString(List<String> columns);
+
+    default boolean equals(DataTransferObject dto) {
         return equals(dto.toMap());
     }
 

@@ -1,14 +1,11 @@
 package br.cefetmg.lagos.model.dto.loja;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "produto_compra")
-public class ProdutoCompra extends AbstractDTO implements DTO {
+public class ProdutoCompra extends AbstractDTO<ProdutoCompra> implements DTO<ProdutoCompra> {
     private int quantidade;
     private double precoUnitario;
 
@@ -41,20 +38,52 @@ public class ProdutoCompra extends AbstractDTO implements DTO {
         this.precoUnitario = precoUnitario;
     }
 
+    @Related(nome = "produto")
+    @Getter
     public Produto getProduto() {
         return produto;
     }
 
+    @Related(nome = "produto")
+    @Setter
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
+    @Column(nome = "produto__fk")
+    @Getter
+    public long getProdutoAsLong() {
+        return getRelatedAsLong(getProduto());
+    }
+
+    @Column(nome = "produto__fk")
+    @Setter
+    public void setProdutoWithLong(long id) {
+        setProduto(setRelatedWithLong(getProduto(), id, new Produto()));
+    }
+
+    @Related(nome = "compra")
+    @Getter
     public Compra getCompra() {
         return compra;
     }
 
+    @Related(nome = "compra")
+    @Setter
     public void setCompra(Compra compra) {
         this.compra = compra;
+    }
+
+    @Column(nome = "compra__fk")
+    @Getter
+    public long getCompraAsLong() {
+        return getRelatedAsLong(getCompra());
+    }
+
+    @Column(nome = "compra__fk")
+    @Setter
+    public void setCompraWithLong(long id) {
+        setCompra(setRelatedWithLong(getCompra(), id, new Compra()));
     }
 
     @Column(nome = "pk")

@@ -6,14 +6,5 @@ import br.cefetmg.lagos.model.dao.IDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.loja.ConfiguracoesDeVenda;
 
-public interface IConfiguracoesDeVendaDAO extends IDAO {
-    Long inserir(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException;
-    
-    boolean alterar(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException;
-    
-    boolean remover(ConfiguracoesDeVenda configuracoesDeVenda) throws PersistenceException;
-    
-    List<ConfiguracoesDeVenda> listar() throws PersistenceException;
-
-    ConfiguracoesDeVenda consultarPorId(Long id) throws PersistenceException;
+public interface IConfiguracoesDeVendaDAO extends IDAO<ConfiguracoesDeVenda> {
 }

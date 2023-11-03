@@ -1,6 +1,7 @@
 package br.cefetmg.lagos.model.dao.util;
 
 import java.util.List;
+import java.util.Map;
 
 public class StringSqlDaoHelper {
     public static String insertWithValues(String table, List<String> columns) {
@@ -52,6 +53,10 @@ public class StringSqlDaoHelper {
     }
 
     public static String selectFromWhere(List<String> columnsSelect, String table, List<String> columnsWhere) {
+        return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.where(columnsWhere));
+    }
+
+    public static String selectFromWhere(List<String> columnsSelect, String table, Map<String, String> columnsWhere) {
         return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.where(columnsWhere));
     }
 
