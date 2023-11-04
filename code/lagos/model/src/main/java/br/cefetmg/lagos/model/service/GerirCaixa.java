@@ -1,9 +1,10 @@
 package br.cefetmg.lagos.model.service;
 
-import br.cefetmg.lagos.model.dto.Caixa;
-import br.cefetmg.lagos.model.dao.ICaixaDAO;
-import br.cefetmg.lagos.model.dao.CaixaDAO;
-import java.sql.SQLException;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dao.loja.CaixaDAO;
+import br.cefetmg.lagos.model.dao.loja.ICaixaDAO;
+import br.cefetmg.lagos.model.dto.loja.Caixa;
+
 import java.util.List;
 
 public class GerirCaixa implements IGerirCaixa {
@@ -19,7 +20,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
     
     @Override
-    public long cadastrar(Caixa caixa) throws SQLException, ClassNotFoundException {
+    public long cadastrar(Caixa caixa) throws PersistenceException {
         
         Long result = caixaDAO.inserir(caixa);
         return result;
@@ -27,7 +28,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
 
     @Override
-    public boolean alterar(Caixa caixa) throws SQLException, ClassNotFoundException {
+    public boolean alterar(Caixa caixa) throws PersistenceException {
         
         boolean result = caixaDAO.alterar(caixa);
         return result;
@@ -35,7 +36,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
 
     @Override
-    public boolean remover(Caixa caixa) throws SQLException, ClassNotFoundException {
+    public boolean remover(Caixa caixa) throws PersistenceException {
         
         boolean result = caixaDAO.remover(caixa);
         return result;
@@ -43,7 +44,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
 
     @Override
-    public List<Caixa> listar() throws SQLException, ClassNotFoundException {
+    public List<Caixa> listar() throws PersistenceException {
     
         List<Caixa> result = caixaDAO.listar();
         return result;
@@ -51,7 +52,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
     
     @Override
-    public boolean abrirCaixa(Caixa caixa) throws SQLException, ClassNotFoundException {
+    public boolean abrirCaixa(Caixa caixa) throws PersistenceException {
        
         caixa.setAberto(true);
         
@@ -62,7 +63,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
     
     @Override
-    public boolean fecharCaixa(Caixa caixa) throws SQLException, ClassNotFoundException {
+    public boolean fecharCaixa(Caixa caixa) throws PersistenceException {
        
         caixa.setAberto(false);
         
@@ -73,7 +74,7 @@ public class GerirCaixa implements IGerirCaixa {
     }
     
     @Override
-    public boolean moverDinheiro(Caixa origem, Caixa destino, Double qtd) throws SQLException, ClassNotFoundException {
+    public boolean moverDinheiro(Caixa origem, Caixa destino, Double qtd) throws PersistenceException {
         
         Boolean result = false;
         Boolean[] results = new Boolean[]{false, false};
@@ -90,7 +91,7 @@ public class GerirCaixa implements IGerirCaixa {
             results[0] = caixaDAO.alterar(origem);
             results[1] = caixaDAO.alterar(destino);
             
-            result = results[0]&&results[1]&&true;
+            result = results[0] && results[1];
             
         }
         
@@ -99,11 +100,11 @@ public class GerirCaixa implements IGerirCaixa {
     }
     
     @Override
-    public boolean moverDinheiro(Caixa origem, Double qtd) throws SQLException, ClassNotFoundException {
+    public boolean moverDinheiro(Caixa origem, Double qtd) throws PersistenceException {
         
         Boolean result;
         
-        Double dinheiroOrigem = origem.getDinheiroEmCaixa()+qtd;
+        Double dinheiroOrigem = origem.getDinheiroEmCaixa() + qtd;
         
         origem.setDinheiroEmCaixa(dinheiroOrigem);
         
