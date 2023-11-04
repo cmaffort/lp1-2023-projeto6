@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "promocoes__produtos")
+@PrimaryKey(nome = "pk")
 public class PromocoesProdutos extends AbstractDTO<PromocoesProdutos> implements DTO<PromocoesProdutos> {
     private Promocao promocao;
     private Produto produto;
@@ -24,12 +25,14 @@ public class PromocoesProdutos extends AbstractDTO<PromocoesProdutos> implements
     }
 
     @Column(nome = "promocao__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPromocaoAsLong() {
         return getRelatedAsLong(getPromocao());
     }
 
     @Column(nome = "promocao__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPromocaoWithLong(Long id) {
         setPromocao(setRelatedWithLong(getPromocao(), id, new Promocao()));
@@ -48,12 +51,14 @@ public class PromocoesProdutos extends AbstractDTO<PromocoesProdutos> implements
     }
 
     @Column(nome = "produto__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getProdutoAsLong() {
         return getRelatedAsLong(getProduto());
     }
 
     @Column(nome = "produto__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setProdutoWithLong(Long id) {
         setProduto(setRelatedWithLong(getProduto(), id, new Produto()));

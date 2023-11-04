@@ -10,6 +10,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import java.sql.Date;
 
 @Table(nome = "cliente")
+@PrimaryKey(nome = "pk")
 public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, PessoaAdapter<Cliente> {
     private String instagram;
     private Date cadastro;
@@ -31,12 +32,14 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
     }
 
     @Column(nome = "cadastro", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getCadastro() {
         return cadastro;
     }
 
     @Column(nome = "cadastro", tipo = Date.class)
+    @NotNull
     @Setter
     public void setCadastro(Date cadastro) {
         this.cadastro = cadastro;
@@ -55,12 +58,14 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setRelatedWithLong(getLoja(), id, new Loja());
@@ -79,12 +84,14 @@ public class Cliente extends AbstractDTO<Cliente> implements DTO<Cliente>, Pesso
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
         return getRelatedAsLong(getPessoa());
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
         setPessoa(setRelatedWithLong(pessoa, id, new Pessoa()));

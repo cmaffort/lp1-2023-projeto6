@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "produto_compra")
+@PrimaryKey(nome = "pk")
 public class ProdutoCompra extends AbstractDTO<ProdutoCompra> implements DTO<ProdutoCompra> {
     private Integer quantidade;
     private Double precoUnitario;
@@ -15,24 +16,28 @@ public class ProdutoCompra extends AbstractDTO<ProdutoCompra> implements DTO<Pro
     private Long id;
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getQuantidade() {
         return quantidade;
     }
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
     @Column(nome = "preco_unitario", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getPrecoUnitario() {
         return precoUnitario;
     }
 
     @Column(nome = "preco_unitario", tipo = Double.class)
+    @NotNull
     @Setter
     public void setPrecoUnitario(Double precoUnitario) {
         this.precoUnitario = precoUnitario;
@@ -75,12 +80,14 @@ public class ProdutoCompra extends AbstractDTO<ProdutoCompra> implements DTO<Pro
     }
 
     @Column(nome = "compra__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getCompraAsLong() {
         return getRelatedAsLong(getCompra());
     }
 
     @Column(nome = "compra__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setCompraWithLong(Long id) {
         setCompra(setRelatedWithLong(getCompra(), id, new Compra()));

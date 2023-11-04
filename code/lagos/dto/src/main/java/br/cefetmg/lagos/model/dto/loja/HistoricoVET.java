@@ -10,6 +10,7 @@ import br.cefetmg.lagos.model.dto.enums.TipoHistoricoVET;
 import java.sql.Date;
 
 @Table(nome = "historico_vet")
+@PrimaryKey(nome = "pk")
 public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<HistoricoVET> {
     private TipoHistoricoVET tipo;
     private Date data;
@@ -27,24 +28,28 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoHistoricoVET.class));
     }
 
     @Column(nome = "data", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getData() {
         return data;
     }
 
     @Column(nome = "data", tipo = Date.class)
+    @NotNull
     @Setter
     public void setData(Date data) {
         this.data = data;
@@ -63,12 +68,14 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

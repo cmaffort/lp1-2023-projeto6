@@ -206,7 +206,9 @@ public class TestContratos {
 
         System.out.println(contratoAssinadoDAO.inserir(contratoAssinado));
         System.out.println(contratoAssinadoDAO.consultarPorId(contratoAssinado.getId()));
+
         System.out.println(contratoAssinadoDAO.filtrarRelated(contratoAssinado.getUsuario()).get(0));
+        System.out.println(contratoAssinadoDAO.filtrarRelated(contratoAssinado.getUsuario()).get(0).getUsuario());
 
         for (ContratoAssinado c : contratoAssinadoDAO.filtrarRelated(usuario))
             System.out.println(c);

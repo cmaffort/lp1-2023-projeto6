@@ -1,7 +1,6 @@
 package br.cefetmg.lagos.model.dto.base;
 
 import br.cefetmg.lagos.model.dto.annotations.*;
-import br.cefetmg.lagos.model.dto.util.Pair;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +16,8 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     private final Map<String, Method> setters;
     private final List<String> columns;
 
+    private final Map<String, Method> gettersNotNull;
+
     private final Map<String, Method> getterRelated;
     private final Map<String, Method> setterRelated;
 
@@ -29,7 +30,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     public Class<?> getTypeForColumn(String column) {
-        return getGetters().get(column).getAnnotation(Column.class).tipo();
+        return getters.get(column).getAnnotation(Column.class).tipo();
     }
 
     private Map<String, Method> getMethodsFromDTO(Class<? extends Annotation> leak) {
@@ -60,6 +61,8 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
         setters = initSetters();
         columns = initColumns();
 
+        gettersNotNull = initGettersNotNull();
+
         getterRelated = initRelatedGetters();
         setterRelated = initRelatedSetters();
     }
@@ -85,7 +88,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     private List<String> initColumns() {
-        return new ArrayList<>(getGetters().keySet().stream().sorted().toList());
+        return new ArrayList<>(getters.keySet().stream().sorted().toList());
     }
 
     public List<String> getColumns() {
@@ -108,12 +111,58 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
         return setterRelated;
     }
 
+    public List<String> getRelatedTables() {
+        return new ArrayList<>(getterRelated.keySet());
+    }
+
     public String getPKColumn() {
-        return "pk";
+        return dtoClass.getDeclaredAnnotation(PrimaryKey.class).nome();
+    }
+
+    private Map<String, Method> initGettersNotNull() {
+        Map<String, Method> map = getters.entrySet().stream()
+                .filter(entry -> entry.getValue().isAnnotationPresent(NotNull.class))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        return new TreeMap<>(map);
+    }
+
+    public boolean hasAllNotNullFields(List<String> columns) {
+        try {
+            for (String column : columns) {
+                Method method = gettersNotNull.get(column);
+                if (method == null)
+                    continue;
+                if (method.invoke(dto) == null)
+                    return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    public List<String> getAllNotNullColumns() {
+        return gettersNotNull.keySet().stream().toList();
+    }
+
+    public List<String> getAllNotNullColumnsButPk() {
+        List<String> c = new ArrayList<>(gettersNotNull.keySet().stream().toList());
+        c.remove(getPKColumn());
+        return c;
+    }
+
+    public boolean hasAllNotNullFields() {
+        return hasAllNotNullFields(getAllNotNullColumns());
+    }
+
+    public boolean hasAllNotNullFieldsButPk() {
+        return hasAllNotNullFields(getAllNotNullColumnsButPk());
     }
 
     public List<String> getColumnsButPK() {
-        List<String> c = new ArrayList<>(getColumns());
+        List<String> c = new ArrayList<>(columns);
         c.remove(getPKColumn());
         return c;
     }
@@ -123,7 +172,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     private Object getColumnValue(String column) throws InvocationTargetException, IllegalAccessException {
-        return getGetters().get(column).invoke(dto);
+        return getters.get(column).invoke(dto);
     }
 
     private String getColumnValueAsString(String column) throws InvocationTargetException, IllegalAccessException {
@@ -156,7 +205,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     public Map<String, Object> toMap() {
-        return toMap(getColumns());
+        return toMap(columns);
     }
 
     public Map<String, String> toStringMap(List<String> columns) {
@@ -166,16 +215,16 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     public Map<String, String> toStringMap() {
-        return toStringMap(getColumns());
+        return toStringMap(columns);
     }
 
     public String toString(List<String> columns) {
-        return toStringMap(columns).entrySet().stream()
+        return getTable() + ": " + toStringMap(columns).entrySet().stream()
                 .map(entry -> entry.getKey() + ": " + entry.getValue())
                 .collect(Collectors.joining(", ", "{", "}"));
     }
 
     public String toString() {
-        return toString(getColumns());
+        return toString(columns);
     }
 }

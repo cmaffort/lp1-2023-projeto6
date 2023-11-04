@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Testando servletweb</p>>
+<p>Testando servletweb</p>
 </body>
 </html>

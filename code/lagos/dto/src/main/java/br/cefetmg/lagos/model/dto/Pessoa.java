@@ -1,15 +1,13 @@
 package br.cefetmg.lagos.model.dto;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
-import br.cefetmg.lagos.model.dto.annotations.Table;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 import java.sql.Date;
 
 @Table(nome = "pessoa")
+@PrimaryKey(nome = "pk")
 public class Pessoa extends AbstractDTO<Pessoa> implements DTO<Pessoa> {
     private String nome;
     private String sobrenome;
@@ -20,12 +18,14 @@ public class Pessoa extends AbstractDTO<Pessoa> implements DTO<Pessoa> {
     private Long id;
 
     @Column(nome = "nome", tipo = String.class)
+    @NotNull
     @Getter
     public String getNome() {
         return nome;
     }
 
     @Column(nome = "nome", tipo = String.class)
+    @NotNull
     @Setter
     public void setNome(String nome) {
         this.nome = nome;
@@ -44,24 +44,28 @@ public class Pessoa extends AbstractDTO<Pessoa> implements DTO<Pessoa> {
     }
 
     @Column(nome = "nascimento", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getNascimento() {
         return nascimento;
     }
 
     @Column(nome = "nascimento", tipo = Date.class)
+    @NotNull
     @Setter
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 
     @Column(nome = "email", tipo = String.class)
+    @NotNull
     @Getter
     public String getEmail() {
         return email;
     }
 
     @Column(nome = "email", tipo = String.class)
+    @NotNull
     @Setter
     public void setEmail(String email) {
         this.email = email;

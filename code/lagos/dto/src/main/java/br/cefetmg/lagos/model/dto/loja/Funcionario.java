@@ -15,6 +15,7 @@ import br.cefetmg.lagos.model.dto.permicoes.PermissoesFuncionario;
 import java.util.List;
 
 @Table(nome = "funcionario")
+@PrimaryKey(nome = "pk")
 public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcionario>, PessoaAdapter<Funcionario> {
     private Double salario;
     private Boolean ativo;
@@ -31,24 +32,28 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     }
 
     @Column(nome = "salario", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getSalario() {
         return salario;
     }
 
     @Column(nome = "salario", tipo = Double.class)
+    @NotNull
     @Setter
     public void setSalario(Double salario) {
         this.salario = salario;
     }
 
     @Column(nome = "ativo", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isAtivo() {
         return ativo;
     }
 
     @Column(nome = "ativo", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
@@ -63,12 +68,14 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     }
 
     @Column(nome = "tipo_funcionario", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
     @Column(nome = "tipo_funcionario", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoFuncionario.class));
@@ -87,12 +94,14 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
@@ -111,12 +120,14 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
         return getRelatedAsLong(getPessoa());
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
         setPessoa(setRelatedWithLong(pessoa, id, new Pessoa()));

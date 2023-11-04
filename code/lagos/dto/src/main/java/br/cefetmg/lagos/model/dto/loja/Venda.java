@@ -5,6 +5,8 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "venda")
+@PrimaryKey(nome = "pk")
+@NotNull
 public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVETAdapter<Venda> {
     private Float desconto;
     private Integer numeroDeParcelas;
@@ -52,12 +54,14 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
     }
 
     @Column(nome = "caixa__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getCaixaAsLong() {
         return getRelatedAsLong(getCaixa());
     }
 
     @Column(nome = "caixa__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setCaixaWithLong(Long id) {
         setCaixa(setRelatedWithLong(getCaixa(), id, new Caixa()));
@@ -125,12 +129,14 @@ public class Venda extends AbstractDTO<Venda> implements DTO<Venda>, HistoricoVE
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
         return getRelatedAsLong(getHistoricoVET());
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
         setHistoricoVET(setRelatedWithLong(getHistoricoVET(), id, new HistoricoVET()));

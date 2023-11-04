@@ -56,6 +56,10 @@ public class StringSqlDaoHelper {
         return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.where(columnsWhere));
     }
 
+    public static String selectFromWhereIn(List<String> columnsSelect, String table, String columnWhere, List<String> valuesIn) {
+        return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.whereIn(columnWhere, valuesIn));
+    }
+
     public static String selectFromWhere(List<String> columnsSelect, String table, Map<String, String> columnsWhere) {
         return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.where(columnsWhere));
     }
@@ -66,5 +70,19 @@ public class StringSqlDaoHelper {
 
     public static String selectAllFromWhereEq(String table, List<String> columnsWhere) {
         return StringSql.bigStatement(StringSql.selectAll(), StringSql.from(table), StringSql.whereEq(columnsWhere));
+    }
+
+    public static String selectFromManyToMany(List<String> columnsSelect, String table, String associationTable, String otherTable, String tablePK, String idValue) {
+        return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table),
+                StringSql.innerJoin(associationTable, Map.ofEntries(
+                        Map.entry(associationTable + "." + table + "__fk", table + "." + tablePK)
+                )), StringSql.where(List.of(associationTable + "." + otherTable + "__fk" + " = " + idValue)));
+    }
+
+    public static String selectInRepeating(List<String> columnsSelect, String table, String columnWhere, List<String> valuesIn) {
+        return StringSql.bigStatement(StringSql.select(columnsSelect), StringSql.from(table), StringSql.innerJoinSelectUnionAll(valuesIn, "y",
+                Map.ofEntries(
+                        Map.entry("x.y", table + "." + columnWhere)
+                ), "x"));
     }
 }

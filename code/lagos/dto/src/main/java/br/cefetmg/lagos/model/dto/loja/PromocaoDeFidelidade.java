@@ -9,6 +9,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import java.sql.Date;
 
 @Table(nome = "promocao_de_fidelidade")
+@PrimaryKey(nome = "pk")
 public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> implements DTO<PromocaoDeFidelidade> {
     private Integer minVendas;
     private Boolean ativa;
@@ -21,48 +22,56 @@ public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> impl
     private Long id;
 
     @Column(nome = "min_vendas", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getMinVendas() {
         return minVendas;
     }
 
     @Column(nome = "min_vendas", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setMinVendas(Integer minVendas) {
         this.minVendas = minVendas;
     }
 
     @Column(nome = "ativa", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isAtiva() {
         return ativa;
     }
 
     @Column(nome = "ativa", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
     }
 
     @Column(nome = "porcentagem", tipo = Float.class)
+    @NotNull
     @Getter
     public Float getPorcentagem() {
         return porcentagem;
     }
 
     @Column(nome = "porcentagem", tipo = Float.class)
+    @NotNull
     @Setter
     public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }
 
     @Column(nome = "data_inicio", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getDataInicio() {
         return dataInicio;
     }
 
     @Column(nome = "data_inicio", tipo = Date.class)
+    @NotNull
     @Setter
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
@@ -81,12 +90,14 @@ public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> impl
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPeriodicidadeAsLong() {
         return getRelatedAsLong(getPeriodicidade());
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPeriodicidadeWithLong(Long id) {
         setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
@@ -105,12 +116,14 @@ public class PromocaoDeFidelidade extends AbstractDTO<PromocaoDeFidelidade> impl
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

@@ -7,6 +7,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import java.sql.Date;
 
 @Table(nome = "contrato_assinado")
+@PrimaryKey(nome = "pk")
 public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements DTO<ContratoAssinado> {
     private Boolean vigente;
     private Date dataDeContratacao;
@@ -18,36 +19,42 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     private Long id;
 
     @Column(nome = "vigente", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isVigente() {
         return vigente;
     }
 
     @Column(nome = "vigente", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
     }
 
     @Column(nome = "data_de_contratacao", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getDataDeContratacao() {
         return dataDeContratacao;
     }
 
     @Column(nome = "data_de_contratacao", tipo = Date.class)
+    @NotNull
     @Setter
     public void setDataDeContratacao(Date dataDeContratacao) {
         this.dataDeContratacao = dataDeContratacao;
     }
 
     @Column(nome = "cancelado", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isCancelado() {
         return cancelado;
     }
 
     @Column(nome = "cancelado", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setCancelado(Boolean cancelado) {
         this.cancelado = cancelado;
@@ -90,12 +97,14 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     }
 
     @Column(nome = "contrato__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getContratoAsLong() {
         return getRelatedAsLong(getContrato());
     }
 
     @Column(nome = "contrato__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setContratoWithLong(Long id) {
         setContrato(setRelatedWithLong(getContrato(), id, new Contrato()));

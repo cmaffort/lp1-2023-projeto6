@@ -6,6 +6,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "produto")
+@PrimaryKey(nome = "pk")
 public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
     private String codigo;
     private String nome;
@@ -17,48 +18,56 @@ public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
     private Long id;
 
     @Column(nome = "codigo", tipo = String.class)
+    @NotNull
     @Getter
     public String getCodigo() {
         return codigo;
     }
 
     @Column(nome = "codigo", tipo = String.class)
+    @NotNull
     @Setter
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
     @Column(nome = "nome", tipo = String.class)
+    @NotNull
     @Getter
     public String getNome() {
         return nome;
     }
 
     @Column(nome = "nome", tipo = String.class)
+    @NotNull
     @Setter
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getQuantidade() {
         return quantidade;
     }
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getPreco() {
         return preco;
     }
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Setter
     public void setPreco(Double preco) {
         this.preco = preco;
@@ -77,12 +86,14 @@ public class Produto extends AbstractDTO<Produto> implements DTO<Produto> {
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

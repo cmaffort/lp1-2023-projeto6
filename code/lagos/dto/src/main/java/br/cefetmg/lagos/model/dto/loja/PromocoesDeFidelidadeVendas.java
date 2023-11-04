@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
 @Table(nome = "promocoes_de_fidelidade__vendas")
+@PrimaryKey(nome = "pk")
 public class PromocoesDeFidelidadeVendas extends AbstractDTO<PromocoesDeFidelidadeVendas> implements DTO<PromocoesDeFidelidadeVendas> {
     private PromocaoDeFidelidade promocaoDeFidelidade;
     private Venda venda;
@@ -24,12 +25,14 @@ public class PromocoesDeFidelidadeVendas extends AbstractDTO<PromocoesDeFidelida
     }
 
     @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPromocaoDeFidelidadeAsLong() {
         return getRelatedAsLong(getPromocaoDeFidelidade());
     }
 
     @Column(nome = "promocao_de_fidelidade__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPromocaoDeFidelidadeWithLong(Long id) {
         setPromocaoDeFidelidade(setRelatedWithLong(getPromocaoDeFidelidade(), id, new PromocaoDeFidelidade()));
@@ -48,12 +51,14 @@ public class PromocoesDeFidelidadeVendas extends AbstractDTO<PromocoesDeFidelida
     }
 
     @Column(nome = "venda__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getVendaAsLong() {
         return getRelatedAsLong(getVenda());
     }
 
     @Column(nome = "venda__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setVendaWithLong(Long id) {
         setVenda(setRelatedWithLong(getVenda(), id, new Venda()));

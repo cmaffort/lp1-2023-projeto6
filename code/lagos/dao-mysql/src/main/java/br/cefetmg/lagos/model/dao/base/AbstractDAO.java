@@ -4,8 +4,9 @@ import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dao.util.DAOHelper;
 import br.cefetmg.lagos.model.dao.util.StringSql;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
-import br.cefetmg.lagos.model.dto.annotations.Table;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.base.Manager;
+import br.cefetmg.lagos.util.Pair;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -142,6 +143,22 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         return fillFKedDTOs(helper.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet));
     }
 
+    protected String getSqlIdIn(List<List<String>> columnsResultSet, List<String> valuesIn) {
+        String id = getDTO().getManeger().getPKColumn();
+        return StringSqlDaoHelper.selectFromWhereIn(columnsResultSet.get(0), table, id, valuesIn)
+                + " " + StringSql.orderBy(List.of(StringSql.field(id, valuesIn)));
+    }
+
+    public List<DataTransferObject> consultarPorIdIn(Long... ids) throws PersistenceException {
+        List<List<String>> columnsResultSet = getColumnsResultSetConsultar();
+
+        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
+
+        String sql = getSqlIdIn(columnsResultSet, Arrays.stream(ids).map(Object::toString).toList());
+
+        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+    }
+
     protected List<List<String>> getColumnsResultSetFiltrar() {
         return List.of(getDTO().getManeger().getColumns());
     }
@@ -162,25 +179,44 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         return fillFKedDTOs(helper.executeQueryGettingList(dto, sql, allColumnsPreparedStatement, allColumnsResultSet));
     }
 
-    protected String getWhereRelated(DTO dto) {
-        String tableDto = dto.getClass().getAnnotation(Table.class).nome();
-        String fk = tableDto + "__fk";
+    protected Pair<String, Method> getWhereRelated(DTO dto) {
+        Manager managerDTO = dto.getManeger();
+        Manager<DataTransferObject> managerThis = getDTO().getManeger();
+
+        String fk = managerDTO.getTable() + "__fk";
 
         // No banco de dados é padronizado que toda Foreing Key termina em __fk e começa pelo nome da tabela referenciada
         // Todavia, em relações de um para um, por vezes a chave estrangeira é a própria chave primária
-        if (!getDTO().getManeger().getColumns().contains(fk))
-            return "pk";
-        return fk;
+        if (!managerThis.getColumns().contains(fk)) {
+            fk = managerThis.getTable() + "__fk";
+
+            // Se aqui for verdadeiro a relação dessa dto com a passada é de herança e essa dto herda da passada
+            if (!managerDTO.getColumns().contains(fk))
+                return new Pair<>(managerThis.getPKColumn(), (Method) managerDTO.getGetters().get(managerDTO.getPKColumn()));
+
+            // Se chegar aqui a dto passada possuí uma relação para a essa dto por meio do fk atual
+            return new Pair<>(managerThis.getPKColumn(), (Method) managerDTO.getGetters().get(fk));
+        }
+
+        // Se chegar aqui essa dto tem uma relação para a dto passada por meio do fk
+        return new Pair<>(fk, (Method) managerDTO.getGetters().get(managerDTO.getPKColumn()));
     }
 
     protected List<String> getWhereStatementsFromRelatedDTOs(List<DTO> dtos) {
         return dtos.stream()
-                .map(dto -> getWhereRelated(dto) + " = " + dto.getId())
+                .map(dto -> {
+                    Pair<String, Method> whereRelated = getWhereRelated(dto);
+                    try {
+                        return whereRelated.first() + " = " + whereRelated.second().invoke(dto);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e.getMessage(), e);
+                    }
+                })
                 .toList();
     }
 
     protected String getSqlFiltrarRelated(List<List<String>> columnsResultSet, List<String> whereStatements) {
-        return StringSqlDaoHelper.selectFromWhere(columnsResultSet.get(0), getTable(), whereStatements)
+        return StringSqlDaoHelper.selectFromWhere(columnsResultSet.get(0), table, whereStatements)
                 + " " + StringSql.orderBy(getOrderByPriority());
     }
 
@@ -188,9 +224,35 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public List<DataTransferObject> filtrarRelated(DTO... related) throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsResultSet = DAOHelper.mergeLists(columnsResultSet.toArray(new List[0]));
 
         String sql = getSqlFiltrarRelated(columnsResultSet, getWhereStatementsFromRelatedDTOs(Arrays.asList(related)));
+
+        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+    }
+
+    protected String getSqlFiltrarRelatedEqualTypes(List<List<String>> columnsResultSet, String columnWhere,
+                                                    List<String> valuesIn) {
+        return StringSqlDaoHelper.selectInRepeating(columnsResultSet.get(0), table, columnWhere, valuesIn);
+    }
+
+    public List<DataTransferObject> filtrarRelatedIn(DTO<?>... related) throws PersistenceException {
+        List<List<String>> columnsResultSet = getColumnsResultSetListar();
+
+        List<String> allColumnsResultSet = DAOHelper.mergeLists(columnsResultSet.toArray(new List[0]));
+
+        Pair<String, Method> whereRelated = getWhereRelated(related[0]);
+
+        String sql = getSqlFiltrarRelatedEqualTypes(columnsResultSet, whereRelated.first(),
+                Arrays.stream(related)
+                        .map(relatedDTO -> {
+                            try {
+                                return whereRelated.second().invoke(relatedDTO).toString();
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                throw new RuntimeException(e.getMessage(), e);
+                            }
+                        })
+                        .toList());
 
         return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
     }
@@ -199,9 +261,9 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         return null;
     }
 
-    protected DataTransferObject fillFKedDTOs(DataTransferObject dto) throws PersistenceException {
+    protected DataTransferObject fillFKedDTOs(DataTransferObject dto) {
         Map<String, IDAO> daos = getDAOs();
-        if (getDAOs() == null)
+        if (daos == null)
             return dto;
 
         Map<String, Method> getters = dto.getManeger().getGetterRelated();
@@ -221,9 +283,48 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         return dto;
     }
 
-    protected List<DataTransferObject> fillFKedDTOs(List<DataTransferObject> dtos) throws PersistenceException {
-        for (DataTransferObject dto : dtos)
-            fillFKedDTOs(dto);
+    protected List<DataTransferObject> fillFKedDTOs(List<DataTransferObject> dtos) {
+        Map<String, IDAO> daos = getDAOs();
+        if (daos == null || dtos == null || dtos.isEmpty())
+            return dtos;
+
+        Map<String, Method> setters = getDTO().getManeger().getSetterRelated();
+
+        daos.forEach((name, dao) -> {
+            Method setter = setters.get(name);
+            try {
+                List<DTO<?>> related = dao.filtrarRelatedIn(dtos.toArray(new DTO<?>[0]));
+                if (related.size() != dtos.size())
+                    throw new PersistenceException("Não existem campos relacionados para todas as dtos.");
+                for (int i = 0; i < dtos.size(); i++)
+                    setter.invoke(dtos.get(i), related.get(i));
+            } catch (PersistenceException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         return dtos;
+    }
+
+    protected List<String> getSqlManyToManyColumns() {
+        Manager<DataTransferObject> manager = getDTO().getManeger();
+        List<String> columns = manager.getColumnsButPK();
+        columns.add(manager.getTable() + "." + manager.getPKColumn());
+        return columns;
+    }
+
+    protected String getSqlManyToMany(List<String> columnsSelect, DTO associationTable, DTO relatedManyToMany) {
+        return StringSqlDaoHelper.selectFromManyToMany(getSqlManyToManyColumns(), table, associationTable.getManeger().getTable(),
+                relatedManyToMany.getManeger().getTable(), getDTO().getManeger().getPKColumn(), relatedManyToMany.getId().toString());
+    }
+
+    protected List<DataTransferObject> selectFromManyToMany(DTO associationTable, DTO relatedManyToMany) throws PersistenceException {
+        List<List<String>> columnsResultSet = getColumnsResultSetListar();
+
+        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
+
+        String sql = getSqlManyToMany(columnsResultSet.get(0), associationTable, relatedManyToMany);
+
+        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
     }
 }

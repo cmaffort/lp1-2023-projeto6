@@ -1,12 +1,11 @@
 package br.cefetmg.lagos.model.dto.loja;
 
-import br.cefetmg.lagos.model.dto.annotations.Column;
-import br.cefetmg.lagos.model.dto.annotations.Getter;
-import br.cefetmg.lagos.model.dto.annotations.Related;
-import br.cefetmg.lagos.model.dto.annotations.Setter;
+import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
 
+@Table(nome = "promocoes__vendas")
+@PrimaryKey(nome = "pk")
 public class PromocoesVendas extends AbstractDTO<PromocoesVendas> implements DTO<PromocoesVendas> {
     private Promocao promocao;
     private Venda venda;
@@ -26,12 +25,14 @@ public class PromocoesVendas extends AbstractDTO<PromocoesVendas> implements DTO
     }
 
     @Column(nome = "promocao__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPromocaoAsLong() {
         return getRelatedAsLong(getPromocao());
     }
 
     @Column(nome = "promocao__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPromocaoWithLong(Long id) {
         setPromocao(setRelatedWithLong(getPromocao(), id, new Promocao()));
@@ -50,12 +51,14 @@ public class PromocoesVendas extends AbstractDTO<PromocoesVendas> implements DTO
     }
 
     @Column(nome = "venda__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getVendaAsLong() {
         return getRelatedAsLong(getVenda());
     }
 
     @Column(nome = "venda__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setVendaWithLong(Long id) {
         setVenda(setRelatedWithLong(getVenda(), id, new Venda()));

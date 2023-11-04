@@ -14,6 +14,7 @@ import br.cefetmg.lagos.model.dto.permicoes.PermissoesUsuario;
 import java.util.List;
 
 @Table(nome = "usuario")
+@PrimaryKey(nome = "pk")
 public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, PessoaAdapter<Usuario> {
     private TipoUsuario tipo;
     private String username;
@@ -41,36 +42,42 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getTipoAsInt() {
         return IntEnum.getIntForEnum(getTipo());
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
         setTipo(IntEnum.getEnumForInt(ord, TipoUsuario.class));
     }
 
     @Column(nome = "username", tipo = String.class)
+    @NotNull
     @Getter
     public String getUsername() {
      return username;
     }
 
     @Column(nome = "username", tipo = String.class)
+    @NotNull
     @Setter
     public void setUsername(String username) {
      this.username = username;
     }
 
     @Column(nome = "senha", tipo = String.class)
+    @NotNull
     @Getter
     public String getSenha() {
      return senha;
     }
 
     @Column(nome = "senha", tipo = String.class)
+    @NotNull
     @Setter
     public void setSenha(String senha) {
      this.senha = senha;
@@ -89,14 +96,16 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
      }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
-        return getRelatedAsLong(getPessoa());
+        return getRelatedAsLong(pessoa);
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
-        setPessoa(setRelatedWithLong(getPessoa(), id, new Pessoa()));
+        pessoa = setRelatedWithLong(pessoa, id, new Pessoa());
     }
 }

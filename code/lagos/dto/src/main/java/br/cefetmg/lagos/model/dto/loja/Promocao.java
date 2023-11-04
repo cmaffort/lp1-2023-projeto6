@@ -9,6 +9,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import java.sql.Date;
 
 @Table(nome = "promocao")
+@PrimaryKey(nome = "pk")
 public class Promocao extends AbstractDTO<Promocao> implements DTO<Promocao> {
     private Boolean ativa;
     private Float porcentagem;
@@ -20,36 +21,42 @@ public class Promocao extends AbstractDTO<Promocao> implements DTO<Promocao> {
     private Long id;
 
     @Column(nome = "ativa", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isAtiva() {
         return ativa;
     }
 
     @Column(nome = "ativa", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
     }
 
     @Column(nome = "porcentagem", tipo = Float.class)
+    @NotNull
     @Getter
     public Float getPorcentagem() {
         return porcentagem;
     }
 
     @Column(nome = "porcentagem", tipo = Float.class)
+    @NotNull
     @Getter
     public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }
 
     @Column(nome = "data_inicio", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getDataInicio() {
         return dataInicio;
     }
 
     @Column(nome = "data_inicio", tipo = Date.class)
+    @NotNull
     @Setter
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
@@ -68,12 +75,14 @@ public class Promocao extends AbstractDTO<Promocao> implements DTO<Promocao> {
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPeriodicidadeAsLong() {
         return getRelatedAsLong(getPeriodicidade());
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPeriodicidadeWithLong(Long id) {
         setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
@@ -92,12 +101,14 @@ public class Promocao extends AbstractDTO<Promocao> implements DTO<Promocao> {
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

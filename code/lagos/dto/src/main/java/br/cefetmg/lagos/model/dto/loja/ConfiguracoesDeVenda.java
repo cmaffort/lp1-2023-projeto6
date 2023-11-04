@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Table(nome = "configuracoes_de_venda")
+@PrimaryKey(nome = "pk")
 public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> implements DTO<ConfiguracoesDeVenda> {
     private Float limiteDeDesconto;
     private Float taxaDeJurosAoMes;
@@ -114,12 +115,14 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

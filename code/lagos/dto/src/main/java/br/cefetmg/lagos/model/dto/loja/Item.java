@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "item")
+@PrimaryKey(nome = "pk")
 public class Item extends AbstractDTO<Item> implements DTO<Item> {
     private Double preco;
     private Integer quantidade;
@@ -15,24 +16,28 @@ public class Item extends AbstractDTO<Item> implements DTO<Item> {
     private Long id;
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getPreco() {
         return preco;
     }
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Setter
     public void setPreco(Double preco) {
         this.preco = preco;
     }
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getQuantidade() {
         return quantidade;
     }
 
     @Column(nome = "quantidade", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
@@ -78,12 +83,14 @@ public class Item extends AbstractDTO<Item> implements DTO<Item> {
     }
 
     @Column(nome = "historico_vet__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getHistoricoVETAsLong() {
         return getRelatedAsLong(getHistoricoVET());
     }
 
     @Column(nome = "historico_vet__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setHistoricoVETWithLong(Long id) {
         setHistoricoVET(setRelatedWithLong(getHistoricoVET(), id, new HistoricoVET()));

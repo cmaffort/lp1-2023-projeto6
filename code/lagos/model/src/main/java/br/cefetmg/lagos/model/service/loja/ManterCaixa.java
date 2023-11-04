@@ -1,9 +1,10 @@
-package br.cefetmg.lagos.model.service;
+package br.cefetmg.lagos.model.service.loja;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dao.loja.CaixaDAO;
 import br.cefetmg.lagos.model.dao.loja.ICaixaDAO;
 import br.cefetmg.lagos.model.dto.loja.Caixa;
+import br.cefetmg.lagos.model.service.loja.IManterCaixa;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ManterCaixa implements IManterCaixa {
     }
 
     @Override
-    public long cadastrar(Caixa caixa) throws PersistenceException {
+    public Long cadastrar(Caixa caixa) throws PersistenceException {
 
         Long result = caixaDAO.inserir(caixa);
         return result;
@@ -36,7 +37,7 @@ public class ManterCaixa implements IManterCaixa {
     }
 
     @Override
-    public boolean remover(Caixa caixa) throws PersistenceException {
+    public boolean excluir(Caixa caixa) throws PersistenceException {
 
         boolean result = caixaDAO.remover(caixa);
         return result;
@@ -44,7 +45,7 @@ public class ManterCaixa implements IManterCaixa {
     }
 
     @Override
-    public List<Caixa> listar() throws PersistenceException {
+    public List<Caixa> pesquisarTodos() throws PersistenceException {
 
         List<Caixa> result = caixaDAO.listar();
         return result;

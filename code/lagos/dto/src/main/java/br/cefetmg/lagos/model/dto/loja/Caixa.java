@@ -6,6 +6,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "caixa")
+@PrimaryKey(nome = "pk")
 public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     private Boolean aberto;
     private Double dinheiroEmCaixa;
@@ -16,24 +17,28 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     private Long id;
 
     @Column(nome = "aberto", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isAberto() {
         return aberto;
     }
 
     @Column(nome = "aberto", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setAberto(Boolean aberto) {
         this.aberto = aberto;
     }
 
     @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getDinheiroEmCaixa() {
         return dinheiroEmCaixa;
     }
 
     @Column(nome = "dinheiro_em_caixa", tipo = Double.class)
+    @NotNull
     @Setter
     public void setDinheiroEmCaixa(Double dinheiroEmCaixa) {
         this.dinheiroEmCaixa = dinheiroEmCaixa;
@@ -52,12 +57,14 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     }
 
     @Column(nome = "usuario_loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getUsuarioLojaAsLong() {
         return getRelatedAsLong(getUsuarioLoja());
     }
 
     @Column(nome = "usuario_loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setUsuarioLojaWithLong(Long id) {
         setUsuarioLoja(setRelatedWithLong(getUsuarioLoja(), id, new UsuarioLoja()));
@@ -76,12 +83,14 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

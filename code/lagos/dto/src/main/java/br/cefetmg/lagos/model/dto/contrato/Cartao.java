@@ -8,6 +8,7 @@ import br.cefetmg.lagos.model.dto.enums.Bandeira;
 import br.cefetmg.lagos.model.dto.enums.IntEnum;
 
 @Table(nome = "cartao")
+@PrimaryKey(nome = "pk")
 public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     private Long numero;
     private Bandeira bandeira;
@@ -18,12 +19,14 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     private Long id;
 
     @Column(nome = "numero", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getNumero() {
         return numero;
     }
 
     @Column(nome = "numero", tipo = Long.class)
+    @NotNull
     @Setter
     public void setNumero(Long numero) {
         this.numero = numero;
@@ -38,12 +41,14 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     }
 
     @Column(nome = "bandeira", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getBandeiraAsInt() {
         return IntEnum.getIntForEnum(getBandeira());
     }
 
     @Column(nome = "bandeira", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setBandeiraWithInt(Integer ord) {
         setBandeira(IntEnum.getEnumForInt(ord, Bandeira.class));
@@ -62,12 +67,14 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     }
 
     @Column(nome = "endereco__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getEnderecoAsLong() {
         return getRelatedAsLong(getEndereco());
     }
 
     @Column(nome = "endereco__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setEnderecoWithLong(Long id) {
         setEndereco(setRelatedWithLong(getEndereco(), id, new Endereco()));
@@ -86,12 +93,14 @@ public class Cartao extends AbstractDTO<Cartao> implements DTO<Cartao> {
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getUsuarioAsLong() {
         return getRelatedAsLong(getUsuario());
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setUsuarioWithLong(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));

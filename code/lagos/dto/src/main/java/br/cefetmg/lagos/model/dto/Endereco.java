@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "endereco")
+@PrimaryKey(nome = "pk")
 public class Endereco extends AbstractDTO<Endereco> implements DTO<Endereco> {
     private Integer cep;
     private Integer numero;
@@ -12,12 +13,14 @@ public class Endereco extends AbstractDTO<Endereco> implements DTO<Endereco> {
     private Long id;
 
     @Column(nome = "cep", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getCep() {
         return cep;
     }
 
     @Column(nome = "cep", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setCep(Integer cep) {
         this.cep = cep;

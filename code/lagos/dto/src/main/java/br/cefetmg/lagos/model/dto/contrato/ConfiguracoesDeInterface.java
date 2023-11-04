@@ -8,6 +8,7 @@ import java.io.File;
 import java.sql.Blob;
 
 @Table(nome = "configuracoes_de_interface")
+@PrimaryKey(nome = "pk")
 public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterface> implements DTO<ConfiguracoesDeInterface> {
     private String nomeDaEmpresa;
     private File logo;
@@ -74,12 +75,14 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getId() {
         return getRelatedAsLong(getUsuario());
     }
 
     @Column(nome = "pk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setId(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));

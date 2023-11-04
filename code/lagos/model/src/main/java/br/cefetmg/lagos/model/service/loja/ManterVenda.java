@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.service;
+package br.cefetmg.lagos.model.service.loja;
 
 public class ManterVenda {
     private double precoTotal;

@@ -6,6 +6,7 @@ import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
 @Table(nome = "loja")
+@PrimaryKey(nome = "pk")
 public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
     private Usuario usuario;
     private Endereco endereco;
@@ -25,12 +26,14 @@ public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getUsuarioAsLong() {
         return getRelatedAsLong(getUsuario());
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setUsuarioWithLong(Long id) {
         setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));

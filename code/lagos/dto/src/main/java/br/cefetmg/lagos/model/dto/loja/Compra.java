@@ -8,6 +8,7 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import java.sql.Date;
 
 @Table(nome = "compra")
+@PrimaryKey(nome = "pk")
 public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
     private Date dataDeCompra;
     private Date dataDeChegada;
@@ -17,12 +18,14 @@ public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
     private Long id;
 
     @Column(nome = "data_de_compra", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getDataDeCompra() {
         return dataDeCompra;
     }
 
     @Column(nome = "data_de_compra", tipo = Date.class)
+    @NotNull
     @Setter
     public void setDataDeCompra(Date dataDeCompra) {
         this.dataDeCompra = dataDeCompra;
@@ -53,12 +56,14 @@ public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getLojaAsLong() {
         return getRelatedAsLong(getLoja());
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
         setLoja(setRelatedWithLong(getLoja(), id, new Loja()));

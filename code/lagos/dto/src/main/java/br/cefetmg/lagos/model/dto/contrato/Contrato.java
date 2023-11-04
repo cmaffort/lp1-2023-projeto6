@@ -10,6 +10,7 @@ import java.sql.Blob;
 import java.sql.Date;
 
 @Table(nome = "contrato")
+@PrimaryKey(nome = "pk")
 public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private Boolean ativo;
     private String descricao;
@@ -24,12 +25,14 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private Long id;
 
     @Column(nome = "ativo", tipo = Boolean.class)
+    @NotNull
     @Getter
     public Boolean isAtivo() {
         return ativo;
     }
 
     @Column(nome = "ativo", tipo = Boolean.class)
+    @NotNull
     @Setter
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
@@ -48,12 +51,14 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     }
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Getter
     public Double getPreco() {
         return preco;
     }
 
     @Column(nome = "preco", tipo = Double.class)
+    @NotNull
     @Setter
     public void setPreco(Double preco) {
         this.preco = preco;
@@ -94,24 +99,28 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     }
 
     @Column(nome = "numero_de_lojas", tipo = Integer.class)
+    @NotNull
     @Getter
     public Integer getNumeroDeLojas() {
         return numeroDeLojas;
     }
 
     @Column(nome = "numero_de_lojas", tipo = Integer.class)
+    @NotNull
     @Setter
     public void setNumeroDeLojas(Integer numeroDeLojas) {
         this.numeroDeLojas = numeroDeLojas;
     }
 
     @Column(nome = "data_de_criacao", tipo = Date.class)
+    @NotNull
     @Getter
     public Date getDataDeCriacao() {
         return dataDeCriacao;
     }
 
     @Column(nome = "data_de_criacao", tipo = Date.class)
+    @NotNull
     @Setter
     public void setDataDeCriacao(Date dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
@@ -130,15 +139,17 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Getter
     public Long getPeriodicidadeAsLong() {
-        return getRelatedAsLong(getPeriodicidade());
+        return getRelatedAsLong(periodicidade);
     }
 
     @Column(nome = "periodicidade__fk", tipo = Long.class)
+    @NotNull
     @Setter
     public void setPeriodicidadeWithLong(Long id) {
-        setPeriodicidade(setRelatedWithLong(getPeriodicidade(), id, new Periodicidade()));
+        periodicidade = setRelatedWithLong(periodicidade, id, new Periodicidade());
     }
 
     @Column(nome = "pk", tipo = Long.class)

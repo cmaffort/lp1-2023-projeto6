@@ -81,12 +81,31 @@ public class StringSql {
         return "WHERE " + statementsList(statements, " AND ", "", "");
     }
 
+    public static String whereIn(String columnWhere, List<String> valuesIn) {
+        return "WHERE " + columnWhere + " IN " + listWithParenthesis(valuesIn, ", ", "(", ")");
+    }
+
+    public static String field(String column, List<String> values) {
+        return "FIELD(" + column + ", " + listWithParenthesis(values, ", ", "", "") + ")";
+    }
+
     public static String whereEq(List<String> columns) {
         return "WHERE " + columnValueList(columns);
     }
 
-    public static String innerJoin(Map<String, String> statements) {
-        return "INNER JOIN " + statementsList(statements, " AND ", "", "");
+    public static String innerJoin(String table, Map<String, String> statements) {
+        return "INNER JOIN " + table + " ON " + statementsList(statements, " AND ", "", "");
+    }
+
+    public static String unionAll(List<String> unionValues, String column) {
+        unionValues = new ArrayList<>(unionValues);
+        String result = "SELECT " + unionValues.remove(0) + " AS " + column + " ";
+        return result + unionValues.stream()
+                .map(value -> "UNION ALL SELECT " + value + " AS " + column).collect(Collectors.joining(" "));
+    }
+
+    public static String innerJoinSelectUnionAll(List<String> unionValues, String columnUnion, Map<String, String> statements, String unionName) {
+        return "INNER JOIN " + "(" + unionAll(unionValues, columnUnion) + ") " + unionName + " ON " + statementsList(statements, " AND ", "", "");
     }
 
     public static String dateBetween(String dateCheck, String dateStart, String dateEnd) {
