@@ -1,7 +1,7 @@
 let inputPesquisaCliente = document.querySelector("#input_cliente");
 let cadastroClienteEL = document.querySelector("#botao_cadastro");
 
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
         type: 'POST',
         url: '/loja?acao=ListarClientes',

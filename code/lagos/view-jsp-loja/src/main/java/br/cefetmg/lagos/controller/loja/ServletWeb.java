@@ -14,7 +14,7 @@ public class ServletWeb extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String acao =  request.getParameter("acao");
+        String acao = request.getParameter("acao");
         TipoServlet tipoServlet = null;
         String result = "";
 

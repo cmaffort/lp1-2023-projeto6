@@ -1,15 +1,16 @@
 body {
-   background-color: #e2e3d1;
-   color: #c9cbad;
-   overflow:hidden;
+    background-color: #e2e3d1;
+    color: #c9cbad;
+    overflow: hidden;
 }
 
-h1{
-   position: relative;
-   font-size: 8vh;
-   top: -50%;
-   text-align: center;
+h1 {
+    position: relative;
+    font-size: 8vh;
+    top: -50%;
+    text-align: center;
 }
+
 .avisos {
     background-color: #c9cbad;
     border: 1px solid #E6DB55;
