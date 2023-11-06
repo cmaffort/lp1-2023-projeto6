@@ -1,0 +1,39 @@
+body {
+    background-color: #e2e3d1;
+    color: #c9cbad;
+    overflow:hidden;
+}
+
+.menuL {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+h1{
+   position: relative;
+   font-size: 8vh;
+   top: -50%;
+   text-align: center;
+}
+.menuL a:link,.menuL a:focus,.menuL a:active,.menuL a:visited{
+    background-color: #d3d3b8; 
+    color: black;
+    padding: 10px;
+    margin-left: 40vh;
+    margin-right: 40vh;
+}
+.menuL a:hover{
+    background-color: #a8a88f; 
+    color: #eaeace;
+    padding: 10px;
+    margin-left: 40vh;
+    margin-right: 40vh;
+}
+
+.menuL a {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-decoration: none;
+}
