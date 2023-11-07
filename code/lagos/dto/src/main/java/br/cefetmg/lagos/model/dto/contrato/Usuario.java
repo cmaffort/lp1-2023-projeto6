@@ -9,6 +9,7 @@ import br.cefetmg.lagos.model.dto.enums.IntEnum;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
+import br.cefetmg.lagos.model.dto.permicoes.PermissoesTipo;
 import br.cefetmg.lagos.model.dto.permicoes.PermissoesUsuario;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
             throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
-        return PermissoesUsuario.getPermissoesForTipo(tipo);
+        return PermissoesTipo.getPermissoesForTipo(tipo);
     }
 
     public TipoUsuario getTipo() {
@@ -45,14 +46,14 @@ public class Usuario extends AbstractDTO<Usuario> implements DTO<Usuario>, Pesso
     @NotNull
     @Getter
     public Integer getTipoAsInt() {
-        return IntEnum.getIntForEnum(getTipo());
+        return IntEnum.getIntForEnum(tipo);
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
     @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
-        setTipo(IntEnum.getEnumForInt(ord, TipoUsuario.class));
+        tipo = IntEnum.getEnumForInt(ord, TipoUsuario.class);
     }
 
     @Column(nome = "username", tipo = String.class)
