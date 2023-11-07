@@ -21,6 +21,31 @@ public class ManterContrato extends AbstractManter<Contrato> implements IManterC
     protected Contrato getDTOInstance() {
         return new Contrato();
     }
+    
+    @Override
+    public Long cadastrar(Contrato contrato) throws NegocioException, PersistenceException {
+        return ContratoDAO.inserir(contrato);
+    }
+
+    @Override
+    public boolean alterar(Contrato contrato) throws NegocioException, PersistenceException {
+        return ContratoDAO.alterar(contrato);
+    }
+
+    @Override
+    public List<Contrato> consultar() throws PersistenceException {
+        return ContratoDAO.listar();
+    }
+
+    @Override
+    public Contrato consultarPorId(Long id) throws PersistenceException {
+        return ContratoDAO.consultarPorId(id);
+    }
+
+    @Override
+    public List<Contrato> consultarPorLoja(Long idLoja) {
+        return null;
+    }
 
     @Override
     public List<Contrato> pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException {
