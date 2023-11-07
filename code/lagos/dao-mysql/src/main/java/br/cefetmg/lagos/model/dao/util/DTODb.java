@@ -73,6 +73,9 @@ public class DTODb<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     public int setPreparedStatement(DataTransferObject dto, PreparedStatement preparedStatement, List<String> columns, int initial) {
+        if (columns.isEmpty())
+            return initial;
+
         AtomicInteger i = new AtomicInteger(initial);
         getGettersForColumns(columns).forEach(entry -> {
             MethodType methodType = entry.getValue();
@@ -90,6 +93,9 @@ public class DTODb<DataTransferObject extends DTO<DataTransferObject>> {
     }
 
     public DataTransferObject insertInto(DataTransferObject dto, ResultSet resultSet, List<String> columns) {
+        if (columns.isEmpty())
+            return dto;
+
         getSettersForColumns(columns).forEach(entry -> {
             String column = entry.getKey();
             MethodType methodType = entry.getValue();

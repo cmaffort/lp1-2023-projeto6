@@ -1,7 +1,7 @@
 package br.cefetmg.lagos.model.dao.base;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dao.util.DAOHelper;
+import br.cefetmg.lagos.model.dao.util.JDBCOperation;
 import br.cefetmg.lagos.model.dao.util.StringSql;
 import br.cefetmg.lagos.model.dao.util.StringSqlDaoHelper;
 import br.cefetmg.lagos.model.dto.base.DTO;
@@ -10,17 +10,15 @@ import br.cefetmg.lagos.util.Pair;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.sql.Statement;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObject>> implements IDAO<DataTransferObject> {
-    protected final DAOHelper<DataTransferObject> helper;
     private final String table;
     
-    public AbstractDAO() {
-        helper = new DAOHelper<>(getDTO());
+    protected AbstractDAO() {
         table = initTable();
     }
 
@@ -42,15 +40,28 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         return StringSqlDaoHelper.insertWithValues(getTable(), columnsPreparedStatement.get(0));
     }
 
+    protected static <T> List<T> mergeLists(List<T>... lists) {
+        return Stream.of(lists)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public Long inserir(DataTransferObject dto) throws PersistenceException {
         List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementInserir();
 
-        List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-
+        List<String> allColumnsPreparedStatement = mergeLists(columnsPreparedStatement.toArray(new List[0]));
         String sql = getSqlInserir(columnsPreparedStatement);
 
-        return helper.executeUpdateGettingId(dto, sql, allColumnsPreparedStatement);
+        Long id = new JDBCOperation.Builder<>(getDTO())
+                .setSql(sql)
+                .setColumnsPreparedStatement(allColumnsPreparedStatement, Statement.RETURN_GENERATED_KEYS, dto)
+                .getId();
+
+        if (id != null)
+            dto.setId(id);
+
+        return id;
     }
 
     protected List<List<String>> getColumnsPreparedStatementAlterar() {
@@ -68,11 +79,15 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public boolean alterar(DataTransferObject dto) throws PersistenceException {
         List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementAlterar();
 
-        List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-
+        List<String> allColumnsPreparedStatement = mergeLists(columnsPreparedStatement.toArray(new List[0]));
         String sql = getSqlAlterar(columnsPreparedStatement);
 
-        return helper.executeUpdate(dto, sql, allColumnsPreparedStatement);
+        new JDBCOperation.Builder<>(getDTO())
+                .setSql(sql)
+                .setColumnsPreparedStatement(allColumnsPreparedStatement, dto)
+                .executeUpdate();
+
+        return true;
     }
 
     protected List<List<String>> getColumnsPreparedStatementRemover() {
@@ -80,18 +95,22 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     }
 
     protected String getSqlRemover(List<List<String>> columnsPreparedStatement) {
-        return StringSqlDaoHelper.deleteFromWhereEq(getTable(), columnsPreparedStatement.get(0));
+        return StringSqlDaoHelper.deleteFromWhereEq(table, columnsPreparedStatement.get(0));
     }
 
     @Override
     public boolean remover(DataTransferObject dto) throws PersistenceException {
         List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementRemover();
 
-        List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-
+        List<String> allColumnsPreparedStatement = mergeLists(columnsPreparedStatement.toArray(new List[0]));
         String sql = getSqlRemover(columnsPreparedStatement);
 
-        return helper.executeUpdate(dto, sql, allColumnsPreparedStatement);
+        new JDBCOperation.Builder<>(getDTO())
+                .setSql(sql)
+                .setColumnsPreparedStatement(allColumnsPreparedStatement, dto)
+                .executeUpdate();
+
+        return true;
     }
 
     protected List<List<String>> getColumnsResultSetListar() {
@@ -110,11 +129,15 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public List<DataTransferObject> listar() throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
         String sql = getSqlListar(columnsResultSet);
 
-        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 
     protected List<List<String>> getColumnsPreparedStatementConsultar() {
@@ -131,16 +154,32 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
 
     @Override
     public DataTransferObject consultarPorId(Long id) throws PersistenceException {
-        List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementConsultar();
+        if (id == null)
+            return null;
 
+        List<List<String>> columnsPreparedStatement = getColumnsPreparedStatementConsultar();
         List<List<String>> columnsResultSet = getColumnsResultSetConsultar();
 
-        List<String> allColumnsPreparedStatement = helper.mergeLists(columnsPreparedStatement.toArray(new List[0]));
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
+        List<String> allColumnsPreparedStatement = mergeLists(columnsPreparedStatement.toArray(new List[0]));
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
         String sql = getSqlConsultar(columnsPreparedStatement, columnsResultSet);
 
-        return fillFKedDTOs(helper.consultarPorId(id, sql, allColumnsPreparedStatement, allColumnsResultSet));
+        DataTransferObject dtoId;
+
+        try {
+            dtoId = getDTO().getInstance();
+            dtoId.setId(id);
+        } catch (Exception e) {
+            throw JDBCOperation.handleExeption(e);
+        }
+
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsPreparedStatement(allColumnsPreparedStatement, dtoId)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstance()
+        );
     }
 
     protected String getSqlIdIn(List<List<String>> columnsResultSet, List<String> valuesIn) {
@@ -152,11 +191,15 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public List<DataTransferObject> consultarPorIdIn(Long... ids) throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetConsultar();
 
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
         String sql = getSqlIdIn(columnsResultSet, Arrays.stream(ids).map(Object::toString).toList());
 
-        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 
     protected List<List<String>> getColumnsResultSetFiltrar() {
@@ -172,11 +215,17 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
         List<List<String>> columnsResultSet = getColumnsResultSetFiltrar();
 
         List<String> allColumnsPreparedStatement = Arrays.asList(columnsFilter);
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
 
         String sql = getSqlFiltrar(columnsResultSet, Arrays.asList(columnsFilter));
 
-        return fillFKedDTOs(helper.executeQueryGettingList(dto, sql, allColumnsPreparedStatement, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsPreparedStatement(allColumnsPreparedStatement, dto)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 
     protected Pair<String, Method> getWhereRelated(DTO dto) {
@@ -224,11 +273,16 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public List<DataTransferObject> filtrarRelated(DTO... related) throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = DAOHelper.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
 
         String sql = getSqlFiltrarRelated(columnsResultSet, getWhereStatementsFromRelatedDTOs(Arrays.asList(related)));
 
-        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 
     protected String getSqlFiltrarRelatedEqualTypes(List<List<String>> columnsResultSet, String columnWhere,
@@ -239,7 +293,7 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     public List<DataTransferObject> filtrarRelatedIn(DTO<?>... related) throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = DAOHelper.mergeLists(columnsResultSet.toArray(new List[0]));
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
 
         Pair<String, Method> whereRelated = getWhereRelated(related[0]);
 
@@ -254,11 +308,16 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
                         })
                         .toList());
 
-        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 
     protected Map<String, IDAO> getDAOs() {
-        return null;
+        return Map.of();
     }
 
     protected DataTransferObject fillFKedDTOs(DataTransferObject dto) {
@@ -321,10 +380,14 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     protected List<DataTransferObject> selectFromManyToMany(DTO associationTable, DTO relatedManyToMany) throws PersistenceException {
         List<List<String>> columnsResultSet = getColumnsResultSetListar();
 
-        List<String> allColumnsResultSet = helper.mergeLists(columnsResultSet.toArray(new List[0]));
-
+        List<String> allColumnsResultSet = mergeLists(columnsResultSet.toArray(new List[0]));
         String sql = getSqlManyToMany(columnsResultSet.get(0), associationTable, relatedManyToMany);
 
-        return fillFKedDTOs(helper.executeQueryGettingList(sql, allColumnsResultSet));
+        return fillFKedDTOs(
+                new JDBCOperation.Builder<>(getDTO())
+                        .setSql(sql)
+                        .setColumnsResultSet(allColumnsResultSet)
+                        .getInstances()
+        );
     }
 }

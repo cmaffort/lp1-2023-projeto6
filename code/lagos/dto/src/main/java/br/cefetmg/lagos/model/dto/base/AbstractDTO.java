@@ -6,7 +6,7 @@ import java.util.Map;
 public abstract class AbstractDTO<DataTransferObject extends AbstractDTO<DataTransferObject>> implements DTO<DataTransferObject> {
     protected Manager<DataTransferObject> manager;
 
-    public AbstractDTO() {
+    protected AbstractDTO() {
         manager = new Manager<>((DataTransferObject) this);
     }
 
@@ -15,19 +15,19 @@ public abstract class AbstractDTO<DataTransferObject extends AbstractDTO<DataTra
     }
 
     public Map<String, Object> toMap() {
-        return getManeger().toMap();
+        return manager.toMap();
     }
 
     public Map<String, Object> toMap(List<String> columns) {
-        return getManeger().toMap(columns);
+        return manager.toMap(columns);
     }
 
     public String toString() {
-        return getManeger().toString();
+        return manager.toString();
     }
 
     public String toString(List<String> columns) {
-        return getManeger().toString(columns);
+        return manager.toString(columns);
     }
 
     protected static <DataTransferObject extends DTO<DataTransferObject>> Long getRelatedAsLong(DataTransferObject related) {

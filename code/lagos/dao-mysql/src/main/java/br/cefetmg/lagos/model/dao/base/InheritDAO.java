@@ -1,7 +1,7 @@
 package br.cefetmg.lagos.model.dao.base;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
-import br.cefetmg.lagos.model.dao.util.DAOHelper;
+import br.cefetmg.lagos.model.dao.util.JDBCOperation;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.Manager;
 
@@ -33,11 +33,11 @@ public abstract class InheritDAO<DataTransferObject extends DTO<DataTransferObje
     public Long inserir(DataTransferObject dto) throws PersistenceException {
         try {
             Long id = getSuperDAO().inserir(callGetSuper(dto));
-            dto.setId(id);
             super.inserir(dto);
+            dto.setId(id);
             return id;
         } catch (Exception e) {
-            throw DAOHelper.handleExeption(e);
+            throw JDBCOperation.handleExeption(e);
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class InheritDAO<DataTransferObject extends DTO<DataTransferObje
             getSuperDAO().alterar(callGetSuper(dto));
             return super.alterar(dto);
         } catch (Exception e) {
-            throw DAOHelper.handleExeption(e);
+            throw JDBCOperation.handleExeption(e);
         }
     }
 
@@ -61,7 +61,7 @@ public abstract class InheritDAO<DataTransferObject extends DTO<DataTransferObje
         try {
             return getSuperDAO().remover(callGetSuper(dto));
         } catch (Exception e) {
-            throw DAOHelper.handleExeption(e);
+            throw JDBCOperation.handleExeption(e);
         }
     }
 }
