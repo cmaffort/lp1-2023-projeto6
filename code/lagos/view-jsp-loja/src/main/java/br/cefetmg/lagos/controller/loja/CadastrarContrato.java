@@ -17,9 +17,10 @@ public class CadastrarContrato extends HttpServlet {
     }
 
     public static String execute(HttpServletRequest request) {
+        try {
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
-        Double preco = request.getParameter("preco");
+        //double preco = request.getParameter("preco");
         String periodicidade = request.getParameter("periodicidade");
 
         HttpSession session = request.getSession();
@@ -27,10 +28,10 @@ public class CadastrarContrato extends HttpServlet {
 
         Contrato contrato = new Contrato();
 
-        contrato.setTitulo(titulo);
+        //contrato.setTitulo(titulo);
         contrato.setDescricao(descricao);
-        contrato.setPreco(preco);
-        contrato.setPeriodicidade(periodicidade);
+        //contrato.setPreco(preco);
+        //contrato.setPeriodicidade(periodicidade);
 
         ManterContrato manterContrato = new ManterContrato();
 
@@ -38,6 +39,10 @@ public class CadastrarContrato extends HttpServlet {
 
         Gson gson = new Gson();
         return gson.toJson(result);
+        }
+        catch(Exception e) {
+            return "";
+        }
     }
 
 }

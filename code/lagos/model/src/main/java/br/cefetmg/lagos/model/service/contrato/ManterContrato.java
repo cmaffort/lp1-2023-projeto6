@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ManterContrato extends AbstractManter<Contrato> implements IManterContrato {
     @Override
-    protected IContratoDAO getDAO() {
+    public IContratoDAO getDAO() {
         return new ContratoDAO();
     }
 
@@ -22,34 +22,19 @@ public class ManterContrato extends AbstractManter<Contrato> implements IManterC
         return new Contrato();
     }
     
-    @Override
-    public Long cadastrar(Contrato contrato) throws NegocioException, PersistenceException {
-        return ContratoDAO.inserir(contrato);
+    protected boolean usuarioHasId(Usuario usuario) {
+        return usuario.getId() != null;
     }
-
-    @Override
-    public boolean alterar(Contrato contrato) throws NegocioException, PersistenceException {
-        return ContratoDAO.alterar(contrato);
-    }
-
-    @Override
-    public List<Contrato> consultar() throws PersistenceException {
-        return ContratoDAO.listar();
-    }
-
-    @Override
-    public Contrato consultarPorId(Long id) throws PersistenceException {
-        return ContratoDAO.consultarPorId(id);
-    }
-
-    @Override
-    public List<Contrato> consultarPorLoja(Long idLoja) {
-        return null;
+    
+    protected void assertUsuarioHasId(Usuario usuario) throws NegocioException {
+        if (!usuarioHasId(usuario)) {
+            throw new NegocioException("Usuario tem que ter um ID");
+        }
     }
 
     @Override
     public List<Contrato> pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException {
-        // TODO: Fazer verificações
+        assertUsuarioHasId(usuario);
         return getDAO().filtrarRelated(usuario);
     }
 }
