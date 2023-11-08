@@ -2,6 +2,7 @@ package br.cefetmg.lagos.model.dto.base;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public abstract class AbstractDTO<DataTransferObject extends AbstractDTO<DataTransferObject>> implements DTO<DataTransferObject> {
     protected Manager<DataTransferObject> manager;
@@ -14,11 +15,11 @@ public abstract class AbstractDTO<DataTransferObject extends AbstractDTO<DataTra
         return manager;
     }
 
-    public Map<String, Object> toMap() {
+    public TreeMap<String, Object> toMap() {
         return manager.toMap();
     }
 
-    public Map<String, Object> toMap(List<String> columns) {
+    public TreeMap<String, Object> toMap(List<String> columns) {
         return manager.toMap(columns);
     }
 

@@ -3,6 +3,7 @@ package br.cefetmg.lagos.model.dto.contrato;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
+import br.cefetmg.lagos.model.dto.util.Blober;
 
 import java.io.File;
 import java.sql.Blob;
@@ -34,20 +35,27 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
 
     public void setLogo(File logo) {
         this.logo = logo;
+        this.logo.deleteOnExit();
     }
-
-    // TODO: Implementar parsers para blob da imagem
 
     @Column(nome = "logo", tipo = Blob.class)
     @Getter
     public Blob getLogoAsBlob() {
-        return null;
+        try {
+            return Blober.parseFromFile(logo);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     @Column(nome = "logo", tipo = Blob.class)
     @Setter
     public void setLogoWithBlob(Blob logo) {
-
+        try {
+            this.logo = Blober.parseToFile(logo, ".png");
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     @Column(nome = "cor_base", tipo = String.class)

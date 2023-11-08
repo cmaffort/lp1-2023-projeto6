@@ -192,7 +192,6 @@ public class TestContratos {
     private static void testContratoAssinado() throws PersistenceException {
         IContratoAssinadoDAO contratoAssinadoDAO = new ContratoAssinadoDAO();
         ContratoAssinado contratoAssinado = new ContratoAssinado();
-        contratoAssinado.setVigente(true);
         contratoAssinado.setDataDeContratacao(Date.valueOf("2023-08-18"));
         contratoAssinado.setCancelado(false);
         contratoAssinado.setUsuarioWithLong(1L);
