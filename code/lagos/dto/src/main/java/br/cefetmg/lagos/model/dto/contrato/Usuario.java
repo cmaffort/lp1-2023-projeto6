@@ -10,7 +10,6 @@ import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
 import br.cefetmg.lagos.model.dto.permicoes.PermissoesTipo;
-import br.cefetmg.lagos.model.dto.permicoes.PermissoesUsuario;
 
 import java.util.List;
 

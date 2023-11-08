@@ -13,5 +13,5 @@ public interface IManterUsuario extends IManter<Usuario> {
      * Pega o usuario do banco de dados conferindo se a senha está correta, se estiver altera a senha do usuário passado para
      * a senha hasheada, salva no banco, e retorna true, senão não altera o usuário passado e retorna false.
      */
-    public boolean autenticar(Usuario usuario) throws PersistenceException, NegocioException;
+    boolean autenticar(Usuario usuario) throws PersistenceException, NegocioException;
 }

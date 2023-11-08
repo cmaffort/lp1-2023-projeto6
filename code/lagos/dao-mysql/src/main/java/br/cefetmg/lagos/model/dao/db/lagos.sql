@@ -56,6 +56,7 @@ create table usuario
     senha    varchar(1024) not null,
     pk       bigint        not null
         primary key,
+    unique (username),
 
     foreign key (pk) references pessoa (pk)
         on delete cascade
@@ -126,7 +127,6 @@ create table contrato
 
 create table contrato_assinado
 (
-    vigente             tinyint(1) not null,
     data_de_contratacao date       not null,
     cancelado           tinyint(1) not null,
     pk                  bigint auto_increment
@@ -313,6 +313,7 @@ create table usuario_loja
     senha    varchar(1024) not null,
     pk       bigint        not null
         primary key,
+    unique (username),
 
     foreign key (pk) references funcionario (pk)
         on delete cascade

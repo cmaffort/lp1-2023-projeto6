@@ -14,19 +14,27 @@ public class ServletWeb extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String acao = request.getParameter("acao");
+        acao = acao == null ? "Login" : acao;
         TipoServlet tipoServlet;
         String result;
 
         switch (acao) {
-//            case "Classe1":
-//                result = Classe1.execute(request);
-//                tipoServlet = Classe1.getTipo();
-//                break;
-//            case "Classe2":
-//                result = Classe2.execute(request);
-//                tipoServlet = Classe2.getTipo();
-//                break;
-//            ...
+            case "ListarLojas":
+                result = ListarLojas.execute(request);
+                tipoServlet = ListarLojas.getTipo();
+                break;
+            case "EditarLoja":
+                result = EditarLoja.execute(request);
+                tipoServlet = EditarLoja.getTipo();
+                break;
+            case "PersonalizarInterface":
+                result = PersonalizarInterface.execute(request);
+                tipoServlet = PersonalizarInterface.getTipo();
+                break;
+            case "CriarUsuario":
+                result = CriarUsuario.execute(request);
+                tipoServlet = CriarUsuario.getTipo();
+                break;
             default:
                 result = Login.execute(request);
                 tipoServlet = Login.getTipo();

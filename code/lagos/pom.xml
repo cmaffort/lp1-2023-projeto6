@@ -8,13 +8,13 @@
   <packaging>pom</packaging>
   
   <modules>
+    <module>common</module>
     <module>idao</module>
     <module>dao-mysql</module>
     <module>dto</module>
     <module>model</module>
     <module>view-jsp-contrato</module>
     <module>view-jsp-loja</module>
-    <module>common</module>
   </modules>
     <dependencies>
 

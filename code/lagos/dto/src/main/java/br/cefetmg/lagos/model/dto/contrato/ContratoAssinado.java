@@ -9,7 +9,6 @@ import java.sql.Date;
 @Table(nome = "contrato_assinado")
 @PrimaryKey(nome = "pk")
 public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements DTO<ContratoAssinado> {
-    private Boolean vigente;
     private Date dataDeContratacao;
     private Boolean cancelado;
 
@@ -17,20 +16,6 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     private Contrato contrato;
 
     private Long id;
-
-    @Column(nome = "vigente", tipo = Boolean.class)
-    @NotNull
-    @Getter
-    public Boolean isVigente() {
-        return vigente;
-    }
-
-    @Column(nome = "vigente", tipo = Boolean.class)
-    @NotNull
-    @Setter
-    public void setVigente(Boolean vigente) {
-        this.vigente = vigente;
-    }
 
     @Column(nome = "data_de_contratacao", tipo = Date.class)
     @NotNull

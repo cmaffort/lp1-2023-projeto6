@@ -29,7 +29,7 @@ public class Loja extends AbstractDTO<Loja> implements DTO<Loja> {
     @NotNull
     @Getter
     public Long getUsuarioAsLong() {
-        return getRelatedAsLong(getUsuario());
+        return getRelatedAsLong(usuario);
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)

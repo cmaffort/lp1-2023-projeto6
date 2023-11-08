@@ -25,9 +25,10 @@ public class ManterUsuario extends AbstractManter<Usuario> implements IManterUsu
      */
     @Override
     public Long cadastrar(Usuario usuario) throws PersistenceException, NegocioException {
+        assertHasNotNullFieldsButPk(usuario);
         PasswordAuthentication pa = new PasswordAuthentication();
         usuario.setSenha(pa.hash(usuario.getSenha()));
-        return super.cadastrar(usuario);
+        return getDAO().inserir(usuario);
     }
 
     public boolean autenticar(Usuario usuario) throws PersistenceException, NegocioException {

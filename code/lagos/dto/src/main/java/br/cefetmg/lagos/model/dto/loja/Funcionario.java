@@ -10,7 +10,7 @@ import br.cefetmg.lagos.model.dto.enums.IntEnum;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
-import br.cefetmg.lagos.model.dto.permicoes.PermissoesFuncionario;
+import br.cefetmg.lagos.model.dto.permicoes.PermissoesTipo;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
             throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
-        return PermissoesFuncionario.getPermissoesForTipo(tipo);
+        return PermissoesTipo.getPermissoesForTipo(tipo);
     }
 
     @Column(nome = "salario", tipo = Double.class)

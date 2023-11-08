@@ -9,6 +9,8 @@ import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.exception.NegocioException;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ManterContratoAssinado extends AbstractManter<ContratoAssinado> implements IManterContratoAssinado {
@@ -23,12 +25,25 @@ public class ManterContratoAssinado extends AbstractManter<ContratoAssinado> imp
     }
 
     @Override
+    public Long cadastrar(ContratoAssinado contratoAssinado) throws PersistenceException, NegocioException {
+        if (contratoAssinado.isCancelado() == null)
+            contratoAssinado.setCancelado(false);
+
+        if (contratoAssinado.getDataDeContratacao() == null)
+            contratoAssinado.setDataDeContratacao(Date.valueOf(LocalDate.now()));
+
+        return super.cadastrar(contratoAssinado);
+    }
+
+    @Override
     public List<ContratoAssinado> pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException {
-        return null;
+        assertIdIsNotNull(usuario.getId());
+        return getDAO().filtrarRelated(usuario);
     }
 
     @Override
     public List<ContratoAssinado> pesquisarPorContrato(Contrato contrato) throws NegocioException, PersistenceException {
-        return null;
+        assertIdIsNotNull(contrato.getId());
+        return getDAO().filtrarRelated(contrato);
     }
 }
