@@ -76,7 +76,7 @@ public class Compra extends AbstractDTO<Compra> implements DTO<Compra> {
     }
 
     @Column(nome = "pk", tipo = Long.class)
-    @Getter
+    @Setter
     public void setId(Long id) {
         this.id = id;
     }

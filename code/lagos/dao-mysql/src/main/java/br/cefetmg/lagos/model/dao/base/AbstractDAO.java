@@ -321,6 +321,9 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     }
 
     protected DataTransferObject fillFKedDTOs(DataTransferObject dto) {
+        if (dto == null)
+            return null;
+
         Map<String, IDAO> daos = getDAOs();
         if (daos == null)
             return dto;

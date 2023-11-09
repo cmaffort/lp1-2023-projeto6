@@ -6,14 +6,14 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.enums.IntEnum;
 import br.cefetmg.lagos.model.dto.enums.TipoFluxoDeCaixa;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Table(nome = "fluxo_de_caixa")
 @PrimaryKey(nome = "pk")
 public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<FluxoDeCaixa> {
     private Double dinheiroEmCaixa;
     private TipoFluxoDeCaixa tipo;
-    private Timestamp hora;
+    private LocalDateTime hora;
 
     private Caixa caixa;
 
@@ -45,27 +45,27 @@ public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<Fluxo
     @NotNull
     @Getter
     public Integer getTipoAsInt() {
-        return IntEnum.getIntForEnum(getTipo());
+        return IntEnum.getIntForEnum(tipo);
     }
 
     @Column(nome = "tipo", tipo = Integer.class)
     @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
-        setTipo(IntEnum.getEnumForInt(ord, TipoFluxoDeCaixa.class));
+        tipo = IntEnum.getEnumForInt(ord, TipoFluxoDeCaixa.class);
     }
 
-    @Column(nome = "hora", tipo = Timestamp.class)
+    @Column(nome = "hora", tipo = LocalDateTime.class)
     @NotNull
     @Getter
-    public Timestamp getHora() {
+    public LocalDateTime getHora() {
         return hora;
     }
 
-    @Column(nome = "hora", tipo = Timestamp.class)
+    @Column(nome = "hora", tipo = LocalDateTime.class)
     @NotNull
     @Setter
-    public void setHora(Timestamp hora) {
+    public void setHora(LocalDateTime hora) {
         this.hora = hora;
     }
 
@@ -85,14 +85,14 @@ public class FluxoDeCaixa extends AbstractDTO<FluxoDeCaixa> implements DTO<Fluxo
     @NotNull
     @Getter
     public Long getCaixaAsLong() {
-        return getRelatedAsLong(getCaixa());
+        return getRelatedAsLong(caixa);
     }
 
     @Column(nome = "caixa__fk", tipo = Long.class)
     @NotNull
     @Setter
     public void setCaixaWithLong(Long id) {
-        setCaixa(setRelatedWithLong(getCaixa(), id, new Caixa()));
+        caixa = setRelatedWithLong(caixa, id, new Caixa());
     }
 
     @Column(nome = "pk", tipo = Long.class)

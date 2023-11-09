@@ -51,7 +51,7 @@ public class Caixa extends AbstractDTO<Caixa> implements DTO<Caixa> {
     }
 
     @Related(nome = "usuario_loja")
-    @Getter
+    @Setter
     public void setUsuarioLoja(UsuarioLoja usuarioLoja) {
         this.usuarioLoja = usuarioLoja;
     }

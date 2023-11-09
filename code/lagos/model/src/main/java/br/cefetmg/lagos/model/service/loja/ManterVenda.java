@@ -1,37 +1,35 @@
 package br.cefetmg.lagos.model.service.loja;
 
-public class ManterVenda {
-    private double precoTotal;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dao.loja.IVendaDAO;
+import br.cefetmg.lagos.model.dao.loja.VendaDAO;
+import br.cefetmg.lagos.model.dto.contrato.Loja;
+import br.cefetmg.lagos.model.dto.loja.HistoricoVET;
+import br.cefetmg.lagos.model.dto.loja.Produto;
+import br.cefetmg.lagos.model.dto.loja.PromocoesProdutos;
+import br.cefetmg.lagos.model.dto.loja.Venda;
+import br.cefetmg.lagos.model.exception.NegocioException;
+import br.cefetmg.lagos.model.service.loja.base.AbstractManterLojaModule;
 
-    void adicionarItem(int id) {
-        //precoTotal += preço do id
+import java.util.List;
+
+public class ManterVenda extends AbstractManterLojaModule<Venda> implements IManterVenda {
+    @Override
+    protected IVendaDAO getDAO() {
+        return new VendaDAO();
     }
 
-    void removerItem(int id) {
-        //remove a primeira ocorrência do id
-        //precoTotal -= preço do id
+    @Override
+    protected Venda getDTOInstance() {
+        return new Venda();
     }
 
-    void descontoVenda(double desconto) {
-        precoTotal -= desconto * precoTotal;
-    }
-
-    void descontoItem(double desconto, int id) {
-        //precoTotal -= desconto * preço do id
-    }
-
-    void emitirNotaFiscal() {
-
-    }
-
-    void finalizarVenda() {
-        //receber e conferir pagamento
-        //registrar venda no sistema
-        //emitirNotaFiscal();
-        //zerar a venda
-    }
-
-    void cancelarVenda() {
-        precoTotal = 0;
+    @Override
+    protected List<Venda> pesquisarPorLojaNotRelated(Loja loja) throws PersistenceException, NegocioException {
+        try {
+            return pesquisarPorQualquerDosRelacionados((new ManterHistoricoVET()).pesquisarPorLoja(loja).toArray(new HistoricoVET[0]));
+        } catch (NegocioException negocioException) {
+            return List.of();
+        }
     }
 }

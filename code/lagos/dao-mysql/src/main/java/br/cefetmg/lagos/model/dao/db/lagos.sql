@@ -198,9 +198,9 @@ create table item
     pk         bigint auto_increment
         primary key,
 
-    historioco_vet__fk bigint not null,
+    historico_vet__fk bigint not null,
     produto__fk        bigint null,
-    foreign key (historioco_vet__fk) references historico_vet (pk)
+    foreign key (historico_vet__fk) references historico_vet (pk)
         on delete cascade,
     foreign key (produto__fk) references produto (pk)
 );

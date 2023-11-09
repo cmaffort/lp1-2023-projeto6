@@ -2,19 +2,15 @@ package br.cefetmg.lagos.controller.contrato;
 
 import br.cefetmg.lagos.controller.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
-import br.cefetmg.lagos.model.dao.contrato.IUsuarioDAO;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
-import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 import br.cefetmg.lagos.model.service.contrato.IManterLoja;
-import br.cefetmg.lagos.model.service.contrato.IManterUsuario;
 import br.cefetmg.lagos.model.service.contrato.ManterLoja;
-import br.cefetmg.lagos.model.dto.contrato.Loja;
 
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
-import com.google.gson.Gson;
+import br.cefetmg.lagos.model.util.DataBaseParser;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 public class ListarLojas {
     public static TipoServlet getTipo() {
