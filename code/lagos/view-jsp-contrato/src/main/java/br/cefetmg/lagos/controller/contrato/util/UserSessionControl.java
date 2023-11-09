@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 public class UserSessionControl {
-    public static void createSession(HttpServletRequest request, Usuario usuario) throws IOException {
+    public static void createSession(HttpServletRequest request, Usuario usuario) throws IOException, NullPointerException {
+        if (usuario == null)
+            throw new NullPointerException("Usuario deve ser definido");
         HttpSession session = request.getSession();
         session.setAttribute("usuario", Serializer.serialize(usuario.toMap()));
     }

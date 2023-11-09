@@ -37,9 +37,4 @@ public class ListarLojas {
             return Error.execute(request);
         }
     }
-
-
-    public static void main(String[] args) throws PersistenceException {
-        System.out.println(DataBaseParser.dbLojaToXML((new ManterLoja()).pesquisarPorId(1L)));
-    }
 }
