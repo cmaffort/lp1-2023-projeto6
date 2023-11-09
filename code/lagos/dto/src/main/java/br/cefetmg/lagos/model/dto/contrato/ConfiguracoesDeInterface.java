@@ -12,7 +12,7 @@ import java.sql.Blob;
 @PrimaryKey(nome = "pk")
 public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterface> implements DTO<ConfiguracoesDeInterface> {
     private String nomeDaEmpresa;
-    private File logo;
+    private Blob logo;
     private String corBase;
 
     private Usuario usuario;
@@ -29,33 +29,16 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
         this.nomeDaEmpresa = nomeDaEmpresa;
     }
 
-    public File getLogo() {
-        return logo;
-    }
-
-    public void setLogo(File logo) {
-        this.logo = logo;
-        this.logo.deleteOnExit();
-    }
-
     @Column(nome = "logo", tipo = Blob.class)
     @Getter
-    public Blob getLogoAsBlob() {
-        try {
-            return Blober.parseFromFile(logo);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+    public Blob getLogo() {
+        return logo;
     }
 
     @Column(nome = "logo", tipo = Blob.class)
     @Setter
     public void setLogoWithBlob(Blob logo) {
-        try {
-            this.logo = Blober.parseToFile(logo, ".png");
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+        this.logo = logo;
     }
 
     @Column(nome = "cor_base", tipo = String.class)

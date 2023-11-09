@@ -1,10 +1,14 @@
 package br.cefetmg.lagos.controller.contrato.util;
 
+import br.cefetmg.lagos.controller.contrato.Error;
 import br.cefetmg.lagos.controller.contrato.Login;
 import br.cefetmg.lagos.controller.contrato.ServletWeb;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
+import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
 import br.cefetmg.lagos.model.service.contrato.IManterUsuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
 import br.cefetmg.lagos.util.Serializer;

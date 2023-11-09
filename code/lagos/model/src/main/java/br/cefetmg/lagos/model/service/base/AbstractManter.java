@@ -111,16 +111,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     }
 
     protected boolean areAllTablesRelated(DataTransferObject dto, List<DTO> relatedTables) {
-        List<String> relatedTablesNames = relatedTables.stream()
-                .map(dtoRelated -> dtoRelated.getManeger().getTable()).toList();
-
-        List<String> otherSideRelated = relatedTables.stream()
-                .map(related -> (List<String>) related.getManeger().getRelatedTables())
-                .flatMap(Collection::stream).toList();
-
-        List<String> allRelations = Stream.concat(dto.getManeger().getRelatedTables().stream(), otherSideRelated.stream()).toList();
-
-        return Collections.indexOfSubList(allRelations, relatedTablesNames) != -1;
+        return dto.getManeger().areAllTablesRelated(relatedTables);
     }
 
     protected void assertAllTablesAreRelated(DataTransferObject dto, List<DTO> relatedTables) throws NegocioException {
@@ -136,9 +127,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     }
 
     protected boolean isTableRelated(DataTransferObject dto, DTO<?> relatedTable) {
-        List<String> otherSideRelated = relatedTable.getManeger().getRelatedTables();
-        List<String> allRelations = Stream.concat(dto.getManeger().getRelatedTables().stream(), otherSideRelated.stream()).toList();
-        return allRelations.contains(relatedTable.getManeger().getTable());
+        return dto.getManeger().isTableRelated(relatedTable);
     }
 
     protected void assertTableRelated(DataTransferObject dto, DTO<?> relatedTable) throws NegocioException {

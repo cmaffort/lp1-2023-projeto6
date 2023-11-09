@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     private final Class<DataTransferObject> dtoClass;
@@ -142,6 +143,25 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+
+    public boolean isTableRelated(DTO<?> relatedTable) {
+        List<String> otherSideRelated = relatedTable.getManeger().getRelatedTables();
+        List<String> allRelations = Stream.concat(getRelatedTables().stream(), otherSideRelated.stream()).toList();
+        return allRelations.contains(relatedTable.getManeger().getTable());
+    }
+
+    public boolean areAllTablesRelated(List<DTO> relatedTables) {
+        List<String> relatedTablesNames = relatedTables.stream()
+                .map(dtoRelated -> dtoRelated.getManeger().getTable()).toList();
+
+        List<String> otherSideRelated = relatedTables.stream()
+                .map(related -> (List<String>) related.getManeger().getRelatedTables())
+                .flatMap(Collection::stream).toList();
+
+        List<String> allRelations = Stream.concat(getRelatedTables().stream(), otherSideRelated.stream()).toList();
+
+        return Collections.indexOfSubList(allRelations, relatedTablesNames) != -1;
     }
 
     public List<String> getAllNotNullColumns() {
