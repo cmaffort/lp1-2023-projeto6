@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.model.base;
+package br.cefetmg.lagos.model.service.base;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.base.DTO;
@@ -17,7 +17,9 @@ public interface IManter<DataTransferObject extends DTO<DataTransferObject>> {
 
     DataTransferObject pesquisarPorId(Long id) throws PersistenceException;
 
-    List<DataTransferObject> filtrar(DataTransferObject dto, String... columas) throws NegocioException, PersistenceException;
+    List<DataTransferObject> filtrar(DataTransferObject dto, String... columns) throws NegocioException, PersistenceException;
 
     List<DataTransferObject> pesquisarPorRelacionado(DTO... tabelasRelacionadas) throws NegocioException, PersistenceException;
+
+    List<DataTransferObject> pesquisarPorQualquerDosRelacionados(DTO<?>... tabelasRelacionadas) throws NegocioException, PersistenceException;
 }

@@ -43,7 +43,7 @@ public class Promocao extends AbstractDTO<Promocao> implements DTO<Promocao> {
 
     @Column(nome = "porcentagem", tipo = Float.class)
     @NotNull
-    @Getter
+    @Setter
     public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }

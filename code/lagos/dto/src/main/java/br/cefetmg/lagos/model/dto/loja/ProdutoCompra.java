@@ -100,7 +100,7 @@ public class ProdutoCompra extends AbstractDTO<ProdutoCompra> implements DTO<Pro
     }
 
     @Column(nome = "pk", tipo = Long.class)
-    @Getter
+    @Setter
     public void setId(Long id) {
         this.id = id;
     }

@@ -7,13 +7,13 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.enums.IntEnum;
 import br.cefetmg.lagos.model.dto.enums.TipoHistoricoVET;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Table(nome = "historico_vet")
 @PrimaryKey(nome = "pk")
 public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<HistoricoVET> {
     private TipoHistoricoVET tipo;
-    private Date data;
+    private LocalDateTime data;
 
     private Loja loja;
 
@@ -41,17 +41,17 @@ public class HistoricoVET extends AbstractDTO<HistoricoVET> implements DTO<Histo
         setTipo(IntEnum.getEnumForInt(ord, TipoHistoricoVET.class));
     }
 
-    @Column(nome = "data", tipo = Date.class)
+    @Column(nome = "data", tipo = LocalDateTime.class)
     @NotNull
     @Getter
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    @Column(nome = "data", tipo = Date.class)
+    @Column(nome = "data", tipo = LocalDateTime.class)
     @NotNull
     @Setter
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

@@ -1,5 +1,4 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="br.cefetmg.lagos.model.dto.contrato.Loja" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 

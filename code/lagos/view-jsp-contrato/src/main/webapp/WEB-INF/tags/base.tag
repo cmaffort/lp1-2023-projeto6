@@ -1,7 +1,7 @@
-<%@tag description="Base Page template" pageEncoding="UTF-8"%>
-<%@attribute name="title" fragment="true"%>
-<%@attribute name="styles" fragment="true"%>
-<%@attribute name="scripts" fragment="true"%>
+<%@ tag description="Base Page template" pageEncoding="UTF-8" %>
+<%@ attribute name="title" fragment="true" %>
+<%@ attribute name="styles" fragment="true" %>
+<%@ attribute name="scripts" fragment="true" %>
 
 <!DOCTYPE html>
 <html>

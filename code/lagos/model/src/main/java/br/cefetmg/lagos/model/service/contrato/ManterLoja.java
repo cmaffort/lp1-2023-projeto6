@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.service.contrato;
 
-import br.cefetmg.lagos.model.base.AbstractManter;
+import br.cefetmg.lagos.model.service.base.AbstractManter;
 import br.cefetmg.lagos.model.dao.base.IDAO;
 import br.cefetmg.lagos.model.dao.contrato.LojaDAO;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;

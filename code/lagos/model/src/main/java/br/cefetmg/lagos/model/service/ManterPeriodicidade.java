@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.model.service;
 
-import br.cefetmg.lagos.model.base.AbstractManter;
+import br.cefetmg.lagos.model.service.base.AbstractManter;
 import br.cefetmg.lagos.model.dao.IPeriodicidadeDAO;
 import br.cefetmg.lagos.model.dao.PeriodicidadeDAO;
 import br.cefetmg.lagos.model.dto.Periodicidade;
