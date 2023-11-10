@@ -4,11 +4,11 @@ import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.exception.NegocioException;
+import br.cefetmg.lagos.model.service.ManterPeriodicidade;
+import br.cefetmg.lagos.model.service.ManterPessoa;
 import br.cefetmg.lagos.model.service.loja.base.IManterLojaModule;
 import br.cefetmg.lagos.util.Pair;
 import com.google.gson.Gson;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.json.XML;
 import org.reflections.Reflections;
@@ -16,15 +16,9 @@ import org.reflections.Reflections;
 import java.lang.reflect.Modifier;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class DataBaseParser {
-    private static final List<IManterLojaModule<? extends DTO>> services;
-
-    static {
-        Logger.getRootLogger().setLevel(Level.OFF);
-        services = getAllLojaServices();
-    }
-
     private static List<IManterLojaModule<? extends DTO>> getAllLojaServices() {
         Reflections reflections = new Reflections("br.cefetmg.lagos.model.service.loja");
         List<Class<? extends IManterLojaModule>> servicesClasses = reflections.getSubTypesOf(IManterLojaModule.class).stream()
@@ -49,7 +43,7 @@ public class DataBaseParser {
             return new TreeMap<>();
 
         return new TreeMap<>(Map.ofEntries(
-                Map.entry("loja_db", services.stream()
+                Map.entry("table", getAllLojaServices().stream()
                         .map(service -> {
                             try {
                                 return tableMap(service.pesquisarPorLoja(loja));
@@ -57,6 +51,7 @@ public class DataBaseParser {
                                 throw new RuntimeException(e.getMessage(), e);
                             }
                         })
+                        .filter(map -> !map.isEmpty())
                         .toList())
         ));
     }
@@ -84,6 +79,7 @@ public class DataBaseParser {
     }
 
     public static String dbLojaToXML(Loja loja) {
+        String jsonstr = dbLojaToJSON(loja);
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + XML.toString(new JSONObject(dbLojaToJSON(loja)));
     }
 }

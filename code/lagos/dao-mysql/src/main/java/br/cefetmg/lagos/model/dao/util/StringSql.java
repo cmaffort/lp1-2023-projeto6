@@ -23,10 +23,14 @@ public class StringSql {
         return statementsList(columns, ", ", "", "");
     }
 
-    public static String columnValueList(List<String> columns) {
+    public static String columnValueList(List<String> columns, String delimiter) {
         return columns.stream()
                 .map(column -> column + " = ?")
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(delimiter));
+    }
+
+    public static String columnValueList(List<String> columns) {
+        return columnValueList(columns, ", ");
     }
 
     public static String valueList(List<String> values) {
@@ -90,7 +94,7 @@ public class StringSql {
     }
 
     public static String whereEq(List<String> columns) {
-        return "WHERE " + columnValueList(columns);
+        return "WHERE " + columnValueList(columns, " AND ");
     }
 
     public static String innerJoin(String table, Map<String, String> statements) {

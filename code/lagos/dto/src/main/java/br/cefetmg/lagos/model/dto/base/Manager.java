@@ -148,7 +148,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
     public boolean isTableRelated(DTO<?> relatedTable) {
         List<String> otherSideRelated = relatedTable.getManeger().getRelatedTables();
         List<String> allRelations = Stream.concat(getRelatedTables().stream(), otherSideRelated.stream()).toList();
-        return allRelations.contains(relatedTable.getManeger().getTable());
+        return allRelations.contains(relatedTable.getManeger().getTable()) || allRelations.contains(getTable());
     }
 
     public boolean areAllTablesRelated(List<DTO> relatedTables) {
@@ -161,7 +161,7 @@ public class Manager<DataTransferObject extends DTO<DataTransferObject>> {
 
         List<String> allRelations = Stream.concat(getRelatedTables().stream(), otherSideRelated.stream()).toList();
 
-        return Collections.indexOfSubList(allRelations, relatedTablesNames) != -1;
+        return (new HashSet<>(allRelations)).containsAll(relatedTablesNames);
     }
 
     public List<String> getAllNotNullColumns() {

@@ -7,14 +7,18 @@ import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
+import br.cefetmg.lagos.model.dto.enums.TipoFuncionario;
 import br.cefetmg.lagos.model.dto.enums.TipoUsuario;
 import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
+import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.IManterEndereco;
 import br.cefetmg.lagos.model.service.IManterPeriodicidade;
 import br.cefetmg.lagos.model.service.ManterEndereco;
 import br.cefetmg.lagos.model.service.ManterPeriodicidade;
+import br.cefetmg.lagos.model.service.loja.IManterUsuarioLoja;
+import br.cefetmg.lagos.model.service.loja.ManterUsuarioLoja;
 
 import java.sql.Date;
 import java.util.List;
@@ -119,6 +123,33 @@ public class InitDefault {
 
         manterLoja.cadastrar(loja);
         manterLoja.cadastrar(loja1);
+
+        IManterUsuarioLoja manterUsuarioLoja = new ManterUsuarioLoja();
+
+        UsuarioLoja chefe1 = new UsuarioLoja();
+        chefe1.setUsername("cef");
+        chefe1.setSenha("Top#$dawe32SENHAAA");
+        chefe1.setSalario(2343.0);
+        chefe1.setAtivo(true);
+        chefe1.setTipo(TipoFuncionario.CHEFE);
+        chefe1.setLoja(loja);
+        chefe1.setNome("Chefioto");
+        chefe1.setNascimento(Date.valueOf("2000-09-14"));
+        chefe1.setEmail("chefe@gmail.com");
+
+        UsuarioLoja chefe2 = new UsuarioLoja();
+        chefe2.setUsername("ce4f");
+        chefe2.setSenha("Top#$dawe32SENHAAA");
+        chefe2.setSalario(2343.0);
+        chefe2.setAtivo(true);
+        chefe2.setTipo(TipoFuncionario.CHEFE);
+        chefe2.setLoja(loja);
+        chefe2.setNome("Chefioto2");
+        chefe2.setNascimento(Date.valueOf("2000-09-14"));
+        chefe2.setEmail("chefe2@gmail.com");
+
+        manterUsuarioLoja.cadastrar(chefe1);
+        manterUsuarioLoja.cadastrar(chefe2);
 
         System.out.println("Todos os usuarios:");
         System.out.println(manterUsuario.pesquisarTodos().stream().map(Usuario::toString)

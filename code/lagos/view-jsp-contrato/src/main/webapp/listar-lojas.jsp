@@ -17,7 +17,10 @@
                     </div>
                     <div>Numero: ${endereco.getNumero()}</div>
                     <div>Cep: ${endereco.getCep()}</div>
-
+                    <a href="${pageContext.request.contextPath}/?acao=EditarLoja&lojaId=${loja.getId()}">Editar Loja</a>
+                    <a href="${pageContext.request.contextPath}/?acao=GetXMLLoja&lojaId=${loja.getId()}" download="loja${endereco.getCep()}.xml">
+                        Baixar XML loja
+                    </a>
                 </div>
             </c:forEach>
         </div>

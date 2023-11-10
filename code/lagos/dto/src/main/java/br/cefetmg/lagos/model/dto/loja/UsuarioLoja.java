@@ -12,6 +12,11 @@ public class UsuarioLoja extends AbstractDTO<UsuarioLoja> implements DTO<Usuario
 
     private Funcionario funcionario;
 
+    public UsuarioLoja() {
+        super();
+        funcionario = new Funcionario();
+    }
+
     @Column(nome = "username", tipo = String.class)
     @NotNull
     @Getter
