@@ -2,16 +2,17 @@ package br.cefetmg.lagos.controller.contrato;
 
 import br.cefetmg.lagos.controller.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.service.contrato.IManterLoja;
 import br.cefetmg.lagos.model.service.contrato.ManterLoja;
-
+import br.cefetmg.lagos.model.util.DataBaseParser;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class ListarLojas {
+public class GetXMLLoja {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSPServlet;
+        return TipoServlet.FileServlet;
     }
 
     public static String execute(HttpServletRequest request) {
@@ -26,12 +27,19 @@ public class ListarLojas {
                 return redirectJSP;
 
             IManterLoja manterLoja = new ManterLoja();
-            request.setAttribute("lojas", manterLoja.pesquisarPorContratante(contratante));
+            Long lojaId = Long.valueOf(request.getParameter("lojaId"));
+            Loja loja = manterLoja.pesquisarPorId(lojaId);
 
-            return "/listar-lojas.jsp";
+            if (!loja.getUsuarioAsLong().equals(contratante.getId()))
+                return Error.execute(request);
+
+            String xmldb = DataBaseParser.dbLojaToXML(loja);
+
+            request.setAttribute("file", xmldb);
+            return "text/xml";
         } catch (Exception e) {
             e.printStackTrace();
-            return "/404.jsp";
+            return "text/xml";
         }
     }
 }

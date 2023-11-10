@@ -1,13 +1,20 @@
 package br.cefetmg.lagos.controller.contrato;
 
+import br.cefetmg.lagos.controller.FileOutput;
 import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.exception.OutputException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
+import java.sql.SQLException;
 
 public class ServletWeb extends HttpServlet {
     @Override
@@ -27,25 +34,55 @@ public class ServletWeb extends HttpServlet {
                 result = EditarLoja.execute(request);
                 tipoServlet = EditarLoja.getTipo();
                 break;
+            case "GetXMLLoja":
+                result = GetXMLLoja.execute(request);
+                tipoServlet = GetXMLLoja.getTipo();
+                break;
+            case "SalvarLoja":
+                result = SalvarLoja.execute(request);
+                tipoServlet = SalvarLoja.getTipo();
+                break;
             case "PersonalizarInterface":
                 result = PersonalizarInterface.execute(request);
                 tipoServlet = PersonalizarInterface.getTipo();
+                break;
+            case "Home":
+                result = Home.execute(request);
+                tipoServlet = Home.getTipo();
                 break;
             case "CriarUsuario":
                 result = CriarUsuario.execute(request);
                 tipoServlet = CriarUsuario.getTipo();
                 break;
-            default:
+            case "Logout":
+                result = Logout.execute(request);
+                tipoServlet = Logout.getTipo();
+                break;
+            case "Login":
                 result = Login.execute(request);
                 tipoServlet = Login.getTipo();
                 break;
+            default:
+                result = "/404.jsp";
+                tipoServlet = TipoServlet.JSPServlet;
         }
 
-        if (tipoServlet == TipoServlet.JSPServlet) {
-            RequestDispatcher rd = request.getRequestDispatcher(result);
-            rd.forward(request, response);
-        } else
-            response.getWriter().write(result);
+        switch (tipoServlet) {
+            case JSPServlet:
+                RequestDispatcher rd = request.getRequestDispatcher(result);
+                rd.forward(request, response);
+                break;
+            case JSONServlet:
+                response.getWriter().write(result);
+                break;
+            case FileServlet:
+                try {
+                    FileOutput.writeToOutput(request.getAttribute("file"), response.getOutputStream());
+                    response.setContentType(result);
+                } catch (OutputException e) {
+                    throw new RuntimeException(e);
+                }
+        }
     }
 }
 

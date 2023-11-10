@@ -25,6 +25,11 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
 
     private Pessoa pessoa;
 
+    public Funcionario() {
+        super();
+        pessoa = new Pessoa();
+    }
+
     public List<Permissao> getPermicoes() throws MissingDataExeption {
         if (tipo == null)
             throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
@@ -97,14 +102,14 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     @NotNull
     @Getter
     public Long getLojaAsLong() {
-        return getRelatedAsLong(getLoja());
+        return getRelatedAsLong(loja);
     }
 
     @Column(nome = "loja__fk", tipo = Long.class)
     @NotNull
     @Setter
     public void setLojaWithLong(Long id) {
-        setLoja(setRelatedWithLong(getLoja(), id, new Loja()));
+        loja = setRelatedWithLong(loja, id, new Loja());
     }
 
     @Related(nome = "pessoa")
@@ -123,13 +128,13 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     @NotNull
     @Getter
     public Long getId() {
-        return getRelatedAsLong(getPessoa());
+        return getRelatedAsLong(pessoa);
     }
 
     @Column(nome = "pk", tipo = Long.class)
     @NotNull
     @Setter
     public void setId(Long id) {
-        setPessoa(setRelatedWithLong(pessoa, id, new Pessoa()));
+        pessoa = setRelatedWithLong(pessoa, id, new Pessoa());
     }
 }
