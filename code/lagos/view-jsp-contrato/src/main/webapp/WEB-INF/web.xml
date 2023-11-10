@@ -11,8 +11,14 @@
 
     <servlet-mapping>
         <servlet-name>ServletWeb</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/servletweb</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>
+            login.jsp
+        </welcome-file>
+    </welcome-file-list>
 
     <context-param>
         <param-name>jakarta.faces.AUTOMATIC_EXTENSIONLESS_MAPPING</param-name>

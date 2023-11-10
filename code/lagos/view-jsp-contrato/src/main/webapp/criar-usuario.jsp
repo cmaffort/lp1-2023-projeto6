@@ -14,6 +14,6 @@
             <label>Senha: <input type="password" name="senha"></label>
             <input type="submit" value="Criar conta">
         </form>
-        <a href="${pageContext.request.contextPath}/?acao=Login">Login</a>
+        <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
     </jsp:body>
 </t:base>

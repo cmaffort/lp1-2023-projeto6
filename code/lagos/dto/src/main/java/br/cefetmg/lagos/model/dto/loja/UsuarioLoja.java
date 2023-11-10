@@ -12,6 +12,11 @@ public class UsuarioLoja extends AbstractDTO<UsuarioLoja> implements DTO<Usuario
 
     private Funcionario funcionario;
 
+    public UsuarioLoja() {
+        super();
+        funcionario = new Funcionario();
+    }
+
     @Column(nome = "username", tipo = String.class)
     @NotNull
     @Getter
@@ -56,13 +61,13 @@ public class UsuarioLoja extends AbstractDTO<UsuarioLoja> implements DTO<Usuario
     @NotNull
     @Getter
     public Long getId() {
-        return getRelatedAsLong(getFuncionario());
+        return getRelatedAsLong(funcionario);
     }
 
     @Column(nome = "pk", tipo = Long.class)
     @NotNull
     @Setter
     public void setId(Long id) {
-        setFuncionario(setRelatedWithLong(getFuncionario(), id, new Funcionario()));
+        funcionario = setRelatedWithLong(funcionario, id, new Funcionario());
     }
 }

@@ -5,10 +5,7 @@ import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.exception.NegocioException;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public abstract class AbstractManter<DataTransferObject extends DTO<DataTransferObject>>
@@ -42,7 +39,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     }
 
     protected void assertHasNotNullFields(DataTransferObject dto) throws NegocioException {
-        if (!hasAllNotNullFieldsButPk(dto))
+        if (!hasAllNotNullFields(dto))
             throw new NegocioException("A DTO deve possuir todos os campos não nulos preenchidos com algum valor.");
     }
 
@@ -91,12 +88,13 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     }
 
     public List<DataTransferObject> pesquisarPorIds(Long... ids) throws PersistenceException, NegocioException {
-        assertArrayIsNotEmpty(ids);
+        if (ids.length == 0)
+            return List.of();
         return dao.consultarPorIdIn(ids);
     }
 
     protected boolean areColumnsOfDTO(DataTransferObject dto, List<String> columns) {
-        return Collections.indexOfSubList(dto.getManeger().getColumns(), columns) != -1;
+        return (new HashSet<>(dto.getManeger().getColumns())).containsAll(columns);
     }
 
     protected void assertColumnsAreFromDTO(DataTransferObject dto, List<String> columns) throws NegocioException {
@@ -105,22 +103,14 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     }
 
     public List<DataTransferObject> filtrar(DataTransferObject dto, String... columns) throws NegocioException, PersistenceException {
-        assertArrayIsNotEmpty(columns);
+        if (columns.length == 0)
+            return pesquisarTodos();
         assertColumnsAreFromDTO(dto, Arrays.asList(columns));
         return dao.filtrar(dto, columns);
     }
 
     protected boolean areAllTablesRelated(DataTransferObject dto, List<DTO> relatedTables) {
-        List<String> relatedTablesNames = relatedTables.stream()
-                .map(dtoRelated -> dtoRelated.getManeger().getTable()).toList();
-
-        List<String> otherSideRelated = relatedTables.stream()
-                .map(related -> (List<String>) related.getManeger().getRelatedTables())
-                .flatMap(Collection::stream).toList();
-
-        List<String> allRelations = Stream.concat(dto.getManeger().getRelatedTables().stream(), otherSideRelated.stream()).toList();
-
-        return Collections.indexOfSubList(allRelations, relatedTablesNames) != -1;
+        return dto.getManeger().areAllTablesRelated(relatedTables);
     }
 
     protected void assertAllTablesAreRelated(DataTransferObject dto, List<DTO> relatedTables) throws NegocioException {
@@ -130,15 +120,14 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     @Override
     public List<DataTransferObject> pesquisarPorRelacionado(DTO... tabelasRelacionadas) throws NegocioException, PersistenceException {
-        assertArrayIsNotEmpty(tabelasRelacionadas);
+        if (tabelasRelacionadas.length == 0)
+            return pesquisarTodos();
         assertAllTablesAreRelated(getDTOInstance(), Arrays.asList(tabelasRelacionadas));
         return dao.filtrarRelated(tabelasRelacionadas);
     }
 
     protected boolean isTableRelated(DataTransferObject dto, DTO<?> relatedTable) {
-        List<String> otherSideRelated = relatedTable.getManeger().getRelatedTables();
-        List<String> allRelations = Stream.concat(dto.getManeger().getRelatedTables().stream(), otherSideRelated.stream()).toList();
-        return allRelations.contains(relatedTable.getManeger().getTable());
+        return dto.getManeger().isTableRelated(relatedTable);
     }
 
     protected void assertTableRelated(DataTransferObject dto, DTO<?> relatedTable) throws NegocioException {
@@ -149,7 +138,8 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
     @Override
     public List<DataTransferObject> pesquisarPorQualquerDosRelacionados(DTO<?>... tabelasRelacionadas)
             throws NegocioException, PersistenceException {
-        assertArrayIsNotEmpty(tabelasRelacionadas);
+        if (tabelasRelacionadas.length == 0)
+            return List.of();
         assertTableRelated(getDTOInstance(), tabelasRelacionadas[0]);
         return getDAO().filtrarRelatedIn(tabelasRelacionadas);
     }

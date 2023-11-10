@@ -15,7 +15,7 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private Boolean ativo;
     private String descricao;
     private Double preco;
-    private File documento;
+    private Blob documento;
     private Float taxaDeMulta;
     private Integer numeroDeLojas;
     private Date dataDeCriacao;
@@ -62,26 +62,16 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
         this.preco = preco;
     }
 
-    // TODO: Implementar parser de File para Blob e de Blob para file
-
-    public File getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(File documento) {
-        this.documento = documento;
-    }
-
     @Column(nome = "documento", tipo = Blob.class)
     @Getter
-    public Blob getDocumentoAsBlob() {
-        return null;
+    public Blob getDocumento() {
+        return documento;
     }
 
     @Column(nome = "documento", tipo = Blob.class)
     @Setter
-    public void setDocumentoWithBlob(Blob documento) {
-
+    public void setDocumento(Blob documento) {
+        this.documento = documento;
     }
 
     @Column(nome = "taxa_de_multa", tipo = Float.class)

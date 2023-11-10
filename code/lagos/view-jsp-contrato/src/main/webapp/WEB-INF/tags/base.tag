@@ -10,8 +10,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><jsp:invoke fragment="title"/></title>
-        <link href="css/header.css" rel="stylesheet">
-        <link href="css/footer.css" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
         <jsp:invoke fragment="styles"/>
     </head>
     <body>

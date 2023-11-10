@@ -28,7 +28,7 @@ public class UsuarioDAO extends InheritDAO<Usuario, Pessoa> implements IUsuarioD
     }
 
     @Override
-    protected IDAO getSuperDAO() {
+    protected IPessoaDAO getSuperDAO() {
         return PESSOA_DAO;
     }
 

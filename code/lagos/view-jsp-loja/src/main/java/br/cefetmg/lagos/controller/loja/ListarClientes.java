@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListarClientes extends HttpServlet {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSONServlet;
+        return TipoServlet.JSON_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {
