@@ -1,0 +1,78 @@
+html, body{
+
+    min-height: 100%;
+
+}
+
+.wrapper {
+
+    position: absolute;
+    right: 0;
+    width: 60%;
+    height: 60%;
+
+}
+
+.swiper {
+    float: right;
+    padding: 0 8% 0 8%;
+    width: 30%;
+    height: 100%;
+    margin: auto;
+}
+
+.swiper-wrapper {
+
+    height: 80%;
+
+}
+
+.card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: normal;
+    border-radius: 2px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #faebd7;
+    color: black;
+    border: 1px solid black;
+
+}
+
+.card-content {
+    user-select: none;
+    overflow-wrap: break-word;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px 0 10px;
+    overflow-x: auto;
+
+    max-height: 100%;
+
+}
+
+::-webkit-scrollbar {
+
+    width: 5px;
+    max-height: 100%;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background: #e2e3d1;
+    box-shadow: inset 0 0 5px #e0a95e;
+    border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e0a95e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a36d26;
+}

@@ -18,6 +18,8 @@ public class ServletWeb extends HttpServlet {
         TipoServlet tipoServlet;
         String result;
 
+        if (acao == null) acao = "";
+
         switch (acao) {
             case "ListarLojas":
                 result = ListarLojas.execute(request);

@@ -1,6 +1,7 @@
 package br.cefetmg.lagos.controller.loja;
 
 import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
