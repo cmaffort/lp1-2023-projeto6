@@ -9,12 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.sql.Blob;
-import java.sql.SQLException;
 
 public class ServletWeb extends HttpServlet {
     @Override
@@ -64,18 +59,18 @@ public class ServletWeb extends HttpServlet {
                 break;
             default:
                 result = "/404.jsp";
-                tipoServlet = TipoServlet.JSPServlet;
+                tipoServlet = TipoServlet.PAGE_SERVLET;
         }
 
         switch (tipoServlet) {
-            case JSPServlet:
+            case PAGE_SERVLET:
                 RequestDispatcher rd = request.getRequestDispatcher(result);
                 rd.forward(request, response);
                 break;
-            case JSONServlet:
+            case JSON_SERVLET:
                 response.getWriter().write(result);
                 break;
-            case FileServlet:
+            case FILE_SERVLET:
                 try {
                     FileOutput.writeToOutput(request.getAttribute("file"), response.getOutputStream());
                     response.setContentType(result);

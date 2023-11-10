@@ -32,7 +32,7 @@ public class ServletWeb extends HttpServlet {
                 break;
         }
 
-        if (tipoServlet == TipoServlet.JSPServlet) {
+        if (tipoServlet == TipoServlet.PAGE_SERVLET) {
             RequestDispatcher rd = request.getRequestDispatcher(result);
             rd.forward(request, response);
         } else

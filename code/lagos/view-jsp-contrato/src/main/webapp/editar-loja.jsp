@@ -20,9 +20,9 @@
                     </div>
                 </c:forEach>
             </div>
-            <input type="submit" formaction="${pageContext.request.contextPath}/?acao=EditarLoja" value="Salvar">
-            <input type="submit" formaction="${pageContext.request.contextPath}/?acao=ExcluirLoja" value="Excluir Loja">
+            <input type="submit" formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja" value="Salvar">
+            <input type="submit" formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja" value="Excluir Loja">
         </form>
-        <a href="${pageContext.request.contextPath}/?acao=ListarLojas">Voltar para a listagem</a>
+        <a href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Voltar para a listagem</a>
     </jsp:body>
 </t:base>

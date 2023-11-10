@@ -1,5 +1,5 @@
 package br.cefetmg.lagos.controller;
 
 public enum TipoServlet {
-    JSPServlet, JSONServlet, FileServlet;
+    PAGE_SERVLET, JSON_SERVLET, FILE_SERVLET;
 }

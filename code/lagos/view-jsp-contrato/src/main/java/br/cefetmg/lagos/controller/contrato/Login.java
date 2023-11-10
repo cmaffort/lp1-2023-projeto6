@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class Login {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSPServlet;
+        return TipoServlet.PAGE_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {

@@ -7,7 +7,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <form action="${pageContext.request.contextPath}/?acao=Login" method="post">
+        <form action="${pageContext.request.contextPath}/servletweb?acao=Login" method="post">
             <label>Nome de usuario: <input type="text" name="username"></label>
             <label>Senha: <input type="password" name="senha"></label>
             <input type="submit" value="Entrar">

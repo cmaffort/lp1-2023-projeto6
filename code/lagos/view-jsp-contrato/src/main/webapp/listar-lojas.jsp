@@ -8,17 +8,18 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div id="lojas">
+        <div class="list-block block">
             <c:forEach var="loja" items="${lojas}" varStatus="i">
-                <div class="loja">
+                <div class="block">
                     <c:set var="endereco" value="${loja.getEndereco()}"/>
                     <div>
                         Loja ${i.index + 1}
                     </div>
                     <div>Numero: ${endereco.getNumero()}</div>
                     <div>Cep: ${endereco.getCep()}</div>
-                    <a href="${pageContext.request.contextPath}/?acao=EditarLoja&lojaId=${loja.getId()}">Editar Loja</a>
-                    <a href="${pageContext.request.contextPath}/?acao=GetXMLLoja&lojaId=${loja.getId()}" download="loja${endereco.getCep()}.xml">
+                    <a class="button" href="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.getId()}">Editar Loja</a>
+                    <a class="button" href="${pageContext.request.contextPath}/servletweb?acao=GetXMLLoja&lojaId=${loja.getId()}"
+                       download="loja${endereco.getCep()}.xml">
                         Baixar XML loja
                     </a>
                 </div>

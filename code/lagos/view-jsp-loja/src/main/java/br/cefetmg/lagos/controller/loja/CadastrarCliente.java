@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CadastrarCliente {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSONServlet;
+        return TipoServlet.JSON_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {

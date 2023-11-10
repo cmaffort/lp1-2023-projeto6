@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class GetXMLLoja {
     public static TipoServlet getTipo() {
-        return TipoServlet.FileServlet;
+        return TipoServlet.FILE_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {
