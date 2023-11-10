@@ -25,7 +25,7 @@ import static java.lang.System.out;
 @WebServlet(name="ListarContratos", urlPatterns= {"/listarContratos"})
 public class ListarContratos extends HttpServlet {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSPServlet;
+        return TipoServlet.PAGE_SERVLET;
     }
 
     @Override
