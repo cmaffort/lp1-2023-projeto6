@@ -34,9 +34,6 @@
                               Assinado em ${contrato.getDataDeContratacao()} por ${contrato.getUsuario().getPessoa().getNome()}
                               "${contrato.getUsuario().getUsername()}" ${contrato.getUsuario().getPessoa().getSobrenome()}<br/>
                               valor: ${contrato.getContrato().getPreco()} <br/>
-                              vigente: ${contrato.isVigente() ? "sim" : "não, ".concat
-                                  (contrato.isCancelado()? "contrato cancelado." : "contrato terminado."
-                                          )} <br/>
                               Periodicidade:
                                   ${contrato.getContrato().getPeriodicidade().getPeriodo()}
                                   ${contrato.getContrato().getPeriodicidade().getPeriodo()>1 ? "periodos" : "periodo"} de
@@ -88,6 +85,18 @@
               </c:forEach>
           </div>
       </div>
+  </div>
+
+  <div>
+
+      <button onclick="location.href='novo_contrato.jsp'">
+        Criar Contrato
+      </button>
+
+      <button >
+
+      </button>
+
   </div>
 
   <!-- swiper JS -->

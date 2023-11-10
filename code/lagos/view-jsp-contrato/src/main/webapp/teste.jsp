@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <form method="get" action="/loja/listarContratos">
+  <form method="get" action="/listarContratos">
 
     <input type="submit">
 

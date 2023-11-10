@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.controller.loja;
+package br.cefetmg.lagos.controller.contrato;
 
 import br.cefetmg.lagos.controller.TipoServlet;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
