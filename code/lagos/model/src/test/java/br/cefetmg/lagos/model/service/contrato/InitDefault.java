@@ -48,9 +48,21 @@ public class InitDefault {
         usuario2.setUsername("another");
         usuario2.setSenha("dfssadfouihfrfq$9efwhqsaf");
 
+        Usuario usuario3 = new Usuario();
+        usuario3.setNome("New");
+        usuario3.setSobrenome("Tird");
+        usuario3.setNascimento(Date.valueOf("1900-07-15"));
+        usuario3.setEmail("thetirssdf@gmail.com");
+        usuario3.setTelefone(32999781209L);
+        usuario3.setTipo(TipoUsuario.CONTRATANTE);
+        usuario3.setUsername("anotherone");
+        usuario3.setSenha("dfssadfouihfrfq$9efwhqsaf");
+
         manterUsuario.cadastrar(usuario2);
         manterUsuario.cadastrar(usuario1);
         usuario1.setSenha("dfssadfouihfrfq$9efwhqsaf");
+
+        manterUsuario.cadastrar(usuario3);
 
         System.out.println(manterUsuario.autenticar(usuario1));
 
@@ -121,8 +133,13 @@ public class InitDefault {
         loja1.setEndereco(endereco2);
         loja1.setUsuario(usuario1);
 
+        Loja loja2 = new Loja();
+        loja2.setEndereco(endereco2);
+        loja2.setUsuario(usuario3);
+
         manterLoja.cadastrar(loja);
         manterLoja.cadastrar(loja1);
+        manterLoja.cadastrar(loja2);
 
         IManterUsuarioLoja manterUsuarioLoja = new ManterUsuarioLoja();
 

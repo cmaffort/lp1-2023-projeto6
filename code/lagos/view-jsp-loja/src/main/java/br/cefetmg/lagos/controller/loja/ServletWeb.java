@@ -40,9 +40,12 @@ public class ServletWeb extends HttpServlet {
         }
 
         switch (tipoServlet) {
-            case PAGE_SERVLET:
+            case PAGE_FORWARD_SERVLET:
                 RequestDispatcher rd = request.getRequestDispatcher(result);
                 rd.forward(request, response);
+                break;
+            case PAGE_REDIRECT_SERVLET:
+                response.sendRedirect(result);
                 break;
             case JSON_SERVLET:
                 response.getWriter().write(result);

@@ -4,11 +4,11 @@ import br.cefetmg.lagos.controller.util.TipoServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class PersonalizarInterface {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
-    public static String execute(HttpServletRequest request) {
+    public static String doGet(HttpServletRequest request) {
         return "/personalizar-interface.jsp";
     }
 }

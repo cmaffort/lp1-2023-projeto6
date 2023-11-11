@@ -8,6 +8,8 @@ import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
 import br.cefetmg.lagos.model.service.contrato.IManterUsuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
 import br.cefetmg.lagos.util.Serializer;
+import br.cefetmg.lagos.controller.contrato.Error;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 

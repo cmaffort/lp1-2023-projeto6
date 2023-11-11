@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class Error {
     public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {

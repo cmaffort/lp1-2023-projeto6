@@ -19,15 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class EditarLoja {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
-    }
-
-    public static String execute(HttpServletRequest request) {
-        if ("GET".equals(request.getMethod()))
-            return doGet(request);
-        else
-            return doPost(request);
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -42,7 +35,7 @@ public class EditarLoja {
             Loja loja = manterLoja.pesquisarPorId(lojaId);
 
             if (!loja.getUsuarioAsLong().equals(contratante.getId()))
-                return "/404.jsp";
+                return Error.doGet(request);
 
             IManterUsuarioLoja manterUsuarioLoja = new ManterUsuarioLoja();
             IManterFuncionario manterFuncionario = new ManterFuncionario();
@@ -61,8 +54,12 @@ public class EditarLoja {
             return "/editar-loja.jsp";
         } catch (Exception e) {
             e.printStackTrace();
-            return "/404.jsp";
+            return Error.doGet();
         }
+    }
+
+    public static TipoServlet getTipoDoPost() {
+        return TipoServlet.PAGE_REDIRECT_SERVLET;
     }
 
     public static String doPost(HttpServletRequest request) {

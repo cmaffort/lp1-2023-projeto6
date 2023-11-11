@@ -13,12 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ListarLojas {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
-    }
-
-    public static String execute(HttpServletRequest request) {
-        return doGet(request);
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -37,15 +33,10 @@ public class ListarLojas {
             request.setAttribute("lojas", lojas);
             request.setAttribute("contratoAssinado", contratoAssinado);
 
-            if (contratoAssinado == null)
-                return AssinarContrato.execute(request);
-
-            System.out.println(contratoAssinado);
-
             return "/listar-lojas.jsp";
         } catch (Exception e) {
             e.printStackTrace();
-            return "/404.jsp";
+            return Error.doGet();
         }
     }
 }
