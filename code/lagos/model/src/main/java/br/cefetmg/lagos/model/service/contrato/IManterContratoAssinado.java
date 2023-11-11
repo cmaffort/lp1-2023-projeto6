@@ -13,4 +13,6 @@ public interface IManterContratoAssinado extends IManter<ContratoAssinado> {
     List<ContratoAssinado> pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException;
 
     List<ContratoAssinado> pesquisarPorContrato(Contrato contrato) throws NegocioException, PersistenceException;
+
+    ContratoAssinado pesquisarContratoAssinadoPorContratante(Usuario usuario) throws NegocioException, PersistenceException;
 }

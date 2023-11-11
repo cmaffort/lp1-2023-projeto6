@@ -42,6 +42,10 @@ public class ServletWeb extends HttpServlet {
                 result = PersonalizarInterface.execute(request);
                 tipoServlet = PersonalizarInterface.getTipo();
                 break;
+            case "AssinarContrato":
+                result = AssinarContrato.execute(request);
+                tipoServlet = AssinarContrato.getTipo();
+                break;
             case "Home":
                 result = Home.execute(request);
                 tipoServlet = Home.getTipo();

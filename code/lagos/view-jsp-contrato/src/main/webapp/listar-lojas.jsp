@@ -21,12 +21,26 @@
                        href="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.getId()}">
                         Editar Loja
                     </a>
-                    <a class="button"
-                       href="${pageContext.request.contextPath}/loja/servletweb?acao=Login&lojaId=${loja.getId()}">
-                        Entrar
-                    </a>
+                    <c:choose>
+                        <c:when test="${contratoAssinado != null}">
+                            <a class="button"
+                               href="${pageContext.request.contextPath}/loja/servletweb?acao=Login&lojaId=${loja.getId()}">
+                                Entrar
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="button"
+                               href="${pageContext.request.contextPath}/loja/servletweb?acao=AssinarContrato">
+                                Entrar
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </c:forEach>
+            <div id="adicionar-loja" class="list-block">
+
+            </div>
         </div>
     </jsp:body>
 </t:base>

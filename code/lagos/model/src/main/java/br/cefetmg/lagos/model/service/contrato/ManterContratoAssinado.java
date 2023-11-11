@@ -1,5 +1,6 @@
 package br.cefetmg.lagos.model.service.contrato;
 
+import br.cefetmg.lagos.model.dao.contrato.IContratoAssinadoDAO;
 import br.cefetmg.lagos.model.service.base.AbstractManter;
 import br.cefetmg.lagos.model.dao.base.IDAO;
 import br.cefetmg.lagos.model.dao.contrato.ContratoAssinadoDAO;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class ManterContratoAssinado extends AbstractManter<ContratoAssinado> implements IManterContratoAssinado {
     @Override
-    protected IDAO<ContratoAssinado> getDAO() {
+    protected IContratoAssinadoDAO getDAO() {
         return new ContratoAssinadoDAO();
     }
 
@@ -45,5 +46,11 @@ public class ManterContratoAssinado extends AbstractManter<ContratoAssinado> imp
     public List<ContratoAssinado> pesquisarPorContrato(Contrato contrato) throws NegocioException, PersistenceException {
         assertIdIsNotNull(contrato.getId());
         return getDAO().filtrarRelated(contrato);
+    }
+
+    @Override
+    public ContratoAssinado pesquisarContratoAssinadoPorContratante(Usuario usuario) throws NegocioException, PersistenceException {
+        assertIdIsNotNull(usuario.getId());
+        return getDAO().filterContratoAssinadoAtivo(usuario);
     }
 }
