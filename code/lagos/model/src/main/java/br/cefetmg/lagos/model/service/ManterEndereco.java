@@ -32,4 +32,10 @@ public class ManterEndereco extends AbstractManter<Endereco> implements IManterE
         assertCepIsValid(endereco.getCep());
         return super.cadastrar(endereco);
     }
+
+    @Override
+    public boolean alterar(Endereco endereco) throws NegocioException, PersistenceException {
+        assertCepIsValid(endereco.getCep());
+        return super.alterar(endereco);
+    }
 }

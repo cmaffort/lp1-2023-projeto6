@@ -10,10 +10,14 @@
     <jsp:body>
         <c:set var="endereco" value="${loja.getEndereco()}"/>
         <h1>Editando a Loja na rua de CEP ${endereco.getCep()}</h1>
+        <c:if test="${erro != null}">
+            <div class="error">${erro}</div>
+        </c:if>
         <form method="post">
-            <label><input class="required" type="number" name="cep" value="${endereco.getCep()}"></label>
-            <label><input class="required" type="number" name="numero" value="${endereco.getNumero()}"></label>
-            <input type="hidden" name="idLoja" value="${loja.getId()}">
+            <label>CEP: <input class="required" type="number" name="cep" value="${endereco.getCep()}"></label>
+            <label>Número: <input class="required" type="number" name="numero" value="${endereco.getNumero()}"></label>
+            <input type="hidden" name="lojaId" value="${loja.getId()}">
+            <h3>Chefes:</h3>
             <div id="chefes">
                 <c:forEach var="chefe" items="${chefes}">
                     <div>
@@ -26,10 +30,12 @@
                download="loja${endereco.getCep()}.xml">
                 Baixar XML loja
             </a>
-            <input class="button" type="submit"
-                   formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja" value="Salvar">
-            <input class="button" type="submit"
-                   formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja" value="Excluir Loja">
+            <div>
+                <input class="button" type="submit"
+                       formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja" value="Salvar">
+                <input class="button" type="submit"
+                       formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja" value="Excluir Loja">
+            </div>
         </form>
         <a class="link" href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Voltar para a listagem</a>
     </jsp:body>
