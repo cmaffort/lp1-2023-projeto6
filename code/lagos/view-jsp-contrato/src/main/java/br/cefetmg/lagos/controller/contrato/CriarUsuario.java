@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class CriarUsuario {

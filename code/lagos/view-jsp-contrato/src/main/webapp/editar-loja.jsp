@@ -20,6 +20,11 @@
                     </div>
                 </c:forEach>
             </div>
+            <a class="button"
+               href="${pageContext.request.contextPath}/servletweb?acao=GetXMLLoja&lojaId=${loja.getId()}"
+               download="loja${endereco.getCep()}.xml">
+                Baixar XML loja
+            </a>
             <input type="submit" formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja" value="Salvar">
             <input type="submit" formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja" value="Excluir Loja">
         </form>

@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.loja;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dto.loja.Cliente;
 import br.cefetmg.lagos.model.service.loja.old.ManterCliente;
 import com.google.gson.Gson;

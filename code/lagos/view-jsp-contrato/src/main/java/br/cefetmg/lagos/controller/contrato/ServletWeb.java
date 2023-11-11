@@ -1,8 +1,9 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.FileOutput;
-import br.cefetmg.lagos.controller.TipoServlet;
-import br.cefetmg.lagos.controller.exception.OutputException;
+import br.cefetmg.lagos.controller.util.TipoServlet;
+import br.cefetmg.lagos.controller.util.FileOutput;
+
+import br.cefetmg.lagos.controller.util.exception.OutputException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -58,8 +59,8 @@ public class ServletWeb extends HttpServlet {
                 tipoServlet = Login.getTipo();
                 break;
             default:
-                result = "/404.jsp";
-                tipoServlet = TipoServlet.PAGE_SERVLET;
+                result = Error.execute(request);
+                tipoServlet = Error.getTipo();
         }
 
         switch (tipoServlet) {
@@ -73,10 +74,10 @@ public class ServletWeb extends HttpServlet {
             case FILE_SERVLET:
                 try {
                     FileOutput.writeToOutput(request.getAttribute("file"), response.getOutputStream());
-                    response.setContentType(result);
                 } catch (OutputException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e.getMessage(), e);
                 }
+                response.setContentType(result);
         }
     }
 }

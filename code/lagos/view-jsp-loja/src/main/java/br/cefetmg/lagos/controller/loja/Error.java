@@ -1,18 +1,14 @@
-package br.cefetmg.lagos.controller.contrato;
+package br.cefetmg.lagos.controller.loja;
 
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class Home {
+public class Error {
     public static TipoServlet getTipo() {
         return TipoServlet.PAGE_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {
-        return doGet(request);
-    }
-
-    public static String doGet(HttpServletRequest request) {
-        return "/home.jsp";
+        return "/404.jsp";
     }
 }

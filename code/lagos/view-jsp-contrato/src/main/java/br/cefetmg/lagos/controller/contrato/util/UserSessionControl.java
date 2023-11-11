@@ -20,7 +20,6 @@ public class UserSessionControl {
             throw new NullPointerException("Usuario deve ser definido");
         HttpSession session = request.getSession();
         session.setAttribute("usuario", Serializer.serialize(usuario.toMap()));
-        session.setAttribute("pessoa", Serializer.serialize(usuario.getPessoa().toMap()));
     }
 
     public static Usuario getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {

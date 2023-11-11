@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
