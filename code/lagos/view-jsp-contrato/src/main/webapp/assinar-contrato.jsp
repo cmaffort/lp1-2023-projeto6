@@ -8,6 +8,13 @@
     </jsp:attribute>
 
     <jsp:body>
-        Lista de contratos ativos
+        <h1>Assinar novo contrato:</h1>
+
+        <button id="chamar-funcao">Chamar Função</button>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="js/assinar-contrato.js"></script>
+
     </jsp:body>
 </t:base>
