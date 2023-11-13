@@ -89,7 +89,7 @@
 
   <div>
 
-      <button onclick="location.href='novo_contrato.jsp'">
+      <button onclick="location.href='novo-contrato.jsp'">
         Criar Contrato
       </button>
 

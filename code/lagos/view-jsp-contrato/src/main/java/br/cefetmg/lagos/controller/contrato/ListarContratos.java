@@ -29,8 +29,7 @@ public class ListarContratos extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        out.println("teste!");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManterContrato mc = new ManterContrato();
         ManterContratoAssinado mca = new ManterContratoAssinado();
 
