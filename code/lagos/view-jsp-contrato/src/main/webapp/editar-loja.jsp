@@ -32,9 +32,11 @@
             </a>
             <div>
                 <input class="button" type="submit"
-                       formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja" value="Salvar">
+                       formaction="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.getId()}"
+                       value="Salvar">
                 <input class="button" type="submit"
-                       formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja" value="Excluir Loja">
+                       formaction="${pageContext.request.contextPath}/servletweb?acao=ExcluirLoja&lojaId=${loja.getId()}"
+                       value="Excluir Loja">
             </div>
         </form>
         <a class="link" href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Voltar para a listagem</a>
