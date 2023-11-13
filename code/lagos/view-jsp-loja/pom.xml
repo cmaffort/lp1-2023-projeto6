@@ -18,24 +18,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.servlet.jsp.jstl</groupId>
-                    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.servlet.jsp</groupId>
-                    <artifactId>jakarta.servlet.jsp-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.servlet</groupId>
-                    <artifactId>jakarta.servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -58,7 +49,32 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -20,7 +20,7 @@ public class ServletWeb extends HttpServlet {
         acao = acao == null ? "Login" : acao;
         TipoServlet tipoServlet;
         String result;
-
+      
         if ("GET".equals(request.getMethod()))
             switch (acao) {
                 case "ListarLojas":
