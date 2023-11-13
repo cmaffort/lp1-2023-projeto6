@@ -9,7 +9,6 @@ import java.sql.Date;
 @Table(nome = "contrato_assinado")
 @PrimaryKey(nome = "pk")
 public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements DTO<ContratoAssinado> {
-    private Boolean vigente;
     private Date dataDeContratacao;
     private Boolean cancelado;
 
@@ -17,20 +16,6 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     private Contrato contrato;
 
     private Long id;
-
-    @Column(nome = "vigente", tipo = Boolean.class)
-    @NotNull
-    @Getter
-    public Boolean isVigente() {
-        return vigente;
-    }
-
-    @Column(nome = "vigente", tipo = Boolean.class)
-    @NotNull
-    @Setter
-    public void setVigente(Boolean vigente) {
-        this.vigente = vigente;
-    }
 
     @Column(nome = "data_de_contratacao", tipo = Date.class)
     @NotNull
@@ -75,13 +60,13 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     @Column(nome = "usuario__fk", tipo = Long.class)
     @Getter
     public Long getUsuarioAsLong() {
-        return getRelatedAsLong(getUsuario());
+        return getRelatedAsLong(usuario);
     }
 
     @Column(nome = "usuario__fk", tipo = Long.class)
     @Setter
     public void setUsuarioWithLong(Long id) {
-        setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
+        usuario = setRelatedWithLong(usuario, id, new Usuario());
     }
 
     @Related(nome = "contrato")
@@ -100,14 +85,14 @@ public class ContratoAssinado extends AbstractDTO<ContratoAssinado> implements D
     @NotNull
     @Getter
     public Long getContratoAsLong() {
-        return getRelatedAsLong(getContrato());
+        return getRelatedAsLong(contrato);
     }
 
     @Column(nome = "contrato__fk", tipo = Long.class)
     @NotNull
     @Setter
     public void setContratoWithLong(Long id) {
-        setContrato(setRelatedWithLong(getContrato(), id, new Contrato()));
+        contrato = setRelatedWithLong(contrato, id, new Contrato());
     }
 
     @Column(nome = "pk", tipo = Long.class)

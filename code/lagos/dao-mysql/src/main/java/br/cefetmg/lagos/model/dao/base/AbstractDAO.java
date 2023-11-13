@@ -55,7 +55,7 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
 
         Long id = new JDBCOperation.Builder<>(getDTO())
                 .setSql(sql)
-                .setColumnsPreparedStatement(allColumnsPreparedStatement, Statement.RETURN_GENERATED_KEYS, dto)
+                .setColumnsPreparedStatement(allColumnsPreparedStatement, dto)
                 .getId();
 
         if (id != null)
@@ -321,6 +321,9 @@ public abstract class AbstractDAO<DataTransferObject extends DTO<DataTransferObj
     }
 
     protected DataTransferObject fillFKedDTOs(DataTransferObject dto) {
+        if (dto == null)
+            return null;
+
         Map<String, IDAO> daos = getDAOs();
         if (daos == null)
             return dto;

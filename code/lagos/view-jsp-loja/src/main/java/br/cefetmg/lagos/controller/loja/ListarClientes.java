@@ -1,8 +1,8 @@
 package br.cefetmg.lagos.controller.loja;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dto.loja.Cliente;
-import br.cefetmg.lagos.model.service.loja.ManterCliente;
+import br.cefetmg.lagos.model.service.loja.old.ManterCliente;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListarClientes extends HttpServlet {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSONServlet;
+        return TipoServlet.JSON_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {

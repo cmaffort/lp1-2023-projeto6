@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public interface DTO<DataTransferObject extends DTO<DataTransferObject>> {
     Long getId();
@@ -41,9 +42,9 @@ public interface DTO<DataTransferObject extends DTO<DataTransferObject>> {
         return getInstance(dto.toMap());
     }
 
-    Map<String, Object> toMap();
+    TreeMap<String, Object> toMap();
 
-    Map<String, Object> toMap(List<String> columns);
+    TreeMap<String, Object> toMap(List<String> columns);
 
     String toString();
 

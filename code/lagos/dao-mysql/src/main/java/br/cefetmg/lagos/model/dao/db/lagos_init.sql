@@ -19,8 +19,8 @@ insert into contrato (ativo, preco, numero_de_lojas, data_de_criacao, periodicid
 values (true, 2500, 10, '2022-10-18', (select last_insert_id()));
 
 # Assina contrato
-insert into contrato_assinado (vigente, data_de_contratacao, cancelado, usuario__fk, contrato__fk)
-values (true, '2023-08-18', false, (select @usuario_contratante), (select last_insert_id()));
+insert into contrato_assinado (data_de_contratacao, cancelado, usuario__fk, contrato__fk)
+values ('2023-08-18', false, (select @usuario_contratante), (select last_insert_id()));
 
 # Configura interface
 insert into configuracoes_de_interface (nome_da_empresa, cor_base, pk)
@@ -29,8 +29,8 @@ values ('LOSH', '#000000', (select @usuario_contratante));
 # Cria uma loja, e gera, automaticamente, uma configuração de venda padrão
 insert into loja (endereco__fk, usuario__fk)
 values ((select @endereco), (select @usuario_contratante));
-insert into configuracoes_de_venda (limite_de_desconto, taxa_de_juros_ao_mes, metodos_aceitos, bandeiras_aceitas, porcentagem_comissao, pk)
-values (0.10, 0.10, 3451521, 1432512, 0.05, 1);
+insert into configuracoes_de_venda (limite_de_desconto, taxa_de_juros_ao_mes, porcentagem_comissao, pk)
+values (0.10, 0.10, 0.05, 1);
 
 # Contratante cria chefe para uma loja
 insert into pessoa (nome, sobrenome, nascimento, email, telefone)
@@ -60,12 +60,12 @@ insert into caixa (aberto, dinheiro_em_caixa, usuario_loja__fk, loja__fk)
 values (false, 26.5, (select last_insert_id()), 1);
 set @caixa := (select last_insert_id());
 insert into fluxo_de_caixa (dinheiro_em_caixa, tipo, hora, caixa__fk)
-values (26.5, 3, '2023-09-19 09:07:48', (select @caixa));
+values (26.5, 0, '2023-09-19 09:07:48', (select @caixa));
 
 # Chefe tira 0.50 centavos do caixa
 update caixa set dinheiro_em_caixa = 26 where pk = (select @caixa);
 insert into fluxo_de_caixa (dinheiro_em_caixa, tipo, hora, caixa__fk)
-values (26, 2, '2023-09-19 09:08:57', (select @caixa));
+values (26, 1, '2023-09-19 09:08:57', (select @caixa));
 
 # Gerente altera configurações de venda
 update configuracoes_de_venda set limite_de_desconto = 0.5 where pk = 1;
@@ -131,9 +131,9 @@ insert into historico_vet (tipo, data, loja__fk)
 values (1, '2023-10-16 13:53:00', 1);
 set @hv1 := (select last_insert_id());
 
-insert into item (preco, quantidade, historioco_vet__fk, produto__fk)
+insert into item (preco, quantidade, historico_vet__fk, produto__fk)
 values ((select (preco) from produto where pk = (select @luminaria)), 3, (select @hv1), (select @luminaria));
-insert into item (preco, quantidade, historioco_vet__fk, produto__fk)
+insert into item (preco, quantidade, historico_vet__fk, produto__fk)
 values ((select (preco) from produto where pk = (select @limpa)), 10, (select @hv1), (select @limpa));
 
 insert into venda (desconto, numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk)
@@ -142,7 +142,7 @@ values (0.05, 2, (select @hv1), (select @caixa), (select @vendedor), (select @cl
 update produto
     inner join item on item.produto__fk = produto.pk
 set produto.quantidade = produto.quantidade - item.quantidade
-where item.historioco_vet__fk = (@hv1);
+where item.historico_vet__fk = (@hv1);
 
 insert into promocoes__vendas (promocao__fk, venda__fk)
 select pk, (select @hv1)
@@ -177,7 +177,7 @@ insert into historico_vet (tipo, data, loja__fk)
 values (1, '2023-10-30 13:53:00', 1);
 set @hv2 := (select last_insert_id());
 
-insert into item (preco, quantidade, historioco_vet__fk, produto__fk)
+insert into item (preco, quantidade, historico_vet__fk, produto__fk)
 values ((select (preco) from produto where pk = (select @luminaria)), 1, (select @hv2), (select @luminaria));
 
 insert into venda (numero_de_parcelas, pk, caixa__fk, funcionario__fk, cliente__fk)
@@ -186,7 +186,7 @@ values (2, (select @hv2), (select @caixa), (select @vendedor), (select @cliente)
 update produto
     inner join item on item.produto__fk = produto.pk
 set produto.quantidade = produto.quantidade - item.quantidade
-where item.historioco_vet__fk = (@hv2);
+where item.historico_vet__fk = (@hv2);
 
 insert into promocoes__vendas (promocao__fk, venda__fk)
 select pk, (select @hv2)
