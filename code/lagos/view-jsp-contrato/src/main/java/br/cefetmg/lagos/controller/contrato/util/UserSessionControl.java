@@ -8,6 +8,8 @@ import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
 import br.cefetmg.lagos.model.service.contrato.IManterUsuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
 import br.cefetmg.lagos.util.Serializer;
+import br.cefetmg.lagos.controller.contrato.Error;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -20,7 +22,6 @@ public class UserSessionControl {
             throw new NullPointerException("Usuario deve ser definido");
         HttpSession session = request.getSession();
         session.setAttribute("usuario", Serializer.serialize(usuario.toMap()));
-        session.setAttribute("pessoa", Serializer.serialize(usuario.getPessoa().toMap()));
     }
 
     public static Usuario getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {

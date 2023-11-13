@@ -26,7 +26,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected void assertHasNotNullFieldsButPk(DataTransferObject dto) throws NegocioException {
         if (!hasAllNotNullFieldsButPk(dto))
-            throw new NegocioException("A DTO deve possuir todos os campos não nulos preenchidos com algum valor.");
+            throw new NegocioException("Todos campos não nulos devem ser preenchidos.");
     }
 
     public Long cadastrar(DataTransferObject dto) throws NegocioException, PersistenceException {
