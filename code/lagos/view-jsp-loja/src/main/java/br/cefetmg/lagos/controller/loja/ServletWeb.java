@@ -26,6 +26,10 @@ public class ServletWeb extends HttpServlet {
                 result = CadastrarCliente.execute(request);
                 tipoServlet = CadastrarCliente.getTipo();
                 break;
+            case "CadastrarContrato":
+                result = CadastrarContrato.execute(request);
+                tipoServlet = CadastrarContrato.getTipo();
+                break;
             case "ListarClientes":
                 result = ListarClientes.execute(request);
                 tipoServlet = ListarClientes.getTipo();
