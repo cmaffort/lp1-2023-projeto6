@@ -1,15 +1,11 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Logout {
-    public static TipoServlet getTipo() {
-        return TipoServlet.JSPServlet;
-    }
-
-    public static String execute(HttpServletRequest request) {
-        return doGet(request);
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {

@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
@@ -11,12 +11,8 @@ import br.cefetmg.lagos.model.util.DataBaseParser;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class GetXMLLoja {
-    public static TipoServlet getTipo() {
-        return TipoServlet.FileServlet;
-    }
-
-    public static String execute(HttpServletRequest request) {
-        return doGet(request);
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.FILE_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -31,7 +27,7 @@ public class GetXMLLoja {
             Loja loja = manterLoja.pesquisarPorId(lojaId);
 
             if (!loja.getUsuarioAsLong().equals(contratante.getId()))
-                return Error.execute(request);
+                return Error.doGet(request);
 
             String xmldb = DataBaseParser.dbLojaToXML(loja);
 

@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface IManterLoja extends IManter<Loja> {
     List<Loja> pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException;
+
+    long countLojas(Usuario usuario) throws NegocioException, PersistenceException;
 }

@@ -2,13 +2,12 @@ package br.cefetmg.lagos.model.dao.util;
 
 import br.cefetmg.lagos.model.dao.connections.ConnectionManager;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.annotations.Related;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class JDBCOperation<DataTransferObject extends DTO<DataTransferObject>> {
     private DTODb<DataTransferObject> dtoDb;
@@ -147,6 +146,103 @@ public class JDBCOperation<DataTransferObject extends DTO<DataTransferObject>> {
         }
     }
 
+    public Object getColumn() throws PersistenceException {
+        try {
+            if (columnsResultSet == null)
+                throw new RuntimeException("Columns result set must be set in order to execute this method.");
+
+            executeQuery();
+            Object resultObject = null;
+            if (resultSet.next())
+                resultObject = resultSet.getObject(1);
+            return resultObject;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    private List<Object> getRowAsserted() throws PersistenceException {
+        try {
+            List<Object> row = new ArrayList<>();
+            for (String column : columnsResultSet)
+                row.add(resultSet.getObject(column));
+            return row;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    public List<Object> getRow() throws PersistenceException {
+        try {
+            if (columnsResultSet == null)
+                throw new RuntimeException("Columns result set must be set in order to execute this method.");
+
+            executeQuery();
+            List<Object> row = new ArrayList<>();
+            if (resultSet.next())
+                row = getRowAsserted();
+            return row;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    public List<List<Object>> getRows() throws PersistenceException {
+        try {
+            if (columnsResultSet == null)
+                throw new RuntimeException("Columns result set must be set in order to execute this method.");
+
+            executeQuery();
+            List<List<Object>> rows = new ArrayList<>();
+            while (resultSet.next())
+                rows.add(getRowAsserted());
+            return rows;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    private Map<String, Object> getMapRowAsserted() throws PersistenceException {
+        try {
+            Map<String, Object> row = new TreeMap<>();
+            for (String column : columnsResultSet)
+                row.put(column, resultSet.getObject(column));
+            return row;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    public Map<String, Object> getMapRow() throws PersistenceException {
+        try {
+            if (columnsResultSet == null)
+                throw new RuntimeException("Columns result set must be set in order to execute this method.");
+
+            executeQuery();
+            Map<String, Object> row = new TreeMap<>();
+            if (resultSet.next())
+                row = getMapRowAsserted();
+            return row;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
+    public List<Map<String, Object>> getMapRows() throws PersistenceException {
+        try {
+            if (columnsResultSet == null)
+                throw new RuntimeException("Columns result set must be set in order to execute this method.");
+
+            executeQuery();
+            List<Map<String, Object>> rows = new ArrayList<>();
+            while (resultSet.next())
+                rows.add(getMapRowAsserted());
+            return rows;
+        } catch (Exception e) {
+            throw handleExeption(e);
+        }
+    }
+
     public void close() throws PersistenceException {
         try {
             if (resultSet != null)
@@ -234,6 +330,34 @@ public class JDBCOperation<DataTransferObject extends DTO<DataTransferObject>> {
             List<DataTransferObject> dtos = operation.getInstances();
             operation.close();
             return dtos;
+        }
+
+        public List<Object> getRow() throws PersistenceException {
+            JDBCOperation<DataTransferObject> operation = build();
+            List<Object> row = operation.getRow();
+            operation.close();
+            return row;
+        }
+
+        public List<List<Object>> getRows() throws PersistenceException {
+            JDBCOperation<DataTransferObject> operation = build();
+            List<List<Object>> rows = operation.getRows();
+            operation.close();
+            return rows;
+        }
+
+        public Map<String, Object> getMapRow() throws PersistenceException {
+            JDBCOperation<DataTransferObject> operation = build();
+            Map<String, Object> row = operation.getMapRow();
+            operation.close();
+            return row;
+        }
+
+        public List<Map<String, Object>> getMapRows() throws PersistenceException {
+            JDBCOperation<DataTransferObject> operation = build();
+            List<Map<String, Object>> rows = operation.getMapRows();
+            operation.close();
+            return rows;
         }
     }
 }

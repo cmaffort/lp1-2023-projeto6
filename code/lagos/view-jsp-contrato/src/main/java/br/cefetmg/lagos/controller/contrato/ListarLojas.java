@@ -1,21 +1,20 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
+import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
-import br.cefetmg.lagos.model.service.contrato.IManterLoja;
-import br.cefetmg.lagos.model.service.contrato.ManterLoja;
+import br.cefetmg.lagos.model.service.contrato.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-public class ListarLojas {
-    public static TipoServlet getTipo() {
-        return TipoServlet.JSPServlet;
-    }
+import java.util.List;
 
-    public static String execute(HttpServletRequest request) {
-        return doGet(request);
+public class ListarLojas {
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -26,12 +25,18 @@ public class ListarLojas {
                 return redirectJSP;
 
             IManterLoja manterLoja = new ManterLoja();
-            request.setAttribute("lojas", manterLoja.pesquisarPorContratante(contratante));
+            List<Loja> lojas = manterLoja.pesquisarPorContratante(contratante);
+
+            IManterContratoAssinado manterContratoAssinado = new ManterContratoAssinado();
+            ContratoAssinado contratoAssinado = manterContratoAssinado.pesquisarContratoAssinadoPorContratante(contratante);
+
+            request.setAttribute("lojas", lojas);
+            request.setAttribute("contratoAssinado", contratoAssinado);
 
             return "/listar-lojas.jsp";
         } catch (Exception e) {
             e.printStackTrace();
-            return "/404.jsp";
+            return Error.doGet();
         }
     }
 }

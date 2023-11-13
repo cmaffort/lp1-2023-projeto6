@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.loja;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.loja.Cliente;
 import br.cefetmg.lagos.model.exception.NegocioException;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CadastrarCliente {
     public static TipoServlet getTipo() {
-        return TipoServlet.JSONServlet;
+        return TipoServlet.JSON_SERVLET;
     }
 
     public static String execute(HttpServletRequest request) {

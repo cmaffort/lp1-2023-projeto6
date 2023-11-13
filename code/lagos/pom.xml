@@ -15,6 +15,7 @@
         <module>model</module>
         <module>view-jsp-contrato</module>
         <module>view-jsp-loja</module>
+        <module>common-controller</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

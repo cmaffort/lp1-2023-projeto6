@@ -1,6 +1,6 @@
-package br.cefetmg.lagos.controller;
+package br.cefetmg.lagos.controller.util;
 
-import br.cefetmg.lagos.controller.exception.OutputException;
+import br.cefetmg.lagos.controller.util.exception.OutputException;
 import net.sf.jmimemagic.Magic;
 
 import java.io.OutputStream;

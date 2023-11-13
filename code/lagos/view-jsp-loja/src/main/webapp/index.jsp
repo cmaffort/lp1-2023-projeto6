@@ -9,7 +9,7 @@
         <%@include file="header.jsp" %>
         <div class="container">
             <h1>Fazer Login</h1>
-            <form action="/loja?acao=Login" method="post">
+            <form action="/loja/servletweb?acao=Login" method="post">
                 <div class="form-field">
                     <label for="usuario" style="background-color: #e2e3d1; color: black;">Usuario</label>
                     <input type="text" name="usuario" id="usuario" required><br>

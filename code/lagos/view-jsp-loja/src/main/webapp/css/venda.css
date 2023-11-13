@@ -1,4 +1,87 @@
 body {
-    background-color: #e2e3d1;
-    color: #c9cbad;
+    background-color: #fbf6f3;
+    min-height: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+.invisivel {
+    display: none;
+}
+
+#titulo-lagos {
+    display: flex;
+    color: #fbf6f3;
+    width: min-content;
+    background-color: rgba(166,166,166,255);
+    padding: 0.2% 1% 0.2% 1%;
+    border-radius: 10px;
+    font-size: 220%;
+}
+
+#titulo {
+    color: rgba(166,166,166,255);
+    text-align: center;
+    font-size: 220%;
+}
+
+header {
+    display: flex;
+    background-color: #fbf6f3;
+    padding-bottom: 1.15%;
+    margin-bottom: 1.15%;
+    border-bottom: solid 3px rgba(216,212,210,255);
+    justify-content: center;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    margin-left: 4%;
+    font-size: 180%;
+    border-radius: 10px;
+    border-style: hidden;
+    background-color: #d0cdcc;
+    color: #f3efec;
+    padding: 0.7% 2% 0.7% 2%;
+    transition: transform 0.4s ease;
+}
+
+.botoes:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: #a6a6a6;
+    color: #fbf6f3;
+
+}
+
+#botao-taxas {
+    margin-bottom: 5%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+#quadro {
+    display: grid;
+    margin-left: 3%;
+    margin-right: 5%;
+    border: dotted 3px rgba(166,166,166,255);
+    border-radius: 20px;
+    padding: 2% 2% 2% 2%;
+}
+
+p {
+    color: rgba(166,166,166,255)
+}
+
+footer {
+    padding-top: 1.15%;
+    margin-top: 1.15%;
+    border-bottom: solid 3px rgba(216,212,210,255);
 }

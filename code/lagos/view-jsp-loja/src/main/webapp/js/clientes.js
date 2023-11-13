@@ -4,7 +4,7 @@ let cadastroClienteEL = document.querySelector("#botao_cadastro");
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
         type: 'POST',
-        url: '/loja?acao=ListarClientes',
+        url: '/loja/servletweb?acao=ListarClientes',
         success: function (result) {
             let tabelaCliente = document.querySelector("#tabela_clientes");
             tabelaCliente.style.display = 'block';
@@ -65,7 +65,7 @@ concluirCadastroEl.addEventListener('click', () => {
     $.ajax({
         data: dadosCadastroJson,
         method: 'POST',
-        url: '/loja?acao=CadastrarCliente',
+        url: '/loja/servletweb?acao=CadastrarCliente',
         contentType: 'application/json',
     })
 });
