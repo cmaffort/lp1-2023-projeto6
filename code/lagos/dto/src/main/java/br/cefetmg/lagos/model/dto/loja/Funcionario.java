@@ -76,14 +76,14 @@ public class Funcionario extends AbstractDTO<Funcionario> implements DTO<Funcion
     @NotNull
     @Getter
     public Integer getTipoAsInt() {
-        return IntEnum.getIntForEnum(getTipo());
+        return IntEnum.getIntForEnum(tipo);
     }
 
     @Column(nome = "tipo_funcionario", tipo = Integer.class)
     @NotNull
     @Setter
     public void setTipoWithInt(Integer ord) {
-        setTipo(IntEnum.getEnumForInt(ord, TipoFuncionario.class));
+        tipo = IntEnum.getEnumForInt(ord, TipoFuncionario.class);
     }
 
     @Related(nome = "loja")

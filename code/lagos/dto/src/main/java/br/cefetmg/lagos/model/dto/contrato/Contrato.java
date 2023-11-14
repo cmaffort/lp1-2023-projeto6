@@ -5,8 +5,6 @@ import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-import java.io.File;
-import java.sql.Blob;
 import java.sql.Date;
 
 @Table(nome = "contrato")
@@ -15,7 +13,7 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private Boolean ativo;
     private String descricao;
     private Double preco;
-    private Blob documento;
+    private byte[] documento;
     private Float taxaDeMulta;
     private Integer numeroDeLojas;
     private Date dataDeCriacao;
@@ -62,15 +60,15 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
         this.preco = preco;
     }
 
-    @Column(nome = "documento", tipo = Blob.class)
+    @Column(nome = "documento", tipo = byte[].class)
     @Getter
-    public Blob getDocumento() {
+    public byte[] getDocumento() {
         return documento;
     }
 
-    @Column(nome = "documento", tipo = Blob.class)
+    @Column(nome = "documento", tipo = byte[].class)
     @Setter
-    public void setDocumento(Blob documento) {
+    public void setDocumento(byte[] documento) {
         this.documento = documento;
     }
 

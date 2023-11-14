@@ -40,7 +40,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected void assertHasNotNullFields(DataTransferObject dto) throws NegocioException {
         if (!hasAllNotNullFields(dto))
-            throw new NegocioException("A DTO deve possuir todos os campos não nulos preenchidos com algum valor.");
+            throw new NegocioException("Todos campos não nulos devem ser preenchidos.");
     }
 
     public boolean alterar(DataTransferObject dto) throws NegocioException, PersistenceException {
@@ -84,7 +84,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected <T> void assertArrayIsNotEmpty(T[] arr) throws NegocioException {
         if (isArrayEmpty(arr))
-            throw new NegocioException("Ao menos um item deve ser passado");
+            throw new NegocioException("Ao menos um item deve ser passado.");
     }
 
     public List<DataTransferObject> pesquisarPorIds(Long... ids) throws PersistenceException, NegocioException {
@@ -99,7 +99,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected void assertColumnsAreFromDTO(DataTransferObject dto, List<String> columns) throws NegocioException {
         if (!areColumnsOfDTO(dto, columns))
-            throw new NegocioException("Ao menos uma coluna não pertence a DTO.");
+            throw new NegocioException("Ao menos uma relação está incorreta.");
     }
 
     public List<DataTransferObject> filtrar(DataTransferObject dto, String... columns) throws NegocioException, PersistenceException {
@@ -115,7 +115,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected void assertAllTablesAreRelated(DataTransferObject dto, List<DTO> relatedTables) throws NegocioException {
         if (!areAllTablesRelated(dto, relatedTables))
-            throw new NegocioException("Todas as DTOs passadas devem ser relacionadas a essa DTO.");
+            throw new NegocioException("Ao menos uma relação está incorreta.");
     }
 
     @Override
@@ -132,7 +132,7 @@ public abstract class AbstractManter<DataTransferObject extends DTO<DataTransfer
 
     protected void assertTableRelated(DataTransferObject dto, DTO<?> relatedTable) throws NegocioException {
         if (!isTableRelated(dto, relatedTable))
-            throw new NegocioException("A DTO passada devem ser relacionada a essa DTO.");
+            throw new NegocioException("Essa relação não existe.");
     }
 
     @Override

@@ -13,6 +13,8 @@ import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.loja.base.AbstractManterLojaModule;
 import br.cefetmg.lagos.util.PasswordAuthentication;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> implements IManterUsuarioLoja {
@@ -25,6 +27,36 @@ public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> imp
     protected UsuarioLoja getDTOInstance() {
         return new UsuarioLoja();
     }
+    
+    protected boolean isOldEnough(Date birthday) {
+        return LocalDate.now().minusYears(14).isAfter(birthday.toLocalDate());
+    }
+    
+    protected void assertOldEnough(Date birthday) throws NegocioException {
+        if (!isOldEnough(birthday))
+            throw new NegocioException("O usuario da loja deve ter ao menos 14 anos para poder tem uma conta na loja.");
+    }
+
+    protected boolean isTelephoneValid(Long telephone) {
+        if (telephone == null)
+            return true;
+        int len = telephone.toString().length();
+        return len == 10 || len == 11;
+    }
+
+    protected void assertTelephoneIsValid(Long telephone) throws NegocioException {
+        if (!isTelephoneValid(telephone))
+            throw new NegocioException("O telefone deve ter entre 10 e 11 digitos.");
+    }
+
+    protected boolean isEmailValid(String email) {
+        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,}$");
+    }
+
+    protected void assertEmailIsValid(String email) throws NegocioException {
+        if (!isEmailValid(email))
+            throw new NegocioException("O dado passado no campo de email não é um email.");
+    }
 
     /**
      * Ao cadastrar um usuario a senha já sofre o hash.
@@ -32,6 +64,9 @@ public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> imp
     @Override
     public Long cadastrar(UsuarioLoja usuarioLoja) throws PersistenceException, NegocioException {
         assertHasNotNullFieldsButPk(usuarioLoja);
+        assertOldEnough(usuarioLoja.getNascimento());
+        assertTelephoneIsValid(usuarioLoja.getTelefone());
+        assertEmailIsValid(usuarioLoja.getEmail());
         PasswordAuthentication pa = new PasswordAuthentication();
         usuarioLoja.setSenha(pa.hash(usuarioLoja.getSenha()));
         return getDAO().inserir(usuarioLoja);

@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.controller.contrato;
+package br.cefetmg.lagos.controller.contrato.gerirLojas;
 
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
 import br.cefetmg.lagos.controller.util.TipoServlet;
@@ -25,7 +25,7 @@ public class ExcluirLoja {
 
             IManterLoja manterLoja = new ManterLoja();
 
-            Long id = Long.parseLong(request.getParameter("idLoja"));
+            Long id = Long.parseLong(request.getParameter("lojaId"));
             List<Long> ids = manterLoja.pesquisarPorContratante(contratante).stream()
                     .map(Loja::getId)
                     .toList();

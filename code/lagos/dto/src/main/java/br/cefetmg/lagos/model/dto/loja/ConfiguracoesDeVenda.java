@@ -7,8 +7,6 @@ import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.enums.Bandeira;
 import br.cefetmg.lagos.model.dto.enums.MetodosPagamento;
 
-import java.sql.Blob;
-import java.sql.Date;
 import java.util.List;
 
 @Table(nome = "configuracoes_de_venda")
@@ -56,15 +54,15 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
 
     // TODO: Implementar list<int> para blob e o inverso, usar Gson
 
-    @Column(nome = "metodos_aceitos", tipo = Blob.class)
+    @Column(nome = "metodos_aceitos", tipo = byte[].class)
     @Getter
-    public Blob getMetodosAceitosAsBlob() {
+    public byte[] getMetodosAceitosAsBytes() {
         return null;
     }
 
-    @Column(nome = "metodos_aceitos", tipo = Blob.class)
+    @Column(nome = "metodos_aceitos", tipo = byte[].class)
     @Setter
-    public void setMetodosAceitosWithBlob(Blob metodosAceitos) {
+    public void setMetodosAceitosWithBytes(byte[] metodosAceitos) {
 
     }
 
@@ -78,15 +76,15 @@ public class ConfiguracoesDeVenda extends AbstractDTO<ConfiguracoesDeVenda> impl
 
     // TODO: Implementar list<int> para blob e o inverso, usar Gson
 
-    @Column(nome = "bandeiras_aceitas", tipo = Blob.class)
+    @Column(nome = "bandeiras_aceitas", tipo = byte[].class)
     @Getter
-    public Blob getBandeirasAceitasAsBlob() {
+    public byte[] getBandeirasAceitasAsBytes() {
         return null;
     }
 
-    @Column(nome = "bandeiras_aceitas", tipo = Blob.class)
+    @Column(nome = "bandeiras_aceitas", tipo = byte[].class)
     @Setter
-    public void setBandeirasAceitasWithBlob(Blob bandeirasAceitas) {
+    public void setBandeirasAceitasWithBytes(byte[] bandeirasAceitas) {
 
     }
 

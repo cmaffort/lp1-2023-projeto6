@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <t:base>
     <jsp:attribute name="title">
@@ -7,11 +8,30 @@
     </jsp:attribute>
 
     <jsp:body>
-        <form method="get">
-            <label>Nome da empresa: <input name="nome_da_empresa" type="text"></label>
-            <label>Logo: <input name="logo" type="file" accept="image/png"></label>
-            <label>Cor base: <input name="cor_base" type="color"></label>
-            <input type="submit" name="submit" value="Salvar">
+        <c:if test="${erro != null}">
+            <div class="error">${erro}</div>
+        </c:if>
+        <form class="center-block" method="post" style="width: 35rem; height: 20rem" enctype="multipart/form-data">
+            <h1>Configure a interface das suas lojas</h1>
+            <div class="form-inputs">
+                <label for="nome_da_empresa">Nome da empresa:</label>
+                <input id="nome_da_empresa" name="nome_da_empresa" type="text" value="${configuracoesDeInterface.getNomeDaEmpresa()}">
+
+                <label for="logo">Logo:</label>
+                <input id="logo" name="logo" type="file" accept="image/png">
+
+                <label for="cor_base">Cor base:</label>
+                <input id="cor_base" name="cor_base" type="color" value="${configuracoesDeInterface.getCorBase()}">
+            </div>
+            <div class="form-buttons">
+                <input class="button" style="width: 47%" type="submit"
+                       formaction="${pageContext.request.contextPath}/servletweb?acao=PersonalizarInterface"
+                       value="Salvar">
+                <a class="button" type="submit" style="width: 47%"
+                   href="${pageContext.request.contextPath}/servletweb?acao=Home">
+                    Cancelar
+                </a>
+            </div>
         </form>
     </jsp:body>
 </t:base>

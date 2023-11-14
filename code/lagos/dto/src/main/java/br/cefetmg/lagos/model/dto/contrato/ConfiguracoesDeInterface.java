@@ -3,16 +3,12 @@ package br.cefetmg.lagos.model.dto.contrato;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
-import br.cefetmg.lagos.model.dto.util.Blober;
-
-import java.io.File;
-import java.sql.Blob;
 
 @Table(nome = "configuracoes_de_interface")
 @PrimaryKey(nome = "pk")
 public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterface> implements DTO<ConfiguracoesDeInterface> {
     private String nomeDaEmpresa;
-    private Blob logo;
+    private byte[] logo;
     private String corBase;
 
     private Usuario usuario;
@@ -29,15 +25,15 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
         this.nomeDaEmpresa = nomeDaEmpresa;
     }
 
-    @Column(nome = "logo", tipo = Blob.class)
+    @Column(nome = "logo", tipo = byte[].class)
     @Getter
-    public Blob getLogo() {
+    public byte[] getLogo() {
         return logo;
     }
 
-    @Column(nome = "logo", tipo = Blob.class)
+    @Column(nome = "logo", tipo = byte[].class)
     @Setter
-    public void setLogoWithBlob(Blob logo) {
+    public void setLogoWithBytes(byte[] logo) {
         this.logo = logo;
     }
 
@@ -69,13 +65,13 @@ public class ConfiguracoesDeInterface extends AbstractDTO<ConfiguracoesDeInterfa
     @NotNull
     @Getter
     public Long getId() {
-        return getRelatedAsLong(getUsuario());
+        return getRelatedAsLong(usuario);
     }
 
     @Column(nome = "pk", tipo = Long.class)
     @NotNull
     @Setter
     public void setId(Long id) {
-        setUsuario(setRelatedWithLong(getUsuario(), id, new Usuario()));
+        usuario = setRelatedWithLong(usuario, id, new Usuario());
     }
 }

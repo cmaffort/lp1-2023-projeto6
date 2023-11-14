@@ -1,17 +1,22 @@
 package br.cefetmg.lagos.controller.contrato;
 
+import br.cefetmg.lagos.controller.contrato.gerirLojas.*;
+import br.cefetmg.lagos.controller.contrato.gerirLojas.chefe.CadastrarChefe;
+import br.cefetmg.lagos.controller.contrato.gerirLojas.chefe.ExcluirChefe;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.util.FileOutput;
 
 import br.cefetmg.lagos.controller.util.exception.OutputException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+@MultipartConfig
 public class ServletWeb extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,9 +44,17 @@ public class ServletWeb extends HttpServlet {
                     result = CadastrarLoja.doGet(request);
                     tipoServlet = CadastrarLoja.getTipoDoGet();
                     break;
+                case "CadastrarChefe":
+                    result = CadastrarChefe.doGet(request);
+                    tipoServlet = CadastrarChefe.getTipoDoGet();
+                    break;
                 case "PersonalizarInterface":
                     result = PersonalizarInterface.doGet(request);
                     tipoServlet = PersonalizarInterface.getTipoDoGet();
+                    break;
+                case "GetLogoInterface":
+                    result = GetLogoInterface.doGet(request);
+                    tipoServlet = GetLogoInterface.getTipoDoGet();
                     break;
                 case "AssinarContrato":
                     result = AssinarContrato.doGet(request);
@@ -84,6 +97,18 @@ public class ServletWeb extends HttpServlet {
                 case "ExcluirLoja":
                     result = ExcluirLoja.doPost(request);
                     tipoServlet = ExcluirLoja.getTipoDoPost();
+                    break;
+                case "CadastrarChefe":
+                    result = CadastrarChefe.doPost(request);
+                    tipoServlet = CadastrarChefe.getTipoDoPost();
+                    break;
+                case "ExcluirChefe":
+                    result = ExcluirChefe.doPost(request);
+                    tipoServlet = ExcluirChefe.getTipoDoPost();
+                    break;
+                case "PersonalizarInterface":
+                    result = PersonalizarInterface.doPost(request);
+                    tipoServlet = PersonalizarInterface.getTipoDoPost();
                     break;
                 case "CriarUsuario":
                     result = CriarUsuario.doPost(request);

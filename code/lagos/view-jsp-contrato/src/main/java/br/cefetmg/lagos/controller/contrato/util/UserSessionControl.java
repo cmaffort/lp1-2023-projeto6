@@ -26,7 +26,7 @@ public class UserSessionControl {
 
     public static Usuario getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {
         HttpSession session = request.getSession(false);
-        if (session == null)
+        if (session == null || session.getAttribute("usuario") == null)
             return null;
 
         IManterUsuario manterUsuario = new ManterUsuario();
