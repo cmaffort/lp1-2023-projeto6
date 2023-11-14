@@ -1,6 +1,6 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Periodicidade;
 import br.cefetmg.lagos.model.exception.NegocioException;
@@ -30,8 +30,8 @@ import static java.lang.System.out;
 
 @WebServlet(name="CriarContrato", urlPatterns= {"/criarContrato"})
 public class CriarContrato extends HttpServlet {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     @Override
