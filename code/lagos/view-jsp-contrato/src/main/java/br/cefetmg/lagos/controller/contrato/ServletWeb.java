@@ -25,7 +25,7 @@ public class ServletWeb extends HttpServlet {
         acao = acao == null ? "Login" : acao;
         TipoServlet tipoServlet;
         String result;
-
+      
         if ("GET".equals(request.getMethod()))
             switch (acao) {
                 case "ListarLojas":
@@ -68,6 +68,10 @@ public class ServletWeb extends HttpServlet {
                     result = CriarUsuario.doGet(request);
                     tipoServlet = CriarUsuario.getTipoDoGet();
                     break;
+                case "ListarContratos":
+                    result = ListarContratos.doGet(request);
+                    tipoServlet = ListarContratos.getTipoDoGet();
+                    break;
                 case "Logout":
                     result = Logout.doGet(request);
                     tipoServlet = Logout.getTipoDoGet();
@@ -109,6 +113,18 @@ public class ServletWeb extends HttpServlet {
                 case "CriarUsuario":
                     result = CriarUsuario.doPost(request);
                     tipoServlet = CriarUsuario.getTipoDoPost();
+                    break;
+                case "CriarContrato":
+                    result = CriarContrato.doPost(request);
+                    tipoServlet = CriarContrato.getTipoDoPost();
+                    break;
+                case "ListarContratos":
+                    result = ListarContratos.doPost(request);
+                    tipoServlet = ListarContratos.getTipoDoPost();
+                    break;
+                case "DesativarContrato":
+                    result = DesativarContrato.doPost(request);
+                    tipoServlet = DesativarContrato.getTipoDoPost();
                     break;
                 case "Login":
                     result = Login.doPost(request);

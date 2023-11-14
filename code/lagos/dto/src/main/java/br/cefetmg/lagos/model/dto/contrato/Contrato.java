@@ -17,9 +17,7 @@ public class Contrato extends AbstractDTO<Contrato> implements DTO<Contrato> {
     private Float taxaDeMulta;
     private Integer numeroDeLojas;
     private Date dataDeCriacao;
-
     private Periodicidade periodicidade;
-
     private Long id;
 
     @Column(nome = "ativo", tipo = Boolean.class)
