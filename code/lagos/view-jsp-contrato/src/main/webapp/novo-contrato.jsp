@@ -41,11 +41,7 @@
     </div>
   </div>
 
-  <form method="POST" action="/criarContrato" id="cadastro-contrato">
-
-    <label for="dataCriacao">Data de Criação</label> <br/>
-    <input type="date" id="dataCriacao" name="dataCriacao"
-    value="<%= LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))%>" disabled> <br/>
+  <form method="POST" action="/servletweb?acao=CriarContrato" id="cadastro-contrato" enctype="multipart/form-data">
 
     <label for="descricao">Descrição do Contrato</label>  <br/>
     <textarea name="descricao" id="descricao" cols="50" rows="10"></textarea> <br/>
@@ -66,7 +62,7 @@
     <input type="number" name="tamanhoPeriodos" id="tamanhoPeriodos" value="30" min="1">  <br/>
 
     <label for="documento">Documentação</label>  <br/>
-    <input type="file" name="documento" id="documento">  <br/> <br/>
+    <input type="file" name="documento" id="documento" accept=".pdf,.doc,.docx,.txt">  <br/> <br/>
 
     <input type="submit" value="Cadastrar">
 

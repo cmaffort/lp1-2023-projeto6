@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <form method="Post" action="/listarContratos">
+  <form method="Post" action="/servletweb?acao=ListarContratos">
 
     <input type="submit">
 

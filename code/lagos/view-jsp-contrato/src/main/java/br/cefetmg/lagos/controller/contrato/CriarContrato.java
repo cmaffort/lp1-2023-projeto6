@@ -1,42 +1,39 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.TipoServlet;
+import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.Periodicidade;
+import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.ManterPeriodicidade;
-import jakarta.jws.WebService;
-import jakarta.servlet.RequestDispatcher;
+import br.cefetmg.lagos.model.service.contrato.ManterContrato;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Part;
 
-import br.cefetmg.lagos.model.dto.contrato.Contrato;
-import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
-import br.cefetmg.lagos.model.service.contrato.ManterContrato;
-import br.cefetmg.lagos.model.service.contrato.ManterContratoAssinado;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
-import java.sql.*;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.sql.SQLException;
+import java.util.Objects;
 
 import static java.lang.System.out;
 
-@WebServlet(name="CriarContrato", urlPatterns= {"/criarContrato"})
+@WebServlet
+@MultipartConfig
 public class CriarContrato extends HttpServlet {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_SERVLET;
+
+    public static TipoServlet getTipoDoPost() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected static String doPost(HttpServletRequest request) throws ServletException, IOException {
 
         ManterContrato mc = new ManterContrato();
         ManterPeriodicidade mp = new ManterPeriodicidade();
@@ -59,7 +56,6 @@ public class CriarContrato extends HttpServlet {
         Long contratoId;
 
         try {
-
             numeroPeriodos = Integer.parseInt(request.getParameter("numeroPeriodos"));
             diasPorPeriodo = Integer.parseInt(request.getParameter("tamanhoPeriodos"));
 
@@ -84,24 +80,41 @@ public class CriarContrato extends HttpServlet {
 
             }
 
-            ativo = false;
+            ativo = true;
+
             descricao = request.getParameter("descricao");
+
             preco = Double.parseDouble(request.getParameter("preco"));
+
             //implementar tranferencia do documento
+
+            /*
+            InputStream inputStream = null; // input stream of the upload file
+
+            // obtains the upload file part in this multipart request
+            Part filePart = request.getPart("documento");
+            if (filePart != null) {
+                // prints out some information for debugging
+                System.out.println(filePart.getName());
+                System.out.println(filePart.getSize());
+                System.out.println(filePart.getContentType());
+
+                // obtains input stream of the upload file
+                inputStream = filePart.getInputStream();
+                documento = new SerialBlob(inputStream.readAllBytes());
+            } else {
+                documento = null;
+            }
+            */
+
             documento = null;
+
             taxaDeMulta = Float.parseFloat(request.getParameter("multa"));
+
             numeroDeLojas = Integer.parseInt(request.getParameter("numeroLojas"));
 
-            String dateParam = request.getParameter("dataCriacao");
-            if (dateParam==null) {
-
-                dateParam = "2023-00-00";
-
-            }
-
-            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd")
-                    .parse(dateParam);
-            dataDeCriacao = new Date(date.getTime());
+            long millis=System.currentTimeMillis();
+            dataDeCriacao = new Date(millis);
 
             novoContrato.setAtivo(ativo);
             novoContrato.setDescricao(descricao);
@@ -122,12 +135,10 @@ public class CriarContrato extends HttpServlet {
 
             mc.cadastrar(novoContrato);
 
-            RequestDispatcher RD = request.getRequestDispatcher("/listarContratos");
+            return "/servletweb?acao=ListarContratos";
 
-            RD.forward(request, response);
-
-        } catch (PersistenceException | NegocioException | ParseException e) {
-            throw new RuntimeException(e);
+        } catch (PersistenceException | NegocioException e) {
+            return "/servletweb?acao=ListarContratos";
         }
 
     }

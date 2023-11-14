@@ -16,7 +16,16 @@
 
   </head>
 <body>
+
   <%@include file="header.jsp" %>
+
+  <c:if test="${listedFlag!=true}">
+      <script>
+          location.href="/servletweb?acao=ListarContratos";
+      </script>
+  </c:if>
+
+  <script src="js/contratos.js"></script>
 
   <div class="wrapper">
       <div class="swiper">
@@ -30,19 +39,20 @@
                   <div class="card swiper-slide">
                       <div class="card-content">
                           <p>
-                              Contrato ${contrato.getId()} <br/>
-                              Assinado em ${contrato.getDataDeContratacao()} por ${contrato.getUsuario().getPessoa().getNome()}
-                              "${contrato.getUsuario().getUsername()}" ${contrato.getUsuario().getPessoa().getSobrenome()}<br/>
-                              valor: ${contrato.getContrato().getPreco()} <br/>
-                              Periodicidade:
+                              Contrato assinado em ${contrato.getDataDeContratacao()} por ${contrato.getUsuario().getPessoa().getNome()}
+                              "${contrato.getUsuario().getUsername()}" ${contrato.getUsuario().getPessoa().getSobrenome()}, no
+                              valor de R$ ${contrato.getContrato().getPreco()} a serem pagos em
+
                                   ${contrato.getContrato().getPeriodicidade().getPeriodo()}
                                   ${contrato.getContrato().getPeriodicidade().getPeriodo()>1 ? "periodos" : "periodo"} de
                                   ${contrato.getContrato().getPeriodicidade().getQuantidadeDiasPorPeriodo()}
                                   ${contrato.getContrato().getPeriodicidade().getQuantidadeDiasPorPeriodo()>1 ? "dias" : "dia"}
                               <br/>
-
+                              O contrato será vigente durante ${contrato.getContrato().getPeriodicidade().getPeriodo() *
+                              contrato.getContrato().getPeriodicidade().getQuantidadeDiasPorPeriodo()} dias,
+                              garantindo acesso ao sistema para ${contrato.getContrato().getNumeroDeLojas()} lojas. <br/>
                               <br/>
-                              ${contrato.getContrato().getDescricao()}
+                              Informações adicionais:<br/>${contrato.getContrato().getDescricao()}
 
                           </p>
                       </div>
@@ -58,30 +68,33 @@
 
           <div class="swiper-wrapper">
               <c:forEach var="contrato" items="${contratos}">
+                  <c:if test="${contrato.isAtivo()}">
                   <div class="card swiper-slide">
                       <div class="card-content">
+                          <button onclick="deletar(${contrato.getId()})">X</button>
                           <p>
-                              Contrato ${contrato.getId()} <br/>
-                              valor: ${contrato.getPreco()} <br/>
-
-                              Periodicidade:
+                              Contrato de uso do sistema no valor de R$ ${contrato.getPreco()} a serem pagos em
                                   ${contrato.getPeriodicidade().getPeriodo()}
                                   ${contrato.getPeriodicidade().getPeriodo()>1 ? "periodos" : "periodo"} de
                                   ${contrato.getPeriodicidade().getQuantidadeDiasPorPeriodo()}
                                   ${contrato.getPeriodicidade().getQuantidadeDiasPorPeriodo()>1 ? "dias" : "dia"}
-                              <br/>
-
-                              Numero de Lojas:
-                                ${contrato.getNumeroDeLojas()} <br/>
-
-                              <br/>
-                              ${contrato.getDescricao()}
-
+                              <br/><br/>
+                              O contrato será vigente durante ${contrato.getPeriodicidade().getPeriodo() *
+                              contrato.getPeriodicidade().getQuantidadeDiasPorPeriodo()} dias,
+                              garantindo acesso ao sistema para ${contrato.getNumeroDeLojas()} lojas.
+                              <br/><br/>
+                              Informações adicionais:<br/>${contrato.getDescricao()}
+                              <br/><br/>
+                              ${contrato.getTaxaDeMulta()>0.0 ? ("A quebra do Contrato determina uma multa de R$ ".concat(contrato.getTaxaDeMulta())) :
+                              ("O contrato não possui multa estabelecida")}
+                              <br/><br/>
+                              Contrato criado em: ${contrato.getDataDeCriacao()}
 
 
                           </p>
                       </div>
                   </div>
+                  </c:if>
               </c:forEach>
           </div>
       </div>
@@ -90,11 +103,7 @@
   <div>
 
       <button onclick="location.href='novo-contrato.jsp'">
-        Criar Contrato
-      </button>
-
-      <button >
-
+          Criar Contrato
       </button>
 
   </div>
@@ -102,7 +111,12 @@
   <!-- swiper JS -->
   <script src="js/swiper-bundle.min.js"></script>
   <!-- inicializar swiper JS -->
-  <script src="js/contratos.js"></script>
+  <script>
+      let swiper = new Swiper(".swiper", {
+          effect: "cards",
+          grabCursor: true,
+      });
+  </script>
 
 </body>
 </html>

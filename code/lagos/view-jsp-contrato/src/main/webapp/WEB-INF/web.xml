@@ -7,6 +7,10 @@
     <servlet>
         <servlet-name>ServletWeb</servlet-name>
         <servlet-class>br.cefetmg.lagos.controller.contrato.ServletWeb</servlet-class>
+        <multipart-config>
+            <max-file-size>3145728</max-file-size>
+            <max-request-size>5242880</max-request-size>
+        </multipart-config>
     </servlet>
 
     <servlet-mapping>
