@@ -38,6 +38,8 @@ public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> imp
     }
 
     protected boolean isTelephoneValid(Long telephone) {
+        if (telephone == null)
+            return true;
         int len = telephone.toString().length();
         return len == 10 || len == 11;
     }

@@ -10,6 +10,7 @@ import br.cefetmg.lagos.model.dto.contrato.*;
 import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 
 import javax.sql.rowset.serial.SerialBlob;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -221,7 +222,7 @@ public class TestContratos {
     private static void testConfiguracoesDeInterface() throws SQLException, PersistenceException {
         IConfiguracoesDeInterfaceDAO configuracoesDeInterfaceDAO = new ConfiguracoesDeInterfaceDAO();
         ConfiguracoesDeInterface configuracoesDeInterface = new ConfiguracoesDeInterface();
-        configuracoesDeInterface.setLogoWithBlob(new SerialBlob("1242".getBytes()));
+        configuracoesDeInterface.setLogoWithBytes("1242".getBytes(StandardCharsets.UTF_8));
         configuracoesDeInterface.setCorBase("#000000");
         configuracoesDeInterface.setNomeDaEmpresa("LOSH");
         configuracoesDeInterface.setId(1L);

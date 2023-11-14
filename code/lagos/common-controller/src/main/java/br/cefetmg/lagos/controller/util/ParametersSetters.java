@@ -12,9 +12,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Blob;
-import java.sql.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -31,10 +29,10 @@ public class ParametersSetters<DataTransferObject extends DTO<DataTransferObject
                 .filter(entry -> columns.contains(entry.getKey()))
                 .collect(TreeMap<String, Method>::new, (map, entry) -> map.put(entry.getKey(), entry.getValue()), TreeMap::putAll)
                 .forEach((column, setter) -> {
-            if (request.getParameter(column) == null || request.getParameter(column).isEmpty())
-                return;
-
             Class<?> type = manager.getTypeForColumn(column);
+
+            if (byte[].class != type && (request.getParameter(column) == null || request.getParameter(column).isEmpty()))
+                return;
 
             try {
                 try {
@@ -43,10 +41,10 @@ public class ParametersSetters<DataTransferObject extends DTO<DataTransferObject
                 } catch (NoSuchMethodException e) {
                     if (type == String.class)
                         setter.invoke(dto, request.getParameter(column));
-                    else if (type == Blob.class) {
+                    else if (type == byte[].class) {
                         Part part = request.getPart(column);
                         InputStream inputStream = part.getInputStream();
-                        setter.invoke(dto, FileInput.readToBlob(inputStream));
+                        setter.invoke(dto, FileInput.readToBytes(inputStream));
                     }
                 }
             } catch (IllegalAccessException | InvocationTargetException | IOException | ServletException |
