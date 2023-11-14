@@ -5,7 +5,6 @@ import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 
-import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 

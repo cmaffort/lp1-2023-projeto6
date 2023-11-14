@@ -5,6 +5,8 @@ import br.cefetmg.lagos.model.dao.PessoaDAO;
 import br.cefetmg.lagos.model.dao.base.AbstractDAO;
 import br.cefetmg.lagos.model.dao.base.IDAO;
 import br.cefetmg.lagos.model.dao.base.InheritDAO;
+import br.cefetmg.lagos.model.dao.contrato.ILojaDAO;
+import br.cefetmg.lagos.model.dao.contrato.LojaDAO;
 import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.loja.Funcionario;
@@ -13,9 +15,11 @@ import java.util.Map;
 
 public class FuncionarioDAO extends InheritDAO<Funcionario, Pessoa> implements IFuncionarioDAO {
     private static final IPessoaDAO PESSOA_DAO;
+    private static final ILojaDAO LOJA_DAO;
 
     static {
         PESSOA_DAO = new PessoaDAO();
+        LOJA_DAO = new LojaDAO();
     }
 
     @Override
@@ -26,7 +30,8 @@ public class FuncionarioDAO extends InheritDAO<Funcionario, Pessoa> implements I
     @Override
     protected Map<String, IDAO> getDAOs() {
         return Map.ofEntries(
-                Map.entry("pessoa", PESSOA_DAO)
+                Map.entry("pessoa", PESSOA_DAO),
+                Map.entry("loja", LOJA_DAO)
         );
     }
 

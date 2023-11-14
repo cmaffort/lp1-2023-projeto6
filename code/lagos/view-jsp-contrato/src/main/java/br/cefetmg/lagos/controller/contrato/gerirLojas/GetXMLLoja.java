@@ -1,20 +1,19 @@
-package br.cefetmg.lagos.controller.contrato;
+package br.cefetmg.lagos.controller.contrato.gerirLojas;
 
+import br.cefetmg.lagos.controller.contrato.Error;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
-import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
-import br.cefetmg.lagos.model.service.contrato.*;
-
+import br.cefetmg.lagos.model.service.contrato.IManterLoja;
+import br.cefetmg.lagos.model.service.contrato.ManterLoja;
+import br.cefetmg.lagos.model.util.DataBaseParser;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.util.List;
-
-public class ListarLojas {
+public class GetXMLLoja {
     public static TipoServlet getTipoDoGet() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
+        return TipoServlet.FILE_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -25,18 +24,19 @@ public class ListarLojas {
                 return redirectJSP;
 
             IManterLoja manterLoja = new ManterLoja();
-            List<Loja> lojas = manterLoja.pesquisarPorContratante(contratante);
+            Long lojaId = Long.valueOf(request.getParameter("lojaId"));
+            Loja loja = manterLoja.pesquisarPorId(lojaId);
 
-            IManterContratoAssinado manterContratoAssinado = new ManterContratoAssinado();
-            ContratoAssinado contratoAssinado = manterContratoAssinado.pesquisarContratoAssinadoPorContratante(contratante);
+            if (!loja.getUsuarioAsLong().equals(contratante.getId()))
+                return Error.doGet(request);
 
-            request.setAttribute("lojas", lojas);
-            request.setAttribute("contratoAssinado", contratoAssinado);
+            String xmldb = DataBaseParser.dbLojaToXML(loja);
 
-            return "/listar-lojas.jsp";
+            request.setAttribute("file", xmldb);
+            return "text/xml";
         } catch (Exception e) {
             e.printStackTrace();
-            return Error.doGet();
+            return "text/xml";
         }
     }
 }

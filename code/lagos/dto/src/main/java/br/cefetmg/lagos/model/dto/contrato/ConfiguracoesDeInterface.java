@@ -3,9 +3,7 @@ package br.cefetmg.lagos.model.dto.contrato;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.DTO;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
-import br.cefetmg.lagos.model.dto.util.Blober;
 
-import java.io.File;
 import java.sql.Blob;
 
 @Table(nome = "configuracoes_de_interface")
