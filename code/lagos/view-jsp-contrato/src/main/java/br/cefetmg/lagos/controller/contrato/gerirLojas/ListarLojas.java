@@ -1,18 +1,21 @@
-package br.cefetmg.lagos.controller.contrato;
+package br.cefetmg.lagos.controller.contrato.gerirLojas;
 
+import br.cefetmg.lagos.controller.contrato.Error;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
-import br.cefetmg.lagos.model.service.contrato.IManterLoja;
-import br.cefetmg.lagos.model.service.contrato.ManterLoja;
-import br.cefetmg.lagos.model.util.DataBaseParser;
+import br.cefetmg.lagos.model.service.contrato.*;
+
 import jakarta.servlet.http.HttpServletRequest;
 
-public class GetXMLLoja {
+import java.util.List;
+
+public class ListarLojas {
     public static TipoServlet getTipoDoGet() {
-        return TipoServlet.FILE_SERVLET;
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static String doGet(HttpServletRequest request) {
@@ -23,19 +26,18 @@ public class GetXMLLoja {
                 return redirectJSP;
 
             IManterLoja manterLoja = new ManterLoja();
-            Long lojaId = Long.valueOf(request.getParameter("lojaId"));
-            Loja loja = manterLoja.pesquisarPorId(lojaId);
+            List<Loja> lojas = manterLoja.pesquisarPorContratante(contratante);
 
-            if (!loja.getUsuarioAsLong().equals(contratante.getId()))
-                return Error.doGet(request);
+            IManterContratoAssinado manterContratoAssinado = new ManterContratoAssinado();
+            ContratoAssinado contratoAssinado = manterContratoAssinado.pesquisarContratoAssinadoPorContratante(contratante);
 
-            String xmldb = DataBaseParser.dbLojaToXML(loja);
+            request.setAttribute("lojas", lojas);
+            request.setAttribute("contratoAssinado", contratoAssinado);
 
-            request.setAttribute("file", xmldb);
-            return "text/xml";
+            return "/gerir-lojas/listar-lojas.jsp";
         } catch (Exception e) {
             e.printStackTrace();
-            return "text/xml";
+            return Error.doGet();
         }
     }
 }

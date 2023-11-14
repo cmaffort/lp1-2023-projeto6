@@ -6,6 +6,10 @@
     text-decoration: none;
 }
 
+*:hover {
+    color: var(--first-text-color);
+}
+
 :root {
     --first-text-color: #443308;
     --second-text-color: #000000;
@@ -28,13 +32,17 @@ body {
     width: 100vw;
 }
 
-.error, .list-block, .block {
+.center-block, .error, .list-block, .block {
     width: fit-content;
     height: fit-content;
     background-color: var(--second-color);
     padding: 1rem;
     border: .15rem solid var(--tird-text-color);
     border-radius: .4rem;
+}
+
+.center-block {
+    margin: 0 auto;
 }
 
 .list-block {
@@ -51,7 +59,7 @@ body {
     align-content: space-between;
 }
 
-.button {
+.small-button, .button {
     width: fit-content;
     height: fit-content;
     display: block;
@@ -60,9 +68,10 @@ body {
     border: .15rem solid var(--tird-text-color);
     border-radius: .4rem;
     cursor: pointer;
+    text-align: center;
 }
 
-button:hover {
+.small-button:hover, .button:hover {
     background-color: var(--second-color);
 }
 
@@ -72,10 +81,61 @@ button:hover {
 }
 
 .link:hover {
-    color: var(--second-color);
+    color: darkolivegreen;
 }
 
 .error {
     background-color: rgba(131, 20, 20, 0.7);
     color: #000000;
+    margin: .5rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.form-inputs {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: .5rem;
+}
+
+.form-buttons {
+    margin-top: .5rem;
+    height: fit-content;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.required::after {
+    content: '*';
+    z-index: 2;
+    color: darkred;
+}
+
+.small-button {
+    height: 1.25rem;
+    width: 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.25rem;
+    padding: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+input:not([type="submit"]):not([type="button"]) {
+    height: 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: .2rem;
+}
+
+label {
+    font-weight: bold;
 }

@@ -1,5 +1,8 @@
 package br.cefetmg.lagos.controller.contrato;
 
+import br.cefetmg.lagos.controller.contrato.gerirLojas.*;
+import br.cefetmg.lagos.controller.contrato.gerirLojas.chefe.CadastrarChefe;
+import br.cefetmg.lagos.controller.contrato.gerirLojas.chefe.ExcluirChefe;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.util.FileOutput;
 
@@ -38,6 +41,10 @@ public class ServletWeb extends HttpServlet {
                 case "CadastrarLoja":
                     result = CadastrarLoja.doGet(request);
                     tipoServlet = CadastrarLoja.getTipoDoGet();
+                    break;
+                case "CadastrarChefe":
+                    result = CadastrarChefe.doGet(request);
+                    tipoServlet = CadastrarChefe.getTipoDoGet();
                     break;
                 case "PersonalizarInterface":
                     result = PersonalizarInterface.doGet(request);
@@ -80,6 +87,14 @@ public class ServletWeb extends HttpServlet {
                 case "ExcluirLoja":
                     result = ExcluirLoja.doPost(request);
                     tipoServlet = ExcluirLoja.getTipoDoPost();
+                    break;
+                case "CadastrarChefe":
+                    result = CadastrarChefe.doPost(request);
+                    tipoServlet = CadastrarChefe.getTipoDoPost();
+                    break;
+                case "ExcluirChefe":
+                    result = ExcluirChefe.doPost(request);
+                    tipoServlet = ExcluirChefe.getTipoDoPost();
                     break;
                 case "CriarUsuario":
                     result = CriarUsuario.doPost(request);

@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.controller.contrato;
+package br.cefetmg.lagos.controller.contrato.gerirLojas;
 
 import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
 import br.cefetmg.lagos.controller.util.TipoServlet;
