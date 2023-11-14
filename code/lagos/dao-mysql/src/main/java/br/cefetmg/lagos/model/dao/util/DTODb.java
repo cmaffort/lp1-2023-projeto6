@@ -100,7 +100,7 @@ public class DTODb<DataTransferObject extends DTO<DataTransferObject>> {
             String column = entry.getKey();
             MethodType methodType = entry.getValue();
             try {
-                methodType.method.invoke(dto, methodType.type.cast(resultSet.getObject(column)));
+                methodType.method.invoke(dto, resultSet.getObject(column, methodType.type));
             } catch (IllegalAccessException | InvocationTargetException | SQLException e) {
                 throw new RuntimeException(e);
             }

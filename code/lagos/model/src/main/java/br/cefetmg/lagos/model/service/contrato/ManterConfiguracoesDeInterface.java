@@ -8,6 +8,8 @@ import br.cefetmg.lagos.model.dto.contrato.ConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.exception.NegocioException;
 
+import java.util.List;
+
 public class ManterConfiguracoesDeInterface extends AbstractManter<ConfiguracoesDeInterface> implements IManterConfiguracoesDeInterface {
     @Override
     protected IConfiguracoesDeInterfaceDAO getDAO() {
@@ -21,6 +23,9 @@ public class ManterConfiguracoesDeInterface extends AbstractManter<Configuracoes
 
     @Override
     public ConfiguracoesDeInterface pesquisarPorContratante(Usuario usuario) throws NegocioException, PersistenceException {
+        List<ConfiguracoesDeInterface> configuracoesDeInterfaceList = pesquisarPorRelacionado(usuario);
+        if (configuracoesDeInterfaceList.isEmpty())
+            return null;
         return pesquisarPorRelacionado(usuario).get(0);
     }
 }

@@ -7,10 +7,9 @@ import java.io.InputStream;
 import java.sql.Blob;
 
 public class FileInput {
-    public static Blob readToBlob(InputStream inputStream) throws InputException {
+    public static byte[] readToBytes(InputStream inputStream) throws InputException {
         try {
-            byte[] bytes = inputStream.readAllBytes();
-            return new SerialBlob(bytes);
+            return inputStream.readAllBytes();
         } catch (Exception e) {
             throw new InputException(e.getMessage(), e);
         }

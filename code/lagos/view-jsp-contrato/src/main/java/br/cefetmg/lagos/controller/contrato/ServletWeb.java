@@ -9,12 +9,14 @@ import br.cefetmg.lagos.controller.util.FileOutput;
 import br.cefetmg.lagos.controller.util.exception.OutputException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+@MultipartConfig
 public class ServletWeb extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,6 +51,10 @@ public class ServletWeb extends HttpServlet {
                 case "PersonalizarInterface":
                     result = PersonalizarInterface.doGet(request);
                     tipoServlet = PersonalizarInterface.getTipoDoGet();
+                    break;
+                case "GetLogoInterface":
+                    result = GetLogoInterface.doGet(request);
+                    tipoServlet = GetLogoInterface.getTipoDoGet();
                     break;
                 case "AssinarContrato":
                     result = AssinarContrato.doGet(request);
@@ -95,6 +101,10 @@ public class ServletWeb extends HttpServlet {
                 case "ExcluirChefe":
                     result = ExcluirChefe.doPost(request);
                     tipoServlet = ExcluirChefe.getTipoDoPost();
+                    break;
+                case "PersonalizarInterface":
+                    result = PersonalizarInterface.doPost(request);
+                    tipoServlet = PersonalizarInterface.getTipoDoPost();
                     break;
                 case "CriarUsuario":
                     result = CriarUsuario.doPost(request);

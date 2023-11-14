@@ -8,7 +8,7 @@
 
     <jsp:body>
         Pagina inicial
-        <a class="link" href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Listar Lojas</a>
-        <a class="link" href="${pageContext.request.contextPath}/servletweb?acao=PersonalizarInterface">Personalizar Interface</a>
+        <a style="display: block" class="link" href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Listar Lojas</a>
+        <a style="display: block" class="link" href="${pageContext.request.contextPath}/servletweb?acao=PersonalizarInterface">Personalizar Interface</a>
     </jsp:body>
 </t:base>
