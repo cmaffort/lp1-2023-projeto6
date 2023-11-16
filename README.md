@@ -14,9 +14,13 @@ As tabelas não podem formar grafos que possuam um ciclo, no que diz respeito à
 
 Os campos anotados com @Column nas DTOs devem ter um tipo de retorno, se forem getters, ou receberem somente um parâmetro, se forem setters, de um tipo compatível com os métodos `PreparedStatement#setObject` e `ResultSet#getObject`, dentre esses é bom resaltar que para `blob` no banco o tipo deve ser `byte[]`, para `date` `java.sql.Date` e para `datetime` `LocalDateTime`.
 
+Toda DTO deve ter uma chave primária, ou id.
+
 ## DTOs
 
-Todas as DTOs 
+Todas as DTOs implementam a interface `DTO` que recebe como parâmetro de tipo a DTO que está sendo criada. A interface `DTO` garante que toda DTO tenha métodos get e set para o id, métodos `toString` e `toMap`, métodos instanciadores e um método `getManager` que retorna o `Manager` daquela DTO. O `Manager` de uma DTO é a classe que proporciona a reflexão da DTO, possibilitando extrair de uma DTO a tabela a qual ela se refere, no banco, o nome de sua chave primária, as colunas que a DTO possuí, as colunas não nulas daquela DTO, se as colunas não nulas estão todas preenchidas e os métodos get e set daquela DTO.
+
+A classe abstrata `AbstractDTO` tem como parâmetro de tipo a própria classe que a extende e implementa vários dos métodos da interface `DTO`, deixando somente os métodos `getId` e `setId` a serem implementados. Desse modo a grande maioria das DTOs herda de `AbstractDTO`.
 
 ### Criando DTOs
 
