@@ -3,7 +3,6 @@ package br.cefetmg.lagos.controller.contrato;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.exception.NegocioException;
-import br.cefetmg.lagos.util.Pair;
 import jakarta.jws.WebService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -24,7 +23,12 @@ import java.util.*;
 import static java.lang.System.out;
 
 public class ListarContratos extends HttpServlet {
-    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) throws ServletException, IOException {
+
+    public static TipoServlet getTipoDoPost() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
+    }
+
+    protected static String doPost(HttpServletRequest request) throws ServletException, IOException {
 
         ManterContrato mc = new ManterContrato();
         ManterContratoAssinado mca = new ManterContratoAssinado();
@@ -37,16 +41,18 @@ public class ListarContratos extends HttpServlet {
             request.getSession().setAttribute("contratos", contratos);
             request.getSession().setAttribute("listedFlag", true);
 
-            return new Pair<>("/contratos.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
+            return "contratos.jsp";
 
         } catch (PersistenceException e) {
             out.println("erro post");
-            return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
+            return "servletweb?acao=Error";
         }
 
     }
 
-    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) throws ServletException, IOException {
+    public static TipoServlet getTipoDoGet() { return TipoServlet.PAGE_FORWARD_SERVLET; }
+
+    protected static String doGet(HttpServletRequest request) throws ServletException, IOException {
 
         ManterContrato mc = new ManterContrato();
         ManterContratoAssinado mca = new ManterContratoAssinado();
@@ -59,11 +65,11 @@ public class ListarContratos extends HttpServlet {
             request.getSession().setAttribute("contratos", contratos);
             request.getSession().setAttribute("listedFlag", true);
 
-            return new Pair<>("/contratos.jsp", TipoServlet.PAGE_REDIRECT_SERVLET);
+            return "contratos.jsp";
 
         } catch (PersistenceException e) {
             out.println("erro get");
-            return Error.doGet(request);
+            return "servletweb?acao=Error";
         }
 
     }

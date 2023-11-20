@@ -1,23 +1,48 @@
 package br.cefetmg.lagos.controller.contrato;
 
 import br.cefetmg.lagos.controller.util.TipoServlet;
-import br.cefetmg.lagos.controller.util.UserSessionControl;
+import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
+import br.cefetmg.lagos.model.dto.contrato.Usuario;
+import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
-import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.io.IOException;
+import java.util.List;
+
 public class Login {
-    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
-        return new Pair<>("/login.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
+    public static TipoServlet getTipoDoGet() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
-    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
+    public static String doGet(HttpServletRequest request) {
+        return "/login.jsp";
+    }
+
+    public static TipoServlet getTipoDoPost() {
+        return TipoServlet.PAGE_FORWARD_SERVLET;
+    }
+
+    public static String doPost(HttpServletRequest request) {
         try {
-            UserSessionControl.createSession(request, (new ManterUsuario()).pesquisarPorId(2L));
-            return new Pair<>("/home.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
-        } catch (Exception e) {
+            String user = request.getParameter("usuario");
+            String senha = request.getParameter("senha");
+
+            ManterUsuario manterUsuario = new ManterUsuario();
+
+            List<Usuario> usuarioList = manterUsuario.pesquisarTodos();
+
+            for(Usuario usuario: usuarioList)
+                if(usuario.getUsername().equals(user))
+                    if(manterUsuario.autenticar(usuario)) {
+                        UserSessionControl.createSession(request, (new ManterUsuario()).pesquisarPorId(usuario.getId()));
+                        return "/home.jsp";
+                    }
+
+        } catch (PersistenceException | NegocioException | IOException e) {
             e.printStackTrace();
-            return Error.doGet(request);
+            return "/servletweb?acao=Error";
         }
     }
 }
