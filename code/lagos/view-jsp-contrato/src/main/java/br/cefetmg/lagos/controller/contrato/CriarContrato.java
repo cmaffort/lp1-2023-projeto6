@@ -7,6 +7,7 @@ import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.ManterPeriodicidade;
 import br.cefetmg.lagos.model.service.contrato.ManterContrato;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,12 +29,7 @@ import static java.lang.System.out;
 @WebServlet
 @MultipartConfig
 public class CriarContrato extends HttpServlet {
-
-    public static TipoServlet getTipoDoPost() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
-    }
-
-    protected static String doPost(HttpServletRequest request) throws ServletException, IOException {
+    protected static Pair<String, TipoServlet> doPost(HttpServletRequest request) throws ServletException, IOException {
 
         ManterContrato mc = new ManterContrato();
         ManterPeriodicidade mp = new ManterPeriodicidade();
@@ -42,7 +38,7 @@ public class CriarContrato extends HttpServlet {
         Boolean ativo;
         String descricao;
         Double preco;
-        Blob documento;
+        byte[] documento;
         Float taxaDeMulta;
         Integer numeroDeLojas;
         Date dataDeCriacao;
@@ -135,10 +131,10 @@ public class CriarContrato extends HttpServlet {
 
             mc.cadastrar(novoContrato);
 
-            return "/servletweb?acao=ListarContratos";
+            return new Pair<>("/servletweb?acao=ListarContratos", TipoServlet.PAGE_REDIRECT_SERVLET);
 
         } catch (PersistenceException | NegocioException e) {
-            return "/servletweb?acao=ListarContratos";
+            return new Pair<>("/servletweb?acao=ListarContratos", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
 
     }

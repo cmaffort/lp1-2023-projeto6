@@ -1,28 +1,24 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.controller.util.UserSessionControl;
 import br.cefetmg.lagos.controller.util.ParametersSetters;
 import br.cefetmg.lagos.controller.util.TipoServlet;
-import br.cefetmg.lagos.model.dto.Endereco;
 import br.cefetmg.lagos.model.dto.contrato.ConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.contrato.IManterConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.service.contrato.ManterConfiguracoesDeInterface;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Set;
 
 public class PersonalizarInterface {
-    public static TipoServlet getTipoDoGet() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
-    }
-
-    public static String doGet(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
         try {
             Usuario contratante = UserSessionControl.getSession(request);
-            String redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
+            Pair<String, TipoServlet> redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
             if (redirectJSP != null)
                 return redirectJSP;
 
@@ -38,21 +34,17 @@ public class PersonalizarInterface {
             request.setAttribute("configuracoesDeInterface", configuracoesDeInterface);
             request.setAttribute("erro", request.getParameter("erro"));
 
-            return "/personalizar-interface.jsp";
+            return new Pair<>("/personalizar-interface.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
             return Error.doGet(request);
         }
     }
 
-    public static TipoServlet getTipoDoPost() {
-        return TipoServlet.PAGE_REDIRECT_SERVLET;
-    }
-
-    public static String doPost(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
         try {
             Usuario contratante = UserSessionControl.getSession(request);
-            String redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
+            Pair<String, TipoServlet> redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
             if (redirectJSP != null)
                 return redirectJSP;
 
@@ -66,13 +58,14 @@ public class PersonalizarInterface {
             try {
                 manterConfiguracoesDeInterface.alterar(configuracoesDeInterface);
             } catch (NegocioException negocioException) {
-                return "/servletweb?acao=PersonalizarInterface&erro=" + negocioException.getMessage();
+                return new Pair<>("/servletweb?acao=PersonalizarInterface&erro=" + negocioException.getMessage(),
+                        TipoServlet.PAGE_REDIRECT_SERVLET);
             }
 
-            return "/servletweb?acao=Home";
+            return new Pair<>("/servletweb?acao=Home", TipoServlet.PAGE_REDIRECT_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
-            return "/servletweb?acao=Error";
+            return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
     }
 }

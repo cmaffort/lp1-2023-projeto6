@@ -7,6 +7,7 @@ import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.controller.util.FileOutput;
 
 import br.cefetmg.lagos.controller.util.exception.OutputException;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -23,128 +24,104 @@ public class ServletWeb extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String acao = request.getParameter("acao");
         acao = acao == null ? "Login" : acao;
-        TipoServlet tipoServlet;
-        String result;
+        Pair<String, TipoServlet> result;
       
         if ("GET".equals(request.getMethod()))
             switch (acao) {
                 case "ListarLojas":
                     result = ListarLojas.doGet(request);
-                    tipoServlet = ListarLojas.getTipoDoGet();
                     break;
                 case "EditarLoja":
                     result = EditarLoja.doGet(request);
-                    tipoServlet = EditarLoja.getTipoDoGet();
                     break;
                 case "GetXMLLoja":
                     result = GetXMLLoja.doGet(request);
-                    tipoServlet = GetXMLLoja.getTipoDoGet();
                     break;
                 case "CadastrarLoja":
                     result = CadastrarLoja.doGet(request);
-                    tipoServlet = CadastrarLoja.getTipoDoGet();
                     break;
                 case "CadastrarChefe":
                     result = CadastrarChefe.doGet(request);
-                    tipoServlet = CadastrarChefe.getTipoDoGet();
                     break;
                 case "PersonalizarInterface":
                     result = PersonalizarInterface.doGet(request);
-                    tipoServlet = PersonalizarInterface.getTipoDoGet();
                     break;
                 case "GetLogoInterface":
                     result = GetLogoInterface.doGet(request);
-                    tipoServlet = GetLogoInterface.getTipoDoGet();
                     break;
                 case "AssinarContrato":
                     result = AssinarContrato.doGet(request);
-                    tipoServlet = AssinarContrato.getTipoDoGet();
                     break;
                 case "Home":
                     result = Home.doGet(request);
-                    tipoServlet = Home.getTipoDoGet();
                     break;
                 case "CriarUsuario":
                     result = CriarUsuario.doGet(request);
-                    tipoServlet = CriarUsuario.getTipoDoGet();
                     break;
                 case "ListarContratos":
                     result = ListarContratos.doGet(request);
-                    tipoServlet = ListarContratos.getTipoDoGet();
                     break;
                 case "Logout":
                     result = Logout.doGet(request);
-                    tipoServlet = Logout.getTipoDoGet();
                     break;
                 case "Login":
                     result = Login.doGet(request);
-                    tipoServlet = Login.getTipoDoGet();
+                    break;
+                case "LoginLoja":
+                    result = LoginLoja.doGet(request);
                     break;
                 default:
                     result = Error.doGet(request);
-                    tipoServlet = Error.getTipoDoGet();
             }
         else
             switch (acao) {
                 case "EditarLoja":
                     result = EditarLoja.doPost(request);
-                    tipoServlet = EditarLoja.getTipoDoPost();
                     break;
                 case "CadastrarLoja":
                     result = CadastrarLoja.doPost(request);
-                    tipoServlet = CadastrarLoja.getTipoDoPost();
                     break;
                 case "ExcluirLoja":
                     result = ExcluirLoja.doPost(request);
-                    tipoServlet = ExcluirLoja.getTipoDoPost();
                     break;
                 case "CadastrarChefe":
                     result = CadastrarChefe.doPost(request);
-                    tipoServlet = CadastrarChefe.getTipoDoPost();
                     break;
                 case "ExcluirChefe":
                     result = ExcluirChefe.doPost(request);
-                    tipoServlet = ExcluirChefe.getTipoDoPost();
                     break;
                 case "PersonalizarInterface":
                     result = PersonalizarInterface.doPost(request);
-                    tipoServlet = PersonalizarInterface.getTipoDoPost();
                     break;
                 case "CriarUsuario":
                     result = CriarUsuario.doPost(request);
-                    tipoServlet = CriarUsuario.getTipoDoPost();
                     break;
                 case "CriarContrato":
                     result = CriarContrato.doPost(request);
-                    tipoServlet = CriarContrato.getTipoDoPost();
                     break;
                 case "ListarContratos":
                     result = ListarContratos.doPost(request);
-                    tipoServlet = ListarContratos.getTipoDoPost();
                     break;
                 case "DesativarContrato":
                     result = DesativarContrato.doPost(request);
-                    tipoServlet = DesativarContrato.getTipoDoPost();
                     break;
                 case "Login":
                     result = Login.doPost(request);
-                    tipoServlet = Login.getTipoDoPost();
                     break;
                 default:
                     result = Error.doGet(request);
-                    tipoServlet = Error.getTipoDoGet();
             }
 
-        switch (tipoServlet) {
+        switch (result.second()) {
             case PAGE_FORWARD_SERVLET:
-                RequestDispatcher rd = request.getRequestDispatcher(result);
+                RequestDispatcher rd = request.getRequestDispatcher(result.first());
                 rd.forward(request, response);
                 break;
             case PAGE_REDIRECT_SERVLET:
-                response.sendRedirect(result);
+                response.sendRedirect(result.first());
                 break;
             case JSON_SERVLET:
-                response.getWriter().write(result);
+                response.getWriter().write(result.first());
                 break;
             case FILE_SERVLET:
                 try {
@@ -152,7 +129,7 @@ public class ServletWeb extends HttpServlet {
                 } catch (OutputException e) {
                     throw new RuntimeException(e.getMessage(), e);
                 }
-                response.setContentType(result);
+                response.setContentType(result.first());
         }
     }
 }

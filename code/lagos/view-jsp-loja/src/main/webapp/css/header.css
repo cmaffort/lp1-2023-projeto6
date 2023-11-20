@@ -1,10 +1,4 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #e2e3d1;
-}
-
-header {
+#header-items {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,31 +6,31 @@ header {
     background-color: #e2e3d1;
 }
 
-.linha {
+#linha-header {
     border: 5px solid #808166;
     border-radius: 200px 200px 200px 200px;
     margin-left: 3vh;
     margin-right: 3vh;
 }
 
-.logo {
+#logo-div {
     flex: 1;
     text-align: center;
 }
 
-.logo img {
+#logo-div img {
     width: 17vh;
     height: auto;
 }
 
-.menu-button {
+#menu-button {
     position: absolute;
     right: 2%;
     cursor: pointer;
     margin-right: 2vh;
 }
 
-.menu-icon {
+#menu-button > div {
     width: 5vh;
     height: 0.75vh;
     border: solid 2px #808166;
@@ -45,18 +39,18 @@ header {
     margin: 0.5vh 3vh;
 }
 
-.menu {
+#menu {
     position: absolute;
     flex-direction: column;
     right: 0%;
 }
 
-.menu.active {
+#menu.active {
     display: flex;
     animation: slideIn 1s forwards;
 }
 
-.menu.inactive {
+#menu.inactive {
     animation: slideOut 1s forwards;
     display: none;
 }
@@ -80,12 +74,12 @@ header {
     }
 }
 
-.menu-item {
+#menu > div {
     padding: 10px;
 
 }
 
-.menu-item a {
+#menu > div a {
     text-decoration: none;
     color: #b4b582;
     border-bottom: 2px solid #808166;

@@ -1,7 +1,7 @@
 package br.cefetmg.lagos.controller.contrato.gerirLojas.chefe;
 
 import br.cefetmg.lagos.controller.contrato.Error;
-import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.controller.util.UserSessionControl;
 import br.cefetmg.lagos.controller.util.ParametersSetters;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dto.Pessoa;
@@ -16,19 +16,16 @@ import br.cefetmg.lagos.model.service.contrato.IManterLoja;
 import br.cefetmg.lagos.model.service.contrato.ManterLoja;
 import br.cefetmg.lagos.model.service.loja.IManterUsuarioLoja;
 import br.cefetmg.lagos.model.service.loja.ManterUsuarioLoja;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Set;
 
 public class CadastrarChefe {
-    public static TipoServlet getTipoDoGet() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
-    }
-
-    public static String doGet(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
         try {
             Usuario contratante = UserSessionControl.getSession(request);
-            String redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
+            Pair<String, TipoServlet> redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
             if (redirectJSP != null)
                 return redirectJSP;
 
@@ -42,21 +39,17 @@ public class CadastrarChefe {
             request.setAttribute("loja", loja);
             request.setAttribute("erro", request.getParameter("erro"));
 
-            return "/gerir-lojas/gerir-chefes/cadastrar-chefe.jsp";
+            return new Pair<>("/gerir-lojas/gerir-chefes/cadastrar-chefe.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
-            return "/servletweb?acao=Error";
+            return Error.doGet(request);
         }
     }
 
-    public static TipoServlet getTipoDoPost() {
-        return TipoServlet.PAGE_REDIRECT_SERVLET;
-    }
-
-    public static String doPost(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
         try {
             Usuario contratante = UserSessionControl.getSession(request);
-            String redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
+            Pair<String, TipoServlet> redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
             if (redirectJSP != null)
                 return redirectJSP;
 
@@ -65,7 +58,7 @@ public class CadastrarChefe {
             Loja loja = manterLoja.pesquisarPorId(lojaId);
 
             if (!loja.getUsuarioAsLong().equals(contratante.getId()))
-                return Error.doGet(request);
+                return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
 
             IManterUsuarioLoja manterUsuarioLoja = new ManterUsuarioLoja();
             UsuarioLoja chefe = new UsuarioLoja();
@@ -84,13 +77,14 @@ public class CadastrarChefe {
             try {
                 manterUsuarioLoja.cadastrar(chefe);
             } catch (NegocioException negocioException) {
-                return "/servletweb?acao=CadastrarChefe&lojaId=" + lojaId + "&erro=" + negocioException.getMessage();
+                return new Pair<>("/servletweb?acao=CadastrarChefe&lojaId=" + lojaId + "&erro=" + negocioException.getMessage(),
+                        TipoServlet.PAGE_REDIRECT_SERVLET);
             }
 
-            return "/servletweb?acao=EditarLoja&lojaId=" + lojaId;
+            return new Pair<>("/servletweb?acao=EditarLoja&lojaId=" + lojaId, TipoServlet.PAGE_REDIRECT_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
-            return "/servletweb?acao=Error";
+            return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
     }
 }

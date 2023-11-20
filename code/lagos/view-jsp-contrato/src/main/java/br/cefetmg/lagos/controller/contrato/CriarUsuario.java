@@ -1,22 +1,15 @@
 package br.cefetmg.lagos.controller.contrato;
 
 import br.cefetmg.lagos.controller.util.TipoServlet;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class CriarUsuario {
-    public static TipoServlet getTipoDoGet() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
+        return new Pair<>("/criar-usuario.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
     }
 
-    public static String doGet(HttpServletRequest request) {
-        return "/criar-usuario.jsp";
-    }
-
-    public static TipoServlet getTipoDoPost() {
-        return TipoServlet.PAGE_REDIRECT_SERVLET;
-    }
-
-    public static String doPost(HttpServletRequest request) {
-        return "/servletweb?acao=Home";
+    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
+        return new Pair<>("/servletweb?acao=Home", TipoServlet.PAGE_REDIRECT_SERVLET);
     }
 }

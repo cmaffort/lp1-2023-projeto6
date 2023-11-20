@@ -11,7 +11,7 @@ h1 {
     text-align: center;
 }
 
-.hidden {
+#hide {
     width: 10%;
     height: 10%;
 }
@@ -29,18 +29,14 @@ input[type="text"], input[type="number"] {
 }
 
 input[type="submit"] {
+    align-self: center;
     background-color: #b4b582;
     color: #000000;
-    padding: 10px 20px;
-    border: none;
+    padding: .5rem 1rem;
     cursor: pointer;
-    position: absolute;
-    font-size: 4vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 20px;
-    border: solid 2px;
-    border-radius: 40px 40px 40px 40px;
+    font-size: 2rem;
+    border: solid .125rem;
+    border-radius: 2rem;
 }
 
 .form-field {
