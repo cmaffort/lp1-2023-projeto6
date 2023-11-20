@@ -28,7 +28,7 @@
                         <c:choose>
                             <c:when test="${contratoAssinado != null}">
                                 <a class="button"
-                                   href="${pageContext.request.contextPath}/loja/servletweb?acao=Login&lojaId=${loja.getId()}">
+                                   href="${pageContext.request.contextPath}/servletweb?acao=LoginLoja&lojaId=${loja.getId()}">
                                     Entrar
                                 </a>
                             </c:when>

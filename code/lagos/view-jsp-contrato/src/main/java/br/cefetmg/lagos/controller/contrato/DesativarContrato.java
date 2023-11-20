@@ -7,6 +7,7 @@ import br.cefetmg.lagos.model.dto.contrato.ContratoAssinado;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.contrato.ManterContrato;
 import br.cefetmg.lagos.model.service.contrato.ManterContratoAssinado;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,12 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class DesativarContrato extends HttpServlet {
-
-    public static TipoServlet getTipoDoPost() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
-    }
-
-    protected static String doPost(HttpServletRequest request) throws ServletException, IOException {
+    protected static Pair<String, TipoServlet> doPost(HttpServletRequest request) throws ServletException, IOException {
 
         try {
             ManterContrato mc = new ManterContrato();
@@ -33,11 +29,10 @@ public class DesativarContrato extends HttpServlet {
 
             mc.alterar(contrato);
 
-            return "servletweb?acao=ListarContratos";
-
+            return new Pair<>("/servletweb?acao=ListarContratos", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
         catch (PersistenceException | NegocioException e) {
-            return "servletweb?acao=Error";
+            return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
 
     }

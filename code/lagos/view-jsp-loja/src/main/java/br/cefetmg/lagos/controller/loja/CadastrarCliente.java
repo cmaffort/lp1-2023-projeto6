@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.loja.Cliente;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.loja.old.ManterCliente;
+import br.cefetmg.lagos.util.Pair;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,11 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
 public class CadastrarCliente {
-    public static TipoServlet getTipo() {
-        return TipoServlet.JSON_SERVLET;
-    }
-
-    public static String execute(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
         String telefoneS = request.getParameter("telefone");
@@ -44,7 +41,7 @@ public class CadastrarCliente {
                 result.put("cadastrar", false);
 
             Gson gson = new Gson();
-            return gson.toJson(result);
+            return new Pair<>(gson.toJson(result), TipoServlet.JSON_SERVLET);
         } catch (NegocioException | PersistenceException e) {
             throw new RuntimeException(e);
         }

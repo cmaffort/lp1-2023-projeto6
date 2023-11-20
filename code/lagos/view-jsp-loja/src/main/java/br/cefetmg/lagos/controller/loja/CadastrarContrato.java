@@ -3,6 +3,7 @@ package br.cefetmg.lagos.controller.loja;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.service.contrato.ManterContrato;
+import br.cefetmg.lagos.util.Pair;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -11,12 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(name = "CadastrarContrato", urlPatterns = {"/CadastrarContrato"})
 public class CadastrarContrato extends HttpServlet {
-
-    public static TipoServlet getTipo() {
-        return TipoServlet.JSON_SERVLET;
-    }
-
-    public static String execute(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
         try {
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
@@ -38,10 +34,10 @@ public class CadastrarContrato extends HttpServlet {
         Long result = manterContrato.cadastrar(contrato);
 
         Gson gson = new Gson();
-        return gson.toJson(result);
+        return new Pair<>(gson.toJson(result), TipoServlet.JSON_SERVLET);
         }
         catch(Exception e) {
-            return "";
+            return Error.doGet(request);
         }
     }
 

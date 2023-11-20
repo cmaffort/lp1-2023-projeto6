@@ -1,4 +1,4 @@
-package br.cefetmg.lagos.controller.contrato.util;
+package br.cefetmg.lagos.controller.util;
 
 import br.cefetmg.lagos.model.dao.exceptions.PersistenceException;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
@@ -7,8 +7,8 @@ import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
 import br.cefetmg.lagos.model.service.contrato.IManterUsuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
+import br.cefetmg.lagos.util.Pair;
 import br.cefetmg.lagos.util.Serializer;
-import br.cefetmg.lagos.controller.contrato.Error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -42,12 +42,12 @@ public class UserSessionControl {
         return usuarioCompleto;
     }
 
-    public static String getRedirectIfUserNotOk(Usuario usuario, Permissao permissao) throws MissingDataExeption {
+    public static Pair<String, TipoServlet> getRedirectIfUserNotOk(Usuario usuario, Permissao permissao) throws MissingDataExeption {
         if (usuario == null)
-            return "/login.jsp";
+            return new Pair<>("/servletweb?acao=Login", TipoServlet.PAGE_REDIRECT_SERVLET);
 
         if (!usuario.getPermicoes().contains(permissao))
-            return "/404.jsp";
+            return new Pair<>("/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
 
         return null;
     }

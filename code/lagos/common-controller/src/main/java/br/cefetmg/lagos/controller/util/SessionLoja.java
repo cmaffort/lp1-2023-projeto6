@@ -33,7 +33,6 @@ public class SessionLoja {
             return null;
 
         IManterUsuarioLoja manterUsuario = new ManterUsuarioLoja();
-        IManterFuncionario manterFuncionario = new ManterFuncionario();
 
         TreeMap<String, Object> userMap = (TreeMap<String, Object>) Serializer.deserialize((byte[])
                 session.getAttribute("usuarioLoja"));

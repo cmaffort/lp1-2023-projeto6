@@ -1,30 +1,34 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>login</title>
-        <style>
-            body {
-                background-color: #e2e3d1;
-                color: #f2f2ea;
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-            }
+<t:base>
+    <jsp:attribute name="title">
+        Login
+    </jsp:attribute>
 
-            .container {
-                width: 50%;
-                margin: 0 auto;
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
+    <jsp:attribute name="styles">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css"/>
+    </jsp:attribute>
+
+    <jsp:attribute name="scripts">
+        <script src="${pageContext.request.contextPath}/js/login.js"></script>
+    </jsp:attribute>
+
+    <jsp:body>
         <div class="container">
-            <h1>Resultado</h1>
-            <% String user = (String) request.getAttribute("Usuario"); %>
-            <% String senha = (String) request.getAttribute("Senha"); %>
-            <p>Bem vindo ao sistema <%= user %>
-            </p>
-            <p>Sua senha � <%= senha %>
-            </p>
+            <h1>Fazer Login</h1>
+            <form action="${pageContext.request.contextPath}/loja/servletweb?acao=Login" method="post">
+                <div class="form-field">
+                    <label for="username" style="background-color: #e2e3d1; color: black;">Usuário</label>
+                    <input type="text" name="username" id="username" required><br>
+                </div>
+                <div class="form-field">
+                    <label for="senha" style="background-color: #e2e3d1; color: black;">Senha</label>
+                    <input type="password" name="senha" id="senha" required>
+                    <img src="${pageContext.request.contextPath}/images/hiddenlogin.png" alt="Mostrar Senha" onclick="mostrarSenha()" id="hide">
+                </div>
+                <input type="submit" class="button" value="Entrar">
+            </form>
         </div>
-    </body>
-</html>
+    </jsp:body>
+</t:base>
