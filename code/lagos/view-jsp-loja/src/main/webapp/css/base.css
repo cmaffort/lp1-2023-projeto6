@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--first-text-color);
+    text-decoration: none;
+}
+
+*:hover {
+    color: var(--first-text-color);
+}
+
+:root {
+    --first-text-color: #443308;
+    --second-text-color: #000000;
+    --tird-text-color: #8a4913;
+    --first-color: #e2e3d1;
+    --second-color: #c9cbad;
+    --tird-color: #9fa182;
+}
+
+html {
+    height: fit-content;
+    width: 100vw;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--first-color);
+    height: fit-content;
+    padding: 1rem;
+    width: 100vw;
+}
+
+.center-block, .error, .list-block, .block {
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--second-color);
+    padding: 1rem;
+    border: .15rem solid var(--tird-text-color);
+    border-radius: .4rem;
+}
+
+.center-block {
+    margin: 0 auto;
+}
+
+.list-block {
+    margin: .5rem;
+}
+
+.list {
+    background-color: var(--second-color);
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.small-button, .button {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    padding: .5rem;
+    background-color: var(--tird-color);
+    border: .15rem solid var(--tird-text-color);
+    border-radius: .4rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.small-button:hover, .button:hover {
+    background-color: var(--second-color);
+}
+
+.link {
+    color: var(--tird-text-color);
+    cursor: pointer;
+}
+
+.link:hover {
+    color: darkolivegreen;
+}
+
+.error {
+    background-color: rgba(131, 20, 20, 0.7);
+    color: #000000;
+    margin: .5rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.form-inputs {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: .5rem;
+}
+
+.form-buttons {
+    margin-top: .5rem;
+    height: fit-content;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.required::after {
+    content: '*';
+    z-index: 2;
+    color: darkred;
+}
+
+.small-button {
+    height: 1.25rem;
+    width: 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.25rem;
+    padding: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+input:not([type="submit"]):not([type="button"]) {
+    height: 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: .2rem;
+}
+
+label {
+    font-weight: bold;
+}

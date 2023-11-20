@@ -1,5 +1,5 @@
 function mostrarSenha() {
-    var senha = document.getElementById("senha");
+    let senha = document.getElementById("senha");
     if (senha.type === "password") {
         senha.type = "text";
     } else {

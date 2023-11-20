@@ -15,7 +15,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <!-- TODO: mover o login do index.jsp para o login.jsp e remover o index.jsp do welcome-file-list -->
+        <!-- TODO: mover o login do index.jsp para o dados-usuario.jsp e remover o index.jsp do welcome-file-list -->
         <welcome-file>
             index.jsp
         </welcome-file>

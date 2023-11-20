@@ -1,23 +1,20 @@
 package br.cefetmg.lagos.controller.contrato;
 
-import br.cefetmg.lagos.controller.contrato.util.UserSessionControl;
+import br.cefetmg.lagos.controller.util.UserSessionControl;
 import br.cefetmg.lagos.controller.util.TipoServlet;
 import br.cefetmg.lagos.model.dto.contrato.ConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.dto.enums.Permissao;
 import br.cefetmg.lagos.model.service.contrato.IManterConfiguracoesDeInterface;
 import br.cefetmg.lagos.model.service.contrato.ManterConfiguracoesDeInterface;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class GetLogoInterface {
-    public static TipoServlet getTipoDoGet() {
-        return TipoServlet.FILE_SERVLET;
-    }
-
-    public static String doGet(HttpServletRequest request) {
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
         try {
             Usuario contratante = UserSessionControl.getSession(request);
-            String redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
+            Pair<String, TipoServlet> redirectJSP = UserSessionControl.getRedirectIfUserNotOk(contratante, Permissao.GERIR_LOJAS);
             if (redirectJSP != null)
                 return redirectJSP;
 
@@ -25,10 +22,10 @@ public class GetLogoInterface {
             ConfiguracoesDeInterface configuracoesDeInterface = manterConfiguracoesDeInterface.pesquisarPorContratante(contratante);
 
             request.setAttribute("file", configuracoesDeInterface.getLogo());
-            return "image/png";
+            return new Pair<>("image/png", TipoServlet.FILE_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
-            return "image/png";
+            return new Pair<>("image/png", TipoServlet.FILE_SERVLET);
         }
     }
 }

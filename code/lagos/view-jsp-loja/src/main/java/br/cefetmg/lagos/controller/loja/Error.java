@@ -1,14 +1,11 @@
 package br.cefetmg.lagos.controller.loja;
 
 import br.cefetmg.lagos.controller.util.TipoServlet;
+import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Error {
-    public static TipoServlet getTipo() {
-        return TipoServlet.PAGE_FORWARD_SERVLET;
-    }
-
-    public static String execute(HttpServletRequest request) {
-        return "/404.jsp";
+    public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
+        return new Pair<>("/404.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
     }
 }
