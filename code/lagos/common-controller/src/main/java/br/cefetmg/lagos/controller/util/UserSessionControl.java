@@ -41,6 +41,12 @@ public class UserSessionControl {
         return usuarioCompleto;
     }
 
+    public static Pair<String, TipoServlet> getRedirectIfUserNotOk(Usuario usuario) throws MissingDataExeption {
+        if (usuario == null)
+            return new Pair<>("/servletweb?acao=Login", TipoServlet.PAGE_REDIRECT_SERVLET);
+        return null;
+    }
+
     public static Pair<String, TipoServlet> getRedirectIfUserNotOk(Usuario usuario, Permissao permissao) throws MissingDataExeption {
         if (usuario == null)
             return new Pair<>("/servletweb?acao=Login", TipoServlet.PAGE_REDIRECT_SERVLET);

@@ -10,6 +10,7 @@ import br.cefetmg.lagos.model.service.loja.IManterFuncionario;
 import br.cefetmg.lagos.model.service.loja.IManterUsuarioLoja;
 import br.cefetmg.lagos.model.service.loja.ManterFuncionario;
 import br.cefetmg.lagos.model.service.loja.ManterUsuarioLoja;
+import br.cefetmg.lagos.util.Pair;
 import br.cefetmg.lagos.util.Serializer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -42,12 +43,18 @@ public class SessionLoja {
         return usuarioLojaCompleto;
     }
 
-    public static String getRedirectIfUserNotOk(UsuarioLoja usuarioLoja, Permissao permissao) throws MissingDataExeption {
+    public static Pair<String, TipoServlet> getRedirectIfUserNotOk(UsuarioLoja usuarioLoja) throws MissingDataExeption {
         if (usuarioLoja == null)
-            return "/login.jsp";
+            return new Pair<>("/loja/servletweb?acao=Login", TipoServlet.PAGE_REDIRECT_SERVLET);
+        return null;
+    }
+
+    public static Pair<String, TipoServlet> getRedirectIfUserNotOk(UsuarioLoja usuarioLoja, Permissao permissao) throws MissingDataExeption {
+        if (usuarioLoja == null)
+            return new Pair<>("/loja/servletweb?acao=Login", TipoServlet.PAGE_REDIRECT_SERVLET);
 
         if (!usuarioLoja.getFuncionario().getPermicoes().contains(permissao))
-            return "/404.jsp";
+            return new Pair<>("/loja/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
 
         return null;
     }

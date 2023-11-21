@@ -6,8 +6,6 @@
              class="java.util.ArrayList" />
 <jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado"
              class="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
-<jsp:useBean id="lojaContextPath" scope="request" type="java.lang.String"
-             class="java.lang.String" />
 
 <t:base>
     <jsp:attribute name="title">
@@ -30,22 +28,7 @@
                     <c:if test="${not empty endereco.numero}">
                         <div>Numero: ${endereco.numero}</div>
                     </c:if>
-
                     <div class="lojas-actions">
-                        <c:choose>
-                            <c:when test="${not empty contratoAssinado}">
-                                <a class="button"
-                                   href="${lojaContextPath}/servletweb?acao=Login">
-                                    Entrar
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="button"
-                                   href="${pageContext.request.contextPath}/servletweb?acao=AssinarContrato">
-                                    Entrar
-                                </a>
-                            </c:otherwise>
-                        </c:choose>
                         <a class="button"
                            href="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.id}">
                             Editar Loja

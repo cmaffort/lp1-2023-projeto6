@@ -3,6 +3,11 @@ package br.cefetmg.lagos.model.dto.loja;
 import br.cefetmg.lagos.model.dto.annotations.*;
 import br.cefetmg.lagos.model.dto.base.AbstractDTO;
 import br.cefetmg.lagos.model.dto.base.DTO;
+import br.cefetmg.lagos.model.dto.enums.Permissao;
+import br.cefetmg.lagos.model.dto.exceptions.MissingDataExeption;
+import br.cefetmg.lagos.model.dto.permicoes.PermissoesTipo;
+
+import java.util.List;
 
 @Table(nome = "usuario_loja")
 @PrimaryKey(nome = "pk")
@@ -15,6 +20,12 @@ public class UsuarioLoja extends AbstractDTO<UsuarioLoja> implements DTO<Usuario
     public UsuarioLoja() {
         super();
         funcionario = new Funcionario();
+    }
+
+    public List<Permissao> getPermicoes() throws MissingDataExeption {
+        if (getTipo() == null)
+            throw new MissingDataExeption("O tipo não pode ser null para pegarmos as permições.");
+        return PermissoesTipo.getPermissoesForTipo(getTipo());
     }
 
     @Column(nome = "username", tipo = String.class)

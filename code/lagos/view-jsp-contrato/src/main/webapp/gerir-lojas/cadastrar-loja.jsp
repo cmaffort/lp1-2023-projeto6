@@ -4,8 +4,7 @@
 
 <jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado"
              class="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
-<jsp:useBean id="numeroDeLojas" scope="request" type="java.lang.Long"
-             class="java.lang.Long" />
+<jsp:useBean id="numeroDeLojas" scope="request" type="java.lang.Long" />
 <jsp:useBean id="erro" scope="request" type="java.lang.String"
              class="java.lang.String" />
 

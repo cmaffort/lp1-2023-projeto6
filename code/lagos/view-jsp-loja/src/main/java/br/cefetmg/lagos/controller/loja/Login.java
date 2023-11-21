@@ -27,7 +27,6 @@ public class Login {
             request.setAttribute("erro", request.getParameter("erro"));
             return new Pair<>("/login.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
         } catch (Exception e) {
-            e.printStackTrace();
             return Error.doGet(request);
         }
     }
@@ -51,9 +50,10 @@ public class Login {
                         TipoServlet.PAGE_REDIRECT_SERVLET);
             }
 
+            System.out.println(request.getContextPath() + "/servletweb?acao=Home");
+
             return new Pair<>(request.getContextPath() + "/servletweb?acao=Home", TipoServlet.PAGE_REDIRECT_SERVLET);
         } catch (Exception e) {
-            e.printStackTrace();
             return new Pair<>(request.getContextPath() + "/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
     }

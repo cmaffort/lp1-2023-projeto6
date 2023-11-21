@@ -27,6 +27,7 @@ public class ServletWeb extends HttpServlet {
             result = switch (acao) {
                 case "CadastrarContrato" -> CadastrarContrato.doGet(request);
                 case "Login" -> Login.doGet(request);
+                case "Home" -> Home.doGet(request);
                 default -> Error.doGet(request);
             };
         else

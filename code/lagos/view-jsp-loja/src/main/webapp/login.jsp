@@ -24,7 +24,7 @@
         </c:if>
         <div class="container">
             <h1>Fazer Login</h1>
-            <form action="${pageContext.request.contextPath}/loja/servletweb?acao=Login" method="post">
+            <form action="${pageContext.request.contextPath}/servletweb?acao=Login" method="post">
                 <div class="form-field">
                     <label for="username" style="background-color: #e2e3d1; color: black;">Usuário</label>
                     <input type="text" name="username" id="username" required><br>
