@@ -2,9 +2,12 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
-<jsp:useBean id="lojas" scope="request" type="java.util.List<br.cefetmg.lagos.model.dto.contrato.Loja>" />
-<jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
-<jsp:useBean id="lojaContextPath" scope="request" type="java.lang.String" />
+<jsp:useBean id="lojas" scope="request" type="java.util.List<br.cefetmg.lagos.model.dto.contrato.Loja>"
+             class="java.util.ArrayList" />
+<jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado"
+             class="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
+<jsp:useBean id="lojaContextPath" scope="request" type="java.lang.String"
+             class="java.lang.String" />
 
 <t:base>
     <jsp:attribute name="title">
@@ -24,13 +27,13 @@
                         Loja ${i.index + 1}
                     </div>
                     <div>Cep: ${endereco.cep}</div>
-                    <c:if test="${endereco.numero != null}">
+                    <c:if test="${not empty endereco.numero}">
                         <div>Numero: ${endereco.numero}</div>
                     </c:if>
 
                     <div class="lojas-actions">
                         <c:choose>
-                            <c:when test="${contratoAssinado != null}">
+                            <c:when test="${not empty contratoAssinado}">
                                 <a class="button"
                                    href="${lojaContextPath}/servletweb?acao=Login">
                                     Entrar

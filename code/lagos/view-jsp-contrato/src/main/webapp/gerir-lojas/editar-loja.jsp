@@ -2,8 +2,10 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
-<jsp:useBean id="loja" scope="request" type="br.cefetmg.lagos.model.dto.contrato.Loja" />
-<jsp:useBean id="erro" scope="request" type="java.lang.String" />
+<jsp:useBean id="loja" scope="request" type="br.cefetmg.lagos.model.dto.contrato.Loja"
+             class="br.cefetmg.lagos.model.dto.contrato.Loja" />
+<jsp:useBean id="erro" scope="request" type="java.lang.String"
+             class="java.lang.String" />
 
 <t:base>
     <jsp:attribute name="title">
@@ -19,7 +21,7 @@
 
     <jsp:body>
         <c:set var="endereco" value="${loja.endereco}"/>
-        <c:if test="${erro != null}">
+        <c:if test="${not empty erro}">
             <div class="error">${erro}</div>
         </c:if>
         <form class="center-block" method="post" style="width: 35rem; height: 40rem">

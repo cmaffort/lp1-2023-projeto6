@@ -2,7 +2,8 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
-<jsp:useBean id="erro" scope="request" type="java.lang.String" />
+<jsp:useBean id="erro" scope="request" type="java.lang.String"
+             class="java.lang.String" />
 
 <t:base>
     <jsp:attribute name="title">
@@ -18,7 +19,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <c:if test="${erro != null}">
+        <c:if test="${not empty erro}">
             <div class="error">${erro}</div>
         </c:if>
         <div class="container">
