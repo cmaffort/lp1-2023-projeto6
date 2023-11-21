@@ -24,30 +24,18 @@ public class ServletWeb extends HttpServlet {
         Pair<String, TipoServlet> result;
 
         if ("GET".equals(request.getMethod()))
-            switch (acao) {
-                case "CadastrarContrato":
-                    result = CadastrarContrato.doGet(request);
-                    break;
-                case "Login":
-                    result = Login.doGet(request);
-                    break;
-                default:
-                    result = Error.doGet(request);
-            }
+            result = switch (acao) {
+                case "CadastrarContrato" -> CadastrarContrato.doGet(request);
+                case "Login" -> Login.doGet(request);
+                default -> Error.doGet(request);
+            };
         else
-            switch (acao) {
-                case "CadastrarCliente":
-                    result = CadastrarCliente.doPost(request);
-                    break;
-                case "ListarClientes":
-                    result = ListarClientes.doPost(request);
-                    break;
-                case "Login":
-                    result = Login.doPost(request);
-                    break;
-                default:
-                    result = Error.doGet(request);
-            }
+            result = switch (acao) {
+                case "CadastrarCliente" -> CadastrarCliente.doPost(request);
+                case "ListarClientes" -> ListarClientes.doPost(request);
+                case "Login" -> Login.doPost(request);
+                default -> Error.doGet(request);
+            };
 
         switch (result.second()) {
             case PAGE_FORWARD_SERVLET:

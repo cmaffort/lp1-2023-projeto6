@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 public class UserSessionControl {
-    public static void createSession(HttpServletRequest request, Usuario usuario) throws IOException, NullPointerException {
+    public static void createSession(HttpServletRequest request, Usuario usuario) throws NullPointerException {
         if (usuario == null)
             throw new NullPointerException("Usuario deve ser definido");
         HttpSession session = request.getSession();
-        session.setAttribute("usuario", Serializer.serialize(usuario.toMap()));
+        session.setAttribute("usuario", usuario);
     }
 
     public static Usuario getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {
@@ -30,8 +30,7 @@ public class UserSessionControl {
             return null;
 
         IManterUsuario manterUsuario = new ManterUsuario();
-        TreeMap<String, Object> userMap = (TreeMap<String, Object>) Serializer.deserialize((byte[]) session.getAttribute("usuario"));
-        Usuario usuario = (new Usuario()).getInstance(userMap);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
         Usuario usuarioCompleto = manterUsuario.pesquisarPorId(usuario.getId());
 
         if (!usuarioCompleto.equals(usuario)) {

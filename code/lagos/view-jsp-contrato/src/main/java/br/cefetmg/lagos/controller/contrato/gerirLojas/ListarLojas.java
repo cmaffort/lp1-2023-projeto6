@@ -30,6 +30,7 @@ public class ListarLojas {
 
             request.setAttribute("lojas", lojas);
             request.setAttribute("contratoAssinado", contratoAssinado);
+            request.setAttribute("lojaContextPath", "/loja");
 
             return new Pair<>("/gerir-lojas/listar-lojas.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
         } catch (Exception e) {

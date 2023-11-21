@@ -27,90 +27,37 @@ public class ServletWeb extends HttpServlet {
         Pair<String, TipoServlet> result;
       
         if ("GET".equals(request.getMethod()))
-            switch (acao) {
-                case "ListarLojas":
-                    result = ListarLojas.doGet(request);
-                    break;
-                case "EditarLoja":
-                    result = EditarLoja.doGet(request);
-                    break;
-                case "GetXMLLoja":
-                    result = GetXMLLoja.doGet(request);
-                    break;
-                case "CadastrarLoja":
-                    result = CadastrarLoja.doGet(request);
-                    break;
-                case "CadastrarChefe":
-                    result = CadastrarChefe.doGet(request);
-                    break;
-                case "PersonalizarInterface":
-                    result = PersonalizarInterface.doGet(request);
-                    break;
-                case "GetLogoInterface":
-                    result = GetLogoInterface.doGet(request);
-                    break;
-                case "AssinarContrato":
-                    result = AssinarContrato.doGet(request);
-                    break;
-                case "Home":
-                    result = Home.doGet(request);
-                    break;
-                case "CriarUsuario":
-                    result = CriarUsuario.doGet(request);
-                    break;
-                case "ListarContratos":
-                    result = ListarContratos.doGet(request);
-                    break;
-                case "Logout":
-                    result = Logout.doGet(request);
-                    break;
-                case "Login":
-                    result = Login.doGet(request);
-                    break;
-                case "LoginLoja":
-                    result = LoginLoja.doGet(request);
-                    break;
-                default:
-                    result = Error.doGet(request);
-            }
+            result = switch (acao) {
+                case "ListarLojas" -> ListarLojas.doGet(request);
+                case "EditarLoja" -> EditarLoja.doGet(request);
+                case "GetXMLLoja" -> GetXMLLoja.doGet(request);
+                case "CadastrarLoja" -> CadastrarLoja.doGet(request);
+                case "CadastrarChefe" -> CadastrarChefe.doGet(request);
+                case "PersonalizarInterface" -> PersonalizarInterface.doGet(request);
+                case "GetLogoInterface" -> GetLogoInterface.doGet(request);
+                case "AssinarContrato" -> AssinarContrato.doGet(request);
+                case "Home" -> Home.doGet(request);
+                case "CriarUsuario" -> CriarUsuario.doGet(request);
+                case "ListarContratos" -> ListarContratos.doGet(request);
+                case "Logout" -> Logout.doGet(request);
+                case "Login" -> Login.doGet(request);
+                default -> Error.doGet(request);
+            };
         else
-            switch (acao) {
-                case "EditarLoja":
-                    result = EditarLoja.doPost(request);
-                    break;
-                case "CadastrarLoja":
-                    result = CadastrarLoja.doPost(request);
-                    break;
-                case "ExcluirLoja":
-                    result = ExcluirLoja.doPost(request);
-                    break;
-                case "CadastrarChefe":
-                    result = CadastrarChefe.doPost(request);
-                    break;
-                case "ExcluirChefe":
-                    result = ExcluirChefe.doPost(request);
-                    break;
-                case "PersonalizarInterface":
-                    result = PersonalizarInterface.doPost(request);
-                    break;
-                case "CriarUsuario":
-                    result = CriarUsuario.doPost(request);
-                    break;
-                case "CriarContrato":
-                    result = CriarContrato.doPost(request);
-                    break;
-                case "ListarContratos":
-                    result = ListarContratos.doPost(request);
-                    break;
-                case "DesativarContrato":
-                    result = DesativarContrato.doPost(request);
-                    break;
-                case "Login":
-                    result = Login.doPost(request);
-                    break;
-                default:
-                    result = Error.doGet(request);
-            }
+            result = switch (acao) {
+                case "EditarLoja" -> EditarLoja.doPost(request);
+                case "CadastrarLoja" -> CadastrarLoja.doPost(request);
+                case "ExcluirLoja" -> ExcluirLoja.doPost(request);
+                case "CadastrarChefe" -> CadastrarChefe.doPost(request);
+                case "ExcluirChefe" -> ExcluirChefe.doPost(request);
+                case "PersonalizarInterface" -> PersonalizarInterface.doPost(request);
+                case "CriarUsuario" -> CriarUsuario.doPost(request);
+                case "CriarContrato" -> CriarContrato.doPost(request);
+                case "ListarContratos" -> ListarContratos.doPost(request);
+                case "DesativarContrato" -> DesativarContrato.doPost(request);
+                case "Login" -> Login.doPost(request);
+                default -> Error.doGet(request);
+            };
 
         switch (result.second()) {
             case PAGE_FORWARD_SERVLET:

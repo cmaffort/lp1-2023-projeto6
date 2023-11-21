@@ -1,5 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
+<jsp:useBean id="erro" scope="request" type="java.lang.String" />
 
 <t:base>
     <jsp:attribute name="title">
@@ -15,6 +18,9 @@
     </jsp:attribute>
 
     <jsp:body>
+        <c:if test="${erro != null}">
+            <div class="error">${erro}</div>
+        </c:if>
         <div class="container">
             <h1>Fazer Login</h1>
             <form action="${pageContext.request.contextPath}/loja/servletweb?acao=Login" method="post">

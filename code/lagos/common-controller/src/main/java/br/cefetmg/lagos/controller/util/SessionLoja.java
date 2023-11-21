@@ -18,35 +18,23 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 public class SessionLoja {
-    public static void createSession(HttpServletRequest request, UsuarioLoja usuarioLoja) throws IOException, NullPointerException {
+    public static void createSession(HttpServletRequest request, UsuarioLoja usuarioLoja) throws NullPointerException {
         if (usuarioLoja == null || usuarioLoja.getFuncionario() == null)
             throw new NullPointerException("Usuario e seu funcionário devem ser definidos");
         HttpSession session = request.getSession();
-        session.setAttribute("usuarioLoja", Serializer.serialize(usuarioLoja.toMap()));
-        session.setAttribute("funcionario", Serializer.serialize(usuarioLoja.getFuncionario().toMap()));
+        session.setAttribute("usuarioLoja", usuarioLoja);
     }
 
-    @SuppressWarnings("unchecked")
     public static UsuarioLoja getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {
         HttpSession session = request.getSession(false);
         if (session == null)
             return null;
 
         IManterUsuarioLoja manterUsuario = new ManterUsuarioLoja();
-
-        TreeMap<String, Object> userMap = (TreeMap<String, Object>) Serializer.deserialize((byte[])
-                session.getAttribute("usuarioLoja"));
-        TreeMap<String, Object> funcionarioMap = (TreeMap<String, Object>) Serializer.deserialize((byte[])
-                session.getAttribute("funcionario"));
-
-        UsuarioLoja usuarioLoja = (new UsuarioLoja()).getInstance(userMap);
-        Funcionario funcionario = (new Funcionario()).getInstance(funcionarioMap);
-        usuarioLoja.setFuncionario(funcionario);
-
+        UsuarioLoja usuarioLoja = (UsuarioLoja) session.getAttribute("usuarioLoja");
         UsuarioLoja usuarioLojaCompleto = manterUsuario.pesquisarPorId(usuarioLoja.getId());
 
-        if (!usuarioLojaCompleto.equals(usuarioLoja) ||
-                !usuarioLojaCompleto.getFuncionario().equals(usuarioLoja.getFuncionario())) {
+        if (!usuarioLojaCompleto.equals(usuarioLoja)) {
             session.invalidate();
             return null;
         }
