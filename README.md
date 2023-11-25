@@ -6,7 +6,7 @@ Projeto Sistema de Gestão de Loja
 
 ## Da Generalização
 
-A generalização feita em todas as camadas do sistema apoiam uma melhor integridade conceitual em todo código e proporciona classes que implementam requerimentos recorrentes entre as classes de uma mesma camada. Isso pode ser feito, em especial, por meio da reflexão de classes e aplicação de padrões de projeto como o builder, o template e o adapter, em especial.
+A generalização feita em todas as camadas do sistema apoiam uma melhor integridade conceitual em todo código e proporciona classes que implementam requerimentos recorrentes entre as classes de uma mesma camada. Isso pode ser feito, em especial, por meio da reflexão de classes e aplicação de padrões de projeto como o builder, o template e o adapter, principalmente.
 
 ### Das limitações
 
@@ -14,7 +14,7 @@ As tabelas não podem formar grafos que possuam um ciclo, no que diz respeito à
 
 Os campos anotados com @Column nas DTOs devem ter um tipo de retorno, se forem getters, ou receberem somente um parâmetro, se forem setters, de um tipo compatível com os métodos `PreparedStatement#setObject` e `ResultSet#getObject`, dentre esses é bom resaltar que para `blob` no banco o tipo deve ser `byte[]`, para `date` `java.sql.Date` e para `datetime` `LocalDateTime`.
 
-Toda DTO deve ter uma chave primária, ou id.
+Toda DTO deve ter uma chave primária, ou id e esse deve ser do tipo `Long`.
 
 A nomenclatura é limitada por enquanto, uma chave estrangeira deve ou ser a própria chave primária, no caso que convenciono herança, caso não seja uma chave estrangeira para estabelecer herança ela deve ser nomeada como `<nome_da_tabela>__fk`, onde `<nome_da_tabela>` é o nome da tabela que quer se estabelecer a ligação.
 
@@ -34,12 +34,51 @@ Para cada coluna de uma DTO devem ser criados métodos get e set anotados, respe
 
 Suponha uma tabela `x` no banco de dados, com as colunas `c1`, `c2`, ..., `cn`, que não são chaves primárias ou estrangeiras, assuma ainda que esta tabela tenha uma coluna de nome `pk` que é chave primária dessa tabela, por fim, tome cada coluna par como não nula e impar como nula e assuma um `n` par. A implementação dessa DTO seria como segue:
 
-java```
+```java
+@Table(nome = "x")
+@PrimaryKey(nome = "pk")
 public class X extends AbstractDTO<X> implements DTO<X> {
     // variáveis e construtor
 
-    
+    @Column(nome = "c1", tipo = TipoDaColunaC1EmJava)
+    @Getter
+    public TipoDaColunaC1EmJava getC1() {
+        // lógica para retornar c1
+    }
+
+    @Column(nome = "c1", tipo = TipoDaColunaC1EmJava)
+    @Setter
+    public void getC1(TipoDaColunaC1EmJava c1) {
+        // lógica para setar c1 nessa dto
+    }
+
+    // ...
+
+    @Column(nome = "cn", tipo = TipoDaColunaCnEmJava)
+    @Getter
+    public TipoDaColunaCnEmJava getCn() {
+        // lógica para retornar cn
+    }
+
+    @Column(nome = "cn", tipo = TipoDaColunaCnEmJava)
+    @Setter
+    public void getCn(TipoDaColunaCnEmJava cn) {
+        // lógica para setar cn nessa dto
+    }
+
+    @Column(nome = "pk", tipo = Long.class)
+    @Getter
+    public Long getId() {
+        // lógica para pegar o id
+    }
+
+    @Column(nome = "pk", tipo = Long.class)
+    @Setter
+    public void setId(Long id) {
+        // lógica para setar o id
+    }
 }
+
 ```
 
 ## DAOs
