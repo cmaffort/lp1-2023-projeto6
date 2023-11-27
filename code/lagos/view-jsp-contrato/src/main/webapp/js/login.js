@@ -23,7 +23,7 @@ let cadastrarEl = document.querySelector("#enviarCadastro");
 
 cadastrarEl.addEventListener('click', () => {
     $.ajax({
-        url: '/ServletWeb',
+        url: `${contextPath}/ServletWeb`,
         type: 'GET',
         data: {
             acao: "CriarUsuario",

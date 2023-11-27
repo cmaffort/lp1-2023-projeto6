@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         contratanteHeaders[i].style.display = 'none';
                 }
             }
-            window.location.href = '${contextPath}/ServletWeb?acao=Error';
+            window.location.href = `${contextPath}/ServletWeb?acao=Error`;
         }
     })
 });

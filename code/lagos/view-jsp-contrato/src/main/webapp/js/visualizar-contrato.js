@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     let acao = "ListarContrato";
 
     $.ajax({
-        url: '${contextPath}/ServletWeb',
+        url: `${contextPath}/ServletWeb`,
         type: 'GET',
         data: {acao: acao},
         contentType: 'application/json',
@@ -47,7 +47,7 @@ function assinarContrato(idContrato) {
     let acao = "ListarIdContrato";
 
     $.ajax({
-        url: '/ServletWeb',
+        url: `${contextPath}/ServletWeb`,
         type: 'GET',
         data: {acao: acao,
         idContrato: idContrato},
