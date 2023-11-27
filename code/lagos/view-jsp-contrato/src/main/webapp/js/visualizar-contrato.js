@@ -9,37 +9,6 @@ document.addEventListener('DOMContentLoaded', () =>{
         contentType: 'application/json',
         success: function (data) {
 
-            data = [
-                {
-                    preco: 1000.00,
-                    taxaDeMulta: 0.05,
-                    descricao: "Contrato 1 - Fornecimento de Serviços",
-                    numeroDeLojas: 3,
-                    id: 1
-                },
-                {
-                    preco: 1500.00,
-                    taxaDeMulta: 0.08,
-                    descricao: "Contrato 2 - Serviços de Consultoria",
-                    numeroDeLojas: 5,
-                    id: 2
-                },
-                {
-                    preco: 800.00,
-                    taxaDeMulta: 0.03,
-                    descricao: "Contrato 3 - Manutenção de Equipamentos",
-                    numeroDeLojas: 2,
-                    id: 3
-                },
-                {
-                    preco: 2000.00,
-                    taxaDeMulta: 0.1,
-                    descricao: "Contrato 4 - Desenvolvimento de Software",
-                    numeroDeLojas: 7,
-                    id: 4
-                }
-            ];
-
             let divContainer = document.querySelector("#container");
 
             for(let i = 0; i < data.length; i++){

@@ -21,6 +21,7 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 input[type="text"], input[type="number"] {
@@ -28,18 +29,17 @@ input[type="text"], input[type="number"] {
     margin-bottom: 10px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="button"] {
     background-color: #b4b582;
     color: #000000;
     padding: 10px 20px;
     cursor: pointer;
-    position: absolute;
     font-size: 4vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 20px;
+    margin: 20px 10px;
     border: solid 2px;
     border-radius: 40px 40px 40px 40px;
+    display: inline-block;
 }
 
 .form-field {
@@ -67,5 +67,29 @@ input[type="submit"] {
 
 .cadastro{
     display: none;
+    background-color: #e2e3d1;
+    font-size: 15px;
+    font-family: 'Chivo', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
+input[type="submit"],
+input[type="button"] {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.cadastro label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.input-cadastro{
+    border: solid 2px;
+    border-radius: 40px 40px 40px 40px;
+    background-color: #c9cbad;
+}

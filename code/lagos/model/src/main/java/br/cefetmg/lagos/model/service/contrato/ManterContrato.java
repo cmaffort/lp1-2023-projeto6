@@ -38,4 +38,8 @@ public class ManterContrato extends AbstractManter<Contrato> implements IManterC
         assertIdIsNotNull(contratante.getId());
         return getDAO().filtrarRelated(contratante);
     }
+
+    public List<Contrato> pesquisarPorAtivo() {
+        return null;
+    }
 }
