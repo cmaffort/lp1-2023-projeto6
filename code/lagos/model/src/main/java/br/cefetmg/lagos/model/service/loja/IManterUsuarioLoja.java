@@ -7,4 +7,6 @@ import br.cefetmg.lagos.model.service.loja.base.IManterLojaModule;
 
 public interface IManterUsuarioLoja extends IManterLojaModule<UsuarioLoja> {
     boolean autenticar(UsuarioLoja usuarioLoja) throws PersistenceException, NegocioException;
+
+    UsuarioLoja pesquisarPorUsername(String username) throws PersistenceException, NegocioException;
 }

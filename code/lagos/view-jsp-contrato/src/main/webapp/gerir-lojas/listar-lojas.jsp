@@ -2,6 +2,11 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
+<jsp:useBean id="lojas" scope="request" type="java.util.List<br.cefetmg.lagos.model.dto.contrato.Loja>"
+             class="java.util.ArrayList" />
+<jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado"
+             class="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
+
 <t:base>
     <jsp:attribute name="title">
         Lojas
@@ -15,39 +20,24 @@
         <div class="list block">
             <c:forEach var="loja" items="${lojas}" varStatus="i">
                 <div class="list-block">
-                    <c:set var="endereco" value="${loja.getEndereco()}"/>
+                    <c:set var="endereco" value="${loja.endereco}"/>
                     <div>
                         Loja ${i.index + 1}
                     </div>
-                    <div>Cep: ${endereco.getCep()}</div>
-                    <c:if test="${endereco.getNumero() != null}">
-                        <div>Numero: ${endereco.getNumero()}</div>
+                    <div>Cep: ${endereco.cep}</div>
+                    <c:if test="${not empty endereco.numero}">
+                        <div>Numero: ${endereco.numero}</div>
                     </c:if>
-
                     <div class="lojas-actions">
-                        <c:choose>
-                            <c:when test="${contratoAssinado != null}">
-                                <a class="button"
-                                   href="${pageContext.request.contextPath}/servletweb?acao=LoginLoja&lojaId=${loja.getId()}">
-                                    Entrar
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="button"
-                                   href="${pageContext.request.contextPath}/servletweb?acao=AssinarContrato">
-                                    Entrar
-                                </a>
-                            </c:otherwise>
-                        </c:choose>
                         <a class="button"
-                           href="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.getId()}">
+                           href="${pageContext.request.contextPath}/servletweb?acao=EditarLoja&lojaId=${loja.id}">
                             Editar Loja
                         </a>
                     </div>
 
                 </div>
             </c:forEach>
-            <c:if test="${lojas.size() < contratoAssinado.getContrato().getNumeroDeLojas()}">
+            <c:if test="${lojas.size() < contratoAssinado.contrato.numeroDeLojas}">
                 <a id="cadastrar-loja" class="list-block" href="${pageContext.request.contextPath}/servletweb?acao=CadastrarLoja">
                     +
                 </a>

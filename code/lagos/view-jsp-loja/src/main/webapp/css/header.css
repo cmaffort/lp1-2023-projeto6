@@ -1,33 +1,42 @@
 #header-items {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.25vw [left-start]   1fr [left-center]   1fr [left-end]     .5vw
+                                  [middle-start] 1fr [middle-center] 1fr [middle-end]   .5vw
+                                  [right-start]  1fr [right-center]  1fr [right-middle] 1.25vw;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5vh;
+    padding: 1.5vh 0;
+    height: 10vh;
     background-color: #e2e3d1;
+}
+
+#header-items #linha-header {
+    width: 100vw;
+    margin-left: 1.25vw;
+    margin-right: 1.25vw;
 }
 
 #linha-header {
     border: 5px solid #808166;
     border-radius: 200px 200px 200px 200px;
-    margin-left: 3vh;
-    margin-right: 3vh;
+    margin-left: 1.25vw;
+    margin-right: 1.25vw;
 }
 
 #logo-div {
-    flex: 1;
+    grid-area: 1 / middle-start / 2 / middle-end;
+    cursor: pointer;
     text-align: center;
+    height: 100%;
 }
 
 #logo-div img {
-    width: 17vh;
-    height: auto;
+    height: 9vh;
 }
 
 #menu-button {
-    position: absolute;
-    right: 2%;
+    grid-area: 1 / right-center / 2 / right-end;
     cursor: pointer;
-    margin-right: 2vh;
 }
 
 #menu-button > div {

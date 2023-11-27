@@ -52,7 +52,6 @@ public class PersonalizarInterface {
             ConfiguracoesDeInterface configuracoesDeInterface = manterConfiguracoesDeInterface.pesquisarPorContratante(contratante);
 
             ParametersSetters<ConfiguracoesDeInterface> parametersSetter = new ParametersSetters<>(configuracoesDeInterface);
-            System.out.println(request.getParameter("cor_base"));
             parametersSetter.setParametersFromRequest(request, Set.of("nome_da_empresa", "logo", "cor_base"));
 
             try {

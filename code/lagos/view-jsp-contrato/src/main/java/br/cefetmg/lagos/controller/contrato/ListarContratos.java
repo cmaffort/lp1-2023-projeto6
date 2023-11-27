@@ -28,11 +28,16 @@ public class ListarContratos extends HttpServlet {
         ManterContrato manterContrato = new ManterContrato();
         Gson gson = new Gson();
 
-        List<Contrato> contratoList = manterContrato.pesquisarPorAtivo();
+        try {
+            List<Contrato> contratoList = manterContrato.pesquisarPorAtivo();
 
-        String jsonContratosList = gson.toJson(contratoList);
+            String jsonContratosList = gson.toJson(contratoList);
 
-        return new Pair<>(jsonContratosList, TipoServlet.JSON_SERVLET);
+            return new Pair<>(jsonContratosList, TipoServlet.JSON_SERVLET);
+
+        } catch (PersistenceException | NegocioException | DTOExeption e) {
+            return new Pair<>("Erro. Nenhum contrato existente.", TipoServlet.JSON_SERVLET);
+        }
     }
 
     protected static Pair<String, TipoServlet> doPost(HttpServletRequest request) throws ServletException, IOException {
@@ -42,7 +47,7 @@ public class ListarContratos extends HttpServlet {
     public static TipoServlet getTipoDoGet() { return TipoServlet.JSON_SERVLET; }
 
     protected static Pair<String, TipoServlet> doGet(HttpServletRequest request) throws ServletException, IOException {
-        return executeActionListarContratos(request);
+        return  executeActionListarContratos(request);
     }
 
 }

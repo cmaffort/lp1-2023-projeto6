@@ -3,13 +3,22 @@ document.addEventListener('DOMContentLoaded', () =>{
     let acao = "ListarContrato";
 
     $.ajax({
-        url: '/view_jsp_contrato_war_exploded/ServletWeb',
+        url: '${contextPath}/ServletWeb',
         type: 'GET',
         data: {acao: acao},
         contentType: 'application/json',
         success: function (data) {
 
             let divContainer = document.querySelector("#container");
+
+            if(data === "Erro. Nenhum contrato existente."){
+                let erro = document.createElement('p');
+                erro.style.color = "red";
+                erro.style.fontSize = "30px";
+
+                erro.innerHTML = "Nenhum contrato foi encontrado";
+                divContainer.appendChild(erro);
+            }
 
             for(let i = 0; i < data.length; i++){
 
@@ -38,7 +47,7 @@ function assinarContrato(idContrato) {
     let acao = "ListarIdContrato";
 
     $.ajax({
-        url: '/view_jsp_contrato_war_exploded/ServletWeb',
+        url: '/ServletWeb',
         type: 'GET',
         data: {acao: acao,
         idContrato: idContrato},

@@ -39,7 +39,15 @@ public class ManterContrato extends AbstractManter<Contrato> implements IManterC
         return getDAO().filtrarRelated(contratante);
     }
 
-    public List<Contrato> pesquisarPorAtivo() {
-        return null;
+    public List<Contrato> pesquisarPorAtivo() throws NegocioException, PersistenceException, DTOExeption {
+        try{
+            Contrato contratoAtivo = getDTOInstance().getInstance(Map.of("ativo", true));
+
+            return filtrar(contratoAtivo, "ativo");
+        }catch (DTOExeption dtoExeption) {
+            throw new RuntimeException(dtoExeption.getMessage(), dtoExeption);
+        } catch (IndexOutOfBoundsException | NegocioException e) {
+            throw new NegocioException("Nenhum contrato existente");
+        }
     }
 }

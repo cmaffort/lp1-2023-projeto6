@@ -15,6 +15,7 @@ public interface DTO<DataTransferObject extends DTO<DataTransferObject>> {
 
     Manager<DataTransferObject> getManeger();
 
+    @SuppressWarnings("unchecked")
     default DataTransferObject getInstance() throws DTOExeption {
         try {
             Constructor<DataTransferObject> constructorDto = (Constructor<DataTransferObject>) getClass().getConstructor();
