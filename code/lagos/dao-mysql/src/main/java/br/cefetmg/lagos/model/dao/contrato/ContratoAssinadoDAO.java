@@ -21,14 +21,6 @@ public class ContratoAssinadoDAO extends AbstractDAO<ContratoAssinado> implement
         CONTRATO_DAO = new ContratoDAO();
     }
 
-    private static IUsuarioDAO getUsuarioDao() {
-        return USUARIO_DAO;
-    }
-
-    private static IContratoDAO getContratoDao() {
-        return CONTRATO_DAO;
-    }
-
     @Override
     protected ContratoAssinado getDTO() {
         return new ContratoAssinado();
