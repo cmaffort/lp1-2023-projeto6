@@ -14,10 +14,10 @@ public class Login {
     public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
         try {
             UserSessionControl.createSession(request, (new ManterUsuario()).pesquisarPorId(2L));
-            return new Pair<>("/home.jsp", TipoServlet.PAGE_FORWARD_SERVLET);
+            return new Pair<>(request.getContextPath() + "/servletweb?acao=Home", TipoServlet.PAGE_REDIRECT_SERVLET);
         } catch (Exception e) {
             e.printStackTrace();
-            return Error.doGet(request);
+            return new Pair<>(request.getContextPath() + "/servletweb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
         }
     }
 }

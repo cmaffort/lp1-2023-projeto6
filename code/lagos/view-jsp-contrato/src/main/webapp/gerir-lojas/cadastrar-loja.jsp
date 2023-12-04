@@ -2,19 +2,25 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
+<jsp:useBean id="contratoAssinado" scope="request" type="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado"
+             class="br.cefetmg.lagos.model.dto.contrato.ContratoAssinado" />
+<jsp:useBean id="numeroDeLojas" scope="request" type="java.lang.Long" />
+<jsp:useBean id="erro" scope="request" type="java.lang.String"
+             class="java.lang.String" />
+
 <t:base>
     <jsp:attribute name="title">
         Editar Loja
     </jsp:attribute>
 
     <jsp:body>
-        <c:if test="${erro != null}">
+        <c:if test="${not empty erro}">
             <div class="error">${erro}</div>
         </c:if>
         <c:choose>
-            <c:when test="${numeroDeLojas >= contratoAssinado.getContrato().getNumeroDeLojas()}">
+            <c:when test="${numeroDeLojas >= contratoAssinado.contrato.numeroDeLojas}">
                 <h1>Não é possível criar mais lojas</h1>
-                <p>O seu contrato permite: ${contratoAssinado.getContrato().getNumeroDeLojas()}</p>
+                <p>O seu contrato permite: ${contratoAssinado.contrato.numeroDeLojas}</p>
                 <p>Número de lojas cadastradas: ${numeroDeLojas}</p>
             </c:when>
             <c:otherwise>

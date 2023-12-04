@@ -7,6 +7,6 @@
     </jsp:attribute>
 
     <jsp:body>
-        404
+        <h1 style="text-align: center; font-weight: bold">404</h1>
     </jsp:body>
 </t:base>

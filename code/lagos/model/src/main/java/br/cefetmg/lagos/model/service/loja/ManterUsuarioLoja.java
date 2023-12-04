@@ -5,6 +5,7 @@ import br.cefetmg.lagos.model.dao.loja.IUsuarioLojaDAO;
 import br.cefetmg.lagos.model.dao.loja.UsuarioLojaDAO;
 import br.cefetmg.lagos.model.dto.contrato.Loja;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
+import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
 import br.cefetmg.lagos.model.dto.loja.Funcionario;
 import br.cefetmg.lagos.model.dto.loja.Produto;
 import br.cefetmg.lagos.model.dto.loja.PromocoesProdutos;
@@ -16,6 +17,7 @@ import br.cefetmg.lagos.util.PasswordAuthentication;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> implements IManterUsuarioLoja {
     @Override
@@ -84,6 +86,30 @@ public class ManterUsuarioLoja extends AbstractManterLojaModule<UsuarioLoja> imp
         }
 
         return false;
+    }
+
+    protected <T> boolean isNull(T t) {
+        return t == null;
+    }
+
+    protected void assertUsernameIsNotNull(String username) throws NegocioException {
+        if (isNull(username))
+            throw new NegocioException("O nome de usuário deve ser atribuído.");
+    }
+
+    @Override
+    public UsuarioLoja pesquisarPorUsername(String username) throws PersistenceException, NegocioException {
+        assertUsernameIsNotNull(username);
+
+        try {
+            UsuarioLoja usuarioLojaComUsername = getDTOInstance().getInstance(Map.of("username", username));
+            List<UsuarioLoja> usuarioInList = filtrar(usuarioLojaComUsername, "username");
+            return usuarioInList.get(0);
+        } catch (DTOExeption dtoExeption) {
+            throw new RuntimeException(dtoExeption.getMessage(), dtoExeption);
+        } catch (IndexOutOfBoundsException | NegocioException e) {
+            throw new NegocioException("O usuário de nome de usuário: " + username + " não existe.", e);
+        }
     }
 
     @Override

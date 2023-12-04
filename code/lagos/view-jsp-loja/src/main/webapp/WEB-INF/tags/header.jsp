@@ -1,5 +1,13 @@
+<jsp:useBean id="usuarioLoja" scope="session" type="br.cefetmg.lagos.model.dto.loja.UsuarioLoja"
+             class="br.cefetmg.lagos.model.dto.loja.UsuarioLoja" />
+
 <div id="header-items">
-    <div id="logo-div"><img src="${pageContext.request.contextPath}/images/lagos-semfundo.svg" alt="logo lagos" /></div>
+    <div id="user-data">
+    </div>
+
+    <a href="${pageContext.request.contextPath}/servletweb?acao=Home" id="logo-div">
+        <img src="${pageContext.request.contextPath}/images/lagos-semfundo.svg" alt="logo lagos" />
+    </a>
 
     <div id="menu-button" onclick="toggleMenu()">
         <div></div>
