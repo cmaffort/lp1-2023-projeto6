@@ -1,28 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    let acao = "DefinirHeader";
-
     $.ajax({
-        url: `${contextPath}/ServletWeb`,
+        url: 'servletweb?acao=DefinirHeader',
         type: 'GET',
-        data: {acao: acao},
         contentType: 'application/json',
         success: function (data) {
             if(data !== "Erro. Nenhum usuario definido"){
-                if(data === "CONTRATANTE"){
+                if (data !== "GERENTE_DE_CONTRATOS") {
                     let gerenteHeaders = document.querySelectorAll(".gerente");
 
-                    for(let i = 0; i < gerenteHeaders.length; i++)
+                    for (let i = 0; i < gerenteHeaders.length; i++)
                         gerenteHeaders[i].style.display = 'none';
-
-                }else{
+                } else {
                     let contratanteHeaders = document.querySelectorAll(".contratante");
 
-                    for(let i = 0; i < contratanteHeaders.length; i++)
+                    for (let i = 0; i < contratanteHeaders.length; i++)
                         contratanteHeaders[i].style.display = 'none';
+
                 }
             }
-            window.location.href = `${contextPath}/ServletWeb?acao=Error`;
         }
     })
 });
+
+function desconectar() {
+    $.ajax({
+        url: 'servletweb?acao=Logout',
+        type: 'GET',
+        contentType: 'text/html'
+    })
+}

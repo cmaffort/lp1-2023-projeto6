@@ -5,6 +5,8 @@ import br.cefetmg.lagos.controller.util.UserSessionControl;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
 import br.cefetmg.lagos.util.Pair;
+
+import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Login {
@@ -16,30 +18,31 @@ public class Login {
         return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
-    private static Pair<String, TipoServlet> executeActionLogin(HttpServletRequest request){
+    private static Pair<String, TipoServlet> executeActionLogin(HttpServletRequest request, TipoServlet tipoServlet){
         try {
             String username = request.getParameter("usuario");
             String senha = request.getParameter("senha");
 
-            Usuario usuario = new ManterUsuario().pesquisarPorUserESenha(username, senha);
+            List<Usuario> usuarios = new ManterUsuario().pesquisarPorUserESenha(username, senha);
 
-            if(new ManterUsuario().autenticar(usuario)) {
-                UserSessionControl.createSession(request, usuario);
+            for(Usuario usuario: usuarios){
+                if(new ManterUsuario().autenticar(usuario)) {
+                    UserSessionControl.createSession(request, usuario);
 
-                return new Pair<>(request.getContextPath() + "/ServletWeb?acao=Home", TipoServlet.PAGE_REDIRECT_SERVLET);
+                    return new Pair<>(request.getContextPath() + "/servletweb?acao=Home", tipoServlet);
+                }
             }
 
-            return new Pair<>(request.getContextPath() + "/ServletWeb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
+            return new Pair<>(request.getContextPath() + "/servletweb?acao=Error", tipoServlet);
         } catch (Exception e) {
-            e.printStackTrace();
-            return new Pair<>(request.getContextPath() + "/ServletWeb?acao=Error", TipoServlet.PAGE_REDIRECT_SERVLET);
+            return new Pair<>(request.getContextPath() + "/servletweb?acao=Error", tipoServlet);
         }
     }
     public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
-        return executeActionLogin(request);
+        return executeActionLogin(request, getTipoDoPost());
     }
 
     public static  Pair<String, TipoServlet> doGet(HttpServletRequest request){
-        return executeActionLogin(request);
+        return executeActionLogin(request, getTipoDoGet());
     }
 }

@@ -19,6 +19,8 @@
     <jsp:body>
         <h1>Pagina inicial</h1>
         <c:if test="${usuario.permicoes.contains(Permissao.GERIR_LOJAS)}">
+            <a style:"display: block" class="link" href="${pageContext.request.contextPath}/visualizar-contrato.jsp">Visualizar Contratos</a>
+            <a style:"display: block" class="link" href="${pageContext.request.contextPath}/criar-usuario.jsp">Criar Funcionario</a>
             <a style="display: block" class="link" href="${pageContext.request.contextPath}/servletweb?acao=ListarLojas">Listar Lojas</a>
             <a style="display: block" class="link" href="${pageContext.request.contextPath}/servletweb?acao=PersonalizarInterface">Personalizar Interface</a>
             <c:choose>

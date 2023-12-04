@@ -66,15 +66,14 @@ public class ManterUsuario extends AbstractManter<Usuario> implements IManterUsu
             throw new NegocioException("A senha do usuário deve ser atribuída.");
     }
 
-    public Usuario pesquisarPorUserESenha(String username, String senha) throws NegocioException, PersistenceException{
+    public List<Usuario> pesquisarPorUserESenha(String username, String senha) throws NegocioException, PersistenceException{
         assertUsernameIsNotNull(username);
         assertSenhaIsNotNull(senha);
 
         try{
             Usuario usuarioComUsernameESenha = getDTOInstance().getInstance(Map.of("username", username, "senha", senha));
 
-            List<Usuario> usuarioInList = filtrar(usuarioComUsernameESenha, "username", "senha");
-            return usuarioInList.get(0);
+            return filtrar(usuarioComUsernameESenha, "username", "senha");
         } catch (DTOExeption dtoExeption) {
             throw new RuntimeException(dtoExeption.getMessage(), dtoExeption);
         } catch (IndexOutOfBoundsException | NegocioException e) {

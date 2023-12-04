@@ -30,3 +30,15 @@ ul{
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
 }
+
+#botao_desconectar{
+    display: inline-block;
+    background-color: bisque;
+    border: 1px solid black;
+    border-radius: 40px 40px 40px 40px;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}

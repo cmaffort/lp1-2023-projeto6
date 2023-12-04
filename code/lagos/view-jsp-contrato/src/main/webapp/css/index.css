@@ -25,7 +25,6 @@ h1 {
 }
 
 input[type="text"], input[type="number"] {
-    padding: 10px;
     margin-bottom: 10px;
 }
 
@@ -92,4 +91,12 @@ input[type="button"] {
     border: solid 2px;
     border-radius: 40px 40px 40px 40px;
     background-color: #c9cbad;
+}
+
+#error-message{
+    display: none;
+    color: red;
+    font-size: 30px;
+    font-family: 'Chivo', sans-serif;
+    text-align: center;
 }

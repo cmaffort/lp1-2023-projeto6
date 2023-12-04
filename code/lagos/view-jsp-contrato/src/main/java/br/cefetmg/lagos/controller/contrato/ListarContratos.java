@@ -31,12 +31,16 @@ public class ListarContratos extends HttpServlet {
         try {
             List<Contrato> contratoList = manterContrato.pesquisarPorAtivo();
 
-            String jsonContratosList = gson.toJson(contratoList);
+            if(!contratoList.isEmpty()){
+                String jsonContratosList = gson.toJson(contratoList);
 
-            return new Pair<>(jsonContratosList, TipoServlet.JSON_SERVLET);
+                return new Pair<>(jsonContratosList, TipoServlet.JSON_SERVLET);
+            }
+
+            return new Pair<>("Erro. Nenhum contrato existente.", TipoServlet.JSON_SERVLET);
 
         } catch (PersistenceException | NegocioException | DTOExeption e) {
-            return new Pair<>("Erro. Nenhum contrato existente.", TipoServlet.JSON_SERVLET);
+            return new Pair<>("Erro. Ocorreu um erro ao acessar o Banco de Dados.", TipoServlet.JSON_SERVLET);
         }
     }
 

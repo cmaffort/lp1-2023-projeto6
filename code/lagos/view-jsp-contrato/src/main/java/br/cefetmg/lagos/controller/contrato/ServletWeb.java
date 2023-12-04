@@ -45,6 +45,7 @@ public class ServletWeb extends HttpServlet {
             };
         else
             result = switch (acao) {
+                case "AssinarContrato" -> AssinarContrato.doPost(request);
                 case "EditarLoja" -> EditarLoja.doPost(request);
                 case "CadastrarLoja" -> CadastrarLoja.doPost(request);
                 case "ExcluirLoja" -> ExcluirLoja.doPost(request);

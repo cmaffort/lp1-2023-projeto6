@@ -24,6 +24,10 @@ public class UserSessionControl {
         session.setAttribute("usuario", usuario);
     }
 
+    public static void invalidateSession(HttpServletRequest request){
+        request.getSession().invalidate();
+    }
+
     public static Usuario getSession(HttpServletRequest request) throws PersistenceException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null)
