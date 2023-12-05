@@ -1,5 +1,8 @@
 package br.cefetmg.lagos.model.service.contrato;
 
+import br.cefetmg.lagos.model.dto.contrato.Contrato;
+import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
+import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
 import br.cefetmg.lagos.model.service.base.AbstractManter;
 import br.cefetmg.lagos.model.dao.base.IDAO;
 import br.cefetmg.lagos.model.dao.contrato.UsuarioDAO;
@@ -8,6 +11,9 @@ import br.cefetmg.lagos.model.dto.Pessoa;
 import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.util.PasswordAuthentication;
+
+import java.util.List;
+import java.util.Map;
 
 public class ManterUsuario extends AbstractManter<Usuario> implements IManterUsuario {
     @Override
@@ -48,5 +54,31 @@ public class ManterUsuario extends AbstractManter<Usuario> implements IManterUsu
     @Override
     public Usuario pesquisarPorPessoa(Pessoa pessoa) throws PersistenceException {
         return pesquisarPorId(pessoa.getId());
+    }
+
+    protected void assertUsernameIsNotNull(String username) throws NegocioException {
+        if (username == null)
+            throw new NegocioException("O nome de usuário deve ser atribuído.");
+    }
+
+    protected void assertSenhaIsNotNull(String senha) throws NegocioException {
+        if (senha == null)
+            throw new NegocioException("A senha do usuário deve ser atribuída.");
+    }
+
+    public Usuario pesquisarPorUserESenha(String username, String senha) throws NegocioException, PersistenceException{
+        assertUsernameIsNotNull(username);
+        assertSenhaIsNotNull(senha);
+
+        try{
+            Usuario usuarioComUsernameESenha = getDTOInstance().getInstance(Map.of("username", username, "senha", senha));
+
+            List<Usuario> usuarioInList = filtrar(usuarioComUsernameESenha, "username", "senha");
+            return usuarioInList.get(0);
+        } catch (DTOExeption dtoExeption) {
+            throw new RuntimeException(dtoExeption.getMessage(), dtoExeption);
+        } catch (IndexOutOfBoundsException | NegocioException e) {
+            throw new NegocioException("O usuário de nome de usuário: " + username + " não existe.", e);
+        }
     }
 }

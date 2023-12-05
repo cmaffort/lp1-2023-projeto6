@@ -24,7 +24,7 @@ public class UserSessionControl {
         session.setAttribute("usuario", usuario);
     }
 
-    public static Usuario getSession(HttpServletRequest request) throws IOException, PersistenceException, DTOExeption {
+    public static Usuario getSession(HttpServletRequest request) throws PersistenceException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null)
             return null;
