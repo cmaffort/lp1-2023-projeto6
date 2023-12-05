@@ -1,8 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.io.File" %>
 <!DOCTYPE html>
 <html lang="pt">
     <head>
-        <link rel="stylesheet" type="text/css" href="css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="css/headerWAPP.css"/>
         <title></title>
     </head>
     <body>
@@ -21,9 +22,28 @@
         <div class="linha"></div>
 
         <div class="menu" id="menu">
-            <div class="menu-item"><a href="#"> _Link 1_ </a></div>
-            <div class="menu-item"><a href="#"> _Link 2_ </a></div>
-            <div class="menu-item"><a href="#"> _Link 3_ </a></div>
+            <%
+                String caminho = getServletContext().getRealPath("/");
+                File pasta = new File(caminho);
+                if (pasta.listFiles() != null) {
+                    for (File arquivo : pasta.listFiles()) {
+                        if (arquivo.isFile() &&
+                                arquivo.getName().endsWith(".jsp") &&
+                                !arquivo.getName().equals("menu.jsp") &&
+                                !arquivo.getName().equals("header.jsp") &&
+                                !arquivo.getName().equals("index.jsp") &&
+                                !arquivo.getName().equals("404.jsp") &&
+                                !arquivo.getName().equals("login.jsp") &&
+                                !arquivo.getName().equals("dados-usuario.jsp")) {
+
+                            String nomeArquivo = arquivo.getName().replace(".jsp", "");
+            %>
+            <div class="menu-item"> <a href="<%= request.getContextPath() %>/<%= nomeArquivo %>.jsp"><%= nomeArquivo %></a> </div> <br>
+            <%
+                        }
+                    }
+                }
+            %>
         </div>
 
         <script>
