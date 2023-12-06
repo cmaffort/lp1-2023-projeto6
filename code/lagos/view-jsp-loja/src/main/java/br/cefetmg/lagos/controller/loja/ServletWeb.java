@@ -26,6 +26,7 @@ public class ServletWeb extends HttpServlet {
         if ("GET".equals(request.getMethod()))
             result = switch (acao) {
                 case "CadastrarContrato" -> CadastrarContrato.doGet(request);
+                case "ListarClientes" -> ListarClientes.doGet(request);
                 case "Login" -> Login.doGet(request);
                 case "Home" -> Home.doGet(request);
                 default -> Error.doGet(request);
@@ -33,7 +34,6 @@ public class ServletWeb extends HttpServlet {
         else
             result = switch (acao) {
                 case "CadastrarCliente" -> CadastrarCliente.doPost(request);
-                case "ListarClientes" -> ListarClientes.doPost(request);
                 case "Login" -> Login.doPost(request);
                 default -> Error.doGet(request);
             };

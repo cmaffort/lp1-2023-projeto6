@@ -6,44 +6,45 @@ import br.cefetmg.lagos.model.dto.loja.Cliente;
 import br.cefetmg.lagos.model.exception.NegocioException;
 import br.cefetmg.lagos.model.service.loja.old.ManterCliente;
 import br.cefetmg.lagos.util.Pair;
+import br.cefetmg.lagos.model.service.contrato.ManterLoja;
+import br.cefetmg.lagos.model.dto.contrato.Loja;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
-import java.util.Map;
 
 public class CadastrarCliente {
-    public static Pair<String, TipoServlet> doPost(HttpServletRequest request) {
+    private static TipoServlet getTipoDoPost(){return TipoServlet.JSON_SERVLET;}
+    
+    public static Pair<String, TipoServlet> doPost(HttpServletRequest request){
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
         String telefoneS = request.getParameter("telefone");
         String email = request.getParameter("email");
 
-        long telefone = Long.parseLong(telefoneS);
+        Gson gson = new Gson();
 
-        HttpSession session = request.getSession();
-        Long idLoja = (Long) session.getAttribute("idLoja");
+        long telefone = Long.parseLong(telefoneS);
+        
+        Long idLoja = (Long) request.getSession().getAttribute("idLoja");
+        
+        ManterLoja manterLoja = new ManterLoja();
 
         Cliente cliente = new Cliente();
-
-        cliente.setEmail(email);
-        cliente.setSobrenome(sobrenome);
-        cliente.setTelefone(telefone);
 
         ManterCliente manterCliente = new ManterCliente();
 
         try {
-            Map<String, Boolean> result = new java.util.HashMap<>(Map.ofEntries(
-                    Map.entry("cadastrado", true)
-            ));
+            cliente.setEmail(email);
+            cliente.setSobrenome(sobrenome);
+            cliente.setTelefone(telefone);
+            cliente.setNome(nome);
+            cliente.setLoja(manterLoja.pesquisarPorIdLoja(idLoja));
 
             if (manterCliente.cadastrar(cliente) == null)
-                result.put("cadastrar", false);
+                return new Pair<>(gson.toJson("Não foi possivel cadastrar o cliente"), getTipoDoPost());
 
-            Gson gson = new Gson();
-            return new Pair<>(gson.toJson(result), TipoServlet.JSON_SERVLET);
+            return new Pair<>(gson.toJson("O cliente foi cadastrado com sucesso"), getTipoDoPost());
         } catch (NegocioException | PersistenceException e) {
-            throw new RuntimeException(e);
+            return new Pair<>(gson.toJson("Não foi possivel cadastrar o cliente"), getTipoDoPost());
         }
     }
 }

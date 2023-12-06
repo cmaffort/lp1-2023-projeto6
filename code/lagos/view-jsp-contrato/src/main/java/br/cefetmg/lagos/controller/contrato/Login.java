@@ -6,7 +6,6 @@ import br.cefetmg.lagos.model.dto.contrato.Usuario;
 import br.cefetmg.lagos.model.service.contrato.ManterUsuario;
 import br.cefetmg.lagos.util.Pair;
 
-import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Login {
@@ -23,15 +22,16 @@ public class Login {
             String username = request.getParameter("usuario");
             String senha = request.getParameter("senha");
 
-            List<Usuario> usuarios = new ManterUsuario().pesquisarPorUserESenha(username, senha);
+            ManterUsuario manterUsuario = new ManterUsuario();
 
-            for(Usuario usuario: usuarios){
-                if(new ManterUsuario().autenticar(usuario)) {
+            Usuario usuario = manterUsuario.pesquisarPorUser(username);
+            usuario.setSenha(senha);
+
+                if(manterUsuario.autenticar(usuario)) {
                     UserSessionControl.createSession(request, usuario);
 
                     return new Pair<>(request.getContextPath() + "/servletweb?acao=Home", tipoServlet);
                 }
-            }
 
             return new Pair<>(request.getContextPath() + "/servletweb?acao=Error", tipoServlet);
         } catch (Exception e) {

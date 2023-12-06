@@ -31,6 +31,7 @@ public class ServletWeb extends HttpServlet {
                 case "ListarLojas" -> ListarLojas.doGet(request);
                 case "EditarLoja" -> EditarLoja.doGet(request);
                 case "GetXMLLoja" -> GetXMLLoja.doGet(request);
+                case "IdContrato" -> IdContrato.doGet(request);
                 case "CadastrarLoja" -> CadastrarLoja.doGet(request);
                 case "CadastrarChefe" -> CadastrarChefe.doGet(request);
                 case "PersonalizarInterface" -> PersonalizarInterface.doGet(request);
@@ -49,6 +50,7 @@ public class ServletWeb extends HttpServlet {
                 case "EditarLoja" -> EditarLoja.doPost(request);
                 case "CadastrarLoja" -> CadastrarLoja.doPost(request);
                 case "ExcluirLoja" -> ExcluirLoja.doPost(request);
+                case "IdContrato" -> IdContrato.doPost(request);
                 case "CadastrarChefe" -> CadastrarChefe.doPost(request);
                 case "ExcluirChefe" -> ExcluirChefe.doPost(request);
                 case "PersonalizarInterface" -> PersonalizarInterface.doPost(request);

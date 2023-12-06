@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () =>{
     $.ajax({
-        url: 'servletweb?acao=ListarContratos',
+        url: '/servletweb?acao=ListarContratos',
         type: 'GET',
         contentType: 'application/json',
         success: function (data) {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 function assinarContrato(idContrato) {
     $.ajax({
-        url: 'servletweb?acao=AssinarContrato',
+        url: 'servletweb?acao=IdContrato',
         type: 'GET',
         data: {idContrato: idContrato},
         contentType: 'application/json',

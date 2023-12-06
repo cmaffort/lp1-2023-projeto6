@@ -33,7 +33,7 @@
         <div id="listar_cliente">
             <table id="tabela_clientes">
                 <thead>
-                <tr>
+                <tr> 
                     <td>Nome</td>
                     <td>Email</td>
                     <td>Telefone</td>

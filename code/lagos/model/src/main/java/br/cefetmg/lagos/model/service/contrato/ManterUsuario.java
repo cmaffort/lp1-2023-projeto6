@@ -1,8 +1,6 @@
 package br.cefetmg.lagos.model.service.contrato;
 
-import br.cefetmg.lagos.model.dto.contrato.Contrato;
 import br.cefetmg.lagos.model.dto.exceptions.DTOExeption;
-import br.cefetmg.lagos.model.dto.loja.UsuarioLoja;
 import br.cefetmg.lagos.model.service.base.AbstractManter;
 import br.cefetmg.lagos.model.dao.base.IDAO;
 import br.cefetmg.lagos.model.dao.contrato.UsuarioDAO;
@@ -61,22 +59,14 @@ public class ManterUsuario extends AbstractManter<Usuario> implements IManterUsu
             throw new NegocioException("O nome de usuário deve ser atribuído.");
     }
 
-    protected void assertSenhaIsNotNull(String senha) throws NegocioException {
-        if (senha == null)
-            throw new NegocioException("A senha do usuário deve ser atribuída.");
-    }
-
-    public List<Usuario> pesquisarPorUserESenha(String username, String senha) throws NegocioException, PersistenceException{
+    public Usuario pesquisarPorUser(String username) throws NegocioException, PersistenceException{
         assertUsernameIsNotNull(username);
-        assertSenhaIsNotNull(senha);
 
         try{
-            Usuario usuarioComUsernameESenha = getDTOInstance().getInstance(Map.of("username", username, "senha", senha));
-
-            return filtrar(usuarioComUsernameESenha, "username", "senha");
-        } catch (DTOExeption dtoExeption) {
-            throw new RuntimeException(dtoExeption.getMessage(), dtoExeption);
-        } catch (IndexOutOfBoundsException | NegocioException e) {
+            Usuario usuario = getDTOInstance().getInstance(Map.of("username", username));
+            List<Usuario> usuarioList = filtrar(usuario, "username");
+            return usuarioList.get(0);
+        } catch (IndexOutOfBoundsException | NegocioException | DTOExeption e) {
             throw new NegocioException("O usuário de nome de usuário: " + username + " não existe.", e);
         }
     }

@@ -6,17 +6,21 @@ import br.cefetmg.lagos.util.Pair;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class AssinarContrato extends HttpServlet {
+public class IdContrato extends HttpServlet {
     public static TipoServlet getTipoDoGet() {
-        return TipoServlet.JSON_SERVLET;
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     public static TipoServlet getTipoDoPost() {
-        return TipoServlet.JSON_SERVLET;
+        return TipoServlet.PAGE_FORWARD_SERVLET;
     }
 
     private static Pair<String, TipoServlet> executeActionAssinarContrato(HttpServletRequest request, TipoServlet tipoServlet){
-       return null;
+        String idContrato = request.getParameter("idContrato");
+
+        request.getSession().setAttribute("idContrato", idContrato);
+
+        return new Pair<>("/assinar-contrato.jsp", tipoServlet);
     }
 
     public static Pair<String, TipoServlet> doGet(HttpServletRequest request) {
